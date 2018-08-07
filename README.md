@@ -12,7 +12,7 @@ git remote add upstream https://github.com/lock-down/unlock-caps.git
 ## Git workflow
 Two branches: master and dev
 
-1. Commit often and pull often.
+1. Commit to your own feature branch often and pull often.
 ```
 git pull upstream dev
 ```
@@ -24,7 +24,7 @@ Example:
 git checkout -b <new-branch>
 ```
 
-3. Do all work in feature branch. 
+3. Do all work in feature branch. Commit only to your feature branch.
 4. Before merging into dev, pull from dev branch and fix merge conflicts.
 5. When merge conflicts are fixed, pull request into dev branch. 
 6. Review.
