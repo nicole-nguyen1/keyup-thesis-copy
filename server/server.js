@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const graphQLHTTP = require('express-graphql');
 const path = require('path')
+const schema = require ('./graqhql/schema.js');
 
 const port = process.env.PORT || 1337;
 
