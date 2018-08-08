@@ -1,0 +1,19 @@
+{
+  "name": "unlock-caps",
+  "version": "1.0.0",
+  "description": "## Git setup 1. Fork from lock-down. 2. Clone from your repo. 3. Add remote.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lock-down/unlock-caps.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lock-down/unlock-caps/issues"
+  },
+  "homepage": "https://github.com/lock-down/unlock-caps#readme"
+}
