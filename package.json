@@ -1,0 +1,29 @@
+{
+  "name": "unlock-caps",
+  "version": "1.0.0",
+  "description": "An app that directs people to careers that don't require a 4-year degree",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react-dev": "./node_modules/.bin/webpack -d -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lock-down/unlock-caps.git"
+  },
+  "author": "lock-down",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lock-down/unlock-caps/issues"
+  },
+  "homepage": "https://github.com/lock-down/unlock-caps#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "webpack": "^4.16.5"
+  }
+}
