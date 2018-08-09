@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { store } from './store/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { exampleAction } from './actions/action'
+import { exampleAction } from './actions/action';
+import Careers from './components/Careers.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class App extends React.Component {
   }
 
   render () {
-    return <p> Team Gender Equality </p>;
+  return (<Careers/>) 
   }
 }
 
