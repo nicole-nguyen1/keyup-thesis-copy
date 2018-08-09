@@ -1,26 +1,25 @@
+const { knex } = require('../../database/db');
 const {
     GraphQLSchema,
     GraphQLObjectType,
-    GraphQLID,
-    GraphQLString,
     GraphQLInt,
-    GraphQLList
+    GraphQLString,
+    GraphQLList,
+    GraphQLID
 } = require('graphql');
-
-const knex = require('knex');
 
 const CareerType = new GraphQLObjectType({
     name: 'Career',
     description: 'This is a career object',
 
-    field: () => ({
+    fields: () => ({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         salary: { type: GraphQLInt },
-        trainingTime: { type: GraphQLString },
+        training_time: { type: GraphQLString },
         path: { type: GraphQLString }
     })
-})
+});
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -29,12 +28,11 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(CareerType),
             resolve(parent, args) {
                 console.log('Add query resolve functionality');
-                //knex('careers').select();
-                return 
+                return knex('careers').select();
             }
         }
     }
-})
+});
 
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
@@ -53,7 +51,7 @@ const Mutation = new GraphQLObjectType({
             }
         }
     }
-})
+});
 
 module.exports = new GraphQLSchema({
     query: RootQuery,
