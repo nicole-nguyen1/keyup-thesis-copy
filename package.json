@@ -32,8 +32,12 @@
     "knex": "^0.15.2",
     "nodemon": "^1.18.3",
     "path": "^0.12.7",
+    "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "webpack": "^4.16.5"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.0"
   }
 }
