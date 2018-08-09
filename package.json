@@ -34,9 +34,12 @@
     "pg": "^7.4.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
     "webpack": "^4.16.5"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "nodemon": "^1.18.3",
     "webpack-cli": "^3.1.0"
   }
