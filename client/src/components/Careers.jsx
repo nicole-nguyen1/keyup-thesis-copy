@@ -1,6 +1,4 @@
 import React from 'react';
-// import { render } from 'react-dom';
-// import { connect } from 'react-redux';
 
 class Careers extends React.Component {
   constructor(props) {
@@ -10,9 +8,6 @@ class Careers extends React.Component {
       'is', 
       'cool'
     ]
-    // this.state = {
-
-    // }
   }
 
   render() {
@@ -23,19 +18,5 @@ class Careers extends React.Component {
     )
   }
 }
-
-// const mapStateToProps = state => {
-//   return {
-//     examplePropOne: '',
-//     examplePropTwo: ''
-//   } 
-    
-// }
-
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({ exampleAction }, dispatch);
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Careers);
 
 export default Careers
