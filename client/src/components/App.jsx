@@ -1,40 +1,31 @@
 import React from 'react';
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Careers from './Careers.jsx';
-// import { store } from '../store/index';
+import { findCareers } from '../actions/action';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-
-    }
-
-
   }
 
   render() {
     return (
       <div>
-        <Careers />
+        <Careers careers={this.props.careers} />
       </div>
     )
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     examplePropOne: state.example.examplePropOne,
-//     examplePropTwo: state.example.examplePropTwo
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    careers: state.careers.careers,
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({ exampleAction, exampleActionTwo }, dispatch);
-// }
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ findCareers }, dispatch);
+};
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
