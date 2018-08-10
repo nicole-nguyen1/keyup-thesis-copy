@@ -1,12 +1,5 @@
-export const exampleAction = () => (
+export const findCareers = () => (
   {
-    type: 'EXAMPLE'
-  }
-)
-
-export const exampleActionTwo = sampleData => (
-  {
-    type: 'EXAMPLE-TWO',
-    payload: sampleData
+    type: 'CAREERS'
   }
 )

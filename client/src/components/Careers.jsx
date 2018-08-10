@@ -1,22 +1,32 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { findCareers } from '../actions/action';
+import Career from './Career.jsx';
 
 class Careers extends React.Component {
   constructor(props) {
     super(props);
-    this.testArray = [
-      'Brian', 
-      'is', 
-      'cool'
-    ]
   }
 
   render() {
     return (
-      this.testArray.map((string, index) => {
-        return <div key={index}>{string}</div>
+      this.props.careers.map((career, index) => {
+        return <Career key={index} career={career} />;
       })
-    )
+    );
   }
 }
 
-export default Careers
+
+const mapStateToProps = state => {
+  return {
+    careers: state.careers.careers,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ findCareers }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Careers);

@@ -1,16 +1,26 @@
 let defaultState = {
-  examplePropOne: 'example',
-  examplePropTwo: 'test'
+  careers: [
+    {
+      name: 'Dentist',
+      salary: 5
+    },
+    {
+      name: 'Engineer',
+      salary: 6
+    },
+    {
+      name: 'Coding',
+      salary: 2
+    }
+  ]
 };
 
 const reducers = (state = defaultState, action) => {
   switch (action.type) {
-    case 'EXAMPLE': 
-      return Object.assign({}, defaultState, {examplePropOne: 'newPropOne'})      
-    case 'EXAMPLE-TWO':
-      return Object.assign({}, defaultState, {examplePropTwo: action.payload})
-    default: return state;
+  case 'CAREERS':
+    return Object.assign({}, defaultState.careers);
+  default: return state;
   }
-}
+};
 
 export default reducers;
