@@ -1,7 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { findCareers } from '../actions/action';
 import Career from './Career.jsx';
 import Paper from '@material-ui/core/Paper';
 
@@ -24,14 +21,5 @@ class Careers extends React.Component {
 }
 
 
-const mapStateToProps = state => {
-  return {
-    careers: state.careers.careers,
-  };
-};
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ findCareers }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Careers);
+export default Careers;
