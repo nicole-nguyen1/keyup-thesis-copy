@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { findCareers } from '../actions/action';
 import Career from './Career.jsx';
+import Paper from '@material-ui/core/Paper';
 
 class Careers extends React.Component {
   constructor(props) {
@@ -11,9 +12,13 @@ class Careers extends React.Component {
 
   render() {
     return (
-      this.props.careers.map((career, index) => {
-        return <Career key={index} career={career} />;
-      })
+      <div>
+        <Paper>
+          {this.props.careers.map((career, index) => {
+            return <Career key={index} career={career} />;
+          })}
+        </Paper>
+      </div>
     );
   }
 }
