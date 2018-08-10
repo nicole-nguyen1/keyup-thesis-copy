@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "react-dev": "./node_modules/.bin/webpack -d -w",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run react-dev\"",
-    "server": "nodemon ./server/server.js"
+    "server": "nodemon ./server/server.js",
+    "start": "webpack && node ./server/server.js"
   },
   "repository": {
     "type": "git",
