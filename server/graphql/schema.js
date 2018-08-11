@@ -99,6 +99,79 @@ const CareerTraitType = new GraphQLObjectType({
   })
 });
 
+const TrainingType = new GraphQLObjectType({
+  name: 'Training',
+  fields: () => ({
+    id: { type: GraphQLID },
+    career_id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    career_name: {
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('careers')
+          .select('name')
+          .where({ 'id': parent.career_id })
+          .first()
+          .then((obj) => obj.name);
+      }
+    },
+    subheading: { type: GraphQLString },
+    logo_url: { type: GraphQLString },
+    about: { type: GraphQLString },
+    financial_info: { type: GraphQLString },
+    location: { type: GraphQLString },
+    app_process: { type: GraphQLString },
+    apply_now_cta: { type: GraphQLString },
+    program_url: { type: GraphQLString },
+    app_url: { type: GraphQLString },
+    program_length_total: { type: GraphQLString },
+    program_length_weekly: { type: GraphQLString },
+    program_class_times: { type: GraphQLString },
+    outcomes: {
+      type: new GraphQLList(TrainingTraitType),
+      resolve(parent, args) {
+        return knex('services_traits')
+          .select()
+          .where({ 'service_id': parent.id, 'type': 'outcome' });
+      }
+    },
+    requirements: {
+      type: new GraphQLList(TrainingTraitType),
+      resolve(parent, args) {
+        return knex('services_traits')
+          .select()
+          .where({ 'service_id': parent.id, 'type': 'requirement' });
+      }
+    },
+    pros: {
+      type: new GraphQLList(TrainingTraitType),
+      resolve(parent, args) {
+        return knex('services_traits')
+          .select()
+          .where({ 'service_id': parent.id, 'type': 'pro' });
+      }
+    },
+    cons: {
+      type: new GraphQLList(TrainingTraitType),
+      resolve(parent, args) {
+        return knex('services_traits')
+          .select()
+          .where({ 'service_id': parent.id, 'type': 'con' });
+      }
+    }
+  })
+});
+
+const TrainingTraitType = new GraphQLObjectType({
+  name: 'TrainingTrait',
+  fields: () => ({
+    id: { type: GraphQLID },
+    service_id: { type: GraphQLID },
+    type: { type: GraphQLString },
+    description: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -119,6 +192,29 @@ const RootQuery = new GraphQLObjectType({
                 .select()
                 .where('careers.id', args.id)
                 .first(); 
+      }
+    },
+
+    //GET list of training services related to specific career
+    trainings: {
+      type: new GraphQLList(TrainingType),
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return knex('services')
+                .select()
+                .where('services.career_id', args.id);
+      }
+    },
+
+      //GET one specific training service with its traits
+    training: {
+      type: TrainingType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return knex('services')
+                .select()
+                .where('services.id', args.id)
+                .first();
       }
     }
   }
