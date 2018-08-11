@@ -1,11 +1,6 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typeography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import CardMedia from '@material-ui/core/CardMedia';
 import NavBar from './NavBar.jsx';
+import Intro from './homePageComponents/Intro.jsx';
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,6 +12,7 @@ class Home extends React.Component {
     return (
       <div>
         <NavBar />
+        <Intro />
       </div>
     )
   }
