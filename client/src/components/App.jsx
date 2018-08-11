@@ -2,6 +2,7 @@ import React from 'react';
 import { createApolloFetch } from 'apollo-fetch';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { store } from '../store/index';
 import Careers from './Careers.jsx';
 import { findCareers } from '../actions/action';
 import NavBar from './NavBar.jsx';
@@ -25,6 +26,9 @@ class App extends React.Component {
       }`
     }).then(res => {
       console.log('res data in app file in graphql request', res.data);
+      store.dispatch(findCareers(res.data));
+    }).then(() => {
+      console.log(store.getState());
     });
   }
 

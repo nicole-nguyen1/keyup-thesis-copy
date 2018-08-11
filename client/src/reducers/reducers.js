@@ -1,16 +1,8 @@
 let defaultState = {
   careers: [
     {
-      name: 'Dentist',
+      name: '',
       salary: 5
-    },
-    {
-      name: 'Engineer',
-      salary: 6
-    },
-    {
-      name: 'Coding',
-      salary: 2
     }
   ]
 };
@@ -18,7 +10,7 @@ let defaultState = {
 const reducers = (state = defaultState, action) => {
   switch (action.type) {
   case 'CAREERS':
-    return Object.assign({}, defaultState.careers);
+    return Object.assign({}, action.payload);
   default: return state;
   }
 };
