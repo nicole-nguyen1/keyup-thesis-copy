@@ -1,5 +1,6 @@
-export const findCareers = () => (
+export const findCareers = (data) => (
   {
-    type: 'CAREERS'
+    type: 'CAREERS',
+    payload: data
   }
 )

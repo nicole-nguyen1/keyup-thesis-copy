@@ -14,6 +14,9 @@ class Career extends React.Component {
   }
 
   render() {
+    const style = {
+      height: '20%'
+    };
     return (
       <Grid item xs={12}>
         <Card>
@@ -21,24 +24,25 @@ class Career extends React.Component {
             <Grid container>
               <Grid item xs={9}>
                 <Typeography color="textSecondary">
-                  Tech
+                  Need relation from careers to industry table {this.props.career.industry_id}
                 </Typeography>
                 <Typeography variant="headline">
                   {this.props.career.name}
                 </Typeography>
                 <Typeography color="textSecondary">
-                  Pro: Not just for math whizzes!
+                  {this.props.career.card_pro}
                   <br />
                   <br />
-                  Salary: $79,800
+                  Salary: {this.props.career.annual_salary}
                   <br/>
-                  Training length: 2 years
+                  Training length: {this.props.career.training_length}
                 </Typeography>
               </Grid>
               <Grid item xs={3}>
                 <CardMedia 
-                  image=""
+                  image={this.props.career.card_image_url}
                   title="Dummy Title"
+                  style={style}
                 />
               </Grid>
             </Grid>
