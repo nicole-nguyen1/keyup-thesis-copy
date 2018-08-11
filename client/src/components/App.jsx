@@ -1,4 +1,5 @@
 import React from 'react';
+import { createApolloFetch } from 'apollo-fetch';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Careers from './Careers.jsx';
@@ -8,6 +9,23 @@ import NavBar from './NavBar.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.fetch = createApolloFetch({
+      uri: './graphql'
+    }).bind(this);
+    
+  }
+
+  componentDidMount() {
+    this.fetch({
+      query: `{
+        careers {
+          id
+          name
+        }
+      }`
+    }).then(res => {
+      console.log('res data in app file in graphql request', res.data);
+    });
   }
 
   render() {
