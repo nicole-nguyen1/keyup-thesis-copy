@@ -12,7 +12,7 @@ class Careers extends React.Component {
       <div>
         <Grid container spacing={8}>
           {this.props.careers.map((career, index) => {
-            return <Career key={index} career={career} />;
+            return <Career key={career.id || index} career={career} />;
           })}
         </Grid>
       </div>
