@@ -21,7 +21,19 @@ class App extends React.Component {
       query: `{
         careers {
           id
+          industry_id
           name
+          annual_salary
+          training_length
+          description
+          openings
+          training_hours
+          training_cost
+          card_image_url
+          card_pro
+          profile_image_url
+          hourly_pay
+          video_url
         }
       }`
     }).then(res => {
