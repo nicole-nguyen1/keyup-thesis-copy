@@ -2,7 +2,11 @@ let defaultState = {
   careers: [
     {
       name: '',
-      salary: 5
+      annual_salary: '',
+      training_length: '',
+      description: '',
+      training_hours: '',
+      card_image_url: ''
     }
   ]
 };
