@@ -10,7 +10,12 @@ class FormHomePage extends React.Component {
   }
 
   render() {
-
+    // const cardStyle = {
+    //   background: '#834A8f',
+    // };
+    // const textStyle = {
+    //   color: '#FFF'
+    // };
     return (
       <Card>
         <CardContent>
@@ -26,10 +31,12 @@ class FormHomePage extends React.Component {
             placeholder="Your name?"
             margin="normal"
           />
+          <br />
           <TextField
             placeholder="Email Address or Phone Number?"
             margin="normal"
           />
+          <br />
           <TextField
             placeholder="Ask a question or tell us a little about your career interests and priorities..."
             margin="normal"
