@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Careers from './Careers.jsx';
 import { findCareers } from '../actions/action';
+import NavBar from './NavBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class App extends React.Component {
 
   render() {
     return (
+
       <div>
+        <NavBar />
         <Careers careers={this.props.careers} />
       </div>
     )

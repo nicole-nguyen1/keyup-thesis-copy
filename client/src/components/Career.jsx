@@ -37,7 +37,7 @@ class Career extends React.Component {
               </Grid>
               <Grid item xs={3}>
                 <CardMedia 
-                  image=""
+                  image="image.png"
                   title="Dummy Title"
                 />
               </Grid>
