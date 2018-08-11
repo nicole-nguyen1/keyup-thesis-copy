@@ -25,9 +25,9 @@ class NavBar extends React.Component {
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon image="image.png"/>
             </IconButton>
-            <Button color="inherit">keyUp</Button>
+            <Typography variant="display1" color="inherit"><Button color="inherit">keyUp</Button></Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
-            Career List
+            Changing Title
             </Typography>
           </Toolbar>
         </AppBar>
