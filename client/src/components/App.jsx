@@ -51,7 +51,7 @@ class App extends React.Component {
         <NavBar />
         <Careers careers={this.props.careers} />
       </div>
-    )
+    );
   }
 }
 
