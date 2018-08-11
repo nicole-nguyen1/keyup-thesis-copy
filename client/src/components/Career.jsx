@@ -14,6 +14,9 @@ class Career extends React.Component {
   }
 
   render() {
+    const style = {
+      height: '20%'
+    };
     return (
       <Grid item xs={12}>
         <Card>
@@ -39,6 +42,7 @@ class Career extends React.Component {
                 <CardMedia 
                   image={this.props.career.card_image_url}
                   title="Dummy Title"
+                  style={style}
                 />
               </Grid>
             </Grid>
