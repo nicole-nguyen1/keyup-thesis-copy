@@ -17,17 +17,17 @@ class NavBar extends React.Component {
 
 
   render() {
-    const classes = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar className={classes.tools}>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon image="image.png"/>
             </IconButton>
             <Button color="inherit">keyUp</Button>
             <Typography variant="title" color="inherit" className={classes.flex}>
-            Careers
+            Career List
             </Typography>
           </Toolbar>
         </AppBar>
@@ -43,11 +43,16 @@ NavBar.styles = {
   },
   flex: {
     flexGrow: 1,
+    textAlign: 'right'
   },
   menuButton: {
     marginLeft: -12, 
     marginRight: 20,
   },
+  tools: {
+    display: 'flex'
+  }
+  
 };
 
 
