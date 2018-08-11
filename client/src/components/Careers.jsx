@@ -1,6 +1,6 @@
 import React from 'react';
 import Career from './Career.jsx';
-import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 class Careers extends React.Component {
   constructor(props) {
@@ -10,11 +10,11 @@ class Careers extends React.Component {
   render() {
     return (
       <div>
-        <Paper>
+        <Grid container spacing={8}>
           {this.props.careers.map((career, index) => {
             return <Career key={index} career={career} />;
           })}
-        </Paper>
+        </Grid>
       </div>
     );
   }
