@@ -8,7 +8,7 @@ import Home from './components/Home.jsx';
 
 render(
   <Provider store={store}>
-    <App/>
+    <Home/>
   </Provider>, 
   document.getElementById('app')
 );

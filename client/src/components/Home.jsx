@@ -14,7 +14,7 @@ class Home extends React.Component {
         <NavBar />
         <Intro />
       </div>
-    )
+    );
   }
 }
 
