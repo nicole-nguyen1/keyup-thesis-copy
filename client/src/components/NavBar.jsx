@@ -64,18 +64,22 @@ class NavBar extends React.Component {
               onClose={this.handleClose}
             >
               <MenuItem onClick={this.handleClose}>
+                <Link to="/">
                 <ListItemIcon className={classes.icon}>
                   <HomeIcon />
                 </ListItemIcon>
-                <ListItemText inset primary="Home">
+                <ListItemText style={{float:'right'}}inset primary="Home">
                 </ListItemText>
+                </Link>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
+                <Link to="/careers">
                 <ListItemIcon className={classes.icon}>
                   <SearchIcon />
                 </ListItemIcon>
-                <ListItemText inset primary="Browse Careers">
+                <ListItemText style={{float:'right'}}inset primary="Browse Careers">
                 </ListItemText>
+                </Link>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
                 <ListItemIcon className={classes.icon}>
