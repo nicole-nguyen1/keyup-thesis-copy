@@ -6,6 +6,7 @@ import { store } from '../store/index';
 import Careers from './Careers.jsx';
 import { findCareers } from '../actions/action';
 import NavBar from './NavBar.jsx';
+import Home from './Home.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -43,13 +44,13 @@ class App extends React.Component {
       console.log(store.getState());
     });
   }
-
+  //<Careers careers={this.props.careers} />
+  //<NavBar />
   render() {
     return (
 
       <div>
-        <NavBar />
-        <Careers careers={this.props.careers} />
+        <Home />
       </div>
     );
   }

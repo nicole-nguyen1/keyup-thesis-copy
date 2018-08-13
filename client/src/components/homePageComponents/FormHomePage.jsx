@@ -3,6 +3,21 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+
+
+const styles = theme => ({
+  form: {
+    background: 'purple',
+    secondary: 'white'
+  },
+  text: {
+    background: 'white'
+  }
+});
+
+// background: '#834A8f'
 
 class FormHomePage extends React.Component {
   constructor(props) {
@@ -10,15 +25,10 @@ class FormHomePage extends React.Component {
   }
 
   render() {
-    // const cardStyle = {
-    //   background: '#834A8f',
-    // };
-    // const textStyle = {
-    //   color: '#FFF'
-    // };
+    const { classes } = this.props;
     return (
-      <Card>
-        <CardContent>
+      <Card className={classes.form}>
+        <CardContent >
           <Typography>
             Chat with one of our
             <br />
@@ -30,6 +40,7 @@ class FormHomePage extends React.Component {
           <TextField 
             placeholder="Your name?"
             margin="normal"
+            className={classes.text}
           />
           <br />
           <TextField
@@ -49,4 +60,4 @@ class FormHomePage extends React.Component {
   }
 }
 
-export default FormHomePage;
+export default withStyles(styles)(FormHomePage);
