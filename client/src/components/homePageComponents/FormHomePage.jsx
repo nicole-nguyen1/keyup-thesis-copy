@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   cardStyle: {
     background: 'purple',
+    borderRadius: '0'
   },
   headerStyle: {
     color: 'white'
