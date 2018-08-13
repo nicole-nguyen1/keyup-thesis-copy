@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from './NavBar.jsx';
 import Intro from './homePageComponents/Intro.jsx';
 import App from './App.jsx';
-import { Switch, Route } from 'react-router-dom';
+import FormHomePage from './homePageComponents/FormHomePage.jsx';
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,13 +13,8 @@ class Home extends React.Component {
 
     return (
       <div>
-        <NavBar />
-        <div>
-          <Switch>
-            <Route exact path="/" component={Intro} />
-            <Route exact path="/careers" component={App} />
-          </Switch>
-        </div>
+        <Intro />
+        <FormHomePage />
       </div>
     );
   }
