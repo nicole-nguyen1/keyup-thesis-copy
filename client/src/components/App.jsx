@@ -5,8 +5,13 @@ import { connect } from 'react-redux';
 import { store } from '../store/index';
 import Careers from './Careers.jsx';
 import { findCareers } from '../actions/action';
+import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Home from './Home.jsx';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const newHistory = createBrowserHistory();
+
 
 class App extends React.Component {
   constructor(props) {
@@ -47,11 +52,22 @@ class App extends React.Component {
   //<Careers careers={this.props.careers} />
   //<NavBar />
   render() {
+    // const context = this;
     return (
-
-      <div>
-        <Home />
-      </div>
+      <Router history={newHistory} >
+        <div>
+          <NavBar />
+          <div>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/careers" render={props => {
+                console.log('props', props); 
+                return <Careers router={props} careers={this.props.careers}/>;
+              }} />
+            </Switch>
+          </div>
+        </div>
+      </Router>
     );
   }
 }
