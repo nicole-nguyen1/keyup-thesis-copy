@@ -8,12 +8,19 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 const styles = theme => ({
-  form: {
+  cardStyle: {
     background: 'purple',
-    secondary: 'white'
   },
-  text: {
-    background: 'white'
+  headerStyle: {
+    color: 'white'
+  },
+  textStyle: {
+    color: 'white'
+  },
+  inputStyle: {
+    background: 'white',
+    margin: '5px 0px',
+    width: '300px',
   }
 });
 
@@ -27,32 +34,31 @@ class FormHomePage extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Card className={classes.form}>
+      <Card className={classes.cardStyle}>
         <CardContent >
-          <Typography>
+          <Typography variant="headline"className={classes.textStyle}>
             Chat with one of our
             <br />
             KeyUp Guides Today
           </Typography>
-          <Typography>
+          <Typography className={classes.textStyle}>
             We'll get back to you within 24 hours
           </Typography>
           <TextField 
             placeholder="Your name?"
-            margin="normal"
-            className={classes.text}
+            className={classes.inputStyle}
           />
           <br />
           <TextField
             placeholder="Email Address or Phone Number?"
-            margin="normal"
+            className={classes.inputStyle}
           />
           <br />
           <TextField
             placeholder="Ask a question or tell us a little about your career interests and priorities..."
-            margin="normal"
             multiline
             rows="4"
+            className={classes.inputStyle}
           />
         </CardContent>
       </Card>
