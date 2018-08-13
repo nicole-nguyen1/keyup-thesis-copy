@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-function Footer() {
+var Footer = function () {
   const styles = {
     footer: {
       backgroundColor: '#444447',
@@ -32,7 +32,7 @@ function Footer() {
     link: {
       color: '#EDEDED'
     }
-  }
+  };
 
   return (
     <Card style={styles.footer}>
@@ -55,7 +55,7 @@ function Footer() {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 export default Footer;

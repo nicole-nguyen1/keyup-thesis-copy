@@ -7,6 +7,7 @@ import Careers from './Careers.jsx';
 import { findCareers } from '../actions/action';
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
+import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 
@@ -66,6 +67,7 @@ class App extends React.Component {
               }} />
             </Switch>
           </div>
+          <Footer />
         </div>
       </Router>
     );

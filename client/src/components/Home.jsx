@@ -1,8 +1,6 @@
 import React from 'react';
-import NavBar from './NavBar.jsx';
 import Intro from './homePageComponents/Intro.jsx';
 import FormHomePage from './homePageComponents/FormHomePage.jsx';
-import Footer from './homePageComponents/Footer.jsx';
 import About from './homePageComponents/About.jsx';
 
 class Home extends React.Component {
@@ -17,7 +15,6 @@ class Home extends React.Component {
         <Intro />
         <About />
         <FormHomePage />
-        <Footer />
       </div>
     );
   }
