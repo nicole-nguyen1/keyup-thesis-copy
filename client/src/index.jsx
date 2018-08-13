@@ -4,12 +4,15 @@ import { Provider } from 'react-redux';
 import { store } from './store/index';
 import App from './components/App.jsx';
 import Home from './components/Home.jsx';
+import { BrowserRouter } from 'react-router-dom';
 
 
 render(
-  <Provider store={store}>
-    <App/>
-  </Provider>, 
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>, 
   document.getElementById('app')
 );
 
