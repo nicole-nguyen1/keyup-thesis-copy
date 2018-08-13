@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 
 class NavBar extends React.Component {
@@ -25,7 +27,14 @@ class NavBar extends React.Component {
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon image="image.png"/>
             </IconButton>
-            <Typography variant="display1" color="inherit"><Button color="inherit">keyUp</Button></Typography>
+            <Typography variant="display1" color="inherit">
+              <Link to="/">
+                <Button color="inherit">keyUp</Button>
+              </Link>
+              <Link to="/careers">
+                <Button color="inherit">Temp link to career list</Button>
+              </Link>
+            </Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
             Changing Title
             </Typography>
@@ -60,4 +69,4 @@ NavBar.styles = {
 //   classes: PropTypes.object.isRequired
 // };
 
-export default withStyles(NavBar.styles)(NavBar);
+export default withStyles(NavBar.styles)(withRouter(NavBar));

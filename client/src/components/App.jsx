@@ -48,7 +48,6 @@ class App extends React.Component {
     return (
 
       <div>
-        <NavBar />
         <Careers careers={this.props.careers} />
       </div>
     );
