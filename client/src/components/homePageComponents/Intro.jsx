@@ -1,5 +1,5 @@
 import React from 'react';
-import Typeography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 
 class Intro extends React.Component {
   constructor(props) {
@@ -38,13 +38,13 @@ class Intro extends React.Component {
         <div style={style.foreground}>
           <div style={style.blackBox}>
             <div style={style.text}>
-              <Typeography variant="display3" color='inherit'>
+              <Typography variant="display3" color='inherit'>
             Find your path to a solid career that doesn't require a 4-year degree
-              </Typeography>
-              <Typeography variant="headline" color='inherit'>
+              </Typography>
+              <Typography variant="headline" color='inherit'>
             Find careers, training services, and support programs that can get you to the 
             middle class without a 4-year degree 
-              </Typeography>
+              </Typography>
             </div>
           </div>
         </div>
