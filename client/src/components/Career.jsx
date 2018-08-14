@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
+import { Link } from 'react-router-dom';
 
 
 class Career extends React.Component {
@@ -48,7 +49,7 @@ class Career extends React.Component {
             </Grid>
             <Grid container spacing={8}>
               <Grid item xs={6}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" component={Link} to={`/careers/${this.props.career.id}`}>
                   LEARN MORE
                 </Button>
               </Grid>
