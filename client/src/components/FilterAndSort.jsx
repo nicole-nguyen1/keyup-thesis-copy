@@ -29,6 +29,11 @@ const styles = theme => ({
 class FilterAndSort extends React.Component {
   constructor(props) {
     super(props);
+    this.sortOptions = [
+      'Highest salary',
+      'Shortest training length',
+      'Most job openings'
+    ];
   }
 
   render() {
@@ -56,9 +61,9 @@ class FilterAndSort extends React.Component {
           SORT BY
         </Typography>
         <RadioGroup name="sort">
-          <Sort />
-          <Sort />
-          <Sort />
+          {this.sortOptions.map((label, index)=>{
+            return (<Sort key={index} label={label}/>);
+          })}
         </RadioGroup>
         <Button variant="contained" color="primary">See Career Results</Button>
       </FormGroup>
