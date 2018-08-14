@@ -11,3 +11,10 @@ export const findCareer = (data) => (
     payload: data
   }
 )
+
+export const findServices = (data) => (
+  {
+    type: 'SERVICES',
+    payload: data
+  }
+)
