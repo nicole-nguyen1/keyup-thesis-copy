@@ -9,6 +9,7 @@ import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
+import CareerProfile from './CareerProfile.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 
 const newHistory = createBrowserHistory();
@@ -20,7 +21,7 @@ class App extends React.Component {
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
-    
+
   }
 
   componentDidMount() {
@@ -28,19 +29,12 @@ class App extends React.Component {
       query: `{
         careers {
           id
-          industry_id
+          industry_name
           name
+          card_pro
           annual_salary
           training_length
-          description
-          openings
-          training_hours
-          training_cost
           card_image_url
-          card_pro
-          profile_image_url
-          hourly_pay
-          video_url
         }
       }`
     }).then(res => {
@@ -62,8 +56,11 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/careers" render={props => {
-                console.log('props', props); 
-                return <Careers router={props} careers={this.props.careers}/>;
+                console.log('props', props);
+                return <Careers router={props} careers={this.props.careers} />;
+              }} />
+              <Route path="/careers/:id" render={props => {
+                return <CareerProfile router={props} />
               }} />
             </Switch>
           </div>

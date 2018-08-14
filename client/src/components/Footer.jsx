@@ -26,7 +26,8 @@ var Footer = function () {
     text: {
       display: 'inline',
       padding: '0 20px',
-      color: '#EDEDED'
+      color: '#EDEDED',
+      fontSize: '10px'
     },
 
     link: {
@@ -39,13 +40,13 @@ var Footer = function () {
       <CardContent>
         <div style={styles.section}>
           <Grid item xs={4} style={styles.icon}>
-            <img src='https://s3.amazonaws.com/key-up-assets/facebook-logo-icon-white.png' width='25px' height='25px' />
+            <img src='https://s3.amazonaws.com/key-up-assets/facebook-logo-icon-white.png' width='50px' height='50px' />
           </Grid>
           <Grid item xs={4} style={styles.icon}>
-            <img src='https://s3.amazonaws.com/key-up-assets/linkedin-icon-white.png' width='25px' height='25px' />
+            <img src='https://s3.amazonaws.com/key-up-assets/linkedin-icon-white.png' width='50px' height='50px' />
           </Grid>
           <Grid item xs={4} style={styles.icon}>
-            <img src='https://s3.amazonaws.com/key-up-assets/instagram-icon-white.png' width='25px' height='25px' />
+            <img src='https://s3.amazonaws.com/key-up-assets/instagram-icon-white.png' width='50px' height='50px' />
           </Grid>
         </div>
         <div style={styles.section}>
