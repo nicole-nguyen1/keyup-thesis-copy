@@ -5,7 +5,8 @@ const {
   GraphQLInt,
   GraphQLString,
   GraphQLList,
-  GraphQLID
+  GraphQLID,
+  GraphQLBoolean
 } = require('graphql');
 
 const IndustryType = new GraphQLObjectType({
@@ -126,8 +127,13 @@ const TrainingType = new GraphQLObjectType({
     program_url: { type: GraphQLString },
     app_url: { type: GraphQLString },
     program_length_total: { type: GraphQLString },
-    program_length_weekly: { type: GraphQLString },
+    program_total_weekly: { type: GraphQLString },
     program_class_times: { type: GraphQLString },
+    paid_to_learn: { type: GraphQLBoolean },
+    federal_student_aid: { type: GraphQLBoolean },
+    card_length: { type: GraphQLString },
+    card_location: { type: GraphQLString},
+    page_title: { type: GraphQLString},
     outcomes: {
       type: new GraphQLList(TrainingTraitType),
       resolve(parent, args) {
