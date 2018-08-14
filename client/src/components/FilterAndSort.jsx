@@ -1,14 +1,7 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import FilterAndSortForm from './filterAndSortComponents/FilterAndSortForm.jsx';
 import { withStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
-import Filter from './filterAndSortComponents/Filter.jsx';
-import Sort from './filterAndSortComponents/Sort.jsx';
 
 const styles = theme => ({
   headerStyle: {
@@ -26,47 +19,42 @@ const styles = theme => ({
 class FilterAndSort extends React.Component {
   constructor(props) {
     super(props);
-    this.sortOptions = [
-      'Highest salary',
-      'Shortest training length',
-      'Most job openings'
-    ];
-    this.techIndustries = [
-      'Health Care Industry',
-      'Tech Industry',
-      'Skilled Trade Industry'
-    ];
+
+    this.state = {
+      showFilter: false
+    }
+  }
+
+  displayFilter = () => {
+    this.setState({
+      showFilter: true
+    });
+  }
+
+  hideFilter = () => {
+    this.setState({
+      showFilter: false
+    });
   }
 
   render() {
-    const { classes } = this.props;
     return (
-      <FormGroup className={classes.formStyle}>
-        <Typography variant="headline" className={classes.headerStyle}>
-          Filter and Sort Careers
-          <br />
-        </Typography>
-        <Typography className={classes.groupStyle}>
-          FILTER
-        </Typography>
-        {this.props.industries.map((industry)=>{
-          return (<Filter key={industry.id} label={industry.name}/>);
-        })}
-        <Divider />
-        <Filter label="Get paid to learn" />
-        <Filter label="Free training services" />
-        <Typography className={classes.groupStyle}>
-          SORT BY
-        </Typography>
-        <RadioGroup name="sort">
-          {this.sortOptions.map((label, index)=>{
-            return (<Sort key={index} label={label}/>);
-          })}
-        </RadioGroup>
-        <Button variant="contained" color="primary">See Career Results</Button>
-      </FormGroup>
+      <div>
+        {this.state.showFilter ?
+          (<FilterAndSortForm 
+            industries={this.props.industries}
+            hideFilter={this.hideFilter}
+          />) :
+          (<Button 
+            variant="contained"
+            color="primary"
+            onClick={this.displayFilter}
+          >Filter And Sort</Button>)
+        }
+      </div>
     );
   }
+
 }
 
 export default withStyles(styles)(FilterAndSort);

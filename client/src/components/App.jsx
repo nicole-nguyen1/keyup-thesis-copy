@@ -14,14 +14,12 @@ import createBrowserHistory from 'history/createBrowserHistory';
 
 const newHistory = createBrowserHistory();
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
-
   }
 
   componentDidMount() {
@@ -38,10 +36,7 @@ class App extends React.Component {
         }
       }`
     }).then(res => {
-      console.log('res data in app file in graphql request', res.data);
       store.dispatch(findCareers(res.data));
-    }).then(() => {
-      console.log(store.getState());
     });
 
     this.fetch({
@@ -52,16 +47,11 @@ class App extends React.Component {
         }
       }`
     }).then(res => {
-      console.log('industry res', res.data);
       store.dispatch(getIndustries(res.data));
-    }).then(()=>{
-      console.log('getState After getIndustries', store.getState());
     });
   }
-  //<Careers careers={this.props.careers} />
-  //<NavBar />
+
   render() {
-    // const context = this;
     return (
       <Router history={newHistory} >
         <div>
