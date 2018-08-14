@@ -10,9 +10,9 @@ import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import CareerProfile from './CareerProfile.jsx';
-import createBrowserHistory from 'history/createBrowserHistory';
+import createHashHistory from 'history/createHashHistory';
 
-const newHistory = createBrowserHistory();
+const newHistory = createHashHistory();
 
 
 class App extends React.Component {
@@ -62,6 +62,7 @@ class App extends React.Component {
   //<NavBar />
   render() {
     // const context = this;
+    console.log('new history', newHistory)
     return (
       <Router history={newHistory} >
         <div>
