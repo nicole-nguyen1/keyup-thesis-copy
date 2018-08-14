@@ -44,7 +44,7 @@ class NavBar extends React.Component {
     const { anchorEl } = this.state;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar className={classes.tools}>
             <IconButton 
             className={classes.menuButton} 
