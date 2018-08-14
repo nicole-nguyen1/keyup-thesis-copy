@@ -25,7 +25,7 @@ class Career extends React.Component {
             <Grid container>
               <Grid item xs={9}>
                 <Typography color="textSecondary">
-                  Need relation from careers to industry table {this.props.career.industry_id}
+                  {this.props.career.industry_name}
                 </Typography>
                 <Typography variant="headline">
                   {this.props.career.name}
@@ -54,7 +54,7 @@ class Career extends React.Component {
                 </Button>
               </Grid>
               <Grid item xs={6}>
-                <Button>
+                <Button variant='contained' color='primary' component={Link} to={`/services/${this.props.career.id}`}>
                   FIND TRAINING
                 </Button>
               </Grid>
