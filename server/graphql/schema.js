@@ -24,13 +24,14 @@ const CareerType = new GraphQLObjectType({
     id: { type: GraphQLID },
     industry_id: { type: GraphQLID },
     name: { type: GraphQLString },
-    industry: { 
-      type: IndustryType,
+    industry_name: {
+      type: GraphQLString,
       resolve(parent, args) {
         return knex('industries')
-                .select()
-                .where({ 'id': parent.industry_id })
-                .first();
+          .select('name')
+          .where({ 'id': parent.industry_id })
+          .first()
+          .then((obj) => obj.name);
       }
     },
     annual_salary: { type: GraphQLString },
