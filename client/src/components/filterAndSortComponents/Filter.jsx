@@ -21,7 +21,7 @@ class Filter extends React.Component {
       <FormControlLabel 
         control={
           <Checkbox color = "default"/>
-        } label="Health Care Industry" />
+        } label={this.props.label} />
     );
   }
 }

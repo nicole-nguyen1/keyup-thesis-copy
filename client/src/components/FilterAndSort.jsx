@@ -34,6 +34,11 @@ class FilterAndSort extends React.Component {
       'Shortest training length',
       'Most job openings'
     ];
+    this.techIndustries = [
+      'Health Care Industry',
+      'Tech Industry',
+      'Skilled Trade Industry'
+    ];
   }
 
   render() {
@@ -47,16 +52,12 @@ class FilterAndSort extends React.Component {
         <Typography className={classes.groupStyle}>
           FILTER
         </Typography>
-        <Filter />
-        <Filter />
-        <Filter />
+        {this.techIndustries.map((label, index)=>{
+          return (<Filter key={index} label={label}/>);
+        })}
         <Divider />
-        <FormControlLabel control={
-          <Checkbox color = "default"/>
-        } label="Get paid to learn" />
-        <FormControlLabel control={
-          <Checkbox color = "default"/>
-        } label="Free training services" />
+        <Filter label="Get paid to learn" />
+        <Filter label="Free training services" />
         <Typography className={classes.groupStyle}>
           SORT BY
         </Typography>
