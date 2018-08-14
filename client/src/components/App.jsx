@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { store } from '../store/index';
 import Careers from './Careers.jsx';
 import { findCareers } from '../actions/action';
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Route, Router, Redirect } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import CareerProfile from './CareerProfile.jsx';
-import createBrowserHistory from 'history/createBrowserHistory';
+import createHashHistory from 'history/createHashHistory';
 
-const newHistory = createBrowserHistory();
+const newHistory = createHashHistory();
 
 
 class App extends React.Component {
@@ -48,6 +48,7 @@ class App extends React.Component {
   //<NavBar />
   render() {
     // const context = this;
+    console.log('new history', newHistory)
     return (
       <Router history={newHistory} >
         <div>
@@ -60,7 +61,7 @@ class App extends React.Component {
                 return <Careers router={props} careers={this.props.careers} />;
               }} />
               <Route path="/careers/:id" render={props => {
-                return <CareerProfile router={props} />
+                return <CareerProfile router={props} />;
               }} />
             </Switch>
           </div>
