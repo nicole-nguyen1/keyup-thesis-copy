@@ -3,6 +3,10 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import { ListItemIcon } from '@material-ui/core/ListItemIcon';
+
 
 
 
@@ -20,7 +24,8 @@ const styles = theme => ({
   divStyle: {
     background: '#232E49',
     padding: '20px 5px'
-  }
+  },
+  icon: {}
 });
 
 class HomePageCards extends React.Component {
@@ -34,26 +39,39 @@ class HomePageCards extends React.Component {
       <div className={classes.divStyle}>
         <Card className={classes.cardStyle}>
           <CardContent >
-            <Typography variant="headline"className={classes.textStyle}>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              <div style={{flexGrow: '4'}}>
+                <Typography variant="headline"className={classes.textStyle}>
             Get Recommendations
-            </Typography>
-            <Typography className={classes.textStyle}>
+                </Typography>
+                <Typography className={classes.textStyle}>
             Answer some quick questions to find careers and training 
             that fit your life
-            </Typography>
+                </Typography>
+              </div>
+              <KeyboardArrowRightIcon style={{flexGrow: '1'}} />
+            </div>
           </CardContent>
         </Card>
-        <Card className={classes.cardStyle}>
-          <CardContent >
-            <Typography variant="headline"className={classes.textStyle}>
+        <Link style={{textDecoration: 'none'}} to="/careers">
+          <Card className={classes.cardStyle}>
+            <CardContent >
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{flexGrow: '4'}}>
+                  <Typography variant="headline"className={classes.textStyle}>
             Browse Careers and Training Services
-            </Typography>
-            <Typography className={classes.textStyle}>
+                  </Typography>
+                  <Typography className={classes.textStyle}>
             Search in-demand careers by salary, distance, training 
             time, and more
-            </Typography>
-          </CardContent>
-        </Card>
+                  </Typography>
+                </div>
+            
+                <KeyboardArrowRightIcon style={{flexGrow: '1'}} />
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     );
   }

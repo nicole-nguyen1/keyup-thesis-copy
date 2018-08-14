@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { ListItem } from '../../../node_modules/@material-ui/core';
+
 
 
 class NavBar extends React.Component {
@@ -38,6 +37,14 @@ class NavBar extends React.Component {
     this.setState( { anchorEl: null });
   };
 
+  // handleScrollClick = section => {
+  //   this.handleClose();
+  //   console.log('document', document)
+  //   window.onload = function() {
+  //   document.getElementById(section).scrollIntoView();
+  //   }
+  // }
+
 
 
   render() {
@@ -45,7 +52,7 @@ class NavBar extends React.Component {
     const { anchorEl } = this.state;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar className={classes.tools}>
             <IconButton 
             className={classes.menuButton} 
@@ -105,10 +112,7 @@ class NavBar extends React.Component {
             </Menu>
             <Typography variant="display1" color="inherit">
               <Link to="/">
-                <Button color="inherit">keyUp</Button>
-              </Link>
-              <Link to="/careers">
-                <Button color="inherit">Temp link to career list</Button>
+                <Button className={classes.home}>keyUp</Button>
               </Link>
             </Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
@@ -135,15 +139,15 @@ NavBar.styles = {
     marginRight: 20,
   },
   tools: {
-    display: 'flex'
+    display: 'flex',
+    backgroundColor: '2979ff'
   },
-  icon: {}
+  icon: {},
+  home: {
+    color: '#ffffff',
+    textDecoration: 'none'
+  }
   
 };
-
-
-// NavBar.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
 
 export default withStyles(NavBar.styles)(withRouter(NavBar));
