@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 
 
@@ -43,17 +44,19 @@ class HomePageCards extends React.Component {
             </Typography>
           </CardContent>
         </Card>
-        <Card className={classes.cardStyle}>
-          <CardContent >
-            <Typography variant="headline"className={classes.textStyle}>
+        <Link style={{textDecoration: 'none'}} to="/careers">
+          <Card className={classes.cardStyle}>
+            <CardContent >
+              <Typography variant="headline"className={classes.textStyle}>
             Browse Careers and Training Services
-            </Typography>
-            <Typography className={classes.textStyle}>
+              </Typography>
+              <Typography className={classes.textStyle}>
             Search in-demand careers by salary, distance, training 
             time, and more
-            </Typography>
-          </CardContent>
-        </Card>
+              </Typography>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     );
   }
