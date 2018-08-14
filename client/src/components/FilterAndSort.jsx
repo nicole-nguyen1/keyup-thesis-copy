@@ -5,10 +5,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Filter from './filterAndSortComponents/Filter.jsx';
+import Sort from './filterAndSortComponents/Sort.jsx';
 
 const styles = theme => ({
   headerStyle: {
@@ -56,15 +56,9 @@ class FilterAndSort extends React.Component {
           SORT BY
         </Typography>
         <RadioGroup name="sort">
-          <FormControlLabel control={
-            <Radio color = "default"/>
-          } label="Highest salary" />
-          <FormControlLabel control={
-            <Radio color = "default"/>
-          } label="Shortest training length" />
-          <FormControlLabel control={
-            <Radio color = "default"/>
-          } label="Most job openings" />
+          <Sort />
+          <Sort />
+          <Sort />
         </RadioGroup>
         <Button variant="contained" color="primary">See Career Results</Button>
       </FormGroup>
