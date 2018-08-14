@@ -3,7 +3,6 @@ import Intro from './homePageComponents/Intro.jsx';
 import FormHomePage from './homePageComponents/FormHomePage.jsx';
 import About from './homePageComponents/About.jsx';
 import HomePageCards from './homePageComponents/HomePageCards.jsx';
-import FilterAndSort from './FilterAndSort.jsx';
 
 class Home extends React.Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class Home extends React.Component {
         <HomePageCards />
         <About />
         <FormHomePage />
-        <FilterAndSort />
       </div>
     );
   }

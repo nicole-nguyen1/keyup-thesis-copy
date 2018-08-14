@@ -23,9 +23,6 @@ const styles = theme => ({
   }
 });
 
-//need to refactor this to render a list tech industries
-
-
 class FilterAndSort extends React.Component {
   constructor(props) {
     super(props);
@@ -52,8 +49,8 @@ class FilterAndSort extends React.Component {
         <Typography className={classes.groupStyle}>
           FILTER
         </Typography>
-        {this.techIndustries.map((label, index)=>{
-          return (<Filter key={index} label={label}/>);
+        {this.props.industries.map((industry)=>{
+          return (<Filter key={industry.id} label={industry.name}/>);
         })}
         <Divider />
         <Filter label="Get paid to learn" />
