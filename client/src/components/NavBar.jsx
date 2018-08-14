@@ -37,6 +37,14 @@ class NavBar extends React.Component {
     this.setState( { anchorEl: null });
   };
 
+  // handleScrollClick = section => {
+  //   this.handleClose();
+  //   console.log('document', document)
+  //   window.onload = function() {
+  //   document.getElementById(section).scrollIntoView();
+  //   }
+  // }
+
 
 
   render() {
