@@ -5,6 +5,13 @@ export const findCareers = (data) => (
   }
 );
 
+export const getIndustries = (data) => (
+  {
+    type: 'INDUSTRIES',
+    payload: data
+  }
+);
+
 export const findCareer = (data) => (
   {
     type: 'CAREER',
