@@ -8,6 +8,8 @@ import HomePageCards from './homePageComponents/HomePageCards.jsx';
 class Home extends React.Component {
   constructor(props) {
     super(props);
+
+    this.about = React.createRef();
   }
 
   render() {
