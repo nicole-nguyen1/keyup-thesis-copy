@@ -38,10 +38,7 @@ class App extends React.Component {
         }
       }`
     }).then(res => {
-      console.log('res data in app file in graphql request', res.data);
       store.dispatch(findCareers(res.data));
-    }).then(() => {
-      console.log(store.getState());
     });
 
     this.fetch({
@@ -52,17 +49,13 @@ class App extends React.Component {
         }
       }`
     }).then(res => {
-      console.log('industry res', res.data);
       store.dispatch(getIndustries(res.data));
-    }).then(()=>{
-      console.log('getState After getIndustries', store.getState());
-    });
+    })
   }
   //<Careers careers={this.props.careers} />
   //<NavBar />
   render() {
     // const context = this;
-    console.log('new history', newHistory)
     return (
       <Router history={newHistory} >
         <div>
@@ -71,7 +64,6 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/careers" render={props => {
-                console.log('props', props); 
                 return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
               }} />
               <Route path="/careers/:id" render={props => {
