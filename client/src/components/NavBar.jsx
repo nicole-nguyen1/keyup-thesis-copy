@@ -21,10 +21,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import { getPageTitle } from '../actions/action';
-
-
-
-
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -89,41 +85,44 @@ class NavBar extends React.Component {
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
+              PopoverClasses={{paper: `${classes.menu}`}}
             >
               <MenuItem onClick={this.handleHomeInsidePopUpMenuClick}>
                 <Link to="/">
-                <ListItemIcon className={classes.icon}>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText style={{float:'right'}}inset primary="Home">
-                </ListItemText>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <ListItemText style={{float:'right'}}inset primary="Home">
+                  </ListItemText>
                 </Link>
               </MenuItem>
               <MenuItem onClick={this.handleBrowseCareersClick}>
                 <Link to="/careers">
-                <ListItemIcon className={classes.icon}>
-                  <SearchIcon />
-                </ListItemIcon>
-                <ListItemText style={{float:'right'}}inset primary="Browse Careers">
-                </ListItemText>
+                  <ListItemIcon>
+                    <SearchIcon />
+                  </ListItemIcon>
+                  <ListItemText style={{float:'right'}}inset primary="Browse Careers">
+                  </ListItemText>
                 </Link>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <ListItemIcon className={classes.icon}>
-                  <ChatIcon />
-                </ListItemIcon>
-                <ListItemText inset primary="Get Recommendations">
-                </ListItemText>
+                <a style={{ textDecoration: 'none' }} href='https://keyup.typeform.com/to/dlfXQi'>
+                  <ListItemIcon style={{ position: 'relative', top: '4px' }}>
+                    <ChatIcon />
+                  </ListItemIcon>
+                  <ListItemText inset primary="Get Recommendations" style={{ position: 'relative', top: '-4px', display: 'inline-flex' }}>
+                  </ListItemText>
+                </a>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <ListItemIcon className={classes.icon}>
+                <ListItemIcon>
                   <InfoIcon />
                 </ListItemIcon>
                 <ListItemText inset primary="About KeyUp">
                 </ListItemText>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <ListItemIcon className={classes.icon}>
+                <ListItemIcon>
                   <PeopleIcon />
                 </ListItemIcon>
                 <ListItemText inset primary ="Contact KeyUp"> 
@@ -132,7 +131,9 @@ class NavBar extends React.Component {
             </Menu>
             <Typography variant="display1" color="inherit">
               <Link to="/">
-                <Button onClick={this.handleKeyUpClick} className={classes.home}>keyUp</Button>
+                <Button onClick={this.handleKeyUpClick} className={classes.home}>
+                  <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px'/>
+                </Button>
               </Link>
             </Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
@@ -155,17 +156,22 @@ NavBar.styles = {
     textAlign: 'right'
   },
   menuButton: {
-    marginLeft: -12, 
-    marginRight: 20,
+    marginLeft: -12
+  },
+  menu: {
+    top: '0!important',
+    left: '0!important',
+    borderRadius: 0
   },
   tools: {
+    top: 0,
+    left: 0,
+    borderRadius: 0,
     display: 'flex',
     backgroundColor: '2979ff'
   },
-  icon: {},
   home: {
-    color: '#ffffff',
-    textDecoration: 'none'
+    padding: '5px'
   }
   
 };
