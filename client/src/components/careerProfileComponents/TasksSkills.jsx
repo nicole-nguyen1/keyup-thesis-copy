@@ -28,7 +28,8 @@ const TasksSkills = (props) => {
       <Card style={styles.card}>
         <CardContent>
           <Typography variant='title'>Typical Tasks</Typography>
-          {props.career.tasks.map((task) => {
+          {props.career.tasks ?
+            props.career.tasks.map((task) => {
               return (
                 <div key={task.id} style={styles.listItem}>
                   <img
@@ -37,11 +38,12 @@ const TasksSkills = (props) => {
                   <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{task.description}</Typography>
                 </div>
               )
-          })}
+            }) : null}
         </CardContent>
         <CardContent>
           <Typography variant='title'>Skills Needed</Typography>
-          {props.career.skills.map((skill) => {
+          {props.career.skills ?
+            props.career.skills.map((skill) => {
               return (
                 <div key={skill.id} style={styles.listItem}>
                   <img
@@ -50,7 +52,7 @@ const TasksSkills = (props) => {
                   <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{skill.description}</Typography>
                 </div>
               )
-          })}
+            }) : null}
         </CardContent>
       </Card>
     </div>
