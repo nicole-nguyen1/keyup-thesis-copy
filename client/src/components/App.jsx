@@ -9,9 +9,9 @@ import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
-import CareerProfile from './CareerProfile.jsx';
 import Services from './Services.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
+import CareerProfileContainer from './CareerProfileContainer.jsx';
 
 const newHistory = createBrowserHistory();
 
@@ -63,7 +63,7 @@ class App extends React.Component {
                 return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
               }} />
               <Route path="/careers/:id" render={props => {
-                return <CareerProfile router={props} />;
+                return <CareerProfileContainer router={props} />;
               }} />
               <Route path='/services/:id' render={props => {
                 return <Services router={props} />;
