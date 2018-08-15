@@ -18,3 +18,10 @@ export const findCareer = (data) => (
     payload: data
   }
 );
+
+export const getPageTitle = (data) => (
+  {
+    type: 'PAGES',
+    payload: data
+  }
+);

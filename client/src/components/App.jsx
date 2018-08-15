@@ -14,14 +14,12 @@ import createHashHistory from 'history/createHashHistory';
 
 const newHistory = createHashHistory();
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
-
   }
 
   componentDidMount() {
@@ -50,12 +48,9 @@ class App extends React.Component {
       }`
     }).then(res => {
       store.dispatch(getIndustries(res.data));
-    })
+    });
   }
-  //<Careers careers={this.props.careers} />
-  //<NavBar />
   render() {
-    // const context = this;
     return (
       <Router history={newHistory} >
         <div>
@@ -81,7 +76,7 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
-    industries: state.industries.industries
+    industries: state.industries.industries,
   };
 };
 
