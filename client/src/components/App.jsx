@@ -12,6 +12,7 @@ import Home from './Home.jsx';
 import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
+import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -85,6 +86,9 @@ class App extends React.Component {
                 <Route path='/services/:id' render={props => {
                   return <ServiceListContainer router={props} />;
                 }} />
+                <Route path='/service/:id' render={props => {
+                  return <TrainingServiceProfileContainer router={props} />;
+                }} />
               </Switch>
             </div>
           </MediaQuery>
@@ -105,6 +109,9 @@ class App extends React.Component {
                 }} />
                 <Route path='/services/:id' render={props => {
                   return <ServiceListContainer router={props} />;
+                }} />
+                <Route path='/service/:id' render={props => {
+                  return <TrainingServiceProfileContainer router={props} />;
                 }} />
               </Switch>
             </div>

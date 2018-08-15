@@ -10,7 +10,7 @@ import TrainingServiceProfile from './trainingServiceProfileComponents/TrainingS
 class TrainingServiceProfileContainer extends React.Component {
   constructor(props) {
     super(props);
-    const service_id = '1';
+    const service_id = +props.router.match.params.id || null;
     this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
     this.state = {
       service_id
