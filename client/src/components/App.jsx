@@ -9,7 +9,7 @@ import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
-import Services from './Services.jsx';
+import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
 
@@ -66,7 +66,7 @@ class App extends React.Component {
                 return <CareerProfileContainer router={props} />;
               }} />
               <Route path='/services/:id' render={props => {
-                return <Services router={props} />;
+                return <ServiceListContainer router={props} />;
               }} />
             </Switch>
           </div>
