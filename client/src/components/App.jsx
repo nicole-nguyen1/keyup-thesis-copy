@@ -10,9 +10,9 @@ import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import CareerProfile from './CareerProfile.jsx';
-import createHashHistory from 'history/createHashHistory';
+import createBrowserHistory from 'history/createBrowserHistory';
 
-const newHistory = createHashHistory();
+const newHistory = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {
