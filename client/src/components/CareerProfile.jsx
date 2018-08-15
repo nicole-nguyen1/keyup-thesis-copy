@@ -12,7 +12,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import MediaQuery from 'react-responsive';
 
 class CareerProfile extends React.Component {
   constructor(props) {
@@ -77,7 +76,8 @@ class CareerProfile extends React.Component {
       cardAction: { 
         display: 'block', 
         textAlign: 'right',
-        marginTop: '10px' 
+        marginTop: '10px',
+        padding: '0 10px 0 0' 
       },
 
       bullets: {
@@ -130,40 +130,27 @@ class CareerProfile extends React.Component {
     }
 
     if (this.props.career) {
-      const firstCard = (
-        <div>
-          <CardMedia
-            image={this.props.career.profile_image_url}
-            style={{ height: '35vh' }} />
-          <CardActions style={styles.cardAction}>
-            <Button>
-              <Typography gutterBottom variant='body1' style={styles.link}>FIND TRAINING</Typography>
-              <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' style={styles.icon} />
-            </Button>
-            <Button onClick={this.toggleDrawer}>
-              <Typography gutterBottom variant='body1' style={styles.link}>SHARE</Typography>
-              <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' style={styles.icon} />
-            </Button>
-          </CardActions>
-          <CardContent>
-            <Typography gutterBottom variant='headline'>{this.props.career.name}</Typography>
-            <Typography variant='body1'>{this.props.career.description}</Typography>
-          </CardContent>
-        </div>
-      )
-
       return (
         <div>
-          <MediaQuery query="(min-device-width: 600px)">
-            <Card style={{ marginTop: '64px', borderRadius: 0}}>
-              {firstCard}
-            </Card>
-          </MediaQuery>
-          <MediaQuery query="(max-device-width: 599px)">
-            <Card style={{ marginTop: '56px', borderRadius: 0 }}>
-              {firstCard}
-            </Card>
-          </MediaQuery>
+          <Card style={{ borderRadius: 0 }}>
+            <CardMedia
+              image={this.props.career.profile_image_url}
+              style={{ height: '35vh' }} />
+            <CardActions style={styles.cardAction}>
+              <Button>
+                <Typography gutterBottom variant='body1' style={styles.link}>FIND TRAINING</Typography>
+                <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' style={styles.icon} />
+              </Button>
+              <Button onClick={this.toggleDrawer}>
+                <Typography gutterBottom variant='body1' style={styles.link}>SHARE</Typography>
+                <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' style={styles.icon} />
+              </Button>
+            </CardActions>
+            <CardContent style={{ paddingTop: 0 }}>
+              <Typography gutterBottom variant='headline'>{this.props.career.name}</Typography>
+              <Typography variant='body1'>{this.props.career.description}</Typography>
+            </CardContent>
+          </Card>
           <Drawer
             anchor="bottom"
             open={this.state.drawerState}
