@@ -121,11 +121,13 @@ class NavBar extends React.Component {
                 </ListItemText>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <ListItemIcon>
-                  <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText inset primary ="Contact KeyUp"> 
-                </ListItemText>
+                <Link to="/#contact">
+                  <ListItemIcon>
+                    <PeopleIcon />
+                  </ListItemIcon>
+                  <ListItemText style={{ float: 'right' }} inset primary="Contact KeyUp">
+                  </ListItemText>
+                </Link>
               </MenuItem>
             </Menu>
             <Typography variant="display1" color="inherit">
