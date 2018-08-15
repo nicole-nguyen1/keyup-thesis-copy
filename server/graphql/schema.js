@@ -179,8 +179,15 @@ const RootQuery = new GraphQLObjectType({
     //GET careers list
     careers: {
       type: new GraphQLList(CareerType),
+      args: { id: { type: new GraphQLList( GraphQLID ) }},
       resolve(parent, args) {
-        return knex('careers').select();
+        if (args.id) {
+          return knex('careers')
+            .select()
+            .whereIn('industry_id', args.id);
+        } else {
+          return knex('careers').select();
+        }
       }
     },
 

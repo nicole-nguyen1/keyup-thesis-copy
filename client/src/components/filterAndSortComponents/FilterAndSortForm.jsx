@@ -30,7 +30,24 @@ class FilterAndSortForm extends React.Component {
       'Shortest training length',
       'Most job openings'
     ];
+    this.filterOptions = {};
+    this.setFilter = this.setFilter.bind(this);
+    this.submitFilter = this.submitFilter.bind(this);
   }
+
+  setFilter (e) {
+    console.log(e.target.value);
+    if (this.filterOptions[e.target.value] === 0) {
+      delete this.filterOptions[e.target.value];
+    } else {
+      this.filterOptions[e.target.value] = 0;
+    }
+  }
+
+  submitFilter () {
+    console.log(Object.keys(this.filterOptions));
+  }
+
 
   render() {
     const { classes } = this.props;
@@ -49,6 +66,7 @@ class FilterAndSortForm extends React.Component {
               key={industry.id} 
               label={industry.name}
               id={industry.id}
+              setFilter={this.setFilter}
             />);
         })}
         <Divider />
@@ -73,11 +91,17 @@ class FilterAndSortForm extends React.Component {
             <Button 
               variant="contained" 
               color="primary"
-              onClick={this.props.hideFilter}
+              onClick={()=>{
+                this.props.hideFilter();
+                this.submitFilter();
+                this.props.filterCareers(Object.keys(this.filterOptions));
+              }}
             >See Career Results</Button>
           </Grid>
           <Grid item xs={6}>
-            <Button onClick={this.props.hideFilter}>CANCEL</Button>
+            <Button
+              onClick={this.props.hideFilter}
+            >CANCEL</Button>
           </Grid>
         </Grid>
       </FormGroup>

@@ -20,6 +20,7 @@ class App extends React.Component {
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
+    this.filterCareers = this.filterCareers.bind(this);
   }
 
   componentDidMount() {
@@ -50,6 +51,26 @@ class App extends React.Component {
       store.dispatch(getIndustries(res.data));
     });
   }
+
+  filterCareers (args) {
+    this.fetch({
+      query: `{
+        careers (id: ${args}){
+          id
+          industry_name
+          name
+          card_pro
+          annual_salary
+          training_length
+          card_image_url
+        }
+      }`
+    }).then((res) => {
+      console.log(res.data);
+      store.dispatch(findCareers(res.data));
+    });
+  }
+
   render() {
     return (
       <Router history={newHistory} >
@@ -59,7 +80,12 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/careers" render={props => {
-                return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
+                return <Careers 
+                  router={props} 
+                  careers={this.props.careers} 
+                  industries={this.props.industries}
+                  filterCareers={this.filterCareers}
+                />;
               }} />
               <Route path="/careers/:id" render={props => {
                 return <CareerProfileContainer router={props} />;

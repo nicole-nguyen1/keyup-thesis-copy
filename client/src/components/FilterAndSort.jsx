@@ -44,6 +44,7 @@ class FilterAndSort extends React.Component {
           (<FilterAndSortForm 
             industries={this.props.industries}
             hideFilter={this.hideFilter}
+            filterCareers={this.props.filterCareers}
           />) :
           (<Button 
             variant="contained"
