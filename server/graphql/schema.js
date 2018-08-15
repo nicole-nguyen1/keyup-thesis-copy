@@ -5,7 +5,8 @@ const {
   GraphQLInt,
   GraphQLString,
   GraphQLList,
-  GraphQLID
+  GraphQLID,
+  GraphQLBoolean
 } = require('graphql');
 
 const IndustryType = new GraphQLObjectType({
@@ -85,7 +86,9 @@ const CareerType = new GraphQLObjectType({
     },
     training_length: { type: GraphQLString },
     training_hours: { type: GraphQLString },
-    training_cost: { type: GraphQLString }
+    training_cost: { type: GraphQLString },
+    paid_to_learn: { type: GraphQLBoolean},
+    free_training: { type: GraphQLBoolean }
   })
 });
 
