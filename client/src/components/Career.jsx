@@ -48,7 +48,7 @@ class Career extends React.Component {
             </Grid>
             <Grid container spacing={8}>
               <Grid item xs={6}>
-                <Button variant="contained" color="primary" component={Link} to={`/careers/${this.props.career.id}`}>
+                <Button variant="contained" color="primary" style={{backgroundColor: '2979ff'}} component={Link} to={`/careers/${this.props.career.id}`}>
                   LEARN MORE
                 </Button>
               </Grid>
