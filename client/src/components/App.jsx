@@ -12,6 +12,11 @@ import Home from './Home.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
 import MediaQuery from 'react-responsive';
+import {
+  getCareersQuery,
+  getIndustriesQuery,
+  filterCareersQuery
+} from './graphql/graphql';
 
 const newHistory = createBrowserHistory();
 
@@ -29,12 +34,7 @@ class App extends React.Component {
     this.getCareers();
 
     this.fetch({
-      query: `{
-        industries {
-          id
-          name
-        }
-      }`
+      query: getIndustriesQuery
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
@@ -42,17 +42,7 @@ class App extends React.Component {
 
   getCareers () {
     this.fetch({
-      query: `{
-        careers {
-          id
-          industry_name
-          name
-          card_pro
-          annual_salary
-          training_length
-          card_image_url
-        }
-      }`
+      query: getCareersQuery
     }).then(res => {
       store.dispatch(findCareers(res.data));
     });
@@ -60,21 +50,10 @@ class App extends React.Component {
 
   filterCareers (args) {
     if (args.length === 0) {
-      console.log( 'LENGTH IS 0')
       this.getCareers();
     } else {
       this.fetch({
-        query: `{
-          careers (id: ${args}){
-            id
-            industry_name
-            name
-            card_pro
-            annual_salary
-            training_length
-            card_image_url
-          }
-        }`
+        query: filterCareersQuery(args)
       }).then((res) => {
         console.log(res.data);
         store.dispatch(findCareers(res.data));
