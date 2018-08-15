@@ -9,7 +9,6 @@ class Careers extends React.Component {
   }
 
   render() {
-    console.log('careers props', this.props);
     return (
       <div>
         <FilterandSort industries={this.props.industries}/>

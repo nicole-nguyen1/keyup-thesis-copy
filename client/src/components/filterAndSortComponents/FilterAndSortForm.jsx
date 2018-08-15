@@ -44,11 +44,22 @@ class FilterAndSortForm extends React.Component {
           FILTER
         </Typography>
         {this.props.industries.map((industry)=>{
-          return (<Filter key={industry.id} label={industry.name}/>);
+          return (
+            <Filter 
+              key={industry.id} 
+              label={industry.name}
+              id={industry.id}
+            />);
         })}
         <Divider />
-        <Filter label="Get paid to learn" />
-        <Filter label="Free training services" />
+        <Filter 
+          label="Get paid to learn"
+          id="-1"
+        />
+        <Filter 
+          label="Free training services" 
+          id="-2"
+        />
         <Typography className={classes.groupStyle}>
           SORT BY
         </Typography>
