@@ -55,7 +55,7 @@ class App extends React.Component {
       <Router history={newHistory} >
         <div>
           <NavBar />
-          <div>
+          <div style={{ marginTop: '56px' }}>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/careers" render={props => {
