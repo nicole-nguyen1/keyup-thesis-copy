@@ -22,9 +22,25 @@ class App extends React.Component {
       uri: './graphql'
     }).bind(this);
     this.filterCareers = this.filterCareers.bind(this);
+    this.getCareers = this.getCareers.bind(this);
   }
 
   componentDidMount() {
+    this.getCareers();
+
+    this.fetch({
+      query: `{
+        industries {
+          id
+          name
+        }
+      }`
+    }).then(res => {
+      store.dispatch(getIndustries(res.data));
+    });
+  }
+
+  getCareers () {
     this.fetch({
       query: `{
         careers {
@@ -40,36 +56,30 @@ class App extends React.Component {
     }).then(res => {
       store.dispatch(findCareers(res.data));
     });
-
-    this.fetch({
-      query: `{
-        industries {
-          id
-          name
-        }
-      }`
-    }).then(res => {
-      store.dispatch(getIndustries(res.data));
-    });
   }
 
   filterCareers (args) {
-    this.fetch({
-      query: `{
-        careers (id: ${args}){
-          id
-          industry_name
-          name
-          card_pro
-          annual_salary
-          training_length
-          card_image_url
-        }
-      }`
-    }).then((res) => {
-      console.log(res.data);
-      store.dispatch(findCareers(res.data));
-    });
+    if (args.length === 0) {
+      console.log( 'LENGTH IS 0')
+      this.getCareers();
+    } else {
+      this.fetch({
+        query: `{
+          careers (id: ${args}){
+            id
+            industry_name
+            name
+            card_pro
+            annual_salary
+            training_length
+            card_image_url
+          }
+        }`
+      }).then((res) => {
+        console.log(res.data);
+        store.dispatch(findCareers(res.data));
+      });
+    }
   }
 
   render() {
