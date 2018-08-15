@@ -44,11 +44,13 @@ class FilterAndSort extends React.Component {
           (<FilterAndSortForm 
             industries={this.props.industries}
             hideFilter={this.hideFilter}
+            filterCareers={this.props.filterCareers}
           />) :
           (<Button 
             variant="contained"
             color="primary"
             onClick={this.displayFilter}
+            style={{backgroundColor: 'b367c2'}}
           >Filter And Sort</Button>)
         }
       </div>

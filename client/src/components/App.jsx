@@ -12,6 +12,12 @@ import Home from './Home.jsx';
 import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
+import MediaQuery from 'react-responsive';
+import {
+  getCareersQuery,
+  getIndustriesQuery,
+  filterCareersQuery
+} from './graphql/graphql';
 
 const newHistory = createBrowserHistory();
 
@@ -21,55 +27,88 @@ class App extends React.Component {
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
+    this.filterCareers = this.filterCareers.bind(this);
+    this.getCareers = this.getCareers.bind(this);
   }
 
   componentDidMount() {
-    this.fetch({
-      query: `{
-        careers {
-          id
-          industry_name
-          name
-          card_pro
-          annual_salary
-          training_length
-          card_image_url
-        }
-      }`
-    }).then(res => {
-      store.dispatch(findCareers(res.data));
-    });
+    this.getCareers();
 
     this.fetch({
-      query: `{
-        industries {
-          id
-          name
-        }
-      }`
+      query: getIndustriesQuery
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
   }
+
+  getCareers() {
+    this.fetch({
+      query: getCareersQuery
+    }).then(res => {
+      store.dispatch(findCareers(res.data));
+    });
+  }
+
+  filterCareers(args) {
+    if (args.length === 0) {
+      this.getCareers();
+    } else {
+      this.fetch({
+        query: filterCareersQuery(args)
+      }).then((res) => {
+        console.log(res.data);
+        store.dispatch(findCareers(res.data));
+      });
+    }
+  }
+
   render() {
     return (
       <Router history={newHistory} >
         <div>
           <NavBar />
-          <div>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/careers" render={props => {
-                return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
-              }} />
-              <Route path="/careers/:id" render={props => {
-                return <CareerProfileContainer router={props} />;
-              }} />
-              <Route path='/services/:id' render={props => {
-                return <ServiceListContainer router={props} />;
-              }} />
-            </Switch>
-          </div>
+          <MediaQuery query="(min-width: 600px)">
+            <div style={{ marginTop: '64px' }}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/careers" render={props => {
+                  return <Careers
+                    router={props}
+                    careers={this.props.careers}
+                    industries={this.props.industries}
+                    filterCareers={this.filterCareers}
+                  />;
+                }} />
+                <Route path="/careers/:id" render={props => {
+                  return <CareerProfileContainer router={props} />;
+                }} />
+                <Route path='/services/:id' render={props => {
+                  return <ServiceListContainer router={props} />;
+                }} />
+              </Switch>
+            </div>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 599px)">
+            <div style={{ marginTop: '56px' }}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/careers" render={props => {
+                  return <Careers
+                    router={props}
+                    careers={this.props.careers}
+                    industries={this.props.industries}
+                    filterCareers={this.filterCareers}
+                  />;
+                }} />
+                <Route path="/careers/:id" render={props => {
+                  return <CareerProfileContainer router={props} />;
+                }} />
+                <Route path='/services/:id' render={props => {
+                  return <ServiceListContainer router={props} />;
+                }} />
+              </Switch>
+            </div>
+          </MediaQuery>
           <Footer />
         </div>
       </Router>
