@@ -50,7 +50,6 @@ class App extends React.Component {
       store.dispatch(getIndustries(res.data));
     });
   }
-
   render() {
     return (
       <Router history={newHistory} >
@@ -60,7 +59,6 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/careers" render={props => {
-                console.log('props', props); 
                 return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
               }} />
               <Route path="/careers/:id" render={props => {
@@ -78,7 +76,7 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
-    industries: state.industries.industries
+    industries: state.industries.industries,
   };
 };
 
