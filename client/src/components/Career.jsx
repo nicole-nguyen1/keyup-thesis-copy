@@ -6,11 +6,17 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
+import { store } from '../store/index';
+import { getPageTitle } from '../actions/action';
 
 
 class Career extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  handleLearnMoreClick = () => {
+    store.dispatch(getPageTitle(this.props.career.name));
   }
 
   render() {
@@ -48,7 +54,7 @@ class Career extends React.Component {
             </Grid>
             <Grid container spacing={8}>
               <Grid item xs={6}>
-                <Button variant="contained" color="primary" style={{backgroundColor: '2979ff'}} component={Link} to={`/careers/${this.props.career.id}`}>
+                <Button onClick={this.handleLearnMoreClick} variant="contained" color="primary" style={{backgroundColor: '2979ff'}} component={Link} to={`/careers/${this.props.career.id}`}>
                   LEARN MORE
                 </Button>
               </Grid>
