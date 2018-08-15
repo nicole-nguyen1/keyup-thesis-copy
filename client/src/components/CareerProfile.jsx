@@ -1,9 +1,4 @@
 import React from 'react';
-import { createApolloFetch } from 'apollo-fetch';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { findCareer } from '../actions/action';
-import { store } from '../store/index';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -16,50 +11,9 @@ import Typography from '@material-ui/core/Typography';
 class CareerProfile extends React.Component {
   constructor(props) {
     super(props);
-    const career_id = +props.router.match.params.id || null;
-    this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
     this.state = {
-      career_id,
       drawerState: false
     }
-  }
-
-  componentDidMount() {
-    this.fetch({
-      query: `{
-        career(id:${this.state.career_id}) {
-          name
-          profile_image_url
-          industry_name
-          description
-          annual_salary
-          hourly_pay
-          openings
-          tasks {
-            id
-            description
-          }
-          skills {
-            id
-            description
-          }
-          pros {
-            id
-            description
-          }
-          cons {
-            id
-            description
-          }
-          number_of_services
-          training_length
-          training_hours
-          training_cost
-        }
-      }`
-    }).then(res => {
-      store.dispatch(findCareer(res.data));
-    })
   }
 
   toggleDrawer = () => {
@@ -132,170 +86,173 @@ class CareerProfile extends React.Component {
     if (this.props.career) {
       return (
         <div>
-          <Card style={{ borderRadius: 0 }}>
-            <CardMedia
-              image={this.props.career.profile_image_url}
-              style={{ height: '35vh' }} />
-            <CardActions style={styles.cardAction}>
-              <Button>
-                <Typography gutterBottom variant='body1' style={styles.link}>FIND TRAINING</Typography>
-                <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' style={styles.icon} />
-              </Button>
-              <Button onClick={this.toggleDrawer}>
-                <Typography gutterBottom variant='body1' style={styles.link}>SHARE</Typography>
-                <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' style={styles.icon} />
-              </Button>
-            </CardActions>
-            <CardContent style={{ paddingTop: 0 }}>
-              <Typography gutterBottom variant='headline'>{this.props.career.name}</Typography>
-              <Typography variant='body1'>{this.props.career.description}</Typography>
-            </CardContent>
-          </Card>
-          <Drawer
-            anchor="bottom"
-            open={this.state.drawerState}
-            onClose={this.toggleDrawer}
-            style={{ textAlign: 'center' }}
-          >
-            <div style={{ display: 'inline-flex', margin: '20px 5px' }}>
-              <Grid item xs={4}
-                role="button"
-                onClick={this.toggleDrawer}
-                onKeyDown={this.toggleDrawer}>
-                <img src='https://s3.amazonaws.com/key-up-assets/facebook-logo-true.png' style={styles.shareTopRow}/>
-                <Typography variant='caption'>Facebook</Typography>
-              </Grid>
-              <Grid item xs={4}
-                role="button"
-                onClick={this.toggleDrawer}
-                onKeyDown={this.toggleDrawer}>
-                <img src='https://s3.amazonaws.com/key-up-assets/Twitter-Logo-True.png' style={styles.shareTopRow} />
-                <Typography variant='caption'>Twitter</Typography>
-              </Grid>
-              <Grid item xs={4}
-                role="button"
-                onClick={this.toggleDrawer}
-                onKeyDown={this.toggleDrawer}>
-                <img src='https://s3.amazonaws.com/key-up-assets/Reddit-logo-true.png' style={styles.shareTopRow} />
-                <Typography variant='caption'>Reddit</Typography>
-              </Grid>
-            </div>
-            <div style={{ display: 'inline-flex', margin: '20px 5px' }}>
-              <Grid item xs={4}
-                role="button"
-                onClick={this.toggleDrawer}
-                onKeyDown={this.toggleDrawer}>
-                <img src='https://s3.amazonaws.com/key-up-assets/Email-Icon.png' style={styles.shareBottomRow}/>
-                <Typography variant='caption'>Email</Typography>
-              </Grid>
-              <Grid item xs={4}
-                role="button"
-                onClick={this.toggleDrawer}
-                onKeyDown={this.toggleDrawer}>
-                <img src='https://s3.amazonaws.com/key-up-assets/Text-Icon.png' style={styles.shareBottomRow}/>
-                <Typography variant='caption'>Text</Typography>
-              </Grid>
-              <Grid item xs={4}
-                role="button"
-                onClick={this.toggleDrawer}
-                onKeyDown={this.toggleDrawer}>
-                <img src='https://s3.amazonaws.com/key-up-assets/Link-symbol-black.png' style={styles.shareBottomRow}/>
-                <Typography variant='caption'>Copy Link</Typography>
-              </Grid>
-            </div>
-          </Drawer>
-          <Card style={styles.dark}>
-            <CardContent>
-              <Typography gutterBottom variant='title' style={styles.lightText}>Average Earnings</Typography>
-              <Typography variant='body1' style={styles.lightText}>
-                <span style={{ color: '#1DCD8C' }}>{this.props.career.annual_salary}</span> or {this.props.career.hourly_pay}/hr
-              </Typography>
-            </CardContent>
-            <CardContent>
-              <Typography gutterBottom variant='title' style={styles.lightText}>Job Openings</Typography>
-              <Typography variant='body1' style={styles.lightText}>
-                <span style={{ color: '#1DCD8C' }}>{this.props.career.openings.split(': ')[0]}:</span> {this.props.career.openings.split(': ')[1]}
-              </Typography>
-            </CardContent>
-          </Card>
-          <Card style={styles.card}>
-            <CardContent>
-              <Typography variant='title'>Typical Tasks</Typography>
-                {this.props.career.tasks.map((task) => {
-                  return (
-                    <div key={task.id} style={styles.listItem}>
-                      <img
-                        style={styles.bullets} 
-                        src='https://s3.amazonaws.com/key-up-assets/Checkbox-for-Typical-Tasks-Icon.png' />
-                      <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{task.description}</Typography>
-                    </div>
-                  )
-                })}
-            </CardContent>
-            <CardContent>
-              <Typography variant='title'>Skills Needed</Typography>
-              {this.props.career.skills.map((skill) => {
-                return (
-                  <div key={skill.id} style={styles.listItem}>
-                    <img
-                      style={styles.bullets}
-                      src='https://s3.amazonaws.com/key-up-assets/Head-Symbol.png' />
-                    <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{skill.description}</Typography>
-                  </div>
-                )
-              })}
-            </CardContent>
-          </Card>
-          <Card style={styles.dark}>
-            <CardContent>
-              <Typography gutterBottom variant='title' style={styles.lightText}>Job Satisfaction</Typography>
-              <Typography variant='subheading' style={{
-                color: '#1DCD8C',
-                textAlign: 'center'
-              }}>PROS</Typography>
-              {this.props.career.pros.map((pro) => {
-                return (
-                  <div key={pro.id} style={styles.listItem}>
-                    <img
-                      style={styles.bullets}
-                      src='https://s3.amazonaws.com/key-up-assets/White-thumbs-up-symbol.png' />
-                    <Typography gutterBottom variant='body1' style={styles.lightTextList}>{pro.description}</Typography>
-                  </div>
-                )
-              })}
-            </CardContent>
-            <CardContent>
-              <Typography variant='subheading' style={{
-                color: '#E9DC00',
-                textAlign: 'center'
-              }}>CONS</Typography>
-              {this.props.career.cons.map((con) => {
-                return (
-                  <div key={con.id} style={styles.listItem}>
-                    <img
-                      style={styles.bullets}
-                      src='https://s3.amazonaws.com/key-up-assets/white-thumbs-down.png' />
-                    <Typography gutterBottom variant='body1' style={styles.lightTextList}>{con.description}</Typography>
-                  </div>
-                )
-              })}
-            </CardContent>
-          </Card>
-          <Card style={styles.card}>
-            <CardContent>
-              <Typography gutterBottom variant='title'>Training</Typography>
-              <Typography gutterBottom variant='body1'>{this.props.career.number_of_services} training services in Austin</Typography>
-              <Typography gutterBottom variant='body1'><strong>Length:</strong> {this.props.career.training_length}</Typography>
-              <Typography gutterBottom variant='body1'><strong>Hours:</strong> {this.props.career.training_hours}</Typography>
-              <Typography variant='body1'><strong>Cost Range:</strong> {this.props.career.training_cost}</Typography>
-            </CardContent>
-            <CardActions style={{ margin: '0px auto 10px' }}>
-              <Button variant="contained" color="primary" style={{ margin: '0px auto 10px' }}>
-                SEE TRAINING SERVICES
-              </Button>
-            </CardActions>
-          </Card>
+          {this.props.career.name}
         </div>
+        // <div>
+        //   <Card style={{ borderRadius: 0 }}>
+        //     <CardMedia
+        //       image={this.props.career.profile_image_url}
+        //       style={{ height: '35vh' }} />
+        //     <CardActions style={styles.cardAction}>
+        //       <Button>
+        //         <Typography gutterBottom variant='body1' style={styles.link}>FIND TRAINING</Typography>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' style={styles.icon} />
+        //       </Button>
+        //       <Button onClick={this.toggleDrawer}>
+        //         <Typography gutterBottom variant='body1' style={styles.link}>SHARE</Typography>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' style={styles.icon} />
+        //       </Button>
+        //     </CardActions>
+        //     <CardContent style={{ paddingTop: 0 }}>
+        //       <Typography gutterBottom variant='headline'>{this.props.career.name}</Typography>
+        //       <Typography variant='body1'>{this.props.career.description}</Typography>
+        //     </CardContent>
+        //   </Card>
+        //   <Drawer
+        //     anchor="bottom"
+        //     open={this.state.drawerState}
+        //     onClose={this.toggleDrawer}
+        //     style={{ textAlign: 'center' }}
+        //   >
+        //     <div style={{ display: 'inline-flex', margin: '20px 5px' }}>
+        //       <Grid item xs={4}
+        //         role="button"
+        //         onClick={this.toggleDrawer}
+        //         onKeyDown={this.toggleDrawer}>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/facebook-logo-true.png' style={styles.shareTopRow}/>
+        //         <Typography variant='caption'>Facebook</Typography>
+        //       </Grid>
+        //       <Grid item xs={4}
+        //         role="button"
+        //         onClick={this.toggleDrawer}
+        //         onKeyDown={this.toggleDrawer}>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/Twitter-Logo-True.png' style={styles.shareTopRow} />
+        //         <Typography variant='caption'>Twitter</Typography>
+        //       </Grid>
+        //       <Grid item xs={4}
+        //         role="button"
+        //         onClick={this.toggleDrawer}
+        //         onKeyDown={this.toggleDrawer}>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/Reddit-logo-true.png' style={styles.shareTopRow} />
+        //         <Typography variant='caption'>Reddit</Typography>
+        //       </Grid>
+        //     </div>
+        //     <div style={{ display: 'inline-flex', margin: '20px 5px' }}>
+        //       <Grid item xs={4}
+        //         role="button"
+        //         onClick={this.toggleDrawer}
+        //         onKeyDown={this.toggleDrawer}>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/Email-Icon.png' style={styles.shareBottomRow}/>
+        //         <Typography variant='caption'>Email</Typography>
+        //       </Grid>
+        //       <Grid item xs={4}
+        //         role="button"
+        //         onClick={this.toggleDrawer}
+        //         onKeyDown={this.toggleDrawer}>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/Text-Icon.png' style={styles.shareBottomRow}/>
+        //         <Typography variant='caption'>Text</Typography>
+        //       </Grid>
+        //       <Grid item xs={4}
+        //         role="button"
+        //         onClick={this.toggleDrawer}
+        //         onKeyDown={this.toggleDrawer}>
+        //         <img src='https://s3.amazonaws.com/key-up-assets/Link-symbol-black.png' style={styles.shareBottomRow}/>
+        //         <Typography variant='caption'>Copy Link</Typography>
+        //       </Grid>
+        //     </div>
+        //   </Drawer>
+        //   <Card style={styles.dark}>
+        //     <CardContent>
+        //       <Typography gutterBottom variant='title' style={styles.lightText}>Average Earnings</Typography>
+        //       <Typography variant='body1' style={styles.lightText}>
+        //         <span style={{ color: '#1DCD8C' }}>{this.props.career.annual_salary}</span> or {this.props.career.hourly_pay}/hr
+        //       </Typography>
+        //     </CardContent>
+        //     <CardContent>
+        //       <Typography gutterBottom variant='title' style={styles.lightText}>Job Openings</Typography>
+        //       <Typography variant='body1' style={styles.lightText}>
+        //         <span style={{ color: '#1DCD8C' }}>{this.props.career.openings.split(': ')[0]}:</span> {this.props.career.openings.split(': ')[1]}
+        //       </Typography>
+        //     </CardContent>
+        //   </Card>
+        //   <Card style={styles.card}>
+        //     <CardContent>
+        //       <Typography variant='title'>Typical Tasks</Typography>
+        //         {this.props.career.tasks.map((task) => {
+        //           return (
+        //             <div key={task.id} style={styles.listItem}>
+        //               <img
+        //                 style={styles.bullets} 
+        //                 src='https://s3.amazonaws.com/key-up-assets/Checkbox-for-Typical-Tasks-Icon.png' />
+        //               <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{task.description}</Typography>
+        //             </div>
+        //           )
+        //         })}
+        //     </CardContent>
+        //     <CardContent>
+        //       <Typography variant='title'>Skills Needed</Typography>
+        //       {this.props.career.skills.map((skill) => {
+        //         return (
+        //           <div key={skill.id} style={styles.listItem}>
+        //             <img
+        //               style={styles.bullets}
+        //               src='https://s3.amazonaws.com/key-up-assets/Head-Symbol.png' />
+        //             <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{skill.description}</Typography>
+        //           </div>
+        //         )
+        //       })}
+        //     </CardContent>
+        //   </Card>
+        //   <Card style={styles.dark}>
+        //     <CardContent>
+        //       <Typography gutterBottom variant='title' style={styles.lightText}>Job Satisfaction</Typography>
+        //       <Typography variant='subheading' style={{
+        //         color: '#1DCD8C',
+        //         textAlign: 'center'
+        //       }}>PROS</Typography>
+        //       {this.props.career.pros.map((pro) => {
+        //         return (
+        //           <div key={pro.id} style={styles.listItem}>
+        //             <img
+        //               style={styles.bullets}
+        //               src='https://s3.amazonaws.com/key-up-assets/White-thumbs-up-symbol.png' />
+        //             <Typography gutterBottom variant='body1' style={styles.lightTextList}>{pro.description}</Typography>
+        //           </div>
+        //         )
+        //       })}
+        //     </CardContent>
+        //     <CardContent>
+        //       <Typography variant='subheading' style={{
+        //         color: '#E9DC00',
+        //         textAlign: 'center'
+        //       }}>CONS</Typography>
+        //       {this.props.career.cons.map((con) => {
+        //         return (
+        //           <div key={con.id} style={styles.listItem}>
+        //             <img
+        //               style={styles.bullets}
+        //               src='https://s3.amazonaws.com/key-up-assets/white-thumbs-down.png' />
+        //             <Typography gutterBottom variant='body1' style={styles.lightTextList}>{con.description}</Typography>
+        //           </div>
+        //         )
+        //       })}
+        //     </CardContent>
+        //   </Card>
+        //   <Card style={styles.card}>
+        //     <CardContent>
+        //       <Typography gutterBottom variant='title'>Training</Typography>
+        //       <Typography gutterBottom variant='body1'>{this.props.career.number_of_services} training services in Austin</Typography>
+        //       <Typography gutterBottom variant='body1'><strong>Length:</strong> {this.props.career.training_length}</Typography>
+        //       <Typography gutterBottom variant='body1'><strong>Hours:</strong> {this.props.career.training_hours}</Typography>
+        //       <Typography variant='body1'><strong>Cost Range:</strong> {this.props.career.training_cost}</Typography>
+        //     </CardContent>
+        //     <CardActions style={{ margin: '0px auto 10px' }}>
+        //       <Button variant="contained" color="primary" style={{ margin: '0px auto 10px' }}>
+        //         SEE TRAINING SERVICES
+        //       </Button>
+        //     </CardActions>
+        //   </Card>
+        // </div>
       )
     } else {
       return null;
@@ -303,14 +260,4 @@ class CareerProfile extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    career: state.careers.career,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ findCareer }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CareerProfile);
+export default CareerProfile;
