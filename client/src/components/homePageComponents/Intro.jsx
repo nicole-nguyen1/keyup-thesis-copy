@@ -10,25 +10,21 @@ class Intro extends React.Component {
     const style = {
       image: {
         backgroundImage: 'url(https://s3.amazonaws.com/key-up-assets/Copy-of-Home-Page-Top-Image.jpg)',
-        height: '100vh',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
       },
       foreground: {
-        height: '100%',
         width: '100%',
         backgroundColor: 'rgba(0, 0, 255, 0.3)',
         color: 'white'
       }, 
       text: {
         textAlign: 'center',
-        margin: '0 10vw',
-        padding: '20vh 0'
+        padding: '10vh 5vh'
       },
       blackBox: {
         backgroundColor: 'rgba(0,0,0,0.35)',
-        height: '100%',
         width: '100%'
       }
     };
@@ -38,10 +34,10 @@ class Intro extends React.Component {
         <div style={style.foreground}>
           <div style={style.blackBox}>
             <div style={style.text}>
-              <Typography variant="display3" color='inherit'>
+              <Typography gutterBottom variant="headline" color='inherit'>
             Find your path to a solid career that doesn't require a 4-year degree
               </Typography>
-              <Typography variant="headline" color='inherit'>
+              <Typography variant="subheading" color='inherit'>
             Find careers, training services, and support programs that can get you to the 
             middle class without a 4-year degree 
               </Typography>
