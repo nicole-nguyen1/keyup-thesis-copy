@@ -45,7 +45,6 @@ class NavBar extends React.Component {
   handleBrowseCareersClick = () => {
     this.handleClose();
     store.dispatch(getPageTitle('Career List'));
-    console.log('you are awesome', store.getState());
   }
 
   handleHomeInsidePopUpMenuClick = () => {
@@ -82,7 +81,7 @@ class NavBar extends React.Component {
             aria-haspopup="true"
             onClick={this.handleClick}
             >
-              <MenuIcon image="image.png"/>
+              <MenuIcon image="#"/>
             </IconButton>
             <Menu
               id="simple-menu"
