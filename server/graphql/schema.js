@@ -207,7 +207,7 @@ const RootQuery = new GraphQLObjectType({
       }
     },
 
-      //GET one specific training service with its traits
+    //GET one specific training service with its traits
     training: {
       type: TrainingType,
       args: { id: { type: GraphQLID } },
