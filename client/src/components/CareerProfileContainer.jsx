@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { findCareer } from '../actions/action';
 import { store } from '../store/index';
-import CareerProfile from './CareerProfile.jsx';
+import CareerProfile from './careerProfileComponents/CareerProfile.jsx';
 
 class CareerProfileContainer extends React.Component {
   constructor(props) {
@@ -55,8 +55,6 @@ class CareerProfileContainer extends React.Component {
       console.log(this.props);
     });
   }
-
-//<CareerProfile career={this.props.career}/>
 
   render() {
     return (
