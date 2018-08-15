@@ -7,11 +7,23 @@ let defaultState = {
       description: '',
       annual_salary: '',
       hourly_pay: '',
-      openings: '',
-      tasks: '',
-      skills: '',
-      pros: '',
-      cons: '',
+      openings: 'a',
+      tasks: [{
+        id: '',
+        description: ''
+      }],
+      skills: [{
+        id: '',
+        description: ''
+      }],
+      pros: [{
+        id: '',
+        description: ''
+      }],
+      cons: [{
+        id: '',
+        description: ''
+      }],
       number_of_services: '',
       training_length: '',
       training_hours: '',
