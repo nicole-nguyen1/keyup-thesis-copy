@@ -45,7 +45,6 @@ class NavBar extends React.Component {
   handleBrowseCareersClick = () => {
     this.handleClose();
     store.dispatch(getPageTitle('Career List'));
-    console.log('you are awesome', store.getState());
   }
 
   handleHomeInsidePopUpMenuClick = () => {

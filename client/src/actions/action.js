@@ -17,6 +17,13 @@ export const findCareer = (data) => (
     type: 'CAREER',
     payload: data
   }
+)
+
+export const findServices = (data) => (
+  {
+    type: 'SERVICES',
+    payload: data
+  }
 );
 
 export const getPageTitle = (data) => (

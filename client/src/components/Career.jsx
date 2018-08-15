@@ -9,14 +9,16 @@ import { Link } from 'react-router-dom';
 import { store } from '../store/index';
 import { getPageTitle } from '../actions/action';
 
-
 class Career extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  handleFindTrainingClick = () => {
+    store.dispatch(getPageTitle('Training List'));
+  }
+   
   handleLearnMoreClick = () => {
-    console.log('i am being clicked');
     store.dispatch(getPageTitle(this.props.career.name));
   }
 
@@ -60,7 +62,7 @@ class Career extends React.Component {
                 </Button>
               </Grid>
               <Grid item xs={6}>
-                <Button>
+                <Button onClick={this.handleFindTrainingClick} variant='contained' color='primary' component={Link} to={`/services/${this.props.career.id}`}>
                   FIND TRAINING
                 </Button>
               </Grid>

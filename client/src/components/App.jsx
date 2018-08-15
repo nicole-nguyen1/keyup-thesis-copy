@@ -9,6 +9,7 @@ import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
+import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
 import MediaQuery from 'react-responsive';
@@ -40,7 +41,7 @@ class App extends React.Component {
     });
   }
 
-  getCareers () {
+  getCareers() {
     this.fetch({
       query: getCareersQuery
     }).then(res => {
@@ -48,7 +49,7 @@ class App extends React.Component {
     });
   }
 
-  filterCareers (args) {
+  filterCareers(args) {
     if (args.length === 0) {
       this.getCareers();
     } else {
@@ -66,21 +67,23 @@ class App extends React.Component {
       <Router history={newHistory} >
         <div>
           <NavBar />
-
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
-                    router={props} 
-                    careers={this.props.careers} 
+                    router={props}
+                    careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
                   return <CareerProfileContainer router={props} />;
+                }} />
+                <Route path='/services/:id' render={props => {
+                  return <ServiceListContainer router={props} />;
                 }} />
               </Switch>
             </div>
@@ -91,14 +94,17 @@ class App extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
-                    router={props} 
-                    careers={this.props.careers} 
+                    router={props}
+                    careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
                   return <CareerProfileContainer router={props} />;
+                }} />
+                <Route path='/services/:id' render={props => {
+                  return <ServiceListContainer router={props} />;
                 }} />
               </Switch>
             </div>

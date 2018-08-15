@@ -52,7 +52,7 @@ class CareerProfile extends React.Component {
 
       return (
         <div>
-          <IntroCard career={career} />
+          <IntroCard career={career} careerID={this.props.careerID}/>
           <EarningsOpenings career={career} />
           <TasksSkills career={career}/>
           <Card style={styles.dark}>
