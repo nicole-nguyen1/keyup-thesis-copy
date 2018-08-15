@@ -9,10 +9,10 @@ import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
+import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
-import createHashHistory from 'history/createHashHistory';
 
-const newHistory = createHashHistory();
+const newHistory = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {

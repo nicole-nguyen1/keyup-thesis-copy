@@ -17,5 +17,8 @@ app.use('/graphql', graphQLHTTP({
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 //set up index in client folder
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
