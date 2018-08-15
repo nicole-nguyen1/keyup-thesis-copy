@@ -9,7 +9,7 @@ import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
-import CareerProfile from './CareerProfile.jsx';
+import CareerProfileContainer from './CareerProfileContainer.jsx';
 import createHashHistory from 'history/createHashHistory';
 
 const newHistory = createHashHistory();
@@ -62,7 +62,7 @@ class App extends React.Component {
                 return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
               }} />
               <Route path="/careers/:id" render={props => {
-                return <CareerProfile router={props} />;
+                return <CareerProfileContainer router={props} />;
               }} />
             </Switch>
           </div>
