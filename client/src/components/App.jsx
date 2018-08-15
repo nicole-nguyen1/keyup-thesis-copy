@@ -11,9 +11,9 @@ import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import CareerProfile from './CareerProfile.jsx';
 import Services from './Services.jsx';
-import createHashHistory from 'history/createHashHistory';
+import createBrowserHistory from 'history/createBrowserHistory';
 
-const newHistory = createHashHistory();
+const newHistory = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {
