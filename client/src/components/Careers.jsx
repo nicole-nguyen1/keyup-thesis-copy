@@ -11,7 +11,10 @@ class Careers extends React.Component {
   render() {
     return (
       <div>
-        <FilterandSort industries={this.props.industries}/>
+        <FilterandSort 
+          industries={this.props.industries}
+          filterCareers={this.props.filterCareers}
+        />
         <Grid container spacing={8}>
           {this.props.careers.map((career, index) => {
             return <Career key={career.id || index} career={career} />;
