@@ -82,7 +82,7 @@ class NavBar extends React.Component {
             aria-haspopup="true"
             onClick={this.handleClick}
             >
-              <MenuIcon image="image.png"/>
+              <MenuIcon image="#"/>
             </IconButton>
             <Menu
               id="simple-menu"

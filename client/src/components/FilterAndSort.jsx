@@ -49,6 +49,7 @@ class FilterAndSort extends React.Component {
             variant="contained"
             color="primary"
             onClick={this.displayFilter}
+            style={{backgroundColor: 'b367c2'}}
           >Filter And Sort</Button>)
         }
       </div>
