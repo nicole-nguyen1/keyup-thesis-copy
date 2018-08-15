@@ -16,6 +16,7 @@ class Career extends React.Component {
   }
 
   handleLearnMoreClick = () => {
+    console.log('i am being clicked');
     store.dispatch(getPageTitle(this.props.career.name));
   }
 

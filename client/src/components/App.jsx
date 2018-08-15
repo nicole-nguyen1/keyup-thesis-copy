@@ -101,7 +101,12 @@ class App extends React.Component {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/careers" render={props => {
-                  return <Careers router={props} careers={this.props.careers} industries={this.props.industries} />;
+                  return <Careers
+                    router={props} 
+                    careers={this.props.careers} 
+                    industries={this.props.industries}
+                    filterCareers={this.filterCareers}
+                  />;
                 }} />
                 <Route path="/careers/:id" render={props => {
                   return <CareerProfileContainer router={props} />;
