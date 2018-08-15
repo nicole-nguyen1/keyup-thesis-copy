@@ -11,6 +11,7 @@ import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
+import MediaQuery from 'react-responsive';
 
 const newHistory = createBrowserHistory();
 
@@ -55,17 +56,32 @@ class App extends React.Component {
       <Router history={newHistory} >
         <div>
           <NavBar />
-          <div style={{ marginTop: '56px' }}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/careers" render={props => {
-                return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
-              }} />
-              <Route path="/careers/:id" render={props => {
-                return <CareerProfileContainer router={props} />;
-              }} />
-            </Switch>
-          </div>
+          <MediaQuery query="(min-width: 600px)">
+            <div style={{ marginTop: '64px' }}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/careers" render={props => {
+                  return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
+                }} />
+                <Route path="/careers/:id" render={props => {
+                  return <CareerProfileContainer router={props} />;
+                }} />
+              </Switch>
+            </div>
+          </MediaQuery>
+          <MediaQuery query="(max-width: 599px)">
+            <div style={{ marginTop: '56px' }}>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/careers" render={props => {
+                  return <Careers router={props} careers={this.props.careers} industries={this.props.industries} />;
+                }} />
+                <Route path="/careers/:id" render={props => {
+                  return <CareerProfileContainer router={props} />;
+                }} />
+              </Switch>
+            </div>
+          </MediaQuery>
           <Footer />
         </div>
       </Router>
