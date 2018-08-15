@@ -27,12 +27,9 @@ const EarningsOpenings = (props) => {
         </CardContent>
         <CardContent>
           <Typography gutterBottom variant='title' style={styles.lightText}>Job Openings</Typography>
-            {props.career.openings ?
-              <div>
-                <Typography variant='body1' style={styles.lightText}>
-                  <span style={{ color: '#1DCD8C' }}>{props.career.openings.split(': ')[0]}&#58;</span><span> {props.career.openings.split(': ')[1]}</span>
-                </Typography>
-              </div> : null }
+          <Typography variant='body1' style={styles.lightText}>
+            <span style={{ color: '#1DCD8C' }}>{props.career.openings.split(': ')[0]}&#58;</span><span> {props.career.openings.split(': ')[1]}</span>
+          </Typography>
         </CardContent>
       </Card>
     </div>
