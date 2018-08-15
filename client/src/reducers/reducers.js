@@ -13,6 +13,7 @@ let defaultState = {
   career: [
     {
       name: '',
+      profile_image_url: '',
       industry_name: '',
       description: '',
       annual_salary: '',

@@ -17,6 +17,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { store } from '../store/index';
+import { getPageTitle } from '../actions/action';
+
 
 
 
@@ -36,6 +41,29 @@ class NavBar extends React.Component {
   handleClose = () => {
     this.setState( { anchorEl: null });
   };
+
+  handleBrowseCareersClick = () => {
+    this.handleClose();
+    store.dispatch(getPageTitle('Career List'));
+    console.log('you are awesome', store.getState());
+  }
+
+  handleHomeInsidePopUpMenuClick = () => {
+    this.handleClose();
+    store.dispatch(getPageTitle(''));
+  }
+
+  handleKeyUpClick = () => {
+    store.dispatch(getPageTitle(''));
+  }
+
+  // handleScrollClick = section => {
+  //   this.handleClose();
+  //   console.log('document', document)
+  //   window.onload = function() {
+  //   document.getElementById(section).scrollIntoView();
+  //   }
+  // }
 
 
 
@@ -62,7 +90,7 @@ class NavBar extends React.Component {
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
             >
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleHomeInsidePopUpMenuClick}>
                 <Link to="/">
                 <ListItemIcon className={classes.icon}>
                   <HomeIcon />
@@ -71,7 +99,7 @@ class NavBar extends React.Component {
                 </ListItemText>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleBrowseCareersClick}>
                 <Link to="/careers">
                 <ListItemIcon className={classes.icon}>
                   <SearchIcon />
@@ -104,11 +132,11 @@ class NavBar extends React.Component {
             </Menu>
             <Typography variant="display1" color="inherit">
               <Link to="/">
-                <Button className={classes.home}>keyUp</Button>
+                <Button onClick={this.handleKeyUpClick} className={classes.home}>keyUp</Button>
               </Link>
             </Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
-            Changing Title
+            {this.props.pages}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -142,4 +170,14 @@ NavBar.styles = {
   
 };
 
-export default withStyles(NavBar.styles)(withRouter(NavBar));
+const mapStateToProps = state => {
+  return {
+    pages: state.pages.page
+  };
+}
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getPageTitle }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(NavBar.styles)(withRouter(NavBar)));

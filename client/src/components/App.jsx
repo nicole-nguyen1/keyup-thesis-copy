@@ -4,16 +4,16 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import Careers from './Careers.jsx';
-import { findCareers } from '../actions/action';
+import { findCareers, getIndustries } from '../actions/action';
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import CareerProfile from './CareerProfile.jsx';
 import Services from './Services.jsx';
-import createBrowserHistory from 'history/createBrowserHistory';
+import createHashHistory from 'history/createHashHistory';
 
-const newHistory = createBrowserHistory();
+const newHistory = createHashHistory();
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +21,6 @@ class App extends React.Component {
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
-
   }
 
   componentDidMount() {
@@ -38,16 +37,21 @@ class App extends React.Component {
         }
       }`
     }).then(res => {
-      console.log('res data in app file in graphql request', res.data);
       store.dispatch(findCareers(res.data));
-    }).then(() => {
-      console.log(store.getState());
+    });
+
+    this.fetch({
+      query: `{
+        industries {
+          id
+          name
+        }
+      }`
+    }).then(res => {
+      store.dispatch(getIndustries(res.data));
     });
   }
-  //<Careers careers={this.props.careers} />
-  //<NavBar />
   render() {
-    // const context = this;
     return (
       <Router history={newHistory} >
         <div>
@@ -56,8 +60,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/careers" render={props => {
-                console.log('props', props);
-                return <Careers router={props} careers={this.props.careers} />;
+                return <Careers router={props} careers={this.props.careers} industries={this.props.industries}/>;
               }} />
               <Route path="/careers/:id" render={props => {
                 return <CareerProfile router={props} />;
@@ -77,11 +80,12 @@ class App extends React.Component {
 const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
+    industries: state.industries.industries,
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ findCareers }, dispatch);
+  return bindActionCreators({ findCareers, getIndustries }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

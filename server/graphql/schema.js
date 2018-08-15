@@ -223,6 +223,14 @@ const RootQuery = new GraphQLObjectType({
                 .where('services.id', args.id)
                 .first();
       }
+    },
+
+    industries: {
+      type: new GraphQLList(IndustryType),
+      resolve(parent, args) {
+        return knex('industries')
+                .select();
+      }
     }
   }
 });
