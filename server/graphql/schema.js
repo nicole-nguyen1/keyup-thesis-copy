@@ -133,6 +133,7 @@ const TrainingType = new GraphQLObjectType({
     federal_student_aid: { type: GraphQLBoolean },
     card_length: { type: GraphQLString },
     card_location: { type: GraphQLString},
+    card_tuition: { type: GraphQLString },
     page_title: { type: GraphQLString},
     outcomes: {
       type: new GraphQLList(TrainingTraitType),
