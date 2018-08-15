@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 class IntroCard extends React.Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class IntroCard extends React.Component {
             image={this.props.career.profile_image_url}
             style={{ height: '35vh' }} />
           <CardActions style={styles.cardAction}>
-            <Button>
+            <Button component={Link} to={`/services/${this.props.careerID}`}>
               <Typography gutterBottom variant='body1' style={styles.link}>FIND TRAINING</Typography>
               <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' style={styles.icon} />
             </Button>

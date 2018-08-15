@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { findCareer } from '../actions/action';
 import { store } from '../store/index';
 import CareerProfile from './careerProfileComponents/CareerProfile.jsx';
+import { getCareerQuery } from './graphql/graphql';
 
 class CareerProfileContainer extends React.Component {
   constructor(props) {
@@ -18,37 +19,7 @@ class CareerProfileContainer extends React.Component {
 
   componentDidMount() {
     this.fetch({
-      query: `{
-        career(id:${this.state.career_id}) {
-          name
-          profile_image_url
-          industry_name
-          description
-          annual_salary
-          hourly_pay
-          openings
-          tasks {
-            id
-            description
-          }
-          skills {
-            id
-            description
-          }
-          pros {
-            id
-            description
-          }
-          cons {
-            id
-            description
-          }
-          number_of_services
-          training_length
-          training_hours
-          training_cost
-        }
-      }`
+      query: getCareerQuery(this.state.career_id)
     }).then(res => {
       store.dispatch(findCareer(res.data));
     }).then(()=>{
@@ -58,7 +29,7 @@ class CareerProfileContainer extends React.Component {
 
   render() {
     return (
-      <CareerProfile career={this.props.career}/>
+      <CareerProfile career={this.props.career} careerID={this.state.career_id}/>
     );
   }
 }

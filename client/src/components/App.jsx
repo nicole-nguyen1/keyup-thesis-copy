@@ -9,9 +9,15 @@ import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Home from './Home.jsx';
+import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
 import MediaQuery from 'react-responsive';
+import {
+  getCareersQuery,
+  getIndustriesQuery,
+  filterCareersQuery
+} from './graphql/graphql';
 
 const newHistory = createBrowserHistory();
 
@@ -22,54 +28,38 @@ class App extends React.Component {
       uri: './graphql'
     }).bind(this);
     this.filterCareers = this.filterCareers.bind(this);
+    this.getCareers = this.getCareers.bind(this);
   }
 
   componentDidMount() {
-    this.fetch({
-      query: `{
-        careers {
-          id
-          industry_name
-          name
-          card_pro
-          annual_salary
-          training_length
-          card_image_url
-        }
-      }`
-    }).then(res => {
-      store.dispatch(findCareers(res.data));
-    });
+    this.getCareers();
 
     this.fetch({
-      query: `{
-        industries {
-          id
-          name
-        }
-      }`
+      query: getIndustriesQuery
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
   }
 
-  filterCareers (args) {
+  getCareers() {
     this.fetch({
-      query: `{
-        careers (id: ${args}){
-          id
-          industry_name
-          name
-          card_pro
-          annual_salary
-          training_length
-          card_image_url
-        }
-      }`
-    }).then((res) => {
-      console.log(res.data);
+      query: getCareersQuery
+    }).then(res => {
       store.dispatch(findCareers(res.data));
     });
+  }
+
+  filterCareers(args) {
+    if (args.length === 0) {
+      this.getCareers();
+    } else {
+      this.fetch({
+        query: filterCareersQuery(args)
+      }).then((res) => {
+        console.log(res.data);
+        store.dispatch(findCareers(res.data));
+      });
+    }
   }
 
   render() {
@@ -77,21 +67,23 @@ class App extends React.Component {
       <Router history={newHistory} >
         <div>
           <NavBar />
-
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
-                    router={props} 
-                    careers={this.props.careers} 
+                    router={props}
+                    careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
                   return <CareerProfileContainer router={props} />;
+                }} />
+                <Route path='/services/:id' render={props => {
+                  return <ServiceListContainer router={props} />;
                 }} />
               </Switch>
             </div>
@@ -102,14 +94,17 @@ class App extends React.Component {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
-                    router={props} 
-                    careers={this.props.careers} 
+                    router={props}
+                    careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
                   return <CareerProfileContainer router={props} />;
+                }} />
+                <Route path='/services/:id' render={props => {
+                  return <ServiceListContainer router={props} />;
                 }} />
               </Switch>
             </div>
