@@ -44,8 +44,12 @@ class App extends React.Component {
   getCareers = () => {
     this.fetch({
       query: getCareersQuery
-    }).then(res => {
-      store.dispatch(findCareers(res.data));
+    })
+    .then((res)=>{
+      return this.sortByHighestSalary(res.data.careers);
+    })
+    .then(res => {
+      store.dispatch(findCareers(res));
     });
   }
 
