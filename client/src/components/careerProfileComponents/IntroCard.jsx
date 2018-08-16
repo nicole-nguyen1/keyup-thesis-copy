@@ -17,7 +17,7 @@ class IntroCard extends React.Component {
   }
 
   toggleDrawer = () => {
-    this.setState({ drawerState: !this.state.drawerState })
+    this.setState({ drawerState: !this.state.drawerState }, () => {console.log(this.state.drawerState)})
   }
 
   render() {
