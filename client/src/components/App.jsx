@@ -51,12 +51,46 @@ class App extends React.Component {
   filterCareers = (args) => {
     this.fetch({
       query: filterCareersQuery(args)
-    }).then((res) => {
-      console.log(res.data);
+    })
+    .then((res) => {
       store.dispatch(findCareers(res.data));
     });
   }
   
+  sortCareers = () => {
+
+  }
+
+  // .then((res) => {
+  //   console.log(res.data.careers);
+  //   return this.sortByShortestTrainingLength(res.data.careers)
+  // })
+  // .then((res) => {
+  //   store.dispatch(findCareers(res));
+  // });
+
+  sortByShortestTrainingLength = (careers) => {
+    let bucket = [];
+    let hash = {};
+    let sortedCareers = [];
+    careers.forEach((career)=>{
+      hash[career.id] = career;
+      bucket.push([career.id,career['training_length'].split(' ')[0]]);
+    });
+    bucket.sort((a,b)=>{
+      if (a[1] < b[1]) {
+        return -1;
+      } else if (a[1] > b[1]) {
+        return 1;
+      }
+      return 0;
+    })
+    bucket.forEach((val)=>{
+      sortedCareers.push(hash[val[0]]);
+    })
+    console.log('sorted careers', sortedCareers);
+    return {careers: sortedCareers};
+  }
 
   render() {
     return (
