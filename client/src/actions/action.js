@@ -32,3 +32,10 @@ export const getPageTitle = (data) => (
     payload: data
   }
 );
+
+export const findService = (data) => (
+  {
+    type: 'SERVICE',
+    payload: data
+  }
+);
