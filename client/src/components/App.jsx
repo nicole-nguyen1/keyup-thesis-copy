@@ -28,6 +28,7 @@ class App extends React.Component {
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
+    this.sortBy = 'Highest salary';
   }
 
   componentDidMount() {
@@ -48,13 +49,20 @@ class App extends React.Component {
     });
   }
 
-  filterCareers = (args) => {
+  filterCareers = (args, sortBy) => {
+    this.sortBy = sortBy;
     this.fetch({
       query: filterCareersQuery(args)
     })
   .then((res) => {
     console.log(res.data.careers);
-    return this.sortByMostJobOpenings(res.data.careers)
+    if (this.sortBy === 'Shortest training length') {
+      return this.sortByShortestTrainingLength(res.data.careers);
+    } else if (this.sortBy === 'Most job openings') {
+      return this.sortByMostJobOpenings(res.data.careers);
+    } else {
+      return this.sortByHighestSalary(res.data.careers);
+    }
   })
     .then((res) => {
       store.dispatch(findCareers(res));
@@ -79,7 +87,6 @@ class App extends React.Component {
     let sortedCareers = [];
     careers.forEach((career)=>{
       hash[career.id] = career;
-      console.log('fix data', Number(career.openings.split(': ')[1].split(' ')[0].split(',').join('')) )
       bucket.push([career.id, Number(career.openings.split(': ')[1].split(' ')[0].split(',').join(''))]);
     })
     bucket.sort((a,b)=>{

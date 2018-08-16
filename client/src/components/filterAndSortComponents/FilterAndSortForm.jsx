@@ -117,7 +117,7 @@ class FilterAndSortForm extends React.Component {
                   args: Object.keys(this.filterOptions),
                   paidToLearn: this.paidToLearn,
                   freeTraining: this.freeTraining
-                });
+                }, this.state.sortSelection);
               }}
             >See Career Results</Button>
           </Grid>
