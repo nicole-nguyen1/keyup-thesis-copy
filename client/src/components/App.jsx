@@ -71,7 +71,7 @@ class App extends React.Component {
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
@@ -95,7 +95,7 @@ class App extends React.Component {
           <MediaQuery query="(max-width: 599px)">
             <div style={{ marginTop: '56px' }}>
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}

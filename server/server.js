@@ -23,10 +23,15 @@ app.use('/graphql', graphQLHTTP({
 app.use('/api/form', form);
 
 //set up index in client folder
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist'), { index: false }));
 
-app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
-})
+app.get('/', function(request, response) {
+  response.redirect('/home');
+});
+
+
+app.get('*', function (request, response) {
+  response.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
