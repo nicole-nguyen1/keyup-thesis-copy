@@ -11,6 +11,11 @@ const Trainings = (props) => {
     card: {
       borderRadius: 0,
       padding: '5px'
+    },
+
+    button: { 
+      margin: '0px auto 10px', 
+      backgroundColor: '2979ff' 
     }
   }
 
@@ -25,7 +30,7 @@ const Trainings = (props) => {
           <Typography variant='body1'><strong>Cost Range:</strong> {props.career.training_cost}</Typography>
         </CardContent>
         <CardActions style={{ margin: '0px auto 10px' }}>
-          <Button component={Link} to={`/services/${props.careerID}`} variant="contained" color="primary" style={{ margin: '0px auto 10px' }}>
+          <Button component={Link} to={`/services/${props.careerID}`} variant="contained" color="primary" style={styles.button}>
             SEE TRAINING SERVICES
           </Button>
         </CardActions>
