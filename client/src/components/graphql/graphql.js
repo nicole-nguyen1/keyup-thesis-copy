@@ -33,7 +33,7 @@ export const filterCareersQuery = (args) => {
 
 export const getCareerQuery = (args) => (
   `{
-    career(${args}) {
+    career(id: ${args}) {
       name
       profile_image_url
       industry_name
