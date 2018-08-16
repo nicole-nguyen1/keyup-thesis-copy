@@ -32,7 +32,9 @@ class FilterAndSortForm extends React.Component {
     ];
     this.filterOptions = {};
     this.setFilter = this.setFilter.bind(this);
-    this.submitFilter = this.submitFilter.bind(this);
+    this.setFixedFilter = this.setFixedFilter.bind(this);
+    this.paidToLearn = false;
+    this.freeTraining = false;
   }
 
   setFilter (e) {
@@ -44,8 +46,14 @@ class FilterAndSortForm extends React.Component {
     }
   }
 
-  submitFilter () {
-    console.log(Object.keys(this.filterOptions));
+  setFixedFilter (e) {
+    if (e.target.value === '-1') {
+      this.paidToLearn = !this.paidToLearn;
+    }
+    if (e.target.value === '-2') {
+      this.freeTraining = !this.freeTraining;
+    }
+    
   }
 
 
@@ -73,10 +81,12 @@ class FilterAndSortForm extends React.Component {
         <Filter 
           label="Get paid to learn"
           id="-1"
+          setFilter={this.setFixedFilter}
         />
         <Filter 
           label="Free training services" 
           id="-2"
+          setFilter={this.setFixedFilter}
         />
         <Typography className={classes.groupStyle}>
           SORT BY
@@ -93,8 +103,11 @@ class FilterAndSortForm extends React.Component {
               color="primary"
               onClick={()=>{
                 this.props.hideFilter();
-                this.submitFilter();
-                this.props.filterCareers(Object.keys(this.filterOptions));
+                this.props.filterCareers({
+                  args: Object.keys(this.filterOptions),
+                  paidToLearn: this.paidToLearn,
+                  freeTraining: this.freeTraining
+                });
               }}
             >See Career Results</Button>
           </Grid>

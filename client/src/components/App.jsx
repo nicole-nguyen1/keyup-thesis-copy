@@ -51,17 +51,14 @@ class App extends React.Component {
   }
 
   filterCareers(args) {
-    if (args.length === 0) {
-      this.getCareers();
-    } else {
-      this.fetch({
-        query: filterCareersQuery(args)
-      }).then((res) => {
-        console.log(res.data);
-        store.dispatch(findCareers(res.data));
-      });
-    }
+    this.fetch({
+      query: filterCareersQuery(args)
+    }).then((res) => {
+      console.log(res.data);
+      store.dispatch(findCareers(res.data));
+    });
   }
+  
 
   render() {
     return (
