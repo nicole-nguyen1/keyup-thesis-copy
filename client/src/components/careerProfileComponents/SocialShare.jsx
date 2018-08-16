@@ -42,7 +42,7 @@ class SocialShare extends React.Component {
         <Drawer
           anchor="bottom"
           open={this.props.open}
-          onClose={this.toggleDrawer}
+          onClose={this.props.toggleDrawer}
           style={{ textAlign: 'center' }}
         >
           <div style={{ display: 'inline-flex', margin: '20px 5px' }}>
@@ -75,7 +75,7 @@ class SocialShare extends React.Component {
             </Grid>
             <CopyToClipboard 
               text={this.state.url}
-              onCopy={() => this.setState({ copied: true }, () => { console.log('copied')})}>
+              onCopy={() => this.setState({ copied: true })}>
               <Grid item xs={4}
                 role="button"
                 onClick={this.handleClick}>
@@ -87,7 +87,7 @@ class SocialShare extends React.Component {
         </Drawer>
         <Snackbar
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          autoHideDuration={1000}
+          autoHideDuration={1500}
           open={this.state.snackBarOpen}
           onClose={this.handleClose}
           ContentProps={{

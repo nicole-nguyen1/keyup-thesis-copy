@@ -17,7 +17,7 @@ class IntroCard extends React.Component {
   }
 
   toggleDrawer = () => {
-    this.setState({ drawerState: !this.state.drawerState }, () => {console.log(this.state.drawerState)})
+    this.setState({ drawerState: !this.state.drawerState });
   }
 
   render() {
@@ -72,7 +72,7 @@ class IntroCard extends React.Component {
             <Typography variant='body1'>{this.props.career.description}</Typography>
           </CardContent>
         </Card>
-        <SocialShare open={this.state.drawerState}/>
+        <SocialShare open={this.state.drawerState} toggleDrawer={this.toggleDrawer}/>
       </div>
     )
   }
