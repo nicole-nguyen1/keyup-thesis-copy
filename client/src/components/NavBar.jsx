@@ -123,7 +123,7 @@ class NavBar extends React.Component {
                 <ListItemIcon>
                   <InfoIcon />
                 </ListItemIcon>
-                <ListItemText style={{ float: 'right' }}inset primary="About KeyUp">
+                <ListItemText style={{float: 'right'}} inset primary="About KeyUp">
                 </ListItemText>
                 </HashLink>
               </MenuItem>

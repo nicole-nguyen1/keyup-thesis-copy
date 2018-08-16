@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
-import SocialShare from './SocialShare.jsx';
+import SocialShare from '../socialShareComponents/SocialShare.jsx';
 
 class IntroCard extends React.Component {
   constructor(props) {
