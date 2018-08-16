@@ -69,6 +69,7 @@ class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
+    console.log('this.props.pages', this.props.pages)
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -122,7 +123,7 @@ class NavBar extends React.Component {
                 <ListItemIcon>
                   <InfoIcon />
                 </ListItemIcon>
-                <ListItemText inset primary="About KeyUp">
+                <ListItemText style={{ float: 'right' }}inset primary="About KeyUp">
                 </ListItemText>
                 </HashLink>
               </MenuItem>
@@ -185,7 +186,8 @@ NavBar.styles = {
 
 const mapStateToProps = state => {
   return {
-    pages: state.pages.page
+    // pages: state.pages.present.page
+    pages:state.pages.page
   };
 }
 

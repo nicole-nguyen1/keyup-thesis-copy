@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from 'redux';
 import reducers from '../reducers/reducers';
 import industryReducers from '../reducers/industryReducers';
+// import undoablePages from '../reducers/pageTitleReducers';
 import pageTitleReducers from '../reducers/pageTitleReducers';
 import serviceReducers from '../reducers/serviceReducers';
 import careerReducers from '../reducers/careerReducers';
@@ -10,6 +11,7 @@ export const store = createStore(
   combineReducers({
     industries: industryReducers,
     careers: reducers,
+    // pages: undoablePages,
     pages: pageTitleReducers,
     career: careerReducers,
     trainingService: trainingServiceReducers,
