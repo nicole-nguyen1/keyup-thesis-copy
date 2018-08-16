@@ -18,7 +18,7 @@ export const getIndustriesQuery = `{
   }`;
 
 export const filterCareersQuery = (args) =>(`{
-    careers (id: ${args}){
+    careers (industry_id: [${args.args}], paid_to_learn: ${args.paidToLearn}, free_training: ${args.freeTraining}){
       id
       industry_name
       name

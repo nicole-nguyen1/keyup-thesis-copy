@@ -189,30 +189,22 @@ const RootQuery = new GraphQLObjectType({
     careers: {
       type: new GraphQLList(CareerType),
       args: { 
-        id: { type: new GraphQLList( GraphQLID ) },
+        industry_id: { type: new GraphQLList( GraphQLID ) },
         paid_to_learn: { type: GraphQLBoolean},
         free_training: { type: GraphQLBoolean }
       },
       resolve(parent, args) {
         let newQuery = `knex('careers').select()`;
-        if (args.id) {
-          newQuery = newQuery.concat(`.whereIn('industry_id', [` + args.id + `])`);
+        if (args.industry_id && args.industry_id.length > 0) {
+          newQuery = newQuery.concat(`.whereIn('industry_id', [` + args.industry_id + `])`);
         }
-        if (args.paid_to_learn) {
+        if (args.paid_to_learn === true) {
           newQuery = newQuery.concat(`.where('paid_to_learn', true)`);
         }
-        if (args.free_training) {
+        if (args.free_training === true) {
           newQuery = newQuery.concat(`.where('free_training', true)`);
         }
-
-        if (args.id || args.paid_to_learn || args.free_training) {
-          // knex('careers')
-          //   .select()
-          //   .whereIn('industry_id', args.id);
-          return eval(newQuery);
-        } else {
-          return knex('careers').select();
-        }
+        return eval(newQuery);
       }
     },
 
