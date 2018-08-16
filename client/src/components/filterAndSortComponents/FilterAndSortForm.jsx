@@ -32,7 +32,6 @@ class FilterAndSortForm extends React.Component {
     ];
     this.filterOptions = {};
     this.setFilter = this.setFilter.bind(this);
-    this.submitFilter = this.submitFilter.bind(this);
     this.setFixedFilter = this.setFixedFilter.bind(this);
     this.paidToLearn = false;
     this.freeTraining = false;
@@ -45,12 +44,6 @@ class FilterAndSortForm extends React.Component {
     } else {
       this.filterOptions[e.target.value] = 0;
     }
-  }
-
-  submitFilter () {
-    console.log('filter options', Object.keys(this.filterOptions));
-    console.log('paid to learn', this.paidToLearn);
-    console.log('free training', this.freeTraining);
   }
 
   setFixedFilter (e) {
@@ -110,7 +103,6 @@ class FilterAndSortForm extends React.Component {
               color="primary"
               onClick={()=>{
                 this.props.hideFilter();
-                this.submitFilter();
                 this.props.filterCareers({
                   args: Object.keys(this.filterOptions),
                   paidToLearn: this.paidToLearn,

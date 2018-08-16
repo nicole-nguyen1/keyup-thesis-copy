@@ -50,12 +50,6 @@ class App extends React.Component {
   }
 
   filterCareers(args) {
-    console.log('args in app', args);
-    console.log('fetching filter data');
-    if (args.args.length === 0) {
-      args.args.push('*');
-    }
-    console.log(filterCareersQuery(args));
     this.fetch({
       query: filterCareersQuery(args)
     }).then((res) => {
