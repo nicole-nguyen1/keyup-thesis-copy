@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
 const Trainings = (props) => {
   const styles = {
@@ -24,7 +25,7 @@ const Trainings = (props) => {
           <Typography variant='body1'><strong>Cost Range:</strong> {props.career.training_cost}</Typography>
         </CardContent>
         <CardActions style={{ margin: '0px auto 10px' }}>
-          <Button variant="contained" color="primary" style={{ margin: '0px auto 10px' }}>
+          <Button component={Link} to={`/services/${props.careerID}`} variant="contained" color="primary" style={{ margin: '0px auto 10px' }}>
             SEE TRAINING SERVICES
           </Button>
         </CardActions>

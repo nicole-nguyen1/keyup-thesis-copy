@@ -62,7 +62,7 @@ class Career extends React.Component {
                 </Button>
               </Grid>
               <Grid item xs={6}>
-                <Button onClick={this.handleFindTrainingClick} variant='contained' color='primary' component={Link} to={`/services/${this.props.career.id}`}>
+                <Button onClick={this.handleFindTrainingClick} variant='contained' color='primary' style={{backgroundColor: '2979ff'}} component={Link} to={`/services/${this.props.career.id}`}>
                   FIND TRAINING
                 </Button>
               </Grid>
