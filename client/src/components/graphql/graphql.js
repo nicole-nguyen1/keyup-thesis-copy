@@ -71,6 +71,7 @@ export const getServiceQuery = (args) => (
       name
       subheading
       logo_url
+      financial_info
     }
   }`
 );
