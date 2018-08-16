@@ -1,39 +1,43 @@
 import React from 'react';
-import Typeography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 
 const HowItWorks = props => {
   const { classes } = props;
   return (
-    <div className={classes.component}>
-      <Typeography variant='subheading' className={classes.title}>How KeyUp Works</Typeography>
-      <div className={classes.grid}>
-        <div className={classes.cell}>
-          <img src='https://s3.amazonaws.com/key-up-assets/lightbulb-white.png' className={classes.image}/>
-          <Typeography variant='body1' style={{color: '#ffae51'}}>Learn</Typeography>
-          <Typeography variant='body1' style={{color: '#ededee'}}>Get recommendations or browse careers that are in-demand in Austin</Typeography>
-        </div>
+    <Card className={classes.component}>
+      <CardContent>
+        <Typography variant='subheading' className={classes.title}>How KeyUp Works</Typography>
+        <div className={classes.grid}>
+          <div className={classes.cell}>
+            <img src='https://s3.amazonaws.com/key-up-assets/lightbulb-white.png' className={classes.image} />
+            <Typography gutterBottom variant='body1' style={{ color: '#ffae51' }}>Learn</Typography>
+            <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Get recommendations or browse careers that are in-demand in Austin</Typography>
+          </div>
 
-        <div className={classes.cell}>
-          <img src='https://s3.amazonaws.com/key-up-assets/Zero-In-(target).png' className={classes.image}/>
-          <Typeography variant='body1' style={{color: '#b2c3fd'}}>Zero In</Typeography>
-          <Typeography variant='body1' style={{color: '#ededee'}}>Find training services in Austin that fit into your life</Typeography>
-        </div>
+          <div className={classes.cell}>
+            <img src='https://s3.amazonaws.com/key-up-assets/Zero-In-(target).png' className={classes.image} />
+            <Typography gutterBottom variant='body1' style={{ color: '#b2c3fd' }}>Zero In</Typography>
+            <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Find training services in Austin that fit into your life</Typography>
+          </div>
 
-        <div className={classes.cell}>
-          <img src='https://s3.amazonaws.com/key-up-assets/Connect-(handshake)-icon.png' className={classes.image}/>
-          <Typeography variant='body1' style={{color: '#e9dc00'}}>Connect</Typeography>
-          <Typeography variant='body1' style={{color: '#ededee'}}>Get matched to support programs that can pay for tuition, childcare, etc.</Typeography>
-        </div>
+          <div className={classes.cell}>
+            <img src='https://s3.amazonaws.com/key-up-assets/Connect-(handshake)-icon.png' className={classes.image} />
+            <Typography gutterBottom variant='body1' style={{ color: '#e9dc00' }}>Connect</Typography>
+            <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Get matched to support programs that can pay for tuition, childcare, etc.</Typography>
+          </div>
 
-        <div className={classes.cell}>
-          <img src='https://s3.amazonaws.com/key-up-assets/Go-(rocket-ship)-icon.png' className={classes.image}/>
-          <Typeography variant='body1' style={{color: '#02ed96'}}>Go!</Typeography>
-          <Typeography variant='body1' style={{color: '#ededee'}}>Apply and start on your path to a better future</Typeography>
+          <div className={classes.cell}>
+            <img src='https://s3.amazonaws.com/key-up-assets/Go-(rocket-ship)-icon.png' className={classes.image} />
+            <Typography gutterBottom variant='body1' style={{ color: '#02ed96' }}>Go!</Typography>
+            <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Apply and start on your path to a better future</Typography>
+          </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -41,7 +45,8 @@ const styles = {
   component: {
     background: '#232e49',
     textAlign: 'center',
-    margin: '0'
+    margin: '0',
+    borderRadius: 0
   },
   grid: {
     display: 'flex',
@@ -49,15 +54,15 @@ const styles = {
     justifyContent: 'space-around'
   },
   cell: {
-    margin: '10px'
+    margin: '10px 100px'
   },
   image: {
     maxWidth: '150px',
     maxHeight: '100px',
-    margin: '5px'
+    margin: '20px'
   },
   title: {
-    padding: '25px 0 5px 0',
+    padding: '30px 0 5px 0',
     color: '#ededee'
   }
 };

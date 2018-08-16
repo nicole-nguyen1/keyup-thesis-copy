@@ -61,7 +61,7 @@ class CareerProfile extends React.Component {
             </CardContent>
             <ProsCons info={career} />
           </Card>
-          <Trainings career={career} />
+          <Trainings career={career} careerID={this.props.careerID}/>
         </div>
       )
     } else {
