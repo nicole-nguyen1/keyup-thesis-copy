@@ -31,9 +31,6 @@ class FilterAndSortForm extends React.Component {
       'Most job openings'
     ];
     this.filterOptions = {};
-    this.setFilter = this.setFilter.bind(this);
-    this.setFixedFilter = this.setFixedFilter.bind(this);
-    this.setSort = this.setSort.bind(this);
     this.paidToLearn = false;
     this.freeTraining = false;
     this.state = {
@@ -41,7 +38,7 @@ class FilterAndSortForm extends React.Component {
     };
   }
 
-  setFilter (e) {
+  setFilter = (e) => {
     console.log(e.target.value);
     if (this.filterOptions[e.target.value] === 0) {
       delete this.filterOptions[e.target.value];
@@ -50,17 +47,16 @@ class FilterAndSortForm extends React.Component {
     }
   }
 
-  setFixedFilter (e) {
+  setFixedFilter = (e) => {
     if (e.target.value === '-1') {
       this.paidToLearn = !this.paidToLearn;
     }
     if (e.target.value === '-2') {
       this.freeTraining = !this.freeTraining;
     }
-    
   }
 
-  setSort (e) {
+  setSort = (e) => {
     this.setState({
       sortSelection: e.target.value
     }, ()=>console.log(this.state));

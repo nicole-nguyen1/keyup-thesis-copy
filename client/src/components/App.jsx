@@ -28,8 +28,6 @@ class App extends React.Component {
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
-    this.filterCareers = this.filterCareers.bind(this);
-    this.getCareers = this.getCareers.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +40,7 @@ class App extends React.Component {
     });
   }
 
-  getCareers() {
+  getCareers = () => {
     this.fetch({
       query: getCareersQuery
     }).then(res => {
@@ -50,7 +48,7 @@ class App extends React.Component {
     });
   }
 
-  filterCareers(args) {
+  filterCareers = (args) => {
     this.fetch({
       query: filterCareersQuery(args)
     }).then((res) => {

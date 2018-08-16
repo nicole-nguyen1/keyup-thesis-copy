@@ -8,10 +8,10 @@ class TrainingServiceProfile extends React.Component {
 
   render() {
     console.log('props', this.props);
-    const service = this.props.service
+    const service = this.props.service;
     return (
       <Intro service={service}/>
-    )
+    );
   }
 }
 
