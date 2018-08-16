@@ -21,6 +21,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import { getPageTitle } from '../actions/action';
+import { HashLink } from 'react-router-hash-link';
+
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -46,10 +48,12 @@ class NavBar extends React.Component {
   handleHomeInsidePopUpMenuClick = () => {
     this.handleClose();
     store.dispatch(getPageTitle(''));
+    window.scrollTo(0,0);
   }
 
   handleKeyUpClick = () => {
     store.dispatch(getPageTitle(''));
+    window.scrollTo(0,0);
   }
 
   // handleScrollClick = section => {
@@ -87,7 +91,7 @@ class NavBar extends React.Component {
               PopoverClasses={{paper: `${classes.menu}`}}
             >
               <MenuItem onClick={this.handleHomeInsidePopUpMenuClick}>
-                <Link to="/">
+                <Link to="/home">
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
@@ -114,24 +118,26 @@ class NavBar extends React.Component {
                 </a>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
+                <HashLink style={{textDecoration: 'none'}} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#about">
                 <ListItemIcon>
                   <InfoIcon />
                 </ListItemIcon>
                 <ListItemText inset primary="About KeyUp">
                 </ListItemText>
+                </HashLink>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <Link to="/#contact">
+                <HashLink scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#contact">
                   <ListItemIcon>
                     <PeopleIcon />
                   </ListItemIcon>
                   <ListItemText style={{ float: 'right' }} inset primary="Contact KeyUp">
                   </ListItemText>
-                </Link>
+                </HashLink>
               </MenuItem>
             </Menu>
             <Typography variant="display1" color="inherit">
-              <Link to="/">
+              <Link to="/home">
                 <Button onClick={this.handleKeyUpClick} className={classes.home}>
                   <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px'/>
                 </Button>

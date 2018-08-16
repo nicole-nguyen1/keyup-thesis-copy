@@ -8,8 +8,10 @@ import HomePageCards from './homePageComponents/HomePageCards.jsx';
 class Home extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    this.about = React.createRef();
+  componentDidMount() {
+    window.scrollTo(0,0);
   }
 
   render() {
@@ -18,8 +20,12 @@ class Home extends React.Component {
       <div>
         <Intro />
         <HomePageCards />
-        <About />
-        <FormHomePage />
+        <div id="about">
+          <About />
+        </div>
+        <div id="contact">
+          <FormHomePage />
+        </div>
         <HowItWorks />
       </div>
     );
