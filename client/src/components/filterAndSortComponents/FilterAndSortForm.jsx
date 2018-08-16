@@ -31,13 +31,14 @@ class FilterAndSortForm extends React.Component {
       'Most job openings'
     ];
     this.filterOptions = {};
-    this.setFilter = this.setFilter.bind(this);
-    this.setFixedFilter = this.setFixedFilter.bind(this);
     this.paidToLearn = false;
     this.freeTraining = false;
+    this.state = {
+      sortSelection: 'Highest salary'
+    };
   }
 
-  setFilter (e) {
+  setFilter = (e) => {
     console.log(e.target.value);
     if (this.filterOptions[e.target.value] === 0) {
       delete this.filterOptions[e.target.value];
@@ -46,16 +47,20 @@ class FilterAndSortForm extends React.Component {
     }
   }
 
-  setFixedFilter (e) {
+  setFixedFilter = (e) => {
     if (e.target.value === '-1') {
       this.paidToLearn = !this.paidToLearn;
     }
     if (e.target.value === '-2') {
       this.freeTraining = !this.freeTraining;
     }
-    
   }
 
+  setSort = (e) => {
+    this.setState({
+      sortSelection: e.target.value
+    }, ()=>console.log(this.state));
+  }
 
   render() {
     const { classes } = this.props;
@@ -93,7 +98,12 @@ class FilterAndSortForm extends React.Component {
         </Typography>
         <RadioGroup name="sort">
           {this.sortOptions.map((label, index)=>{
-            return (<Sort key={index} label={label}/>);
+            return (<Sort 
+              key={index} 
+              label={label}
+              select={this.setSort}
+              sortSelection={this.state.sortSelection}
+            />);
           })}
         </RadioGroup>
         <Grid container>
@@ -107,7 +117,7 @@ class FilterAndSortForm extends React.Component {
                   args: Object.keys(this.filterOptions),
                   paidToLearn: this.paidToLearn,
                   freeTraining: this.freeTraining
-                });
+                }, this.state.sortSelection);
               }}
             >See Career Results</Button>
           </Grid>

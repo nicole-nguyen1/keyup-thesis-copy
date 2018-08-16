@@ -18,7 +18,12 @@ class Sort extends React.Component {
     const { classes } = this.props;
     return (
       <FormControlLabel control={
-        <Radio color = "default"/>
+        <Radio 
+          color = "default"
+          value={this.props.label}
+          onClick={this.props.select}
+          checked={this.props.sortSelection === this.props.label}
+        />
       } label={this.props.label} />
     );
   }

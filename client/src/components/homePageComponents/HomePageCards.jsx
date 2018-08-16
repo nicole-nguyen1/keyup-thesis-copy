@@ -37,11 +37,11 @@ class HomePageCards extends React.Component {
                 <div style={{ flexGrow: '4' }}>
                   <Typography variant="body1" className={classes.headerStyle}>
                     Get Recommendations
-                </Typography>
+                  </Typography>
                   <Typography className={classes.textStyle}>
                     Answer some quick questions to find careers and training
                     that fit your life
-                </Typography>
+                  </Typography>
                 </div>
                 <KeyboardArrowRightIcon style={{ flexGrow: '1' }} />
               </div>

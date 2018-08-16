@@ -28,8 +28,7 @@ class App extends React.Component {
     this.fetch = createApolloFetch({
       uri: './graphql'
     }).bind(this);
-    this.filterCareers = this.filterCareers.bind(this);
-    this.getCareers = this.getCareers.bind(this);
+    this.sortBy = 'Highest salary';
   }
 
   componentDidMount() {
@@ -42,7 +41,7 @@ class App extends React.Component {
     });
   }
 
-  getCareers() {
+  getCareers = () => {
     this.fetch({
       query: getCareersQuery
     }).then(res => {
@@ -50,15 +49,106 @@ class App extends React.Component {
     });
   }
 
-  filterCareers(args) {
+  filterCareers = (args, sortBy) => {
+    this.sortBy = sortBy;
     this.fetch({
       query: filterCareersQuery(args)
-    }).then((res) => {
-      console.log(res.data);
-      store.dispatch(findCareers(res.data));
+    })
+  .then((res) => {
+    console.log(res.data.careers);
+    if (this.sortBy === 'Shortest training length') {
+      return this.sortByShortestTrainingLength(res.data.careers);
+    } else if (this.sortBy === 'Most job openings') {
+      return this.sortByMostJobOpenings(res.data.careers);
+    } else {
+      return this.sortByHighestSalary(res.data.careers);
+    }
+  })
+    .then((res) => {
+      store.dispatch(findCareers(res));
     });
   }
   
+  sortCareers = () => {
+
+  }
+
+  // .then((res) => {
+  //   console.log(res.data.careers);
+  //   return this.sortByShortestTrainingLength(res.data.careers)
+  // })
+  // .then((res) => {
+  //   store.dispatch(findCareers(res));
+  // });
+
+  sortByMostJobOpenings = (careers) => {
+    let bucket = [];
+    let hash = {};
+    let sortedCareers = [];
+    careers.forEach((career)=>{
+      hash[career.id] = career;
+      bucket.push([career.id, Number(career.openings.split(': ')[1].split(' ')[0].split(',').join(''))]);
+    })
+    bucket.sort((a,b)=>{
+      if (a[1] > b[1]) {
+        return -1;
+      } else if (a[1] < b[1]) {
+        return 1;
+      }
+      return 0;
+    });
+    bucket.forEach((val)=>{
+      sortedCareers.push(hash[val[0]]);
+    });
+    console.log('sorted careers', sortedCareers);
+    return {careers: sortedCareers};
+  }
+
+  sortByHighestSalary = (careers) => {
+    let bucket = [];
+    let hash = {};
+    let sortedCareers = [];
+    careers.forEach((career)=>{
+      hash[career.id] = career;
+      bucket.push([career.id, Number(career.annual_salary.split('$').join(',').split(',').join(''))])
+    })
+    bucket.sort((a,b)=>{
+      if(a[1] > b[1]) {
+        return -1;
+      } else if (a[1] < b[1]) {
+        return 1;
+      }
+      return 0;
+    });
+    bucket.forEach((val)=>{
+      sortedCareers.push(hash[val[0]]);
+    });
+    console.log('sorted careers', sortedCareers);
+    return {careers: sortedCareers};
+  }
+
+  sortByShortestTrainingLength = (careers) => {
+    let bucket = [];
+    let hash = {};
+    let sortedCareers = [];
+    careers.forEach((career)=>{
+      hash[career.id] = career;
+      bucket.push([career.id, career.training_length.split(' ')[0]]);
+    });
+    bucket.sort((a,b)=>{
+      if (a[1] < b[1]) {
+        return -1;
+      } else if (a[1] > b[1]) {
+        return 1;
+      }
+      return 0;
+    })
+    bucket.forEach((val)=>{
+      sortedCareers.push(hash[val[0]]);
+    })
+    console.log('sorted careers', sortedCareers);
+    return {careers: sortedCareers};
+  }
 
   render() {
     return (
