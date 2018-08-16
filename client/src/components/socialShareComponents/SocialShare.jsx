@@ -5,18 +5,10 @@ import Reddit from './Reddit.jsx';
 import Email from './Email.jsx';
 import Text from './Text.jsx';
 import CopyLink from './CopyLink.jsx';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import SendTextDialog from './SendTextDialog.jsx';
 import Drawer from '@material-ui/core/Drawer';
 import Snackbar from '@material-ui/core/Snackbar';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
 import { isMobileOnly } from 'react-device-detect';
-import smsLink from 'sms-link';
 
 class SocialShare extends React.Component {
   constructor(props) {
@@ -27,12 +19,6 @@ class SocialShare extends React.Component {
       textOpen: false,
       textLink: ''
     }
-  }
-
-  handleChange = (e) => {
-    this.setState({ 
-      textLink: smsLink({ phone: `1${e.target.value}`, body: this.state.url })
-    });
   }
 
   handleClick = (state) => {
@@ -97,41 +83,12 @@ class SocialShare extends React.Component {
           </div>
         </Drawer>
 
-        {/* This dialog opens when a user wishes to text the page url to someone */}
-        <Dialog
-          open={this.state.textOpen}
-          onClose={() => this.handleClose('textOpen')}
-          aria-labelledby="text-title"
-        >
-          <DialogTitle id="text-title">{"Share This Page"}</DialogTitle>
-          <DialogContent>
-            <Typography gutterBottom>
-              Enter the phone number of the person you want to text. 
-            </Typography>
-            <Typography>
-              Not sure what their number is? 
-              Click the button below and you'll be able to search your contact list.
-            </Typography>
-            <TextField
-              id="text-recipient-input"
-              fullWidth
-              label="Enter a phone number"
-              value={this.state.phoneNum}
-              onChange={this.handleChange}
-              margin="normal"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => this.handleClose('textOpen')} color="primary">
-              Cancel
-            </Button>
-            <a href={this.state.textLink} style={{ textDecoration: 'none' }}>
-              <Button color="primary" autoFocus style={{ backgroundColor: '2979ff', color: 'EDEDEE' }}>
-                Send Text
-              </Button>
-            </a>
-          </DialogActions>
-        </Dialog>
+        {/* This dialog opens when you click to send a text */}
+        <SendTextDialog 
+          url={this.state.url}
+          open={this.state.textOpen} 
+          handleClick={this.handleClick} 
+          handleClose={this.handleClose}/>
 
         {/* The snackbar notification below is a success message once you click 'Copy Link' */}
         <Snackbar
