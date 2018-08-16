@@ -38,6 +38,7 @@
     "path": "^0.12.7",
     "pg": "^7.4.3",
     "react": "^16.4.2",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
     "react-responsive": "^5.0.0",
