@@ -7,7 +7,6 @@ class CopyLink extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: window.location.href,
       copied: false
     }
   }
@@ -16,7 +15,7 @@ class CopyLink extends React.Component {
     return (
       <div style={this.props.styles.row}>
         <CopyToClipboard
-          text={this.state.url}
+          text={this.props.url}
           onCopy={() => this.setState({ copied: true })}>
           <Grid item
             role="button"
