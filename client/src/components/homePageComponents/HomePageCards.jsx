@@ -12,10 +12,7 @@ const styles = theme => ({
     margin: '5px'
   },
   headerStyle: {
-
-  },
-  textStyle: {
-
+    fontWeight: 'bold'
   },
   divStyle: {
     background: '#232E49',
@@ -38,7 +35,7 @@ class HomePageCards extends React.Component {
             <CardContent >
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ flexGrow: '4' }}>
-                  <Typography variant="headline" className={classes.textStyle}>
+                  <Typography variant="body1" className={classes.headerStyle}>
                     Get Recommendations
                 </Typography>
                   <Typography className={classes.textStyle}>
@@ -56,7 +53,7 @@ class HomePageCards extends React.Component {
             <CardContent >
               <div style={{display: 'flex', alignItems: 'center'}}>
                 <div style={{flexGrow: '4'}}>
-                  <Typography variant="headline"className={classes.textStyle}>
+                  <Typography variant="body1"className={classes.headerStyle}>
             Browse Careers and Training Services
                   </Typography>
                   <Typography className={classes.textStyle}>
