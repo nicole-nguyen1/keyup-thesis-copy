@@ -1,11 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
-var dotenv = require('dotenv');
 
 var BUILD_DIR = path.resolve(__dirname, 'client/dist');
 var APP_DIR = path.resolve(__dirname, 'client/src');
-
-const env = dotenv.config().parsed;
 
 var config = {
   entry: APP_DIR + '/index.jsx',
@@ -26,7 +23,7 @@ var config = {
   },
   plugins: [
     new webpack.DefinePlugin({ 'process.env': {
-      FB_APP_ID: JSON.stringify(`${env.FB_APP_ID}`) }
+      FB_APP_ID: JSON.stringify(`${process.env.FB_APP_ID}`) }
     })
   ]
 };

@@ -9,7 +9,6 @@ class Facebook extends React.Component {
   }
 
   render() {
-    console.log(process.env.FB_APP_ID);
     return (
         <div style={this.props.styles.row}>
         <FacebookProvider appId={process.env.FB_APP_ID}>
