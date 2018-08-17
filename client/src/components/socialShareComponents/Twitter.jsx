@@ -21,13 +21,19 @@ class Twitter extends React.Component {
   };
 
   render() {
+    const url = encodeURIComponent(this.props.url);
+    const text = encodeURIComponent(`I'm using KeyUp to explore careers, training services, and support services! Check out this link: `)
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+
     return (
       <div style={this.props.styles.row}>
-        <Grid item
-          role="button">
-          <img src='https://s3.amazonaws.com/key-up-assets/Twitter-Logo-True.png' style={this.props.styles.topIcon} />
-          <Typography variant='caption'>Twitter</Typography>
-        </Grid>
+        <a href={twitterUrl} style={{ textDecoration: 'none' }}>
+          <Grid item
+            role="button">
+            <img src='https://s3.amazonaws.com/key-up-assets/Twitter-Logo-True.png' style={this.props.styles.topIcon} />
+            <Typography variant='caption'>Twitter</Typography>
+          </Grid>
+        </a>
       </div>
     )
   }
