@@ -6,6 +6,8 @@ import { findCareer } from '../actions/action';
 import { store } from '../store/index';
 import CareerProfile from './careerProfileComponents/CareerProfile.jsx';
 import { getCareerQuery } from './graphql/graphql';
+import { getPageTitle } from '../actions/action';
+
 
 class CareerProfileContainer extends React.Component {
   constructor(props) {
@@ -22,8 +24,7 @@ class CareerProfileContainer extends React.Component {
       query: getCareerQuery(this.state.career_id)
     }).then(res => {
       store.dispatch(findCareer(res.data));
-    }).then(()=>{
-      console.log(this.props);
+      store.dispatch(getPageTitle(res.data.career.name))
     });
   }
 

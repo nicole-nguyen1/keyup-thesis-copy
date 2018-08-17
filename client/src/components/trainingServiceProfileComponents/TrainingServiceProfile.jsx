@@ -4,6 +4,7 @@ import Financial from './Financial.jsx';
 import About from './About.jsx';
 import Needs from './Needs.jsx';
 import ProsCons from '../careerProfileComponents/ProsCons.jsx';
+import ApplicationProcess from './ApplicationProcess.jsx';
 import Card from '@material-ui/core/Card';
 
 class TrainingServiceProfile extends React.Component {
@@ -32,6 +33,7 @@ class TrainingServiceProfile extends React.Component {
         <Card style={styles.dark}>
           <Needs service={service} />
         </Card>
+        <ApplicationProcess service={service}/>
       </div>
     );
   }
