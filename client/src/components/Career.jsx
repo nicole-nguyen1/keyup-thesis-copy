@@ -14,14 +14,6 @@ class Career extends React.Component {
     super(props);
   }
 
-  handleFindTrainingClick = () => {
-    store.dispatch(getPageTitle('Training List'));
-  }
-   
-  handleLearnMoreClick = () => {
-    store.dispatch(getPageTitle(this.props.career.name));
-  }
-
   render() {
     const style = {
       height: '20%'
@@ -57,12 +49,12 @@ class Career extends React.Component {
             </Grid>
             <Grid container spacing={8}>
               <Grid item xs={6}>
-                <Button onClick={this.handleLearnMoreClick} variant="contained" color="primary" style={{backgroundColor: '2979ff'}} component={Link} to={`/careers/${this.props.career.id}`}>
+                <Button variant="contained" color="primary" style={{backgroundColor: '2979ff'}} component={Link} to={`/careers/${this.props.career.id}`}>
                   LEARN MORE
                 </Button>
               </Grid>
               <Grid item xs={6}>
-                <Button onClick={this.handleFindTrainingClick} variant='contained' color='primary' style={{backgroundColor: '2979ff'}} component={Link} to={`/services/${this.props.career.id}`}>
+                <Button variant='contained' color='primary' style={{backgroundColor: '2979ff'}} component={Link} to={`/services/${this.props.career.id}`}>
                   FIND TRAINING
                 </Button>
               </Grid>
