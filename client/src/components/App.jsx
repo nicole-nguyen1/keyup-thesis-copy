@@ -77,14 +77,6 @@ class App extends React.Component {
 
   }
 
-  // .then((res) => {
-  //   console.log(res.data.careers);
-  //   return this.sortByShortestTrainingLength(res.data.careers)
-  // })
-  // .then((res) => {
-  //   store.dispatch(findCareers(res));
-  // });
-
   sortByMostJobOpenings = (careers) => {
     let bucket = [];
     let hash = {};
@@ -104,7 +96,6 @@ class App extends React.Component {
     bucket.forEach((val)=>{
       sortedCareers.push(hash[val[0]]);
     });
-    console.log('sorted careers', sortedCareers);
     return {careers: sortedCareers};
   }
 
@@ -127,7 +118,6 @@ class App extends React.Component {
     bucket.forEach((val)=>{
       sortedCareers.push(hash[val[0]]);
     });
-    console.log('sorted careers', sortedCareers);
     return {careers: sortedCareers};
   }
 

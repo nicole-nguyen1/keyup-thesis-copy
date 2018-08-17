@@ -40,36 +40,9 @@ class NavBar extends React.Component {
     this.setState( { anchorEl: null });
   };
 
-  handleBrowseCareersClick = () => {
-    this.handleClose();
-    store.dispatch(getPageTitle('Career List'));
-  }
-
-  handleHomeInsidePopUpMenuClick = () => {
-    this.handleClose();
-    store.dispatch(getPageTitle(''));
-    window.scrollTo(0,0);
-  }
-
-  handleKeyUpClick = () => {
-    store.dispatch(getPageTitle(''));
-    window.scrollTo(0,0);
-  }
-
-  // handleScrollClick = section => {
-  //   this.handleClose();
-  //   console.log('document', document)
-  //   window.onload = function() {
-  //   document.getElementById(section).scrollIntoView();
-  //   }
-  // }
-
-
-
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
-    console.log('this.props.pages', this.props.pages)
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -91,7 +64,7 @@ class NavBar extends React.Component {
               onClose={this.handleClose}
               PopoverClasses={{paper: `${classes.menu}`}}
             >
-              <MenuItem onClick={this.handleHomeInsidePopUpMenuClick}>
+              <MenuItem onClick={this.handleClose}>
                 <Link to="/home">
                   <ListItemIcon>
                     <HomeIcon />
@@ -100,7 +73,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={this.handleBrowseCareersClick}>
+              <MenuItem onClick={this.handleClose}>
                 <Link to="/careers">
                   <ListItemIcon>
                     <SearchIcon />
@@ -139,7 +112,7 @@ class NavBar extends React.Component {
             </Menu>
             <Typography variant="display1" color="inherit">
               <Link to="/home">
-                <Button onClick={this.handleKeyUpClick} className={classes.home}>
+                <Button onClick={this.handleClose} className={classes.home}>
                   <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px'/>
                 </Button>
               </Link>
@@ -186,7 +159,6 @@ NavBar.styles = {
 
 const mapStateToProps = state => {
   return {
-    // pages: state.pages.present.page
     pages:state.pages.page
   };
 }
