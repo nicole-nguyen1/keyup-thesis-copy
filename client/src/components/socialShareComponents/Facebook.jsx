@@ -2,7 +2,6 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FacebookProvider, { Share } from 'react-facebook-sdk';
-import FB_APP_ID from '../../../../env.js';
 
 class Facebook extends React.Component {
   constructor(props) {
@@ -12,7 +11,7 @@ class Facebook extends React.Component {
   render() {
     return (
         <div style={this.props.styles.row}>
-        <FacebookProvider appId={FB_APP_ID}>
+        <FacebookProvider appId={process.env.FB_APP_ID}>
             <Share href={this.props.url}>
               <Grid item
                 role="button">
