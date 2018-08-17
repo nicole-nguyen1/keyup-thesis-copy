@@ -25,7 +25,9 @@ var config = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({ 'process.env.FB_API_KEY': JSON.stringify(`${env.FB_APP_ID}`) })
+    new webpack.DefinePlugin({ 'process.env': {
+      FB_APP_ID: JSON.stringify(`${env.FB_APP_ID}`) }
+    })
   ]
 };
 
