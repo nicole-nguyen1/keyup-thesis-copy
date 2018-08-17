@@ -6,20 +6,6 @@ var BUILD_DIR = path.resolve(__dirname, 'client/dist');
 var APP_DIR = path.resolve(__dirname, 'client/src');
 
 const env = dotenv.config().parsed;
-const envKeys = null;
-
-if (env === null) {
-  return null;
-} else {
-  envKeys = Object.keys(env).reduce((prev, next) => {
-    prev[`process.env.${next}`] = JSON.stringify(env[next]);
-    return prev;
-  }, {});
-}
-// const envKeys = Object.keys(env).reduce((prev, next) => {
-//   prev[`process.env.${next}`] = JSON.stringify(env[next]);
-//   return prev;
-// }, {});
 
 var config = {
   entry: APP_DIR + '/index.jsx',
@@ -39,7 +25,7 @@ var config = {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin(envKeys)
+    new webpack.DefinePlugin({ 'process.env.FB_API_KEY': JSON.stringify(`${env.FB_APP_ID}`) })
   ]
 };
 
