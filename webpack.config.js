@@ -6,7 +6,7 @@ var BUILD_DIR = path.resolve(__dirname, 'client/dist');
 var APP_DIR = path.resolve(__dirname, 'client/src');
 
 const env = dotenv.config().parsed;
-const envKeys;
+const envKeys = null;
 
 if (env === null) {
   return null;
