@@ -87,15 +87,13 @@ export const getServiceQuery = (args) => (
       program_length_total
       program_total_weekly
       program_class_times
-      outcomes {
-        description
-        id
-        service_id
-        type
-      }
       requirements {
         id
-        type
+        description
+      }
+      career_name
+      outcomes {
+        id
         description
       }
     }
