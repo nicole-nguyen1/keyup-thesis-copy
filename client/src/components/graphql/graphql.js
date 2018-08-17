@@ -74,6 +74,15 @@ export const getServiceQuery = (args) => (
       subheading
       logo_url
       financial_info
+      career_name
+      program_length_total
+      program_total_weekly
+      program_class_times
+      location
+      outcomes {
+        id
+        description
+      }
     }
   }`
 );
