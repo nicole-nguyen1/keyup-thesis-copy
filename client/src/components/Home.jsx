@@ -5,6 +5,7 @@ import About from './homePageComponents/About.jsx';
 import HowItWorks from './homePageComponents/HowItWorks.jsx';
 import HomePageCards from './homePageComponents/HomePageCards.jsx';
 
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,6 @@ class Home extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <Intro />
