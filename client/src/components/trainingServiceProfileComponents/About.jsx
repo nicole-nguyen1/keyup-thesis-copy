@@ -6,9 +6,81 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import SocialShare from '../socialShareComponents/SocialShare.jsx';
 
 class About extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      drawerState: false
+    }
+  }
+
+  componentDidMount() {
+    console.log('props', this.props);
+  }
+
+  toggleDrawer = () => {
+    this.setState({ drawerState: !this.state.drawerState });
+  }
+
+  render() {
+    const styles = {
+      cardAction: { 
+        display: 'block', 
+        textAlign: 'right',
+        marginTop: '10px',
+        padding: '0 10px 0 0' 
+      },
+
+      icon: {
+        position: 'relative',
+        top: '-4px',
+        left: '10px',
+        height: '1em'
+      },
+
+      link: {
+        color: '#7A94F4'
+      },
+
+      shareTopRow: {
+        width: '25px',
+        height: '25px',
+        padding: '12.5px'
+      },
+
+      shareBottomRow: {
+        width: '50px',
+        height: '50px'
+      }
+    }
+    return (
+      <div>
+        <Card style={{ borderRadius: 0 }}>
+        <CardActions style={styles.cardAction}>
+        <Button component={Link} to={`/`}>
+              <Typography gutterBottom variant='body1' style={styles.link}>ADVICE</Typography>
+              <img src='https://s3.amazonaws.com/key-up-assets/Advice-Icon-Blue.png' style={styles.icon} />
+            </Button>
+            <Button component={Link} to={`/`}>
+              <Typography gutterBottom variant='body1' style={styles.link}>APPLY</Typography>
+              <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' style={styles.icon} />
+            </Button>
+            <Button onClick={this.toggleDrawer}>
+              <Typography gutterBottom variant='body1' style={styles.link}>SHARE</Typography>
+              <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' style={styles.icon} />
+            </Button>
+          </CardActions>
+          <CardContent style={{ paddingTop: 0 }}>
+            <Typography gutterBottom variant='headline'>About</Typography>
+            <Typography variant='body1'>this is the description</Typography>
+          </CardContent>
+        </Card>
+        <SocialShare open={this.state.drawerState} toggleDrawer={this.toggleDrawer}/>
+      </div>
+    )
   }
 }
+
+export default About;
