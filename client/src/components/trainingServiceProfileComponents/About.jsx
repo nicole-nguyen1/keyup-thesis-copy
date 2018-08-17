@@ -63,7 +63,7 @@ class About extends React.Component {
               <Typography gutterBottom variant='body1' style={styles.link}>ADVICE</Typography>
               <img src='https://s3.amazonaws.com/key-up-assets/Advice-Icon-Blue.png' style={styles.icon} />
             </Button>
-            <Button component={Link} to={`/`}>
+            <Button onClick={this.props.toggleDialog}>
               <Typography gutterBottom variant='body1' style={styles.link}>APPLY</Typography>
               <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' style={styles.icon} />
             </Button>
