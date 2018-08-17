@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import FormHomePage from './FormHomePage.jsx';
+import FormSubmited from './FormSubmited.jsx';
 
 class SubmitFormHomePage extends React.Component {
   constructor(props) {
@@ -38,8 +39,6 @@ class SubmitFormHomePage extends React.Component {
   }
 
   async submitForm(e) {
-    console.log('submit form')
-    e.preventDefault(); //why?
     const { name, email, phone, message } = this.state; //sanitize inputs?
     const form = await axios.post('/api/form', { name, email, phone, message });
     if (form.status === 200) {
@@ -47,9 +46,10 @@ class SubmitFormHomePage extends React.Component {
     }
   }
 
+
   render() {
-    
     return (
+      this.state.messageSent ? <FormSubmited /> :
       <FormHomePage 
         submitForm={this.submitForm}
         handleChange={this.handleChange}

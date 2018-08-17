@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -39,15 +38,6 @@ class FormHomePage extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  //   <div>
-  //   <Typography variant="headline" className={classes.textStyle} gutterBottom>
-  //     Your message was successfully sent.
-  // </Typography>
-  //   <Typography className={classes.textStyle} gutterBottom>
-  //     We'll get back to you within 24 hours!
-  // </Typography>
-  // </div>
 
   render() {
     const { classes } = this.props;
