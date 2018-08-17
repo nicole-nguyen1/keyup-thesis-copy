@@ -43,7 +43,7 @@ const ApplicationProcess = props => {
           </div>
         </CardActions>
         <CardContent style={styles.linkContainer}>
-          <Typography gutterBottom variant='body1'><a style={styles.link} href='#'>Go to {props.service.name} website</a></Typography>
+          <Typography gutterBottom variant='body1'><a style={styles.link} href={props.service.program_url}>Go to {props.service.name} website</a></Typography>
         </CardContent>
       </Card>
     </div>
