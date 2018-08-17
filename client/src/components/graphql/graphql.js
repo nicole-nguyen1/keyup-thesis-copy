@@ -96,6 +96,10 @@ export const getServiceQuery = (args) => (
         id
         description
       }
+      program_url
+      app_url
+      app_process
+      apply_now_cta
     }
   }`
 );
