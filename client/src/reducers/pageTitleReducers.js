@@ -1,5 +1,3 @@
-// import undoable, { distinctState } from 'redux-undo';
-
 let defaultState = {
   page: ''
 };
@@ -14,8 +12,4 @@ const pageTitleReducers = (state = defaultState, action) => {
 
 export default pageTitleReducers;
 
-// const undoablePages = undoable(pageTitleReducers, {
-//   filter: distinctState()
-// });
-  
-// export default undoablePages;
+
