@@ -72,9 +72,17 @@ export const getServiceQuery = (args) => (
     training(id:${args}) {
       name
       subheading
-      description
+      about
       logo_url
       financial_info
+      pros {
+        id
+        description
+      }
+      cons {
+        id
+        description
+      }
     }
   }`
 );

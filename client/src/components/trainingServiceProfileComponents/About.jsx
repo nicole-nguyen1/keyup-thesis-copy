@@ -74,7 +74,7 @@ class About extends React.Component {
           </CardActions>
           <CardContent style={{ paddingTop: 0 }}>
             <Typography gutterBottom variant='headline'>About</Typography>
-            <Typography variant='body1'>this is the description</Typography>
+            <Typography variant='body1'>{this.props.service.about}</Typography>
           </CardContent>
         </Card>
         <SocialShare open={this.state.drawerState} toggleDrawer={this.toggleDrawer}/>
