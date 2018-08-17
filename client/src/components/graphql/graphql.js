@@ -7,6 +7,7 @@ export const getCareersQuery = `{
       annual_salary
       training_length
       card_image_url
+      openings
     }
   }`;
 
@@ -27,6 +28,7 @@ export const filterCareersQuery = (args) => {
       annual_salary
       training_length
       card_image_url
+      openings
     }
   }`);
 };
