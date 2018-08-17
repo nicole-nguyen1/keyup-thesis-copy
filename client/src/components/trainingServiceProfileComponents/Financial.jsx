@@ -11,7 +11,7 @@ const Financial = props => {
       borderRadius: 0,
       padding: '5px'
     }
-  }
+  };
 
   return (
     <div>

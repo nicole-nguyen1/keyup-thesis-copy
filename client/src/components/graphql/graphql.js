@@ -83,6 +83,21 @@ export const getServiceQuery = (args) => (
         id
         description
       }
+      location
+      program_length_total
+      program_total_weekly
+      program_class_times
+      outcomes {
+        description
+        id
+        service_id
+        type
+      }
+      requirements {
+        id
+        type
+        description
+      }
     }
   }`
 );

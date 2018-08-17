@@ -2,9 +2,9 @@ import React from 'react';
 import Intro from './Intro.jsx';
 import Financial from './Financial.jsx';
 import About from './About.jsx';
+import Needs from './Needs.jsx';
 import ProsCons from '../careerProfileComponents/ProsCons.jsx';
 import Card from '@material-ui/core/Card';
-
 
 class TrainingServiceProfile extends React.Component {
   constructor(props) {
@@ -29,6 +29,9 @@ class TrainingServiceProfile extends React.Component {
           <ProsCons info={service} />
         </Card>
         <Financial service={service}/>
+        <Card style={styles.dark}>
+          <Needs service={service} />
+        </Card>
       </div>
     );
   }
