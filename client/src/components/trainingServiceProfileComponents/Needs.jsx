@@ -10,7 +10,7 @@ class Needs extends React.Component {
     const styles = {
       lightText: {
         color: '#EDEDED',
-        margin: '20px 0'
+        margin: '20px 0 0 10px'
       },
       listItem: {
         margin: '10px 0'
