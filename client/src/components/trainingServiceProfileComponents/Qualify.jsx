@@ -32,7 +32,7 @@ const Qualify = props => {
           <Typography style={styles.text} gutterBottom variant='body1'>Answer a few questions, and we can help you access financial support, free childcare, career services and more.</Typography>
         </CardContent>
         <CardActions style={styles.action}>
-          <Button variant="contained" color="primary" style={styles.button}>
+          <Button href='https://keyup.typeform.com/to/Jt4pxV' variant="contained" color="primary" style={styles.button}>
             GET SUPPORT REC'S
           </Button>
         </CardActions>
