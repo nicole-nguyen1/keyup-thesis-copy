@@ -24,6 +24,8 @@ const Qualify = props => {
     }
   };
 
+  console.log(props);
+
   return (
     <div>
       <Card style={styles.card}>
@@ -32,7 +34,12 @@ const Qualify = props => {
           <Typography style={styles.text} gutterBottom variant='body1'>Answer a few questions, and we can help you access financial support, free childcare, career services and more.</Typography>
         </CardContent>
         <CardActions style={styles.action}>
-          <Button variant="contained" color="primary" style={styles.button}>
+          <Button
+            variant="contained" 
+            color="primary" 
+            style={styles.button}
+            onClick={props.openForm}
+          >
             GET SUPPORT REC'S
           </Button>
         </CardActions>
