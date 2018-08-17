@@ -23,6 +23,9 @@ class Careers extends React.Component {
   //   let temp = store.getState();
   //   store.dispatch(getPageTitle(temp.pages.past[0].page));
   // }
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   render() {
     // console.log('careers list component', store.getState());
