@@ -16,7 +16,7 @@ const Financial = props => {
     qualify: {
       margin: '30px 0'
     }
-  }
+  };
 
   return (
     <div>
