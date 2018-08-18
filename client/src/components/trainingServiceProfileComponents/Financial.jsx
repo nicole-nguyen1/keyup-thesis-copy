@@ -11,7 +11,7 @@ const Financial = props => {
       borderRadius: 0,
       padding: '5px'
     }
-  }
+  };
 
   return (
     <div>
@@ -20,7 +20,7 @@ const Financial = props => {
           <Typography gutterBottom variant='title'>Financial Information</Typography>
           <Typography gutterBottom variant='body1'>{props.service.financial_info}</Typography>
           <div style={{marginTop: '20px'}}>
-            <QualifyContainer />
+            <QualifyContainer service={props.service}/>
           </div>
         </CardContent>
       </Card>

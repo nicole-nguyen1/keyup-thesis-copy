@@ -19,8 +19,8 @@ class QualifyContainer extends React.Component {
 
     return (
       this.state.showForm ?
-        <QualifyForm /> :
-        <Qualify openForm={this.openForm}/>
+        <QualifyForm service={this.props.service}/> :
+        <Qualify openForm={this.openForm} />
     );
   }
 }

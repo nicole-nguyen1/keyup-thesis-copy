@@ -71,8 +71,8 @@ const CareerType = new GraphQLObjectType({
       type: new GraphQLList(CareerTraitType),
       resolve(parent, args) {
         return knex('career_traits')
-                .select()
-                .where({ 'career_id': parent.id, 'type': 'con' });
+          .select()
+          .where({ 'career_id': parent.id, 'type': 'con' });
       } 
     },
     number_of_services: {
@@ -214,9 +214,9 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('careers')
-                .select()
-                .where('careers.id', args.id)
-                .first(); 
+          .select()
+          .where('careers.id', args.id)
+          .first(); 
       }
     },
 
@@ -226,8 +226,8 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('services')
-                .select()
-                .where('services.career_id', args.id);
+          .select()
+          .where('services.career_id', args.id);
       }
     },
 
@@ -237,9 +237,9 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('services')
-                .select()
-                .where('services.id', args.id)
-                .first();
+          .select()
+          .where('services.id', args.id)
+          .first();
       }
     },
 
@@ -247,7 +247,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(IndustryType),
       resolve(parent, args) {
         return knex('industries')
-                .select();
+          .select();
       }
     }
   }

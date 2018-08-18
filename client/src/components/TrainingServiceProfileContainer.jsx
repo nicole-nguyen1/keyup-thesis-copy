@@ -21,23 +21,19 @@ class TrainingServiceProfileContainer extends React.Component {
     this.fetch({
       query: getServiceQuery(this.state.service_id)
     }).then(res => {
-      console.log(res)
+      console.log('Service res', res);
       store.dispatch(findService(res.data));
-    }).then(() => {
-      // console.log('this is in a different file', store.getState());
     });
   }
 
   render() {
-    // console.log('this is more props', this.props);
     return (
       <TrainingServiceProfile service={this.props.service}/>
     );
   }
-};
+}
 
 const mapStateToProps = state => {
-  // console.log('hi', state)
   return {
     service: state.trainingService.service
   };

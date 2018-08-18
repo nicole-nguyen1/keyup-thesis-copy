@@ -9,13 +9,12 @@ class TrainingServiceProfile extends React.Component {
 
   render() {
     console.log('props', this.props);
-    const service = this.props.service;
     return (
       <div>
-        <Intro service={service}/>
-        <Financial service={service}/>
+        <Intro service={this.props.service}/>
+        <Financial service={this.props.service}/>
       </div>
-    )
+    );
   }
 }
 

@@ -39,8 +39,8 @@ class QualifyForm extends React.Component {
     this.labels = [
       'Financial aid',
       'The application process',
-      'Talk to a grad of this training program',
-      'Talk to a working dental assistant',
+      `Talk to a grad of ${this.props.service.name}`,
+      `Talk to a working ${this.props.service.career_name}`,
       'Other'
     ];
   }

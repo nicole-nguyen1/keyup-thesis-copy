@@ -3,7 +3,8 @@ let defaultState = {
     {
       name: '',
       subheading: '',
-      logo_url: ''
+      logo_url: '',
+      career_name: ''
     }
   
 };
