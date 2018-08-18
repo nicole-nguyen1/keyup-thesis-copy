@@ -4,6 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
+import ApplyDialog from './ApplyDialog.jsx';
 
 const ApplicationProcess = props => {
   const styles = {
@@ -34,10 +35,10 @@ const ApplicationProcess = props => {
         </CardContent>
         <CardActions >
           <div style={styles.buttons} >
-            <Button variant="contained" color="primary" style={{backgroundColor: '#4e74ff'}}>
+            <Button onClick={props.toggleDialog} variant="contained" color="primary" style={{ backgroundColor: '#4e74ff' }}>
               APPLY NOW
             </Button>
-            <Button variant="contained" color="primary" style={{backgroundColor: '88888a'}}>
+            <Button variant="contained" color="primary" style={{ backgroundColor: '88888a' }}>
               GET ADVICE
             </Button>
           </div>
@@ -46,6 +47,7 @@ const ApplicationProcess = props => {
           <Typography gutterBottom variant='body1'><a style={styles.link} href={props.service.program_url}>Go to {props.service.name} website</a></Typography>
         </CardContent>
       </Card>
+      <ApplyDialog open={props.open} toggleDialog={props.toggleDialog} service={props.service} />
     </div>
   );
 };

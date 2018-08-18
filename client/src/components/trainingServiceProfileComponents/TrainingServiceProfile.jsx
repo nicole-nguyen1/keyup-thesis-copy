@@ -10,7 +10,14 @@ import Card from '@material-ui/core/Card';
 class TrainingServiceProfile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      open: false
+    };
   }
+
+  toggleDialog = () => {
+    this.setState({ open: !this.state.open });
+  };
 
   render() {
     const styles = {
@@ -25,7 +32,7 @@ class TrainingServiceProfile extends React.Component {
     return (
       <div>
         <Intro service={service}/>
-        <About service={service}/>
+        <About service={service} open={this.state.open} toggleDialog={this.toggleDialog}/>
         <Card style={styles.dark}>
           <ProsCons info={service} />
         </Card>
@@ -33,7 +40,7 @@ class TrainingServiceProfile extends React.Component {
         <Card style={styles.dark}>
           <Needs service={service} />
         </Card>
-        <ApplicationProcess service={service}/>
+        <ApplicationProcess service={service} open={this.state.open} toggleDialog={this.toggleDialog}/>
       </div>
     );
   }
