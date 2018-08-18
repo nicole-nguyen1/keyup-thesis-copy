@@ -69,9 +69,9 @@ CREATE TABLE "users" (
 "id"  SERIAL ,
 "email" VARCHAR NOT NULL DEFAULT 'NULL' UNIQUE,
 "password" VARCHAR NOT NULL DEFAULT 'NULL' ,
-"first_name" VARCHAR ,
-"last_name" VARCHAR ,
-"phone_number" VARCHAR ,
+"first_name" VARCHAR DEFAULT 'NULL',
+"last_name" VARCHAR DEFAULT 'NULL',
+"phone_number" VARCHAR DEFAULT 'NULL' UNIQUE,
 PRIMARY KEY ("id")
 );
 

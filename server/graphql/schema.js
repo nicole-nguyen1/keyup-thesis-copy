@@ -39,7 +39,7 @@ const CareerType = new GraphQLObjectType({
     description: { type: GraphQLString },
     openings: { type: GraphQLString },
     card_image_url: { type: GraphQLString },
-    card_pro: { type: GraphQLString},
+    card_pro: { type: GraphQLString },
     profile_image_url: { type: GraphQLString },
     hourly_pay: { type: GraphQLString },
     video_url: { type: GraphQLString },
@@ -67,13 +67,13 @@ const CareerType = new GraphQLObjectType({
           .where({ 'career_id': parent.id, 'type': 'pro' });
       }
     },
-    cons: { 
+    cons: {
       type: new GraphQLList(CareerTraitType),
       resolve(parent, args) {
         return knex('career_traits')
-                .select()
-                .where({ 'career_id': parent.id, 'type': 'con' });
-      } 
+          .select()
+          .where({ 'career_id': parent.id, 'type': 'con' });
+      }
     },
     number_of_services: {
       type: GraphQLInt,
@@ -87,7 +87,7 @@ const CareerType = new GraphQLObjectType({
     training_length: { type: GraphQLString },
     training_hours: { type: GraphQLString },
     training_cost: { type: GraphQLString },
-    paid_to_learn: { type: GraphQLBoolean},
+    paid_to_learn: { type: GraphQLBoolean },
     free_training: { type: GraphQLBoolean }
   })
 });
@@ -134,9 +134,9 @@ const TrainingType = new GraphQLObjectType({
     paid_to_learn: { type: GraphQLBoolean },
     federal_student_aid: { type: GraphQLBoolean },
     card_length: { type: GraphQLString },
-    card_location: { type: GraphQLString},
+    card_location: { type: GraphQLString },
     card_tuition: { type: GraphQLString },
-    page_title: { type: GraphQLString},
+    page_title: { type: GraphQLString },
     outcomes: {
       type: new GraphQLList(TrainingTraitType),
       resolve(parent, args) {
@@ -199,6 +199,10 @@ const ContactFormType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     user_id: { type: GraphQLID },
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    phone_number: { type: GraphQLString },
     page: { type: GraphQLString },
     career: { type: GraphQLString },
     training_service: { type: GraphQLString },
@@ -217,9 +221,9 @@ const RootQuery = new GraphQLObjectType({
     //GET careers list
     careers: {
       type: new GraphQLList(CareerType),
-      args: { 
-        industry_ids: { type: new GraphQLList( GraphQLID ) },
-        paid_to_learn: { type: GraphQLBoolean},
+      args: {
+        industry_ids: { type: new GraphQLList(GraphQLID) },
+        paid_to_learn: { type: GraphQLBoolean },
         free_training: { type: GraphQLBoolean }
       },
       resolve(parent, args) {
@@ -243,9 +247,9 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('careers')
-                .select()
-                .where('careers.id', args.id)
-                .first(); 
+          .select()
+          .where('careers.id', args.id)
+          .first();
       }
     },
 
@@ -255,8 +259,8 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('services')
-                .select()
-                .where('services.career_id', args.id);
+          .select()
+          .where('services.career_id', args.id);
       }
     },
 
@@ -266,9 +270,9 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('services')
-                .select()
-                .where('services.id', args.id)
-                .first();
+          .select()
+          .where('services.id', args.id)
+          .first();
       }
     },
 
@@ -276,7 +280,7 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(IndustryType),
       resolve(parent, args) {
         return knex('industries')
-                .select();
+          .select();
       }
     }
   }
@@ -285,40 +289,139 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    addCareer: {
-      type: CareerType,
-      args: {
-        name: { type: GraphQLString }
-      }, 
-      resolve(parent, args) {
-        console.log('add Mutation resolve functionality');
-        return;
-      }
-    },
-
     saveContactFormUser: {
-      type: UserType,
+      type: ContactFormType,
       args: {
         first_name: { type: GraphQLString },
         last_name: { type: GraphQLString },
         email: { type: GraphQLString },
-        phone_number: { type: GraphQLString }
+        phone_number: { type: GraphQLString },
+        page: { type: GraphQLString },
+        career: { type: GraphQLString },
+        training_service: { type: GraphQLString },
+        financial_aid: { type: GraphQLBoolean },
+        app_process: { type: GraphQLBoolean },
+        talk_to_grad: { type: GraphQLBoolean },
+        talk_to_working: { type: GraphQLBoolean },
+        other: { type: GraphQLBoolean },
+        message: { type: GraphQLString }
       },
       resolve(parent, args) {
-        return knex('users')
-                .insert(args);
+        if (args.email !== null) {
+          console.log('searching users table');
+          return knex('users')
+            .select('id')
+            .where('email', args.email)
+            .returning('id')
+            .then((res) => {
+              console.log('searched users table');
+              console.log(res);
+              if (res[0].id) {
+                console.log(res);
+                return knex('contact_form')
+                  .insert({
+                    user_id: res[0].id,
+                    page: args.page,
+                    career: args.career,
+                    training_service: args.training_service,
+                    financial_aid: args.financial_aid,
+                    app_process: args.app_process,
+                    talk_to_grad: args.talk_to_grad,
+                    talk_to_working: args.talk_to_working,
+                    other: args.other,
+                    message: args.message
+                  })
+                  .then((res) => console.log(res))
+              } else {
+                return knex('users')
+                  .insert({
+                    first_name: args.first_name,
+                    last_name: args.last_name,
+                    password: null,
+                    email: args.email,
+                    phone_number: args.phone_number
+                  })
+                  .returning('id')
+                  .then((res, err) => {
+                    console.log('added to users table');
+                    console.log(res);
+                    if (res[0].id) {
+                      console.log(res);
+                      return knex('contact_form')
+                        .insert({
+                          user_id: res[0].id,
+                          page: args.page,
+                          career: args.career,
+                          training_service: args.training_service,
+                          financial_aid: args.financial_aid,
+                          app_process: args.app_process,
+                          talk_to_grad: args.talk_to_grad,
+                          talk_to_working: args.talk_to_working,
+                          other: args.other,
+                          message: args.message
+                        })
+                        .then((res) => console.log(res))
+                    } else {
+                      console.error(err);
+                    }
+                  })
+              }
+            });
+        } else if (args.phone_number !== null) {
+          return knex('users')
+            .select('id')
+            .where('phone_number', args.phone_number)
+            .returning('id')
+            .then((res, err) => {
+              if (res[0].id) {
+                return knex('contact_form')
+                  .insert({
+                    user_id: res[0].id,
+                    page: args.page,
+                    career: args.career,
+                    training_service: args.training_service,
+                    financial_aid: args.financial_aid,
+                    app_process: args.app_process,
+                    talk_to_grad: args.talk_to_grad,
+                    talk_to_working: args.talk_to_working,
+                    other: args.other,
+                    message: args.message
+                  })
+              } else {
+                return knex('users')
+                  .insert({
+                    first_name: args.first_name,
+                    last_name: args.last_name,
+                    password: null,
+                    email: args.email,
+                    phone_number: args.phone_number
+                  })
+                  .returning('id')
+                  .then((res, err) => {
+                    if (res[0].id) {
+                      return knex('contact_form')
+                        .insert({
+                          user_id: res[0].id,
+                          page: args.page,
+                          career: args.career,
+                          training_service: args.training_service,
+                          financial_aid: args.financial_aid,
+                          app_process: args.app_process,
+                          talk_to_grad: args.talk_to_grad,
+                          talk_to_working: args.talk_to_working,
+                          other: args.other,
+                          message: args.message
+                        })
+                    } else {
+                      console.error(err);
+                    }
+                  })
+              }
+            });
+        }
       }
     },
 
-    // saveContactFormInfo: {
-    //   type: ContactFormType,
-    //   args: {
-
-    //   },
-    //   resolve(parent, args) {
-
-    //   }
-    // }
   }
 });
 
