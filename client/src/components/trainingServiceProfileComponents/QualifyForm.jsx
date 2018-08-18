@@ -6,10 +6,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import Filter from '../filterAndSortComponents/Filter.jsx';
 
 const styles = theme => ({
   cardStyle: {
-    background: 'purple',
+    backgroundColor: 'EDEDEE',
     borderRadius: '0'
   },
   cardContentStyle: {
@@ -19,16 +20,14 @@ const styles = theme => ({
   headerStyle: {
     color: 'white'
   },
-  textStyle: {
-    color: 'white'
-  },
   inputStyle: {
-    background: 'white',
+    backgroundColor: 'white',
     margin: '5px 0px',
     padding: '10px'
   },
   buttonStyle: { 
-    backgroundColor: '2979ff',
+    backgroundColor: 'CFCFCE',
+    color: '88888A',
     borderRadius: 0,
     marginTop: '1em' 
   }
@@ -37,6 +36,13 @@ const styles = theme => ({
 class QualifyForm extends React.Component {
   constructor(props) {
     super(props);
+    this.labels = [
+      'Financial aid',
+      'The application process',
+      'Talk to a grad of this training program',
+      'Talk to a working dental assistant',
+      'Other'
+    ];
   }
 
   render() {
@@ -45,12 +51,12 @@ class QualifyForm extends React.Component {
     return (
       <Card className={classes.cardStyle}>
         <CardContent className={classes.cardContentStyle}>
-          <Typography variant="headline" className={classes.textStyle} gutterBottom>
+          <Typography variant="headline" gutterBottom>
             Chat with one of our
             <br />
             KeyUp Guides Today
           </Typography>
-          <Typography className={classes.textStyle} gutterBottom>
+          <Typography gutterBottom>
             We'll get back to you within 24 hours
           </Typography>
           <FormControl style={{ width: '98%' }}>
@@ -70,6 +76,9 @@ class QualifyForm extends React.Component {
               className={classes.inputStyle}
               onChange={this.props.handleChange}
             />
+            {this.labels.map((label, index) => {
+              return <Filter key={index} label={label}/>;
+            })}
             <Input
               type="text"
               name="message"
@@ -84,11 +93,10 @@ class QualifyForm extends React.Component {
           <div style={{ textAlign: 'center' }}>
             <Button
               variant="contained" 
-              color="primary" 
               className={classes.buttonStyle}
               onClick={this.props.submitForm}
             >
-              GET STARTED
+              GET ADVICE
             </Button>
           </div>
         </CardContent>
