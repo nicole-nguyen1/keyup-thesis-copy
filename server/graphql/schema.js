@@ -73,7 +73,7 @@ const CareerType = new GraphQLObjectType({
         return knex('career_traits')
           .select()
           .where({ 'career_id': parent.id, 'type': 'con' });
-      }
+      } 
     },
     number_of_services: {
       type: GraphQLInt,
@@ -249,7 +249,7 @@ const RootQuery = new GraphQLObjectType({
         return knex('careers')
           .select()
           .where('careers.id', args.id)
-          .first();
+          .first(); 
       }
     },
 

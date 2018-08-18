@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import QualifyContainer from './QualifyContainer.jsx';
 import Qualify from './Qualify.jsx';
 import Outcomes from './Outcomes.jsx';
 
@@ -25,7 +26,7 @@ const Financial = props => {
           <Typography gutterBottom variant='title'>Financial Information</Typography>
           <Typography gutterBottom variant='body1'>{props.service.financial_info}</Typography>
           <div style={styles.qualify}>
-            <Qualify />
+            <QualifyContainer service={props.service}/>
           </div>
           <Outcomes service={props.service} />
         </CardContent>

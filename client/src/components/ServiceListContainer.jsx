@@ -75,7 +75,6 @@ class ServiceListContainer extends React.Component {
       return <Services services={this.props.services} careerName={this.props.careerName}/>;
     }
   }
-
 }
 
 const mapStateToProps = state => {
