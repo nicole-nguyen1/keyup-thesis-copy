@@ -40,15 +40,20 @@ CREATE TABLE "services" (
 "subheading" VARCHAR ,
 "about" VARCHAR ,
 "financial_info" VARCHAR ,
-"program_length" VARCHAR ,
+"program_length_total" VARCHAR ,
 "location" VARCHAR ,
 "app_process" VARCHAR ,
-"website" VARCHAR ,
 "apply_now_cta" VARCHAR ,
 "program_url" VARCHAR ,
 "app_url" VARCHAR ,
 "paid_to_learn" BOOLEAN ,
-"federal_loans" BOOLEAN ,
+"federal_student_aid" BOOLEAN ,
+"card_length" VARCHAR ,
+"card_tuition" VARCHAR ,
+"card_location" VARCHAR ,
+"page_title" VARCHAR ,
+"program_total_weekly" VARCHAR ,
+"program_class_times" VARCHAR ,
 PRIMARY KEY ("id")
 );
 
@@ -78,6 +83,19 @@ CREATE TABLE "favorites" (
 PRIMARY KEY ("id")
 );
 
+CREATE TABLE "contact_form" (
+"id"  SERIAL ,
+"user_id" INTEGER ,
+"page" VARCHAR NOT NULL DEFAULT 'NULL' ,
+"financial_aid" BOOLEAN ,
+"app_process" BOOLEAN ,
+"talk_to_grad" BOOLEAN ,
+"talk_to_working" BOOLEAN ,
+"other" BOOLEAN ,
+"message" VARCHAR NOT NULL DEFAULT 'NULL' ,
+PRIMARY KEY ("id")
+);
+
 ALTER TABLE "careers" ADD FOREIGN KEY ("industry_id") REFERENCES "industries" ("id");
 ALTER TABLE "career_traits" ADD FOREIGN KEY ("career_id") REFERENCES "careers" ("id");
 ALTER TABLE "services" ADD FOREIGN KEY ("career_id") REFERENCES "careers" ("id");
@@ -85,3 +103,4 @@ ALTER TABLE "services_traits" ADD FOREIGN KEY ("service_id") REFERENCES "service
 ALTER TABLE "favorites" ADD FOREIGN KEY ("target_id") REFERENCES "services" ("id");
 ALTER TABLE "favorites" ADD FOREIGN KEY ("target_id") REFERENCES "careers" ("id");
 ALTER TABLE "favorites" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "contact_form" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
