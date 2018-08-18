@@ -101,6 +101,10 @@ class FilterAndSortForm extends React.Component {
     }
   }
 
+  sortByAffordability = () => {
+    
+  }
+
   render() {
     const { classes } = this.props;
     const filteredPaidServices = this.filterServicesByGetPaidToLearn(this.props.services);
