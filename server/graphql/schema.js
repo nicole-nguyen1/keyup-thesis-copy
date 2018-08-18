@@ -182,6 +182,35 @@ const TrainingTraitType = new GraphQLObjectType({
   })
 });
 
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  fields: () => ({
+    id: { type: GraphQLID },
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    phone_number: { type: GraphQLString }
+  })
+});
+
+const ContactFormType = new GraphQLObjectType({
+  name: 'ContactForm',
+  fields: () => ({
+    id: { type: GraphQLID },
+    user_id: { type: GraphQLID },
+    page: { type: GraphQLString },
+    career: { type: GraphQLString },
+    training_service: { type: GraphQLString },
+    financial_aid: { type: GraphQLBoolean },
+    app_process: { type: GraphQLBoolean },
+    talk_to_grad: { type: GraphQLBoolean },
+    talk_to_working: { type: GraphQLBoolean },
+    other: { type: GraphQLBoolean },
+    message: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -265,7 +294,31 @@ const Mutation = new GraphQLObjectType({
         console.log('add Mutation resolve functionality');
         return;
       }
-    }
+    },
+
+    saveContactFormUser: {
+      type: UserType,
+      args: {
+        first_name: { type: GraphQLString },
+        last_name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        phone_number: { type: GraphQLString }
+      },
+      resolve(parent, args) {
+        return knex('users')
+                .insert(args);
+      }
+    },
+
+    // saveContactFormInfo: {
+    //   type: ContactFormType,
+    //   args: {
+
+    //   },
+    //   resolve(parent, args) {
+
+    //   }
+    // }
   }
 });
 

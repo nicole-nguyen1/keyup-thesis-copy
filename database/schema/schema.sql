@@ -67,7 +67,7 @@ PRIMARY KEY ("id")
 
 CREATE TABLE "users" (
 "id"  SERIAL ,
-"email" VARCHAR NOT NULL DEFAULT 'NULL' ,
+"email" VARCHAR NOT NULL DEFAULT 'NULL' UNIQUE,
 "password" VARCHAR NOT NULL DEFAULT 'NULL' ,
 "first_name" VARCHAR ,
 "last_name" VARCHAR ,
@@ -87,6 +87,8 @@ CREATE TABLE "contact_form" (
 "id"  SERIAL ,
 "user_id" INTEGER ,
 "page" VARCHAR NOT NULL DEFAULT 'NULL' ,
+"career" VARCHAR ,
+"training_service" VARCHAR ,
 "financial_aid" BOOLEAN ,
 "app_process" BOOLEAN ,
 "talk_to_grad" BOOLEAN ,
