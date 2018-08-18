@@ -39,7 +39,6 @@ class ServiceListContainer extends React.Component {
       />;
     }
   }
-
 }
 
 const mapStateToProps = state => {

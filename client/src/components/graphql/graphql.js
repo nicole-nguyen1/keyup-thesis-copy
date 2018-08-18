@@ -75,6 +75,7 @@ export const getServiceQuery = (args) => (
       about
       logo_url
       financial_info
+      career_name
       pros {
         id
         description
@@ -96,6 +97,10 @@ export const getServiceQuery = (args) => (
         id
         description
       }
+      program_url
+      app_url
+      app_process
+      apply_now_cta
     }
   }`
 );

@@ -1,5 +1,6 @@
 /client/dist/bundle.js
 .env
 /node_modules
+env.js
 
 
