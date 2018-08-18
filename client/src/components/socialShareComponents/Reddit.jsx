@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 const Reddit = (props) => {
   const url = encodeURIComponent(props.url);
-  const redditUrl = `https://twitter.com/intent/tweet?url=${url}`;
+  const redditUrl = `https://www.reddit.com/submit?url=${url}`;
   
   return (
     <div style={props.styles.row}>
