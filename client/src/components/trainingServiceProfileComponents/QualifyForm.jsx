@@ -17,19 +17,16 @@ const styles = theme => ({
     maxWidth: '400px',
     margin: '0 auto'
   },
-  headerStyle: {
-    color: 'white'
-  },
   inputStyle: {
     backgroundColor: 'white',
     margin: '5px 0px',
     padding: '10px'
   },
-  buttonStyle: { 
-    backgroundColor: 'CFCFCE',
-    color: '88888A',
+  buttonStyle: {
+    backgroundColor: 'blue',
+    color: 'white',
     borderRadius: 0,
-    marginTop: '1em' 
+    marginTop: '1em'
   }
 });
 
@@ -77,7 +74,12 @@ class QualifyForm extends React.Component {
               onChange={this.props.handleChange}
             />
             {this.labels.map((label, index) => {
-              return <Filter key={index} label={label}/>;
+              return <Filter 
+                key={index} 
+                label={label}
+                setFilter={this.props.setCheckbox}
+                id={String(index)}
+              />;
             })}
             <Input
               type="text"
@@ -87,7 +89,10 @@ class QualifyForm extends React.Component {
               multiline
               rows="4"
               className={classes.inputStyle}
-              onChange={this.props.handleChange}
+              onChange={()=>{
+                this.props.handleChange;
+                this.props.enableButton;
+              }}
             />
           </FormControl>
           <div style={{ textAlign: 'center' }}>
@@ -95,6 +100,7 @@ class QualifyForm extends React.Component {
               variant="contained" 
               className={classes.buttonStyle}
               onClick={this.props.submitForm}
+              disabled={this.props.buttonStatus}
             >
               GET ADVICE
             </Button>
