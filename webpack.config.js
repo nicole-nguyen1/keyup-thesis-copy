@@ -20,7 +20,12 @@ var config = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({ 'process.env': {
+      FB_APP_ID: JSON.stringify(`${process.env.FB_APP_ID}`) }
+    })
+  ]
 };
 
 module.exports = config;
