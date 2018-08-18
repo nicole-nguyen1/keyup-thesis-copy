@@ -92,7 +92,6 @@ class App extends React.Component {
     bucket.forEach((val)=>{
       sortedCareers.push(hash[val[0]]);
     });
-    console.log('sorted careers', sortedCareers);
     return {careers: sortedCareers};
   }
 
@@ -115,7 +114,6 @@ class App extends React.Component {
     bucket.forEach((val)=>{
       sortedCareers.push(hash[val[0]]);
     });
-    console.log('sorted careers', sortedCareers);
     return {careers: sortedCareers};
   }
 

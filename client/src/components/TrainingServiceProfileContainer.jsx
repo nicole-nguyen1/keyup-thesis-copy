@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import { findService } from '../actions/action';
+import { getPageTitle } from '../actions/action';
 import { getServiceQuery } from './graphql/graphql';
 import TrainingServiceProfile from './trainingServiceProfileComponents/TrainingServiceProfile.jsx';
 
@@ -23,6 +24,8 @@ class TrainingServiceProfileContainer extends React.Component {
     }).then(res => {
       console.log('Service res', res);
       store.dispatch(findService(res.data));
+      store.dispatch(getPageTitle(res.data.training.name));
+      console.log('inside training service profile container', res.data);
     });
   }
 

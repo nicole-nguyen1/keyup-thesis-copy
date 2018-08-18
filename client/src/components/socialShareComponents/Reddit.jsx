@@ -2,35 +2,21 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-class Reddit extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      url: window.location.href,
-      copied: false,
-      snackBarOpen: false
-    }
-  }
-
-  handleClick = () => {
-    this.setState({ snackBarOpen: true });
-  };
-
-  handleClose = () => {
-    this.setState({ snackBarOpen: false });
-  };
-
-  render() {
-    return (
-      <div style={this.props.styles.row}>
+const Reddit = (props) => {
+  const url = encodeURIComponent(props.url);
+  const redditUrl = `https://www.reddit.com/submit?url=${url}`;
+  
+  return (
+    <div style={props.styles.row}>
+      <a href={redditUrl} style={{ textDecoration: 'none' }}>
         <Grid item
           role="button">
-          <img src='https://s3.amazonaws.com/key-up-assets/Reddit-logo-true.png' style={this.props.styles.topIcon} />
+          <img src='https://s3.amazonaws.com/key-up-assets/Reddit-logo-true.png' style={props.styles.topIcon} />
           <Typography variant='caption'>Reddit</Typography>
         </Grid>
-      </div>
-    )
-  }
+      </a>
+    </div>
+  )
 }
 
 export default Reddit;

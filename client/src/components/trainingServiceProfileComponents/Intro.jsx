@@ -13,7 +13,6 @@ class Intro extends React.Component {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
-        height: '100%',
         textAlign: 'center',
         padding: '80px 0 0 0'
       },

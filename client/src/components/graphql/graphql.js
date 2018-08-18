@@ -72,9 +72,35 @@ export const getServiceQuery = (args) => (
     training(id:${args}) {
       name
       subheading
+      about
       logo_url
       financial_info
       career_name
+      pros {
+        id
+        description
+      }
+      cons {
+        id
+        description
+      }
+      location
+      program_length_total
+      program_total_weekly
+      program_class_times
+      requirements {
+        id
+        description
+      }
+      career_name
+      outcomes {
+        id
+        description
+      }
+      program_url
+      app_url
+      app_process
+      apply_now_cta
     }
   }`
 );

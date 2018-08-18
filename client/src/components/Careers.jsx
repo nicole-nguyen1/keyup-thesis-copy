@@ -2,6 +2,12 @@ import React from 'react';
 import Career from './Career.jsx';
 import Grid from '@material-ui/core/Grid';
 import FilterandSort from './FilterAndSort.jsx';
+import { store } from '../store/index';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getPageTitle } from '../actions/action';
+
+
 
 class Careers extends React.Component {
   constructor(props) {
@@ -10,9 +16,11 @@ class Careers extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+    store.dispatch(getPageTitle('Career List'));
   }
 
   render() {
+    console.log('state in career list', store.getState());
     return (
       <div>
         <FilterandSort 
@@ -29,6 +37,14 @@ class Careers extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    pages: state.pages.page
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getPageTitle}, dispatch);
+};
 
-export default Careers;
+export default connect(mapStateToProps, mapDispatchToProps)(Careers);
