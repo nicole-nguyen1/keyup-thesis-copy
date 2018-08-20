@@ -22,8 +22,8 @@ class Filter extends React.Component {
         control={
           <Checkbox 
             color = "default"
-            onChange = {this.props.setFilter}
-            value = {this.props.id}
+            onChange ={this.props.setFilter}
+            value ={this.props.id}
           />
         } label={this.props.label} />
     );

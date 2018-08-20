@@ -6,37 +6,40 @@ import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import Filter from '../filterAndSortComponents/Filter.jsx';
 
 const styles = theme => ({
   cardStyle: {
-    background: 'purple',
+    backgroundColor: 'EDEDEE',
     borderRadius: '0'
   },
   cardContentStyle: {
     maxWidth: '400px',
     margin: '0 auto'
   },
-  headerStyle: {
-    color: 'white'
-  },
-  textStyle: {
-    color: 'white'
-  },
   inputStyle: {
-    background: 'white',
+    backgroundColor: 'white',
     margin: '5px 0px',
     padding: '10px'
   },
-  buttonStyle: { 
-    backgroundColor: '2979ff',
+  buttonStyle: {
+    backgroundColor: 'blue',
+    color: 'white',
     borderRadius: 0,
-    marginTop: '1em' 
+    marginTop: '1em'
   }
 });
 
-class FormHomePage extends React.Component {
+class QualifyForm extends React.Component {
   constructor(props) {
     super(props);
+    this.labels = [
+      'Financial aid',
+      'The application process',
+      `Talk to a grad of ${this.props.service.name}`,
+      `Talk to a working ${this.props.service.career_name}`,
+      'Other'
+    ];
   }
 
   render() {
@@ -45,12 +48,12 @@ class FormHomePage extends React.Component {
     return (
       <Card className={classes.cardStyle}>
         <CardContent className={classes.cardContentStyle}>
-          <Typography variant="headline" className={classes.textStyle} gutterBottom>
+          <Typography variant="headline" gutterBottom>
             Chat with one of our
             <br />
             KeyUp Guides Today
           </Typography>
-          <Typography className={classes.textStyle} gutterBottom>
+          <Typography gutterBottom>
             We'll get back to you within 24 hours
           </Typography>
           <FormControl style={{ width: '98%' }}>
@@ -70,6 +73,14 @@ class FormHomePage extends React.Component {
               className={classes.inputStyle}
               onChange={this.props.handleChange}
             />
+            {this.labels.map((label, index) => {
+              return <Filter 
+                key={index} 
+                label={label}
+                setFilter={this.props.setCheckbox}
+                id={String(index)}
+              />;
+            })}
             <Input
               type="text"
               name="message"
@@ -78,17 +89,20 @@ class FormHomePage extends React.Component {
               multiline
               rows="4"
               className={classes.inputStyle}
-              onChange={this.props.handleChange}
+              onChange={()=>{
+                this.props.handleChange;
+                this.props.enableButton;
+              }}
             />
           </FormControl>
           <div style={{ textAlign: 'center' }}>
             <Button
               variant="contained" 
-              color="primary" 
               className={classes.buttonStyle}
               onClick={this.props.submitForm}
+              disabled={this.props.buttonStatus}
             >
-              GET STARTED
+              GET ADVICE
             </Button>
           </div>
         </CardContent>
@@ -97,4 +111,4 @@ class FormHomePage extends React.Component {
   }
 }
 
-export default withStyles(styles)(FormHomePage);
+export default withStyles(styles)(QualifyForm);

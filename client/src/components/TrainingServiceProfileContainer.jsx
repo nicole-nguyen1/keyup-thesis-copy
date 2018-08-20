@@ -22,7 +22,7 @@ class TrainingServiceProfileContainer extends React.Component {
     this.fetch({
       query: getServiceQuery(this.state.service_id)
     }).then(res => {
-      console.log(res)
+      console.log('Service res', res);
       store.dispatch(findService(res.data));
       store.dispatch(getPageTitle(res.data.training.name));
       console.log('inside training service profile container', res.data);
@@ -34,7 +34,7 @@ class TrainingServiceProfileContainer extends React.Component {
       <TrainingServiceProfile service={this.props.service}/>
     );
   }
-};
+}
 
 const mapStateToProps = state => {
   return {

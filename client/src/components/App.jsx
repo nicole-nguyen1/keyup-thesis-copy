@@ -72,10 +72,6 @@ class App extends React.Component {
       store.dispatch(findCareers(res));
     });
   }
-  
-  sortCareers = () => {
-
-  }
 
   sortByMostJobOpenings = (careers) => {
     let bucket = [];
