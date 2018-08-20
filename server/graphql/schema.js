@@ -389,12 +389,12 @@ const Mutation = new GraphQLObjectType({
           .then((res) => {
             //insert into contact form table
             let thisInsert = {
+              user_id: res[0].id,
               message: args.message,
               page: args.page
             };
 
             if (args.page === 'Homepage') {
-              thisInsert.user_id = res[0].id;
               thisInsert.career = null;
               thisInsert.training_service = null;
               thisInsert.financial_aid = null;
@@ -403,7 +403,6 @@ const Mutation = new GraphQLObjectType({
               thisInsert.talk_to_working = null;
               thisInsert.other = null;
             } else {
-              thisInsert.user_id = res[0].id;
               thisInsert.career = args.career;
               thisInsert.training_service = args.training_service;
               thisInsert.financial_aid = args.financial_aid;
