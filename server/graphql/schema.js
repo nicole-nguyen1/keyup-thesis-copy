@@ -1,4 +1,6 @@
 const { knex } = require('../../database/db');
+const contactForm = require('../helpers/form');
+
 const {
   GraphQLSchema,
   GraphQLObjectType,
@@ -73,7 +75,7 @@ const CareerType = new GraphQLObjectType({
         return knex('career_traits')
           .select()
           .where({ 'career_id': parent.id, 'type': 'con' });
-      } 
+      }
     },
     number_of_services: {
       type: GraphQLInt,
@@ -199,10 +201,46 @@ const ContactFormType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     user_id: { type: GraphQLID },
-    first_name: { type: GraphQLString },
-    last_name: { type: GraphQLString },
-    email: { type: GraphQLString },
-    phone_number: { type: GraphQLString },
+    first_name: {
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('first_name')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.first_name);
+      }
+    },
+    last_name: {
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('last_name')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.last_name);
+      }
+    },
+    email: { 
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('email')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.email);
+      } 
+    },
+    phone_number: { 
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('phone_number')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.phone_number);
+      } 
+    },
     page: { type: GraphQLString },
     career: { type: GraphQLString },
     training_service: { type: GraphQLString },
@@ -249,7 +287,7 @@ const RootQuery = new GraphQLObjectType({
         return knex('careers')
           .select()
           .where('careers.id', args.id)
-          .first(); 
+          .first();
       }
     },
 
@@ -314,10 +352,10 @@ const Mutation = new GraphQLObjectType({
         } else {
           checkUsers = checkUsers.where('phone_number', args.phone_number);
         }
-        
+
         // check if contact form user is a user
         return checkUsers
-          .select('id')
+          .select('id', 'email', 'first_name', 'last_name', 'phone_number')
           .first()
           .then((res) => {
             if (res === undefined) {
@@ -326,7 +364,7 @@ const Mutation = new GraphQLObjectType({
                 first_name: args.first_name,
                 password: null
               }
-              
+
               if (args.last_name === null) {
                 thisInsert.last_name = null;
               } else {
@@ -343,10 +381,10 @@ const Mutation = new GraphQLObjectType({
 
               return knex('users')
                 .insert(thisInsert)
-                .returning('id')
+                .returning(['id', 'email', 'first_name', 'last_name', 'phone_number']);
             }
 
-            return [res.id];
+            return [res];
           })
           .then((res) => {
             //insert into contact form table
@@ -356,7 +394,7 @@ const Mutation = new GraphQLObjectType({
             };
 
             if (args.page === 'Homepage') {
-              thisInsert.user_id = res[0];
+              thisInsert.user_id = res[0].id;
               thisInsert.career = null;
               thisInsert.training_service = null;
               thisInsert.financial_aid = null;
@@ -365,7 +403,7 @@ const Mutation = new GraphQLObjectType({
               thisInsert.talk_to_working = null;
               thisInsert.other = null;
             } else {
-              thisInsert.user_id = res[0];
+              thisInsert.user_id = res[0].id;
               thisInsert.career = args.career;
               thisInsert.training_service = args.training_service;
               thisInsert.financial_aid = args.financial_aid;
@@ -378,9 +416,14 @@ const Mutation = new GraphQLObjectType({
             return knex('contact_form')
               .insert(thisInsert)
               .returning('*')
-              .then((res) => {
-                return res[0];
-              })
+              .then((result) => {
+                result[0].first_name = res[0].first_name;
+                result[0].last_name = res[0].last_name;
+                result[0].email = res[0].email;
+                result[0].phone_number = res[0].phone_number;
+                contactForm(result[0]);
+                return result[0];
+              });
           })
       }
     },
