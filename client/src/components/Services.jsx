@@ -14,14 +14,13 @@ class Services extends React.Component {
 
   componentDidMount() {
     store.dispatch(getPageTitle('Training List'));
-    console.log('this is the props inside the services component', this.props);
   }
 
   render() {
-    console.log(this.props.careerName)
+    console.log(this.props)
     return (
       <div>
-        <FilterAndSort services={this.props.services} careerName={this.props.careerName}/>
+        <FilterAndSort services={this.props.services} careerName={this.props.careerName} careerID={this.props.careerID}/>
         <Grid container spacing={8}>
           {this.props.services.map((service, index) => {
             return <Service key={service.id || index} service={service} careerName={this.props.careerName}/>;

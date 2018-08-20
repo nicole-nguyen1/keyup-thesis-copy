@@ -20,7 +20,6 @@ class Careers extends React.Component {
   }
 
   render() {
-    console.log('state in career list', store.getState());
     return (
       <div>
         <FilterandSort 
