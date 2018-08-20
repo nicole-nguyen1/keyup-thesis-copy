@@ -69,7 +69,7 @@ export const getCareerQuery = (args) => (
 
 export const getServiceQuery = (args) => (
   `{
-    trainings(id:${args}) {
+    training(id:${args}) {
       name
       subheading
       about

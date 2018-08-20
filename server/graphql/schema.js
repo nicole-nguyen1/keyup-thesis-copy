@@ -343,7 +343,10 @@ const Mutation = new GraphQLObjectType({
 
               return knex('users')
                 .insert(thisInsert)
+                .returning('id')
             }
+
+            return [res.id];
           })
           .then((res) => {
             //insert into contact form table
@@ -353,6 +356,7 @@ const Mutation = new GraphQLObjectType({
             };
 
             if (args.page === 'Homepage') {
+              thisInsert.user_id = res[0];
               thisInsert.career = null;
               thisInsert.training_service = null;
               thisInsert.financial_aid = null;
@@ -361,6 +365,7 @@ const Mutation = new GraphQLObjectType({
               thisInsert.talk_to_working = null;
               thisInsert.other = null;
             } else {
+              thisInsert.user_id = res[0];
               thisInsert.career = args.career;
               thisInsert.training_service = args.training_service;
               thisInsert.financial_aid = args.financial_aid;
@@ -372,6 +377,10 @@ const Mutation = new GraphQLObjectType({
 
             return knex('contact_form')
               .insert(thisInsert)
+              .returning('*')
+              .then((res) => {
+                return res[0];
+              })
           })
       }
     },
