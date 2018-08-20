@@ -17,7 +17,6 @@ class Services extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <FilterAndSort services={this.props.services} careerName={this.props.careerName} careerID={this.props.careerID}/>

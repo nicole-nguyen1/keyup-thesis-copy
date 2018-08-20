@@ -24,8 +24,6 @@ const Qualify = props => {
     }
   };
 
-  console.log(props);
-
   return (
     <div>
       <Card style={styles.card}>

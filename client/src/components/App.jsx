@@ -59,7 +59,6 @@ class App extends React.Component {
       query: filterCareersQuery(args)
     })
   .then((res) => {
-    console.log(res.data.careers);
     if (this.sortBy === 'Shortest training length') {
       return this.sortByShortestTrainingLength(res.data.careers);
     } else if (this.sortBy === 'Most job openings') {
@@ -136,7 +135,7 @@ class App extends React.Component {
     bucket.forEach((val)=>{
       sortedCareers.push(hash[val[0]]);
     })
-    console.log('sorted careers', sortedCareers);
+    
     return {careers: sortedCareers};
   }
 
