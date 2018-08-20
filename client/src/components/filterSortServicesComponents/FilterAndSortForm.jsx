@@ -48,15 +48,13 @@ class FilterAndSortForm extends React.Component {
     this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
   }
 
-  handlePaidClick = (e) => {
-    e.preventDefault();
+  handlePaidClick = () => {
     this.setState({
       paidToLearn: !this.state.paidToLearn
     })
   }
 
-  handleFreeClick = (e) => {
-    e.preventDefault();
+  handleFreeClick = () => {
     this.setState({
       freeTraining: !this.state.freeTraining
     })
@@ -67,7 +65,6 @@ class FilterAndSortForm extends React.Component {
       query: getServicesQuery(this.props.careerID)
     }).then( res => {
     if (this.state.paidToLearn && !this.state.freeTraining) {
-      console.log(res.data)
       let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings), career: res.data.career.name}
       store.dispatch(findServices(temp))
     } else if (this.state.freeTraining && !this.state.paidToLearn) {
