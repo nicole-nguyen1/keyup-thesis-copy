@@ -260,7 +260,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         return knex('services')
           .select()
-          .where('services.career_id', args.id)
+          .where('services.career_id', args.id);
       }
     },
 
