@@ -25,13 +25,11 @@ class ServiceListContainer extends React.Component {
     this.fetch({
       query: getServicesQuery(this.state.career_id)
     }).then(res => {
-      console.log('inside service list container', res.data)
       store.dispatch(findServices(res.data));
     });
   }
   
   render() {
-    console.log('laksdjf;a', this.props.services)
     if (!this.props.services) {
       return <div>Loading...</div>
     } else {

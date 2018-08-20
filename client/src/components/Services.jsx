@@ -14,7 +14,6 @@ class Services extends React.Component {
 
   componentDidMount() {
     store.dispatch(getPageTitle('Training List'));
-    console.log('this is the props inside the services component', this.props);
   }
 
   render() {

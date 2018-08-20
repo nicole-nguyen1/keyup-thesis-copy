@@ -67,22 +67,14 @@ class FilterAndSortForm extends React.Component {
       query: getServicesQuery(this.props.careerID)
     }).then( res => {
     if (this.state.paidToLearn && !this.state.freeTraining) {
-      console.log('inside paid to learn')
       console.log(res.data)
       let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings), career: res.data.career.name}
-      console.log('temp', temp)
       store.dispatch(findServices(temp))
     } else if (this.state.freeTraining && !this.state.paidToLearn) {
-      console.log('inside free training')
-      console.log(res.data)
       let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings), career: res.data.career.name}
-      console.log('temp', temp)
       store.dispatch(findServices(temp))
     } else {
-      console.log('inside final else statement')
-      console.log(res.data)
       let temp = {trainings: res.data.trainings, career: res.data.career.name}
-      console.log('temp', temp)
       store.dispatch(findServices(temp))
     }})
   }

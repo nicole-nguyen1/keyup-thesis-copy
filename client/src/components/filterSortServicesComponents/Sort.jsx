@@ -15,7 +15,6 @@ class Sort extends React.Component {
   }
 
   render() {
-    console.log('inside sort component', this.props.label)
     const { classes } = this.props;
     return (
       <FormControlLabel control={
