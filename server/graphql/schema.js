@@ -39,7 +39,7 @@ const CareerType = new GraphQLObjectType({
     description: { type: GraphQLString },
     openings: { type: GraphQLString },
     card_image_url: { type: GraphQLString },
-    card_pro: { type: GraphQLString},
+    card_pro: { type: GraphQLString },
     profile_image_url: { type: GraphQLString },
     hourly_pay: { type: GraphQLString },
     video_url: { type: GraphQLString },
@@ -67,13 +67,13 @@ const CareerType = new GraphQLObjectType({
           .where({ 'career_id': parent.id, 'type': 'pro' });
       }
     },
-    cons: { 
+    cons: {
       type: new GraphQLList(CareerTraitType),
       resolve(parent, args) {
         return knex('career_traits')
-                .select()
-                .where({ 'career_id': parent.id, 'type': 'con' });
-      } 
+          .select()
+          .where({ 'career_id': parent.id, 'type': 'con' });
+      }
     },
     number_of_services: {
       type: GraphQLInt,
@@ -87,7 +87,7 @@ const CareerType = new GraphQLObjectType({
     training_length: { type: GraphQLString },
     training_hours: { type: GraphQLString },
     training_cost: { type: GraphQLString },
-    paid_to_learn: { type: GraphQLBoolean},
+    paid_to_learn: { type: GraphQLBoolean },
     free_training: { type: GraphQLBoolean }
   })
 });
@@ -134,9 +134,9 @@ const TrainingType = new GraphQLObjectType({
     paid_to_learn: { type: GraphQLBoolean },
     federal_student_aid: { type: GraphQLBoolean },
     card_length: { type: GraphQLString },
-    card_location: { type: GraphQLString},
+    card_location: { type: GraphQLString },
     card_tuition: { type: GraphQLString },
-    page_title: { type: GraphQLString},
+    page_title: { type: GraphQLString },
     outcomes: {
       type: new GraphQLList(TrainingTraitType),
       resolve(parent, args) {
@@ -182,15 +182,27 @@ const TrainingTraitType = new GraphQLObjectType({
   })
 });
 
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  fields: () => ({
+    id: { type: GraphQLID },
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
+    first_name: { type: GraphQLString },
+    last_name: { type: GraphQLString },
+    phone_number: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     //GET careers list
     careers: {
       type: new GraphQLList(CareerType),
-      args: { 
-        industry_ids: { type: new GraphQLList( GraphQLID ) },
-        paid_to_learn: { type: GraphQLBoolean},
+      args: {
+        industry_ids: { type: new GraphQLList(GraphQLID) },
+        paid_to_learn: { type: GraphQLBoolean },
         free_training: { type: GraphQLBoolean }
       },
       resolve(parent, args) {
@@ -214,9 +226,9 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('careers')
-                .select()
-                .where('careers.id', args.id)
-                .first(); 
+          .select()
+          .where('careers.id', args.id)
+          .first();
       }
     },
 
@@ -226,8 +238,8 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('services')
-                .select()
-                .where('services.career_id', args.id);
+          .select()
+          .where('services.career_id', args.id);
       }
     },
 
@@ -237,9 +249,9 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return knex('services')
-                .select()
-                .where('services.id', args.id)
-                .first();
+          .select()
+          .where('services.id', args.id)
+          .first();
       }
     },
 
@@ -247,7 +259,17 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(IndustryType),
       resolve(parent, args) {
         return knex('industries')
-                .select();
+          .select();
+      }
+    },
+    user: {
+      type: UserType,
+      args: {id: { type: GraphQLID }},
+      resolve(parent, {id}) {
+        return knex('users')
+          .select()
+          .where({id})
+          .first();
       }
     }
   }
@@ -256,14 +278,17 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    addCareer: {
-      type: CareerType,
+    signUp: {
+      type: UserType,
       args: {
-        name: { type: GraphQLString }
-      }, 
-      resolve(parent, args) {
-        console.log('add Mutation resolve functionality');
-        return;
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+        first_name: { type: GraphQLString },
+        last_name: { type: GraphQLString },
+        phone_number: { type: GraphQLString }
+      },
+      resolve(parent, {email, password, first_name, last_name, phone_number}) {
+        return knex('users').insert({email, password, first_name, last_name, phone_number});
       }
     }
   }
