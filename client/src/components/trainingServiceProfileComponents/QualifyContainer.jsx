@@ -1,15 +1,15 @@
 import React from 'react';
 import QualifyForm from './QualifyForm.jsx';
 import Qualify from './Qualify.jsx';
-//import addFormData from '../graphql/graphql';
-//import { createApolloFetch } from 'apollo-fetch';
+import { addFormData } from '../graphql/graphql';
+import { createApolloFetch } from 'apollo-fetch';
 
 class QualifyContainer extends React.Component {
   constructor(props) {
     super(props);
-    // this.fetch = createApolloFetch({
-    //   uri: './graphql'
-    // }).bind(this);
+    this.fetch = createApolloFetch({
+      uri: '../graphql'
+    }).bind(this);
     this.state = {
       showForm: false,
       name: '',
@@ -76,27 +76,24 @@ class QualifyContainer extends React.Component {
 
   submitForm = () => {
     console.log('clicked!', this.state)
-    // let formArguments = {
-    //   first_name: "test",
-    //   last_name: "test",
-    //   email: "test",
-    //   phone_number: "test",
-    //   page: "service",
-    //   career: "test",
-    //   training_service: "ACC",
-    //   financial_aid: true,
-    //   app_process: true,
-    //   talk_to_grad: true,
-    //   talk_to_working: true,
-    //   other: true,
-    //   message: "some strange question"
-    // }
-    // this.fetch({
-    //   query: addFormData(formArguments) 
-    // })
-    // .then(()=> {
-    //   console.log('form data query resolved')
-    // })
+    let formArguments = {
+      first_name: "test",
+      last_name: "test",
+      email: "test",
+      phone_number: "test",
+      page: "service",
+      career: "test",
+      training_service: "ACC",
+      message: "some strange question"
+    };
+    console.log(addFormData(formArguments));
+    this.fetch({
+      query: addFormData(formArguments) 
+    })
+    .then(()=> {
+      console.log('form data query resolved')
+    })
+    .catch((err)=>{console.log(err)})
   }
 
   render() {
