@@ -288,7 +288,10 @@ const Mutation = new GraphQLObjectType({
         phone_number: { type: GraphQLString }
       },
       resolve(parent, {email, password, first_name, last_name, phone_number}) {
-        return knex('users').insert({email, password, first_name, last_name, phone_number});
+        return knex('users')
+          .insert({email, password, first_name, last_name, phone_number})
+          .returning('*')
+          .then( res => res[0]);
       }
     }
   }
