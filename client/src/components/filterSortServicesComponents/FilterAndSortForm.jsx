@@ -70,6 +70,9 @@ class FilterAndSortForm extends React.Component {
     } else if (this.state.freeTraining && !this.state.paidToLearn) {
       let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings), career: res.data.career.name}
       store.dispatch(findServices(temp))
+    } else if (this.state.freeTraining && this.state.paidToLearn) {
+      let temp = {trainings: this.filterServicesByPayAndLoans(res.data.trainings), career: res.data.career.name}
+      store.dispatch(findServices(temp))
     } else {
       let temp = {trainings: res.data.trainings, career: res.data.career.name}
       store.dispatch(findServices(temp))
@@ -103,6 +106,18 @@ class FilterAndSortForm extends React.Component {
         }
       })
       return filteredLoanServices;
+    }
+  }
+    
+  filterServicesByPayAndLoans = services => {
+    const filteredServices = [];
+    if (services[0].id) {
+      services.forEach(service => {
+        if (service.federal_student_aid && service.paid_to_learn) {
+          filteredServices.push(service);
+        }
+      })
+      return filteredServices;
     }
   }
 
