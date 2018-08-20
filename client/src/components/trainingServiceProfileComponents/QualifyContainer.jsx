@@ -28,6 +28,10 @@ class QualifyContainer extends React.Component {
     this.setState({showForm: true});
   }
 
+  closeForm = () => {
+    this.setState({showForm: false})
+  }
+
   handleChange = (e) => {
     let thisState = {};
     thisState[e.target.name] = e.target.value;
@@ -112,6 +116,7 @@ class QualifyContainer extends React.Component {
           setCheckbox={this.setCheckbox}
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
+          closeForm={this.closeForm}
         /> :
         <Qualify openForm={this.openForm} />
     );

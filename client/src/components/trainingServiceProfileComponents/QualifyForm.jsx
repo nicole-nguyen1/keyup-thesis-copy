@@ -99,7 +99,10 @@ class QualifyForm extends React.Component {
             <Button
               variant="contained" 
               className={classes.buttonStyle}
-              onClick={this.props.submitForm}
+              onClick={()=>{
+                this.props.submitForm();
+                this.props.closeForm();
+              }}
               disabled={this.props.buttonStatus}
             >
               GET ADVICE
