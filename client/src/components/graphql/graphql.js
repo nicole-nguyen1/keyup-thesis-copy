@@ -104,3 +104,49 @@ export const getServiceQuery = (args) => (
     }
   }`
 );
+
+export const getServicesQuery = (args) => (
+  `{
+    trainings(id:${args}) {
+      id
+      career_id
+      name
+      subheading
+      logo_url
+      about
+      financial_info
+      location
+      app_process
+      apply_now_cta
+      program_url
+      program_length_total
+      program_total_weekly
+      program_class_times
+      paid_to_learn
+      federal_student_aid
+      card_length
+      card_location
+      card_tuition
+      page_title
+      outcomes {
+        id
+        description
+      }
+      requirements {
+        id
+        description
+      }
+      pros {
+        id
+        description
+      }
+      cons {
+        id
+        description
+      }
+    }
+    career(id:${args}) {
+      name
+    }
+  }`
+);

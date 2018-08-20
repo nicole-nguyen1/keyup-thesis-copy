@@ -50,7 +50,14 @@ class QualifyContainer extends React.Component {
 
   enableButton = () => {
     if (this.state.name.length > 0 &&
-      this.state.emailOrPhone.length > 0 
+      this.state.emailOrPhone.length > 0  &&
+      (
+        this.state.financialAid ||
+        this.state.applicationProcess ||
+        this.state.talkToGrad ||
+        this.state.talkToProfessional ||
+        this.state.other
+      )
     ) {
       this.setState({
         buttonStatus: false
