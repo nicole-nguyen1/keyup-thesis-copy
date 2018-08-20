@@ -1,4 +1,5 @@
 import React from 'react';
+import { createApolloFetch } from 'apollo-fetch';
 import Filter from './Filter.jsx';
 import Sort from './Sort.jsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -11,6 +12,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../../store/index';
 import { findServices } from '../../actions/action';
+import { getServicesQuery } from '../graphql/graphql';
+
 
 
 const styles = theme => ({
@@ -42,6 +45,7 @@ class FilterAndSortForm extends React.Component {
       paidToLearn: false,
       freeTraining: false
     };
+    this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
   }
 
   handlePaidClick = (e) => {
@@ -58,17 +62,21 @@ class FilterAndSortForm extends React.Component {
     })
   }
 
-  handleFormSubmission = (paidServices, loanServices, services) => {
+  handleFormSubmission = () => {
+    this.fetch({
+      query: getServicesQuery(this.props.careerID)
+    }).then( res => {
     if (this.state.paidToLearn && !this.state.freeTraining) {
-      let temp = {trainings: paidServices, career: this.props.careerName}
+      console.log(res.data)
+      let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings), career: res.data.career.name}
       store.dispatch(findServices(temp))
     } else if (this.state.freeTraining && !this.state.paidToLearn) {
-      let temp = {trainings: loanServices, career: this.props.careerName}
+      let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings), career: res.data.career.name}
       store.dispatch(findServices(temp))
     } else {
-      let temp = {trainings: services, career: this.props.careerName}
+      let temp = {trainings: res.data.trainings, career: res.data.career.name}
       store.dispatch(findServices(temp))
-    }
+    }})
   }
 
   setSort = (e) => {
@@ -102,13 +110,11 @@ class FilterAndSortForm extends React.Component {
   }
 
   sortByAffordability = () => {
-    
+
   }
 
   render() {
     const { classes } = this.props;
-    const filteredPaidServices = this.filterServicesByGetPaidToLearn(this.props.services);
-    const filteredLoanServices = this.filterServicesByFederalLoans(this.props.services);
     return (
       <FormGroup className={classes.formStyle}>
         <Typography variant="headline" className={classes.headerStyle}>
@@ -147,7 +153,7 @@ class FilterAndSortForm extends React.Component {
               color="primary"
               onClick={()=>{
                 this.props.hideFilter();
-                this.handleFormSubmission(filteredPaidServices, filteredLoanServices, this.props.services)
+                this.handleFormSubmission()
               }}
             >See Training Results</Button>
           </Grid>
