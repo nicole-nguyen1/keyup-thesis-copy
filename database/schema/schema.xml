@@ -103,7 +103,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="619" y="22" name="career_traits">
+<table x="616" y="42" name="career_traits">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -262,6 +262,12 @@
 <row name="page" null="0" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>'NULL'</default></row>
+<row name="career" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="training_service" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
 <row name="financial_aid" null="1" autoincrement="0">
 <datatype>BOOLEAN</datatype>
 <default>NULL</default></row>
