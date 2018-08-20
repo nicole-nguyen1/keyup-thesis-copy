@@ -61,7 +61,7 @@ class QualifyContainer extends React.Component {
     ) {
       this.setState({
         buttonStatus: false
-      }, console.log('Enabled!'))
+      })
     } else {
       this.setState({
         buttonStatus: true
@@ -70,7 +70,7 @@ class QualifyContainer extends React.Component {
   }
 
   submitForm = () => {
-    console.log('clicked!', this.state)
+    // console.log('clicked!', this.state)
   }
 
   render() {
