@@ -307,118 +307,72 @@ const Mutation = new GraphQLObjectType({
         message: { type: GraphQLString }
       },
       resolve(parent, args) {
+        let checkUsers = knex('users');
+
         if (args.email !== null) {
-          console.log('searching users table');
-          return knex('users')
-            .select('id')
-            .where('email', args.email)
-            .returning('id')
-            .then((res) => {
-              console.log('searched users table');
-              console.log(res);
-              if (res[0].id) {
-                console.log(res);
-                return knex('contact_form')
-                  .insert({
-                    user_id: res[0].id,
-                    page: args.page,
-                    career: args.career,
-                    training_service: args.training_service,
-                    financial_aid: args.financial_aid,
-                    app_process: args.app_process,
-                    talk_to_grad: args.talk_to_grad,
-                    talk_to_working: args.talk_to_working,
-                    other: args.other,
-                    message: args.message
-                  })
-                  .then((res) => console.log(res))
-              } else {
-                return knex('users')
-                  .insert({
-                    first_name: args.first_name,
-                    last_name: args.last_name,
-                    password: null,
-                    email: args.email,
-                    phone_number: args.phone_number
-                  })
-                  .returning('id')
-                  .then((res, err) => {
-                    console.log('added to users table');
-                    console.log(res);
-                    if (res[0].id) {
-                      console.log(res);
-                      return knex('contact_form')
-                        .insert({
-                          user_id: res[0].id,
-                          page: args.page,
-                          career: args.career,
-                          training_service: args.training_service,
-                          financial_aid: args.financial_aid,
-                          app_process: args.app_process,
-                          talk_to_grad: args.talk_to_grad,
-                          talk_to_working: args.talk_to_working,
-                          other: args.other,
-                          message: args.message
-                        })
-                        .then((res) => console.log(res))
-                    } else {
-                      console.error(err);
-                    }
-                  })
-              }
-            });
-        } else if (args.phone_number !== null) {
-          return knex('users')
-            .select('id')
-            .where('phone_number', args.phone_number)
-            .returning('id')
-            .then((res, err) => {
-              if (res[0].id) {
-                return knex('contact_form')
-                  .insert({
-                    user_id: res[0].id,
-                    page: args.page,
-                    career: args.career,
-                    training_service: args.training_service,
-                    financial_aid: args.financial_aid,
-                    app_process: args.app_process,
-                    talk_to_grad: args.talk_to_grad,
-                    talk_to_working: args.talk_to_working,
-                    other: args.other,
-                    message: args.message
-                  })
-              } else {
-                return knex('users')
-                  .insert({
-                    first_name: args.first_name,
-                    last_name: args.last_name,
-                    password: null,
-                    email: args.email,
-                    phone_number: args.phone_number
-                  })
-                  .returning('id')
-                  .then((res, err) => {
-                    if (res[0].id) {
-                      return knex('contact_form')
-                        .insert({
-                          user_id: res[0].id,
-                          page: args.page,
-                          career: args.career,
-                          training_service: args.training_service,
-                          financial_aid: args.financial_aid,
-                          app_process: args.app_process,
-                          talk_to_grad: args.talk_to_grad,
-                          talk_to_working: args.talk_to_working,
-                          other: args.other,
-                          message: args.message
-                        })
-                    } else {
-                      console.error(err);
-                    }
-                  })
-              }
-            });
+          checkUsers = checkUsers.where('email', args.email);
+        } else {
+          checkUsers = checkUsers.where('phone_number', args.phone_number);
         }
+        
+        // check if contact form user is a user
+        return checkUsers
+          .select('id')
+          .first()
+          .then((res) => {
+            if (res === undefined) {
+              // create contact form user as a user
+              let thisInsert = {
+                first_name: args.first_name,
+                password: null
+              }
+              
+              if (args.last_name === null) {
+                thisInsert.last_name = null;
+              } else {
+                thisInsert.last_name = args.last_name;
+              }
+
+              if (args.email !== null) {
+                thisInsert.email = args.email;
+                thisInsert.phone_number = null;
+              } else {
+                thisInsert.email = null;
+                thisInsert.phone_number = args.phone_number;
+              }
+
+              return knex('users')
+                .insert(thisInsert)
+            }
+          })
+          .then((res) => {
+            //insert into contact form table
+            let thisInsert = {
+              message: args.message,
+              page: args.page
+            };
+
+            if (args.page === 'Homepage') {
+              thisInsert.career = null;
+              thisInsert.training_service = null;
+              thisInsert.financial_aid = null;
+              thisInsert.app_process = null;
+              thisInsert.talk_to_grad = null;
+              thisInsert.talk_to_working = null;
+              thisInsert.other = null;
+            } else {
+              thisInsert.career = args.career;
+              thisInsert.training_service = args.training_service;
+              thisInsert.financial_aid = args.financial_aid;
+              thisInsert.app_process = args.app_process;
+              thisInsert.talk_to_grad = args.talk_to_grad;
+              thisInsert.talk_to_working = args.talk_to_working;
+              thisInsert.other = args.other;
+            }
+
+            return knex('contact_form')
+              .insert(thisInsert)
+          })
       }
     },
 
