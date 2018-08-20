@@ -155,13 +155,19 @@ export const addFormData = (args) => (
   `
   mutation {
     saveContactFormUser (
-      first_name: "test",
-      last_name: "test",
-      email: "asddlfkj@;lkasjf",
-      phone_number: "12341234123",
-      page: "asdfasdf",
-      career: "asdfasdf",
-      message: "asdfasdf"
+      first_name: ${args.first_name},
+      last_name: ${args.last_name},
+      email: ${args.email},
+      phone_number: ${args.phone_number},
+      page: ${args.page},
+      career: ${args.career},
+      training_service: ${args.training_service},
+      financial_aid: ${args.financial_aid || null},
+      app_process: ${args.app_process || null},
+      talk_to_grad: ${args.talk_to_grad || null},
+      talk_to_working: ${args.talk_to_working || null},
+      other: ${args.other || null},
+      message: ${args.message}
     ) {
       id
     }

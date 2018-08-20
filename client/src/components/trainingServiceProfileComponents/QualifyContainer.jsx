@@ -75,16 +75,22 @@ class QualifyContainer extends React.Component {
   }
 
   submitForm = () => {
-    console.log('clicked!', this.state)
+    console.log('clicked! props', this.props)
+    //add logic for email or phone
     let formArguments = {
-      first_name: "test",
-      last_name: "test",
-      email: "test",
-      phone_number: "test",
-      page: "service",
-      career: "test",
-      training_service: "ACC",
-      message: "some strange question"
+      first_name: JSON.stringify(this.state.name.split(' ')[0]),
+      last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
+      email: JSON.stringify(this.state.emailOrPhone),
+      phone_number: JSON.stringify(this.state.emailOrPhone),
+      page: JSON.stringify("service"),
+      career: JSON.stringify(this.props.service.career_name),
+      training_service: JSON.stringify(this.props.service.name),
+      financial_aid: this.state.financialAid,
+      app_process: this.state.applicationProcess,
+      talk_to_grad: this.state.talkToGrad,
+      talk_to_working: this.state.talkToProfessional,
+      other: this.state.other,
+      message: JSON.stringify("some strange question")
     };
     console.log(addFormData(formArguments));
     this.fetch({
