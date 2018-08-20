@@ -27,7 +27,6 @@ class TrainingServiceProfile extends React.Component {
         padding: '5px'
       }
     };
-    console.log('props', this.props);
     const service = this.props.service;
     return (
       <div>
