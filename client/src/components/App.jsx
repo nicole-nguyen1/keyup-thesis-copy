@@ -29,7 +29,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.fetch = createApolloFetch({
-      uri: './graphql'
+      uri: '/graphql'
     }).bind(this);
     this.sortBy = 'Highest salary';
   }
@@ -42,6 +42,8 @@ class App extends React.Component {
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
+
+    console.log('MOUNTING')
   }
 
   getCareers = () => {
@@ -53,6 +55,8 @@ class App extends React.Component {
     })
     .then(res => {
       store.dispatch(findCareers(res));
+    }).catch((error) => {
+      console.log('ERROR ASDLK;JFDASKL;F', error)
     });
   }
 
