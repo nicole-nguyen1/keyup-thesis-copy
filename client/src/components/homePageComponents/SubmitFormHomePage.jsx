@@ -18,7 +18,6 @@ class SubmitFormHomePage extends React.Component {
       message: '',
       open: false
     }
-    this.form = React.createRef();
   }
 
   clearForm = () => {
