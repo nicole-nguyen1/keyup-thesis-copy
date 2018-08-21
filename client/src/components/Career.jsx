@@ -41,7 +41,7 @@ class Career extends React.Component {
               </Grid>
               <Grid item xs={3}>
                 <CardMedia 
-                  image={this.props.career.card_image_url}
+                  image={this.props.career.card_image_url || '#'}
                   title="Dummy Title"
                   style={style}
                 />

@@ -15,11 +15,11 @@ class Filter extends React.Component {
     super(props);
   }
 
-  checkLabel = (e) => {
+  checkLabel = () => {
     if (this.props.label === "Get paid to learn") {
-      this.props.handlePaidClick(e);
+      this.props.handlePaidClick();
     } else {
-      this.props.handleFreeClick(e);
+      this.props.handleFreeClick();
     }
   }
   
@@ -31,7 +31,7 @@ class Filter extends React.Component {
         control={
           <Checkbox 
             color = "default"
-            onChange={(e) => this.checkLabel(e)}
+            onChange={this.checkLabel}
           />
         } label={this.props.label}/>
     );

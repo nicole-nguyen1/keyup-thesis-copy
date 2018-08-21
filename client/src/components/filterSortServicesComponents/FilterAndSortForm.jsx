@@ -48,15 +48,13 @@ class FilterAndSortForm extends React.Component {
     this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
   }
 
-  handlePaidClick = (e) => {
-    e.preventDefault();
+  handlePaidClick = () => {
     this.setState({
       paidToLearn: !this.state.paidToLearn
     })
   }
 
-  handleFreeClick = (e) => {
-    e.preventDefault();
+  handleFreeClick = () => {
     this.setState({
       freeTraining: !this.state.freeTraining
     })
@@ -65,24 +63,35 @@ class FilterAndSortForm extends React.Component {
   handleFormSubmission = () => {
     this.fetch({
       query: getServicesQuery(this.props.careerID)
-    }).then( res => {
+    }).then(res => {
+      console.log('this state', this.state)
     if (this.state.paidToLearn && !this.state.freeTraining) {
-      console.log(res.data)
       let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings), career: res.data.career.name}
-      store.dispatch(findServices(temp))
+      let temp2 = this.checkSortState(temp.trainings);
+      let temp3 = {trainings: temp2, career: res.data.career.name}
+      store.dispatch(findServices(temp3))
     } else if (this.state.freeTraining && !this.state.paidToLearn) {
       let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings), career: res.data.career.name}
-      store.dispatch(findServices(temp))
+      let temp2 = this.checkSortState(temp.trainings);
+      let temp3 = {trainings: temp2, career: res.data.career.name}
+      store.dispatch(findServices(temp3));
+    } else if (this.state.freeTraining && this.state.paidToLearn) {
+      let temp = {trainings: this.filterServicesByPayAndLoans(res.data.trainings), career: res.data.career.name}
+      let temp2 = this.checkSortState(temp.trainings);
+      let temp3 = {trainings: temp2, career: res.data.career.name}
+      store.dispatch(findServices(temp3))
     } else {
       let temp = {trainings: res.data.trainings, career: res.data.career.name}
-      store.dispatch(findServices(temp))
+      let temp2 = this.checkSortState(temp.trainings);
+      let temp3 = {trainings: temp2, career: res.data.career.name}
+      store.dispatch(findServices(temp3))
     }})
   }
 
   setSort = (e) => {
     this.setState({
       sortSelection: e.target.value
-    }, ()=>console.log(this.state));
+    }, ()=>console.log('inside setSort function', this.state));
   }
 
   filterServicesByGetPaidToLearn = (services) => {
@@ -108,9 +117,101 @@ class FilterAndSortForm extends React.Component {
       return filteredLoanServices;
     }
   }
+    
+  filterServicesByPayAndLoans = (services) => {
+    const filteredServices = [];
+    if (services[0].id) {
+      services.forEach(service => {
+        if (service.federal_student_aid && service.paid_to_learn) {
+          filteredServices.push(service);
+        }
+      })
+      console.log('filtered services', filteredServices)
+      return filteredServices;
+    }
+  }
 
-  sortByAffordability = () => {
+  checkSortState = (services) => {
+    if (this.state.sortSelection === 'Affordability') {
+      return this.sortByAffordability(services)
+    } else if (this.state.sortSelection === 'Shortest Training') {
+      return this.sortByShortestTraining(services)
+    } else {
+      return this.sortByAffordability(services)
+    }
+  }
 
+  sortByAffordability = (services) => {
+    if (services.length < 1) {
+      return [];
+    }
+    const sortedServices = [];
+    const unsortedRangeServices = [];
+    const unsortedNumberServices = [];
+    if (services[0].id) {
+      services.forEach(service => {
+        if (service.card_tuition.slice(0,4).toLowerCase() === 'paid') {
+          sortedServices.push(service)
+        } else if (service.card_tuition.slice(0,4).toLowerCase() === 'free' && service.card_tuition.length === 4) {
+          sortedServices.push(service)
+        } else if (service.card_tuition.slice(0,4).toLowerCase() === 'free' && service.card_tuition.length > 4) {
+          let range = Number(service.card_tuition.match(/\d/g).join(''));
+          unsortedRangeServices.push([service, range]);
+        } else {
+          let num = Number(service.card_tuition.match(/\d/g).join(''));
+          unsortedNumberServices.push([service, num]);
+        }
+      })
+    }
+    unsortedRangeServices.sort(this.sortNumbers);
+    unsortedRangeServices.forEach(service => {
+      sortedServices.push(service[0]);
+    })
+    unsortedNumberServices.sort(this.sortNumbers);
+    unsortedNumberServices.forEach(service => {
+      sortedServices.push(service[0]);
+    })
+    return sortedServices;
+  }
+
+  sortByShortestTraining = (services) => {
+    if (services.length < 1) {
+      return [];
+    }
+    const sortedServices = [];
+    const unsorted = [];
+    if (services[0].id) {
+      services.forEach(service => {
+        if (service.card_length.includes('week')) {
+          let num = Number(service.card_length.match(/\d/g).join(''));
+          unsorted.push([service, num]);
+        } else if (service.card_length.includes('month')) {
+          let num = Number(service.card_length.match(/\d/g).join('')) * 4;
+          unsorted.push([service, num]);
+        } else if (service.card_length.includes('semester')) {
+          let num = Number(service.card_length.match(/\d/g).join('')) * 16;
+          unsorted.push([service, num]);
+        } else if (service.card_length.includes('year')) {
+          let num = Number(service.card_length.match(/\d/g).join('')) * 52;
+          unsorted.push([service, num]);
+        } 
+      })
+    }
+    unsorted.sort(this.sortNumbers);
+    unsorted.forEach(service => {
+      sortedServices.push(service[0]);
+    })
+    return sortedServices;
+  }
+
+  sortNumbers = (a,b) => {
+    if (a[1] < b[1]) {
+      return -1;
+    } else if (a[1] > b[1]) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   render() {

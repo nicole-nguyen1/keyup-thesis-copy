@@ -55,7 +55,7 @@ class IntroCard extends React.Component {
       <div>
         <Card style={{ borderRadius: 0 }}>
           <CardMedia
-            image={this.props.career.profile_image_url}
+            image={this.props.career.profile_image_url || '#'}
             style={{ height: '35vh' }} />
           <CardActions style={styles.cardAction}>
             <Button component={Link} to={`/services/${this.props.careerID}`}>
