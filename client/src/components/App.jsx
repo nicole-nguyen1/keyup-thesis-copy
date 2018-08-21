@@ -13,12 +13,14 @@ import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
 import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.jsx';
+import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
   getIndustriesQuery,
   filterCareersQuery
 } from './graphql/graphql';
+
 
 const newHistory = createBrowserHistory();
 
@@ -148,6 +150,7 @@ class App extends React.Component {
             <div style={{ marginTop: '64px' }}>
               <Switch>
                 <Route exact path="/home" component={Home} />
+                <Route exact path="/terms-and-conditions" component={TermsConditions} />>
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
@@ -172,6 +175,7 @@ class App extends React.Component {
             <div style={{ marginTop: '56px' }}>
               <Switch>
                 <Route exact path="/home" component={Home} />
+                <Route exact path="/terms-and-conditions" component={TermsConditions} />>
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
