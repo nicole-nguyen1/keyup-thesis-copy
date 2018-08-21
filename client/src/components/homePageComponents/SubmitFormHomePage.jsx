@@ -1,6 +1,6 @@
 import React from 'react';
 import FormHomePage from './FormHomePage.jsx';
-import FormSubmited from './FormSubmited.jsx';
+import FormSubmitted from './FormSubmitted.jsx';
 import { addFormData } from '../graphql/graphql';
 import { createApolloFetch } from 'apollo-fetch';
 
@@ -16,8 +16,9 @@ class SubmitFormHomePage extends React.Component {
       email: '',
       phone: '',
       message: '',
-      messageSent: false
+      open: false
     }
+    this.form = React.createRef();
   }
 
   handleChange = (e) => {
@@ -40,6 +41,10 @@ class SubmitFormHomePage extends React.Component {
     }
   }
 
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+
   submitForm = async () => {
     let formArguments = {
       first_name: JSON.stringify(this.state.name.split(' ')[0]),
@@ -55,18 +60,26 @@ class SubmitFormHomePage extends React.Component {
     });
 
     if (form.data.saveContactForm.id) {
-      this.setState({ messageSent: true });
+      this.setState({ open: true });
     }
+
+    this.refs.form.reset();
   }
 
 
   render() {
     return (
-      this.state.messageSent ? <FormSubmited /> :
-      <FormHomePage 
-        submitForm={this.submitForm}
-        handleChange={this.handleChange}
-      />
+      <div>
+        <FormHomePage
+          submitForm={this.submitForm}
+          handleChange={this.handleChange}
+          ref={this.form}
+        />
+        <FormSubmitted
+          open={this.state.open}
+          onClose={this.handleClose}
+        />
+      </div>
     );
   }
 }
