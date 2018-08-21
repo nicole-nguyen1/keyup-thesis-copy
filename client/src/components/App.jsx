@@ -14,6 +14,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
 import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.jsx';
 import TermsConditions from './homePageComponents/TermsConditions.jsx';
+import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -150,7 +151,8 @@ class App extends React.Component {
             <div style={{ marginTop: '64px' }}>
               <Switch>
                 <Route exact path="/home" component={Home} />
-                <Route exact path="/terms-and-conditions" component={TermsConditions} />>
+                <Route exact path="/terms-and-conditions" component={TermsConditions} />
+                <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
@@ -175,7 +177,8 @@ class App extends React.Component {
             <div style={{ marginTop: '56px' }}>
               <Switch>
                 <Route exact path="/home" component={Home} />
-                <Route exact path="/terms-and-conditions" component={TermsConditions} />>
+                <Route exact path="/terms-and-conditions" component={TermsConditions} />
+                <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
