@@ -1,11 +1,15 @@
 import React from 'react';
-import axios from 'axios';
 import FormHomePage from './FormHomePage.jsx';
 import FormSubmited from './FormSubmited.jsx';
+import { addFormData } from '../graphql/graphql';
+import { createApolloFetch } from 'apollo-fetch';
 
 class SubmitFormHomePage extends React.Component {
   constructor(props) {
     super(props);
+    this.fetch = createApolloFetch({
+      uri: '../graphql'
+    }).bind(this);
     this.state = {
       name: '',
       emailOrPhone: '',
@@ -14,8 +18,6 @@ class SubmitFormHomePage extends React.Component {
       message: '',
       messageSent: false
     }
-
-    this.submitForm = this.submitForm.bind(this);
   }
 
   handleChange = (e) => {
@@ -38,10 +40,21 @@ class SubmitFormHomePage extends React.Component {
     }
   }
 
-  async submitForm(e) {
-    const { name, email, phone, message } = this.state; //sanitize inputs?
-    const form = await axios.post('/api/form', { name, email, phone, message });
-    if (form.status === 200) {
+  submitForm = async () => {
+    let formArguments = {
+      first_name: JSON.stringify(this.state.name.split(' ')[0]),
+      last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
+      email: JSON.stringify(this.state.email),
+      phone_number: JSON.stringify(this.state.phone),
+      message: JSON.stringify(this.state.message),
+      page: JSON.stringify("Homepage")
+    }
+
+    const form = await this.fetch({
+      query: addFormData(formArguments)
+    });
+
+    if (form.data.saveContactForm.id) {
       this.setState({ messageSent: true });
     }
   }

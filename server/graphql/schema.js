@@ -327,7 +327,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
-    saveContactFormUser: {
+    saveContactForm: {
       type: ContactFormType,
       args: {
         first_name: { type: GraphQLString },

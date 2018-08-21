@@ -79,7 +79,6 @@ class QualifyContainer extends React.Component {
   }
 
   submitForm = () => {
-    console.log('clicked! props', this.props)
     //add logic for email or phone
     let formArguments = {
       first_name: JSON.stringify(this.state.name.split(' ')[0]),
@@ -96,7 +95,6 @@ class QualifyContainer extends React.Component {
       other: this.state.other,
       message: JSON.stringify("some strange question")
     };
-    console.log(addFormData(formArguments));
     this.fetch({
       query: addFormData(formArguments) 
     })
