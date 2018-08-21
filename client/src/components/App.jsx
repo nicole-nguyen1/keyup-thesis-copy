@@ -42,8 +42,6 @@ class App extends React.Component {
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
-
-    console.log('MOUNTING')
   }
 
   getCareers = () => {
@@ -56,16 +54,18 @@ class App extends React.Component {
     .then(res => {
       store.dispatch(findCareers(res));
     }).catch((error) => {
-      console.log('ERROR ASDLK;JFDASKL;F', error)
+      console.error(error)
     });
   }
 
   filterCareers = (args, sortBy) => {
+    console.log(args);
     this.sortBy = sortBy;
     this.fetch({
       query: filterCareersQuery(args)
     })
   .then((res) => {
+    console.log(res);
     if (this.sortBy === 'Shortest training length') {
       return this.sortByShortestTrainingLength(res.data.careers);
     } else if (this.sortBy === 'Most job openings') {

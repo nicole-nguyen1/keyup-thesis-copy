@@ -38,7 +38,6 @@ class FilterAndSort extends React.Component {
   }
 
   render() {
-    console.log(this.props.careerName)
     return (
       <div>
         {this.state.showFilter ?

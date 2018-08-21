@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import Filter from './Filter.jsx';
 import Sort from './Sort.jsx';
 import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = theme => ({
   headerStyle: {
@@ -19,6 +22,16 @@ const styles = theme => ({
   formStyle: {
     padding: '10px',
     maxWidth: '400px'
+  },
+  backdrop: {
+    backgroundColor: "transparent"
+  },
+
+  paper: {
+    // backgroundColor: "transparent",
+    // boxShadow: "none",
+    // overflow: "hidden",
+    top: '56px'
   }
 });
 
@@ -39,7 +52,6 @@ class FilterAndSortForm extends React.Component {
   }
 
   setFilter = (e) => {
-    console.log(e.target.value);
     if (this.filterOptions[e.target.value] === 0) {
       delete this.filterOptions[e.target.value];
     } else {
@@ -59,75 +71,92 @@ class FilterAndSortForm extends React.Component {
   setSort = (e) => {
     this.setState({
       sortSelection: e.target.value
-    }, ()=>console.log(this.state));
+    });
   }
 
   render() {
     const { classes } = this.props;
+
     return (
-      <FormGroup className={classes.formStyle}>
-        <Typography variant="headline" className={classes.headerStyle}>
-          Filter and Sort Careers
-          <br />
+      <Dialog
+        fullScreen
+        open={this.props.open}
+        onClose={this.handleClose}
+        BackdropProps={{
+          classes: {
+            root: classes.backdrop
+          }
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.paper
+          }
+        }}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">{"Filter and Sort Careers"}</DialogTitle>
+        <DialogContent>
+          <FormGroup className={classes.formStyle}>
+            <Typography className={classes.groupStyle}>
+              FILTER
+          </Typography>
+            {this.props.industries.map((industry) => {
+              return (
+                <Filter
+                  key={industry.id}
+                  label={industry.name}
+                  id={industry.id}
+                  setFilter={this.setFilter}
+                />);
+            })}
+            <Divider />
+            <Filter
+              label="Get paid to learn"
+              id="-1"
+              setFilter={this.setFixedFilter}
+            />
+            <Filter
+              label="Free training services"
+              id="-2"
+              setFilter={this.setFixedFilter}
+            />
+            <Typography className={classes.groupStyle}>
+              SORT BY
         </Typography>
-        <Typography className={classes.groupStyle}>
-          FILTER
-        </Typography>
-        {this.props.industries.map((industry)=>{
-          return (
-            <Filter 
-              key={industry.id} 
-              label={industry.name}
-              id={industry.id}
-              setFilter={this.setFilter}
-            />);
-        })}
-        <Divider />
-        <Filter 
-          label="Get paid to learn"
-          id="-1"
-          setFilter={this.setFixedFilter}
-        />
-        <Filter 
-          label="Free training services" 
-          id="-2"
-          setFilter={this.setFixedFilter}
-        />
-        <Typography className={classes.groupStyle}>
-          SORT BY
-        </Typography>
-        <RadioGroup name="sort">
-          {this.sortOptions.map((label, index)=>{
-            return (<Sort 
-              key={index} 
-              label={label}
-              select={this.setSort}
-              sortSelection={this.state.sortSelection}
-            />);
-          })}
-        </RadioGroup>
-        <Grid container>
-          <Grid item xs={6}>
-            <Button 
-              variant="contained" 
-              color="primary"
-              onClick={()=>{
-                this.props.hideFilter();
-                this.props.filterCareers({
-                  args: Object.keys(this.filterOptions),
-                  paidToLearn: this.paidToLearn,
-                  freeTraining: this.freeTraining
-                }, this.state.sortSelection);
-              }}
-            >See Career Results</Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              onClick={this.props.hideFilter}
-            >CANCEL</Button>
-          </Grid>
-        </Grid>
-      </FormGroup>
+            <RadioGroup name="sort">
+              {this.sortOptions.map((label, index) => {
+                return (<Sort
+                  key={index}
+                  label={label}
+                  select={this.setSort}
+                  sortSelection={this.state.sortSelection}
+                />);
+              })}
+            </RadioGroup>
+            <Grid container>
+              <Grid item xs={6}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    this.props.hideFilter();
+                    this.props.filterCareers({
+                      args: Object.keys(this.filterOptions),
+                      paidToLearn: this.paidToLearn,
+                      freeTraining: this.freeTraining
+                    }, this.state.sortSelection);
+                  }}
+                >See Career Results</Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  onClick={this.props.hideFilter}
+                >CANCEL</Button>
+              </Grid>
+            </Grid>
+          </FormGroup>
+        </DialogContent>
+      </Dialog>
     );
   }
 }

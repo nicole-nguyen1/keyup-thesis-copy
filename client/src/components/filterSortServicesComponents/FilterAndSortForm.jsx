@@ -64,7 +64,6 @@ class FilterAndSortForm extends React.Component {
     this.fetch({
       query: getServicesQuery(this.props.careerID)
     }).then(res => {
-      console.log('this state', this.state)
     if (this.state.paidToLearn && !this.state.freeTraining) {
       let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings), career: res.data.career.name}
       let temp2 = this.checkSortState(temp.trainings);
@@ -91,7 +90,7 @@ class FilterAndSortForm extends React.Component {
   setSort = (e) => {
     this.setState({
       sortSelection: e.target.value
-    }, ()=>console.log('inside setSort function', this.state));
+    });
   }
 
   filterServicesByGetPaidToLearn = (services) => {
@@ -126,7 +125,6 @@ class FilterAndSortForm extends React.Component {
           filteredServices.push(service);
         }
       })
-      console.log('filtered services', filteredServices)
       return filteredServices;
     }
   }

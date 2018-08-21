@@ -30,7 +30,6 @@ class QualifyContainer extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(this.state)
     let thisState = {};
     thisState[e.target.name] = e.target.value;
     this.setState(thisState, this.enableButton());

@@ -40,7 +40,7 @@ class FilterAndSort extends React.Component {
   render() {
     return (
       <div>
-        {this.state.showFilter ?
+        {/* {this.state.showFilter ?
           (<FilterAndSortForm 
             industries={this.props.industries}
             hideFilter={this.hideFilter}
@@ -52,7 +52,19 @@ class FilterAndSort extends React.Component {
             onClick={this.displayFilter}
             style={{backgroundColor: 'b367c2'}}
           >Filter And Sort</Button>)
-        }
+        } */}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.displayFilter}
+          style={{ backgroundColor: 'b367c2' }}
+        >Filter And Sort</Button>
+        <FilterAndSortForm
+          industries={this.props.industries}
+          hideFilter={this.hideFilter}
+          filterCareers={this.props.filterCareers}
+          open={this.state.showFilter}
+        />
       </div>
     );
   }
