@@ -5,14 +5,14 @@ import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   headerStyle: {
+    backgroundColor: '#3652C5',
+    padding: '8px',
     textAlign: 'center'
   },
-  groupStyle: {
-    fontSize: '12px'
-  },
-  formStyle: {
-    padding: '10px',
-    maxWidth: '400px'
+
+  button: {
+    backgroundColor: 'b367c2',
+    borderRadius: 0
   }
 });
 
@@ -38,26 +38,15 @@ class FilterAndSort extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
-        {/* {this.state.showFilter ?
-          (<FilterAndSortForm 
-            industries={this.props.industries}
-            hideFilter={this.hideFilter}
-            filterCareers={this.props.filterCareers}
-          />) :
-          (<Button 
-            variant="contained"
-            color="primary"
-            onClick={this.displayFilter}
-            style={{backgroundColor: 'b367c2'}}
-          >Filter And Sort</Button>)
-        } */}
+      <div className={classes.headerStyle}>
         <Button
           variant="contained"
           color="primary"
           onClick={this.displayFilter}
-          style={{ backgroundColor: 'b367c2' }}
+          className={classes.button}
         >Filter And Sort</Button>
         <FilterAndSortForm
           industries={this.props.industries}
