@@ -21,6 +21,14 @@ class SubmitFormHomePage extends React.Component {
     this.form = React.createRef();
   }
 
+  clearForm = () => {
+    this.setState({
+      name: '',
+      emailOrPhone: '',
+      message: ''
+    });
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -30,12 +38,12 @@ class SubmitFormHomePage extends React.Component {
       if ((this.state.emailOrPhone).includes('@')) {
         this.setState({ 
           email: e.target.value,
-          phone: ''
+          phone: null
         });
       } else {
         this.setState({ 
           phone: e.target.value,
-          email: ''
+          email: null
         });
       }
     }
@@ -60,10 +68,8 @@ class SubmitFormHomePage extends React.Component {
     });
 
     if (form.data.saveContactForm.id) {
-      this.setState({ open: true });
+      this.setState({ open: true }, this.clearForm());
     }
-
-    this.refs.form.reset();
   }
 
 
@@ -73,7 +79,9 @@ class SubmitFormHomePage extends React.Component {
         <FormHomePage
           submitForm={this.submitForm}
           handleChange={this.handleChange}
-          ref={this.form}
+          name={this.state.name}
+          emailOrPhone={this.state.emailOrPhone}
+          message={this.state.message}
         />
         <FormSubmitted
           open={this.state.open}

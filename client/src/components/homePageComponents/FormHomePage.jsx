@@ -2,12 +2,11 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
-const FormHomePage = React.forwardRef((props, ref) => {
+const FormHomePage = (props) => {
   const styles = {
     cardStyle: {
       background: 'purple',
@@ -26,7 +25,8 @@ const FormHomePage = React.forwardRef((props, ref) => {
     inputStyle: {
       background: 'white',
       margin: '5px 0px',
-      padding: '10px'
+      padding: '10px',
+      width: '95%'
     },
     buttonStyle: {
       backgroundColor: '2979ff',
@@ -46,10 +46,11 @@ const FormHomePage = React.forwardRef((props, ref) => {
         <Typography style={styles.textStyle} gutterBottom>
           We'll get back to you within 24 hours
         </Typography>
-        <FormControl style={{ width: '98%' }}>
+        <form style={{ width: '98%' }}>
           <Input
             type="text"
             name="name"
+            value={props.name}
             placeholder="Your name?"
             disableUnderline={true}
             style={styles.inputStyle}
@@ -58,6 +59,7 @@ const FormHomePage = React.forwardRef((props, ref) => {
           <Input
             type="text"
             name="emailOrPhone"
+            value={props.emailOrPhone}
             placeholder="Email Address or Phone Number?"
             disableUnderline={true}
             style={styles.inputStyle}
@@ -66,6 +68,7 @@ const FormHomePage = React.forwardRef((props, ref) => {
           <Input
             type="text"
             name="message"
+            value={props.message}
             placeholder="Ask a question or tell us a little about your career interests and priorities..."
             disableUnderline={true}
             multiline
@@ -73,7 +76,7 @@ const FormHomePage = React.forwardRef((props, ref) => {
             style={styles.inputStyle}
             onChange={props.handleChange}
           />
-        </FormControl>
+        </form>
         <div style={{ textAlign: 'center' }}>
           <Button
             variant="contained" 
@@ -87,6 +90,6 @@ const FormHomePage = React.forwardRef((props, ref) => {
       </CardContent>
     </Card>
   );
-});
+};
 
 export default FormHomePage;
