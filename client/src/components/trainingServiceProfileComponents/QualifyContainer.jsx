@@ -30,6 +30,7 @@ class QualifyContainer extends React.Component {
   }
 
   handleChange = (e) => {
+    console.log(this.state)
     let thisState = {};
     thisState[e.target.name] = e.target.value;
     this.setState(thisState, this.enableButton());
@@ -79,7 +80,7 @@ class QualifyContainer extends React.Component {
     //add logic for email or phone
     let email = null;
     let phoneNumber = null;
-    if (this.state.emailOrPhone.contains('@')) {
+    if (this.state.emailOrPhone.includes('@')) {
       email = JSON.stringify(this.state.emailOrPhone);
     } else {
       phoneNumber = JSON.stringify(this.state.emailOrPhone)
@@ -97,7 +98,7 @@ class QualifyContainer extends React.Component {
       talk_to_grad: this.state.talkToGrad,
       talk_to_working: this.state.talkToProfessional,
       other: this.state.other,
-      message: JSON.stringify("some strange question")
+      message: JSON.stringify(this.state.message)
     };
     this.fetch({
       query: addFormData(formArguments) 

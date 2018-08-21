@@ -91,10 +91,7 @@ class QualifyForm extends React.Component {
               multiline
               rows="4"
               className={classes.inputStyle}
-              onChange={()=>{
-                this.props.handleChange;
-                this.props.enableButton;
-              }}
+              onChange={this.props.handleChange}
             />
           </FormControl>
           <div style={{ textAlign: 'center' }}>

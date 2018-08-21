@@ -29,7 +29,7 @@ const Qualify = props => {
   const { classes } = props;
   return (
     <div>
-      <Card style={styles.card}>
+      <Card className={classes.card}>
         <FormSubmitted 
           open={props.formSubmitted}
           onClose={props.closePopup}
