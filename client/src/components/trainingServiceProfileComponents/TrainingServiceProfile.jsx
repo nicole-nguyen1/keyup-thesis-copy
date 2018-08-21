@@ -6,7 +6,15 @@ import Needs from './Needs.jsx';
 import ProsCons from '../careerProfileComponents/ProsCons.jsx';
 import ApplicationProcess from './ApplicationProcess.jsx';
 import Card from '@material-ui/core/Card';
+import { withStyles } from '@material-ui/core';
 
+const styles = theme => ({
+  dark: {
+    backgroundColor: '#232E49',
+    borderRadius: 0,
+    padding: '5px'
+  }
+});
 class TrainingServiceProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -20,23 +28,17 @@ class TrainingServiceProfile extends React.Component {
   };
 
   render() {
-    const styles = {
-      dark: {
-        backgroundColor: '#232E49',
-        borderRadius: 0,
-        padding: '5px'
-      }
-    };
+    const { classes } = this.props;
     const service = this.props.service;
     return (
       <div>
         <Intro service={service}/>
         <About service={service} open={this.state.open} toggleDialog={this.toggleDialog}/>
-        <Card style={styles.dark}>
+        <Card className={classes.dark}>
           <ProsCons info={service} />
         </Card>
         <Financial service={service}/>
-        <Card style={styles.dark}>
+        <Card className={classes.dark}>
           <Needs service={service} />
         </Card>
         <ApplicationProcess service={service} open={this.state.open} toggleDialog={this.toggleDialog}/>
@@ -45,4 +47,4 @@ class TrainingServiceProfile extends React.Component {
   }
 }
 
-export default TrainingServiceProfile;
+export default withStyles(styles)(TrainingServiceProfile);
