@@ -20,7 +20,8 @@ class QualifyContainer extends React.Component {
       talkToGrad: false,
       talkToProfessional: false,
       other: false,
-      buttonStatus: true
+      buttonStatus: true,
+      formSubmitted: false
     };
   }
 
@@ -28,11 +29,8 @@ class QualifyContainer extends React.Component {
     this.setState({showForm: true});
   }
 
-  closeForm = () => {
-    this.setState({showForm: false})
-  }
-
   handleChange = (e) => {
+    console.log(this.state)
     let thisState = {};
     thisState[e.target.name] = e.target.value;
     this.setState(thisState, this.enableButton());
@@ -80,11 +78,18 @@ class QualifyContainer extends React.Component {
 
   submitForm = () => {
     //add logic for email or phone
+    let email = null;
+    let phoneNumber = null;
+    if (this.state.emailOrPhone.includes('@')) {
+      email = JSON.stringify(this.state.emailOrPhone);
+    } else {
+      phoneNumber = JSON.stringify(this.state.emailOrPhone)
+    }
     let formArguments = {
       first_name: JSON.stringify(this.state.name.split(' ')[0]),
       last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
-      email: JSON.stringify(this.state.emailOrPhone),
-      phone_number: JSON.stringify(this.state.emailOrPhone),
+      email: email,
+      phone_number: phoneNumber,
       page: JSON.stringify("Training Service Profile"),
       career: JSON.stringify(this.props.service.career_name),
       training_service: JSON.stringify(this.props.service.name),
@@ -93,15 +98,34 @@ class QualifyContainer extends React.Component {
       talk_to_grad: this.state.talkToGrad,
       talk_to_working: this.state.talkToProfessional,
       other: this.state.other,
-      message: JSON.stringify("some strange question")
+      message: JSON.stringify(this.state.message)
     };
     this.fetch({
       query: addFormData(formArguments) 
     })
     .then(()=> {
-      console.log('form data query resolved')
+      this.setState({
+        showForm: false,
+        name: '',
+        emailOrPhone: '',
+        message: '',
+        financialAid: false,
+        applicationProcess: false,
+        talkToGrad: false,
+        talkToProfessional: false,
+        other: false,
+        buttonStatus: true,
+        formSubmitted: true
+      })
     })
     .catch((err)=>{console.log(err)})
+  }
+
+  closePopup = () => {
+    
+    this.setState({
+      formSubmitted: false
+    })
   }
 
   render() {
@@ -114,9 +138,12 @@ class QualifyContainer extends React.Component {
           setCheckbox={this.setCheckbox}
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
-          closeForm={this.closeForm}
         /> :
-        <Qualify openForm={this.openForm} />
+        <Qualify 
+          openForm={this.openForm} 
+          formSubmitted={this.state.formSubmitted}
+          closePopup={this.closePopup}
+        />
     );
   }
 }
