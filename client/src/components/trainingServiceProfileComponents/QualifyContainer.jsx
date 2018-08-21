@@ -86,7 +86,7 @@ class QualifyContainer extends React.Component {
       last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
       email: JSON.stringify(this.state.emailOrPhone),
       phone_number: JSON.stringify(this.state.emailOrPhone),
-      page: JSON.stringify("service"),
+      page: JSON.stringify("Training Service Profile"),
       career: JSON.stringify(this.props.service.career_name),
       training_service: JSON.stringify(this.props.service.name),
       financial_aid: this.state.financialAid,
