@@ -17,11 +17,14 @@ const styles = theme => ({
     color: '#ededee'
   },
   button: {
-    margin: '0px auto 10px',
     backgroundColor: '#b367c2'
   },
   action: {
     margin: '0px auto 10px'
+  },
+  linkButton: {
+    margin: '0px auto 10px',
+    textDecoration: 'none'
   }
 });
 
@@ -39,14 +42,15 @@ const Qualify = props => {
           <Typography className={classes.text} gutterBottom variant='body1'>Answer a few questions, and we can help you access financial support, free childcare, career services and more.</Typography>
         </CardContent>
         <CardActions className={classes.action}>
-          <Button
-            variant="contained" 
-            color="primary" 
-            className={classes.button}
-            onClick={props.openForm}
-          >
-            GET SUPPORT REC'S
-          </Button>
+          <a className={classes.linkButton} href='https://keyup.typeform.com/to/dlfXQi'>
+            <Button
+              variant="contained" 
+              color="primary" 
+              className={classes.button}
+            >
+              GET SUPPORT REC'S
+            </Button>
+          </a>
         </CardActions>
       </Card>
     </div>
