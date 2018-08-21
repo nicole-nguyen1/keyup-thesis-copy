@@ -1,10 +1,15 @@
 import React from 'react';
 import QualifyForm from './QualifyForm.jsx';
 import Qualify from './Qualify.jsx';
+import { addFormData } from '../graphql/graphql';
+import { createApolloFetch } from 'apollo-fetch';
 
 class QualifyContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.fetch = createApolloFetch({
+      uri: '../graphql'
+    }).bind(this);
     this.state = {
       showForm: false,
       name: '',
@@ -21,6 +26,10 @@ class QualifyContainer extends React.Component {
 
   openForm = () => {
     this.setState({showForm: true});
+  }
+
+  closeForm = () => {
+    this.setState({showForm: false})
   }
 
   handleChange = (e) => {
@@ -70,7 +79,31 @@ class QualifyContainer extends React.Component {
   }
 
   submitForm = () => {
-    // console.log('clicked!', this.state)
+    console.log('clicked! props', this.props)
+    //add logic for email or phone
+    let formArguments = {
+      first_name: JSON.stringify(this.state.name.split(' ')[0]),
+      last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
+      email: JSON.stringify(this.state.emailOrPhone),
+      phone_number: JSON.stringify(this.state.emailOrPhone),
+      page: JSON.stringify("Training Service Profile"),
+      career: JSON.stringify(this.props.service.career_name),
+      training_service: JSON.stringify(this.props.service.name),
+      financial_aid: this.state.financialAid,
+      app_process: this.state.applicationProcess,
+      talk_to_grad: this.state.talkToGrad,
+      talk_to_working: this.state.talkToProfessional,
+      other: this.state.other,
+      message: JSON.stringify("some strange question")
+    };
+    console.log(addFormData(formArguments));
+    this.fetch({
+      query: addFormData(formArguments) 
+    })
+    .then(()=> {
+      console.log('form data query resolved')
+    })
+    .catch((err)=>{console.log(err)})
   }
 
   render() {
@@ -83,6 +116,7 @@ class QualifyContainer extends React.Component {
           setCheckbox={this.setCheckbox}
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
+          closeForm={this.closeForm}
         /> :
         <Qualify openForm={this.openForm} />
     );

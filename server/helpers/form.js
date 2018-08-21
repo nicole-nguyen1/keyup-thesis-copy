@@ -1,4 +1,3 @@
-const express = require('express');
 const nodemailer = require('nodemailer');
 
 const contactForm = (req) => {
@@ -73,7 +72,7 @@ const contactForm = (req) => {
         <p>${message}</p>
       `
   }
-
+  
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
