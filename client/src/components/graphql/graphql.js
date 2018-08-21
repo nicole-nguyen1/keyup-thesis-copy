@@ -104,3 +104,73 @@ export const getServiceQuery = (args) => (
     }
   }`
 );
+
+export const getServicesQuery = (args) => (
+  `{
+    trainings(id:${args}) {
+      id
+      career_id
+      name
+      subheading
+      logo_url
+      about
+      financial_info
+      location
+      app_process
+      apply_now_cta
+      program_url
+      program_length_total
+      program_total_weekly
+      program_class_times
+      paid_to_learn
+      federal_student_aid
+      card_length
+      card_location
+      card_tuition
+      page_title
+      outcomes {
+        id
+        description
+      }
+      requirements {
+        id
+        description
+      }
+      pros {
+        id
+        description
+      }
+      cons {
+        id
+        description
+      }
+    }
+    career(id:${args}) {
+      name
+    }
+  }`
+);
+
+export const addFormData = (args) => (
+  `
+  mutation {
+    saveContactForm (
+      first_name: ${args.first_name},
+      last_name: ${args.last_name || null},
+      email: ${args.email || null},
+      phone_number: ${args.phone_number || null},
+      page: ${args.page},
+      career: ${args.career || null},
+      training_service: ${args.training_service || null},
+      financial_aid: ${args.financial_aid || null},
+      app_process: ${args.app_process || null},
+      talk_to_grad: ${args.talk_to_grad || null},
+      talk_to_working: ${args.talk_to_working || null},
+      other: ${args.other || null},
+      message: ${args.message || null}
+    ) {
+      id
+    }
+  }
+  `
+);

@@ -57,8 +57,8 @@ const Footer = () => {
         </div>
         <div style={styles.section}>
           <Grid item xs={4} style={styles.text}><Typography variant='body1' style={styles.text}>&copy; KeyUp LLC</Typography></Grid>
-          <Grid item xs={4} style={styles.text}><Typography variant='body1' style={styles.text}><a href='' style={styles.link}>Terms of Service</a></Typography></Grid>
-          <Grid item xs={4} style={styles.text}><Typography variant='body1' style={styles.text}><a href='' style={styles.link}>Privacy Policy</a></Typography></Grid>
+          <Grid item xs={4} style={styles.text}><Typography variant='body1' style={styles.text}><a href='/terms-and-conditions' style={styles.link}>Terms of Service</a></Typography></Grid>
+          <Grid item xs={4} style={styles.text}><Typography variant='body1' style={styles.text}><a href='/privacy-policy' style={styles.link}>Privacy Policy</a></Typography></Grid>
         </div>
       </CardContent>
     </Card>

@@ -9,9 +9,6 @@ const port = process.env.PORT || 1337;
 
 const app = express();
 
-//ROUTES
-const form = require('./routes/form');
-
 app.use(bodyParser.json());
 
 //graphql endpoint
@@ -19,8 +16,6 @@ app.use('/graphql', graphQLHTTP({
   schema,
   graphiql: true
 }));
-
-app.use('/api/form', form);
 
 //set up index in client folder
 app.use(express.static(path.join(__dirname, '../client/dist'), { index: false }));

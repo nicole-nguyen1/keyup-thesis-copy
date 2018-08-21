@@ -1,6 +1,7 @@
 import React from 'react';
 import Service from './Service.jsx';
 import Grid from '@material-ui/core/Grid';
+import FilterAndSort from './filterSortServicesComponents/FilterAndSort.jsx';
 import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -18,6 +19,7 @@ class Services extends React.Component {
   render() {
     return (
       <div>
+        <FilterAndSort services={this.props.services} careerName={this.props.careerName} careerID={this.props.careerID}/>
         <Grid container spacing={8}>
           {this.props.services.map((service, index) => {
             return <Service key={service.id || index} service={service} careerName={this.props.careerName}/>;

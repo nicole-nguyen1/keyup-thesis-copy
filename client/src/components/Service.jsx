@@ -36,7 +36,7 @@ const Service = props => {
             </Grid>
             <Grid item xs={3}>
               <CardMedia
-                image={props.service.logo_url}
+                image={props.service.logo_url || '#'}
                 title="Dummy Title"
                 style={style}
               />

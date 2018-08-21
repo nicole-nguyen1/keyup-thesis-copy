@@ -13,6 +13,8 @@ import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from './CareerProfileContainer.jsx';
 import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.jsx';
+import TermsConditions from './homePageComponents/TermsConditions.jsx';
+import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -20,13 +22,14 @@ import {
   filterCareersQuery
 } from './graphql/graphql';
 
+
 const newHistory = createBrowserHistory();
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.fetch = createApolloFetch({
-      uri: './graphql'
+      uri: '/graphql'
     }).bind(this);
     this.sortBy = 'Highest salary';
   }
@@ -39,6 +42,8 @@ class App extends React.Component {
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
+
+    console.log('MOUNTING')
   }
 
   getCareers = () => {
@@ -50,6 +55,8 @@ class App extends React.Component {
     })
     .then(res => {
       store.dispatch(findCareers(res));
+    }).catch((error) => {
+      console.log('ERROR ASDLK;JFDASKL;F', error)
     });
   }
 
@@ -59,7 +66,6 @@ class App extends React.Component {
       query: filterCareersQuery(args)
     })
   .then((res) => {
-    console.log(res.data.careers);
     if (this.sortBy === 'Shortest training length') {
       return this.sortByShortestTrainingLength(res.data.careers);
     } else if (this.sortBy === 'Most job openings') {
@@ -136,7 +142,7 @@ class App extends React.Component {
     bucket.forEach((val)=>{
       sortedCareers.push(hash[val[0]]);
     })
-    console.log('sorted careers', sortedCareers);
+    
     return {careers: sortedCareers};
   }
 
@@ -149,6 +155,8 @@ class App extends React.Component {
             <div style={{ marginTop: '64px' }}>
               <Switch>
                 <Route exact path="/home" component={Home} />
+                <Route exact path="/terms-and-conditions" component={TermsConditions} />
+                <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
@@ -173,6 +181,8 @@ class App extends React.Component {
             <div style={{ marginTop: '56px' }}>
               <Switch>
                 <Route exact path="/home" component={Home} />
+                <Route exact path="/terms-and-conditions" component={TermsConditions} />
+                <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}

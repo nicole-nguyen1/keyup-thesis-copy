@@ -1,4 +1,6 @@
 const { knex } = require('../../database/db');
+const contactForm = require('../helpers/form');
+
 const {
   GraphQLSchema,
   GraphQLObjectType,
@@ -194,6 +196,63 @@ const UserType = new GraphQLObjectType({
   })
 });
 
+const ContactFormType = new GraphQLObjectType({
+  name: 'ContactForm',
+  fields: () => ({
+    id: { type: GraphQLID },
+    user_id: { type: GraphQLID },
+    first_name: {
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('first_name')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.first_name);
+      }
+    },
+    last_name: {
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('last_name')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.last_name);
+      }
+    },
+    email: {
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('email')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.email);
+      }
+    },
+    phone_number: {
+      type: GraphQLString,
+      resolve(parent, args) {
+        return knex('users')
+          .select('phone_number')
+          .where({ 'id': parent.user_id })
+          .first()
+          .then((obj) => obj.phone_number);
+      }
+    },
+    page: { type: GraphQLString },
+    career: { type: GraphQLString },
+    training_service: { type: GraphQLString },
+    financial_aid: { type: GraphQLBoolean },
+    app_process: { type: GraphQLBoolean },
+    talk_to_grad: { type: GraphQLBoolean },
+    talk_to_working: { type: GraphQLBoolean },
+    other: { type: GraphQLBoolean },
+    message: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -264,11 +323,11 @@ const RootQuery = new GraphQLObjectType({
     },
     user: {
       type: UserType,
-      args: {id: { type: GraphQLID }},
-      resolve(parent, {id}) {
+      args: { id: { type: GraphQLID } },
+      resolve(parent, { id }) {
         return knex('users')
           .select()
-          .where({id})
+          .where({ id })
           .first();
       }
     }
@@ -287,11 +346,110 @@ const Mutation = new GraphQLObjectType({
         last_name: { type: GraphQLString },
         phone_number: { type: GraphQLString }
       },
-      resolve(parent, {email, password, first_name, last_name, phone_number}) {
+      resolve(parent, { email, password, first_name, last_name, phone_number }) {
         return knex('users')
-          .insert({email, password, first_name, last_name, phone_number})
+          .insert({ email, password, first_name, last_name, phone_number })
           .returning('*')
-          .then( res => res[0]);
+          .then(res => res[0]);
+      }
+    },
+    saveContactForm: {
+      type: ContactFormType,
+      args: {
+        first_name: { type: GraphQLString },
+        last_name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        phone_number: { type: GraphQLString },
+        page: { type: GraphQLString },
+        career: { type: GraphQLString },
+        training_service: { type: GraphQLString },
+        financial_aid: { type: GraphQLBoolean },
+        app_process: { type: GraphQLBoolean },
+        talk_to_grad: { type: GraphQLBoolean },
+        talk_to_working: { type: GraphQLBoolean },
+        other: { type: GraphQLBoolean },
+        message: { type: GraphQLString }
+      },
+      resolve(parent, args) {
+        let checkUsers = knex('users');
+
+        if (args.email !== null) {
+          checkUsers = checkUsers.where('email', args.email);
+        } else {
+          checkUsers = checkUsers.where('phone_number', args.phone_number);
+        }
+
+        // check if contact form user is a user
+        return checkUsers
+          .select('id', 'email', 'first_name', 'last_name', 'phone_number')
+          .first()
+          .then((res) => {
+            if (res === undefined) {
+              // create contact form user as a user
+              let thisInsert = {
+                first_name: args.first_name,
+                password: null
+              }
+
+              if (args.last_name === null) {
+                thisInsert.last_name = null;
+              } else {
+                thisInsert.last_name = args.last_name;
+              }
+
+              if (args.email !== null) {
+                thisInsert.email = args.email;
+                thisInsert.phone_number = null;
+              } else {
+                thisInsert.email = null;
+                thisInsert.phone_number = args.phone_number;
+              }
+
+              return knex('users')
+                .insert(thisInsert)
+                .returning(['id', 'email', 'first_name', 'last_name', 'phone_number']);
+            }
+
+            return [res];
+          })
+          .then((res) => {
+            //insert into contact form table
+            let thisInsert = {
+              user_id: res[0].id,
+              message: args.message,
+              page: args.page
+            };
+
+            if (args.page === 'Homepage') {
+              thisInsert.career = null;
+              thisInsert.training_service = null;
+              thisInsert.financial_aid = null;
+              thisInsert.app_process = null;
+              thisInsert.talk_to_grad = null;
+              thisInsert.talk_to_working = null;
+              thisInsert.other = null;
+            } else {
+              thisInsert.career = args.career;
+              thisInsert.training_service = args.training_service;
+              thisInsert.financial_aid = args.financial_aid;
+              thisInsert.app_process = args.app_process;
+              thisInsert.talk_to_grad = args.talk_to_grad;
+              thisInsert.talk_to_working = args.talk_to_working;
+              thisInsert.other = args.other;
+            }
+
+            return knex('contact_form')
+              .insert(thisInsert)
+              .returning('*')
+              .then((result) => {
+                result[0].first_name = res[0].first_name;
+                result[0].last_name = res[0].last_name;
+                result[0].email = res[0].email;
+                result[0].phone_number = res[0].phone_number;
+                contactForm(result[0]);
+                return result[0];
+              });
+          })
       }
     }
   }
