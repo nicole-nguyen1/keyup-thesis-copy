@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterAndSortForm from './filterAndSortComponents/FilterAndSortForm.jsx';
+import FilterAndSortForm from './FilterAndSortForm.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 

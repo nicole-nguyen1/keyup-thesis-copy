@@ -111,7 +111,9 @@ class FilterAndSortForm extends React.Component {
         }}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>{"Filter and Sort Careers"}</DialogTitle>
+        <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>
+          {"Filter and Sort Careers"}
+        </DialogTitle>
         <DialogContent>
           <FormGroup className={classes.formStyle}>
             <Typography gutterBottom className={classes.groupStyle}>
