@@ -1,25 +1,29 @@
 import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  bullets: {
+    position: 'relative',
+    height: '1em',
+    top: '2px',
+    marginRight: '20px'
+  },
+
+  lightTextList: {
+    color: '#EDEDED',
+    display: 'inline'
+  },
+
+  listItem: {
+    margin: '10px 0'
+  }
+});
 
 const ProsCons = (props) => {
-  const styles = {
-    bullets: {
-      position: 'relative',
-      height: '1em',
-      top: '2px',
-      marginRight: '20px'
-    },
+  const { classes } = props;
 
-    lightTextList: {
-      color: '#EDEDED',
-      display: 'inline'
-    },
-
-    listItem: {
-      margin: '10px 0'
-    }
-  }
   return (
     <div>
       <CardContent>
@@ -30,11 +34,11 @@ const ProsCons = (props) => {
         {props.info.pros ?
           props.info.pros.map((pro) => {
             return (
-              <div key={pro.id} style={styles.listItem}>
+              <div key={pro.id} className={classes.listItem}>
                 <img
-                  style={styles.bullets}
+                  className={classes.bullets}
                   src='https://s3.amazonaws.com/key-up-assets/White-thumbs-up-symbol.png' />
-                <Typography gutterBottom variant='body1' style={styles.lightTextList}>{pro.description}</Typography>
+                <Typography gutterBottom variant='body1' className={classes.lightTextList}>{pro.description}</Typography>
               </div>
             )
           }) : null}
@@ -47,11 +51,11 @@ const ProsCons = (props) => {
         {props.info.cons ?
           props.info.cons.map((con) => {
             return (
-              <div key={con.id} style={styles.listItem}>
+              <div key={con.id} className={classes.listItem}>
                 <img
-                  style={styles.bullets}
+                  className={classes.bullets}
                   src='https://s3.amazonaws.com/key-up-assets/white-thumbs-down.png' />
-                <Typography gutterBottom variant='body1' style={styles.lightTextList}>{con.description}</Typography>
+                <Typography gutterBottom variant='body1' className={classes.lightTextList}>{con.description}</Typography>
               </div>
             )
           }) : null}
@@ -60,4 +64,4 @@ const ProsCons = (props) => {
   )
 }
 
-export default ProsCons;
+export default withStyles(styles)(ProsCons);

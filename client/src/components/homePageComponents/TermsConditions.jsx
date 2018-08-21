@@ -1,23 +1,26 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
-const TermsConditions = () => {
-  const styles = {
-    body: {
-      padding: '50px 10px 20px 10px'
-    },
+const styles = theme => ({
+  body: {
+    padding: '50px 10px 20px 10px'
+  },
 
-    section: {
-      marginBottom: '30px'
-    }
+  section: {
+    marginBottom: '30px'
   }
+})
+
+const TermsConditions = (props) => {
+  const { classes } = props;
 
   return (
     <div>
-      <Paper style={styles.body}>
+      <Paper className={classes.body}>
         <Typography paragraph variant='headline' component='h1'>Terms and Conditions</Typography>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>Overview</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -47,7 +50,7 @@ const TermsConditions = () => {
           </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 1 - KEYUP TERMS</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -67,7 +70,7 @@ const TermsConditions = () => {
           </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 2 - GENERAL CONDITIONS</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -87,7 +90,7 @@ const TermsConditions = () => {
           </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -102,7 +105,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -116,7 +119,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 5 - PRODUCTS OR SERVICES (if applicable)</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -136,7 +139,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 6 - ACCURACY OF BILLING AND ACCOUNT INFORMATION</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -156,7 +159,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 7 - OPTIONAL TOOLS</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -177,7 +180,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 8 - THIRD-PARTY LINKS</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -196,7 +199,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 9 - PERSONAL INFORMATION</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -204,7 +207,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 10 - ERRORS, INACCURACIES AND OMISSIONS</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -221,7 +224,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 11 - PROHIBITED USES</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -239,7 +242,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 12 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -270,7 +273,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 13 - INDEMNIFICATION</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -281,7 +284,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 14 - SEVERABILITY</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -291,7 +294,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 15 - TERMINATION</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -308,7 +311,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 16 - ENTIRE AGREEMENT</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -324,7 +327,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 17 - GOVERNING LAW</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -332,7 +335,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 18 - CHANGES TO TERMS OF SERVICE</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -345,7 +348,7 @@ const TermsConditions = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>SECTION 19 - CONTACT INFORMATION</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -358,4 +361,4 @@ const TermsConditions = () => {
   )
 }
 
-export default TermsConditions;
+export default withStyles(styles)(TermsConditions);

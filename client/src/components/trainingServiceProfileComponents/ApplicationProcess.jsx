@@ -5,36 +5,39 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import ApplyDialog from './ApplyDialog.jsx';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  card: {
+    paddingTop: '30px',
+    paddingBottom: '20px'
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    width: '100%'
+  },
+  linkContainer: {
+    textAlign: 'center'
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#7a94f4'
+  }
+});
 
 const ApplicationProcess = props => {
-  const styles = {
-    card: {
-      paddingTop: '30px',
-      paddingBottom: '20px'
-    },
-    buttons: {
-      display: 'flex',
-      justifyContent: 'space-around',
-      width: '100%'
-    },
-    linkContainer: {
-      textAlign: 'center'
-    },
-    link: {
-      textDecoration: 'none',
-      color: '#7a94f4'
-    }
-  };
+  const { classes } = props;
 
   return (
     <div>
-      <Card style={styles.card} >
+      <Card className={classes.card} >
         <CardContent>
           <Typography gutterBottom variant='title'>Application Process</Typography>
           <Typography gutterBottom variant='body1'>Use the buttons below to learn how to apply to this training service or contact one of our KeyUp guides for advice.</Typography>
         </CardContent>
         <CardActions >
-          <div style={styles.buttons} >
+          <div className={classes.buttons} >
             <Button onClick={props.toggleDialog} variant="contained" color="primary" style={{ backgroundColor: '#4e74ff' }}>
               APPLY NOW
             </Button>
@@ -43,8 +46,8 @@ const ApplicationProcess = props => {
             </Button>
           </div>
         </CardActions>
-        <CardContent style={styles.linkContainer}>
-          <Typography gutterBottom variant='body1'><a style={styles.link} href={props.service.program_url}>Go to {props.service.name} website</a></Typography>
+        <CardContent className={classes.linkContainer}>
+          <Typography gutterBottom variant='body1'><a className={classes.link} href={props.service.program_url}>Go to {props.service.name} website</a></Typography>
         </CardContent>
       </Card>
       <ApplyDialog open={props.open} toggleDialog={props.toggleDialog} service={props.service} />
@@ -52,4 +55,4 @@ const ApplicationProcess = props => {
   );
 };
 
-export default ApplicationProcess;
+export default withStyles(styles)(ApplicationProcess);
