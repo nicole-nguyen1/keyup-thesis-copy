@@ -59,13 +59,11 @@ class App extends React.Component {
   }
 
   filterCareers = (args, sortBy) => {
-    console.log(args);
     this.sortBy = sortBy;
     this.fetch({
       query: filterCareersQuery(args)
     })
   .then((res) => {
-    console.log(res);
     if (this.sortBy === 'Shortest training length') {
       return this.sortByShortestTrainingLength(res.data.careers);
     } else if (this.sortBy === 'Most job openings') {
