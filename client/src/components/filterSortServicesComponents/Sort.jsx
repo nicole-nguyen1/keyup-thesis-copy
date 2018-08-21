@@ -16,6 +16,7 @@ class Sort extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log('sort selection', this.props.sortSelection)
     return (
       <FormControlLabel control={
         <Radio 
