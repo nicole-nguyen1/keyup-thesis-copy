@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const contactForm = (req, res) => {
+const contactForm = (req) => {
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -73,12 +73,10 @@ const contactForm = (req, res) => {
       `
   }
   
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(mailOptions, (error) => {
     if (error) {
       return console.error(error);
-    } else {
-      res.sendStatus(200);
-    }
+    } 
   });
 };
 

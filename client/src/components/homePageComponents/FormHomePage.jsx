@@ -86,9 +86,7 @@ class FormHomePage extends React.Component {
               variant="contained" 
               color="primary" 
               className={classes.buttonStyle}
-              onClick={(e) => {
-                this.props.submitForm();
-              }}
+              onClick={this.props.submitForm}
             >
               GET STARTED
             </Button>
