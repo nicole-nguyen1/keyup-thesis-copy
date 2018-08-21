@@ -77,11 +77,18 @@ class QualifyContainer extends React.Component {
 
   submitForm = () => {
     //add logic for email or phone
+    let email = null;
+    let phoneNumber = null;
+    if (this.state.emailOrPhone.contains('@')) {
+      email = JSON.stringify(this.state.emailOrPhone);
+    } else {
+      phoneNumber = JSON.stringify(this.state.emailOrPhone)
+    }
     let formArguments = {
       first_name: JSON.stringify(this.state.name.split(' ')[0]),
       last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
-      email: JSON.stringify(this.state.emailOrPhone),
-      phone_number: JSON.stringify(this.state.emailOrPhone),
+      email: email,
+      phone_number: phoneNumber,
       page: JSON.stringify("Training Service Profile"),
       career: JSON.stringify(this.props.service.career_name),
       training_service: JSON.stringify(this.props.service.name),

@@ -1,30 +1,31 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  outcomes: {
+    paddingLeft: '25px',
+    paddingTop: '10px',
+    marginBottom: '30px'
+  },
+  time: {
+    marginBottom: '30px'
+  }
+});
 
 const Outcomes = props => {
-  const styles = {
-    outcomes: {
-      paddingLeft: '25px',
-      paddingTop: '10px',
-      marginBottom: '30px'
-    },
-    time: {
-      marginBottom: '30px'
-    }
-  };
+  const { classes } = props;
 
   return (
     <div>
       <Typography gutterBottom variant='title'>Outcomes</Typography>
       <Typography gutterBottom variant='body1'><strong>What you will get out of {props.service.career_name && props.service.career_name.toLowerCase()} training:</strong></Typography>
-      <div style={styles.outcomes}>
+      <div className={classes.outcomes}>
         {props.service.outcomes && props.service.outcomes.map(outcome => {
           return <Typography gutterBottom variant='body1' key={outcome.id}>{outcome.description}</Typography>;
         })}
       </div>
-      <div style={styles.time}>
+      <div className={classes.time}>
         <Typography gutterBottom variant='title'>Time Commitment</Typography>
         <Typography gutterBottom variant='body1'>{props.service.program_length_total}</Typography>
         <Typography gutterBottom variant='body1'>{props.service.program_total_weekly}</Typography>
@@ -38,4 +39,4 @@ const Outcomes = props => {
   );
 };
 
-export default Outcomes;
+export default withStyles(styles)(Outcomes);
