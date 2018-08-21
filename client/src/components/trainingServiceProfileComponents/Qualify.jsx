@@ -4,6 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
+import FormSubmitted from '../homePageComponents/FormSubmitted.jsx';
 
 const Qualify = props => {
   const styles = {
@@ -23,10 +24,14 @@ const Qualify = props => {
       margin: '0px auto 10px'
     }
   };
-
+ 
   return (
     <div>
       <Card style={styles.card}>
+        <FormSubmitted 
+          open={props.formSubmitted}
+          onClose={props.closePopup}
+        />
         <CardContent>
           <Typography style={styles.text} gutterBottom variant='title'>What help do you qualify for?</Typography>
           <Typography style={styles.text} gutterBottom variant='body1'>Answer a few questions, and we can help you access financial support, free childcare, career services and more.</Typography>

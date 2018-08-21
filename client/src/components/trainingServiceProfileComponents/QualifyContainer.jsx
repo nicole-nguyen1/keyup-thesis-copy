@@ -20,16 +20,13 @@ class QualifyContainer extends React.Component {
       talkToGrad: false,
       talkToProfessional: false,
       other: false,
-      buttonStatus: true
+      buttonStatus: true,
+      formSubmitted: false
     };
   }
 
   openForm = () => {
     this.setState({showForm: true});
-  }
-
-  closeForm = () => {
-    this.setState({showForm: false})
   }
 
   handleChange = (e) => {
@@ -99,9 +96,28 @@ class QualifyContainer extends React.Component {
       query: addFormData(formArguments) 
     })
     .then(()=> {
-      console.log('form data query resolved')
+      this.setState({
+        showForm: false,
+        name: '',
+        emailOrPhone: '',
+        message: '',
+        financialAid: false,
+        applicationProcess: false,
+        talkToGrad: false,
+        talkToProfessional: false,
+        other: false,
+        buttonStatus: true,
+        formSubmitted: true
+      })
     })
     .catch((err)=>{console.log(err)})
+  }
+
+  closePopup = () => {
+    
+    this.setState({
+      formSubmitted: false
+    })
   }
 
   render() {
@@ -114,9 +130,12 @@ class QualifyContainer extends React.Component {
           setCheckbox={this.setCheckbox}
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
-          closeForm={this.closeForm}
         /> :
-        <Qualify openForm={this.openForm} />
+        <Qualify 
+          openForm={this.openForm} 
+          formSubmitted={this.state.formSubmitted}
+          closePopup={this.closePopup}
+        />
     );
   }
 }
