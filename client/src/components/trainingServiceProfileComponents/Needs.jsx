@@ -21,7 +21,7 @@ class Needs extends React.Component {
         margin: '30px 0 30px 50px'
       }
     };
-    console.log(this.props.service.requirements && this.props.service.requirements[0].description);
+  
     return (
       <div >
         <Typography variant='title' style={styles.lightText}>

@@ -16,10 +16,6 @@ class About extends React.Component {
     }
   }
 
-  componentDidMount() {
-    console.log('props', this.props);
-  }
-
   toggleDrawer = () => {
     this.setState({ drawerState: !this.state.drawerState });
   }
