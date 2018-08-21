@@ -73,14 +73,10 @@ const contactForm = (req) => {
       `
   }
   
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(mailOptions, (error) => {
     if (error) {
-      return console.log(error);
-    } else {
-      res.sendStatus(200);
-    }
-    console.log('Message sent: %s', info.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+      return console.error(error);
+    } 
   });
 };
 
