@@ -3,47 +3,49 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
-import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  cardStyle: {
+    background: 'purple',
+    borderRadius: '0'
+  },
+  cardContentStyle: {
+    maxWidth: '400px',
+    margin: '0 auto'
+  },
+  headerStyle: {
+    color: 'white'
+  },
+  textStyle: {
+    color: 'white'
+  },
+  inputStyle: {
+    background: 'white',
+    margin: '5px 0px',
+    padding: '10px',
+    width: '95%'
+  },
+  buttonStyle: {
+    backgroundColor: '2979ff',
+    borderRadius: 0,
+    marginTop: '1em'
+  }
+});
 
 const FormHomePage = (props) => {
-  const styles = {
-    cardStyle: {
-      background: 'purple',
-      borderRadius: '0'
-    },
-    cardContentStyle: {
-      maxWidth: '400px',
-      margin: '0 auto'
-    },
-    headerStyle: {
-      color: 'white'
-    },
-    textStyle: {
-      color: 'white'
-    },
-    inputStyle: {
-      background: 'white',
-      margin: '5px 0px',
-      padding: '10px',
-      width: '95%'
-    },
-    buttonStyle: {
-      backgroundColor: '2979ff',
-      borderRadius: 0,
-      marginTop: '1em'
-    }
-  };
+  const { classes } = props;
 
   return (
-    <Card style={styles.cardStyle}>
-      <CardContent style={styles.cardContentStyle}>
-        <Typography variant="headline" style={styles.textStyle} gutterBottom>
+    <Card className={classes.cardStyle}>
+      <CardContent className={classes.cardContentStyle}>
+        <Typography variant="headline" className={classes.textStyle} gutterBottom>
           Chat with one of our
           <br />
           KeyUp Guides Today
         </Typography>
-        <Typography style={styles.textStyle} gutterBottom>
+        <Typography className={classes.textStyle} gutterBottom>
           We'll get back to you within 24 hours
         </Typography>
         <form style={{ width: '98%' }}>
@@ -53,7 +55,7 @@ const FormHomePage = (props) => {
             value={props.name}
             placeholder="Your name?"
             disableUnderline={true}
-            style={styles.inputStyle}
+            className={classes.inputStyle}
             onChange={props.handleChange}
           />
           <Input
@@ -62,7 +64,7 @@ const FormHomePage = (props) => {
             value={props.emailOrPhone}
             placeholder="Email Address or Phone Number?"
             disableUnderline={true}
-            style={styles.inputStyle}
+            className={classes.inputStyle}
             onChange={props.handleChange}
           />
           <Input
@@ -73,7 +75,7 @@ const FormHomePage = (props) => {
             disableUnderline={true}
             multiline
             rows="4"
-            style={styles.inputStyle}
+            className={classes.inputStyle}
             onChange={props.handleChange}
           />
         </form>
@@ -81,7 +83,7 @@ const FormHomePage = (props) => {
           <Button
             variant="contained" 
             color="primary" 
-            style={styles.buttonStyle}
+            className={classes.buttonStyle}
             onClick={props.submitForm}
           >
             GET STARTED
@@ -92,4 +94,4 @@ const FormHomePage = (props) => {
   );
 };
 
-export default FormHomePage;
+export default withStyles(styles)(FormHomePage);

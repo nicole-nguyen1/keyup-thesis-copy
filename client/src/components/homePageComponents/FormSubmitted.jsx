@@ -6,11 +6,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const FormSubmitted = () => {  
+const FormSubmitted = (props) => {  
   return (
     <Dialog
-      open={this.props.open}
-      onClose={this.props.onClose}
+      open={props.open}
+      onClose={props.onClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
@@ -21,7 +21,7 @@ const FormSubmitted = () => {
           </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={this.props.onClose} color="primary" autoFocus>
+        <Button onClick={props.onClose} color="primary" autoFocus>
           Okay
           </Button>
       </DialogActions>
