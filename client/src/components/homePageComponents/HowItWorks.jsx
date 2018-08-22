@@ -4,6 +4,31 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+const styles = {
+  component: {
+    background: '#232e49',
+    textAlign: 'center',
+    margin: '0',
+    borderRadius: 0
+  },
+  grid: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around'
+  },
+  cell: {
+    margin: '10px 100px'
+  },
+  image: {
+    maxWidth: '150px',
+    maxHeight: '100px',
+    margin: '20px'
+  },
+  title: {
+    padding: '30px 0 5px 0',
+    color: '#ededee'
+  }
+};
 
 const HowItWorks = props => {
   const { classes } = props;
@@ -40,31 +65,5 @@ const HowItWorks = props => {
     </Card>
   );
 }
-
-const styles = {
-  component: {
-    background: '#232e49',
-    textAlign: 'center',
-    margin: '0',
-    borderRadius: 0
-  },
-  grid: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around'
-  },
-  cell: {
-    margin: '10px 100px'
-  },
-  image: {
-    maxWidth: '150px',
-    maxHeight: '100px',
-    margin: '20px'
-  },
-  title: {
-    padding: '30px 0 5px 0',
-    color: '#ededee'
-  }
-};
 
 export default withStyles(styles)(HowItWorks);

@@ -1,7 +1,7 @@
 import React from 'react';
 import Career from './Career.jsx';
 import Grid from '@material-ui/core/Grid';
-import FilterandSort from './FilterAndSort.jsx';
+import FilterandSort from './filterAndSortComponents/FilterAndSort.jsx';
 import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

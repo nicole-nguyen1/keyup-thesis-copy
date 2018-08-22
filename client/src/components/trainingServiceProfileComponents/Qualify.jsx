@@ -4,46 +4,53 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
+import FormSubmitted from '../homePageComponents/FormSubmitted.jsx';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  card: {
+    borderRadius: 0,
+    padding: '5px',
+    backgroundColor: '#834A8F'
+  },
+  text: {
+    color: '#ededee'
+  },
+  button: {
+    backgroundColor: '#b367c2'
+  },
+  action: {
+    margin: '0px auto 10px'
+  },
+  linkButton: {
+    margin: '0px auto 10px',
+    textDecoration: 'none'
+  }
+});
 
 const Qualify = props => {
-  const styles = {
-    card: {
-      borderRadius: 0,
-      padding: '5px',
-      backgroundColor: '#834A8F'
-    },
-    text: {
-      color: '#ededee'
-    },
-    button: {
-      margin: '0px auto 10px',
-      backgroundColor: '#b367c2'
-    },
-    action: {
-      margin: '0px auto 10px'
-    }
-  };
-
+  const { classes } = props;
   return (
     <div>
-      <Card style={styles.card}>
+      <Card className={classes.card}>
         <CardContent>
-          <Typography style={styles.text} gutterBottom variant='title'>What help do you qualify for?</Typography>
-          <Typography style={styles.text} gutterBottom variant='body1'>Answer a few questions, and we can help you access financial support, free childcare, career services and more.</Typography>
+          <Typography className={classes.text} gutterBottom variant='title'>What help do you qualify for?</Typography>
+          <Typography className={classes.text} gutterBottom variant='body1'>Answer a few questions, and we can help you access financial support, free childcare, career services and more.</Typography>
         </CardContent>
-        <CardActions style={styles.action}>
-          <Button
-            variant="contained" 
-            color="primary" 
-            style={styles.button}
-            onClick={props.openForm}
-          >
-            GET SUPPORT REC'S
-          </Button>
+        <CardActions className={classes.action}>
+          <a className={classes.linkButton} href='https://keyup.typeform.com/to/dlfXQi'>
+            <Button
+              variant="contained" 
+              color="primary" 
+              className={classes.button}
+            >
+              GET SUPPORT REC'S
+            </Button>
+          </a>
         </CardActions>
       </Card>
     </div>
   );
 };
 
-export default Qualify;
+export default withStyles(styles)(Qualify);

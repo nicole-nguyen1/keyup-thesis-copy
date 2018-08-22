@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Filter from '../filterAndSortComponents/Filter.jsx';
 
+
 const styles = theme => ({
   cardStyle: {
     backgroundColor: 'EDEDEE',
@@ -47,6 +48,7 @@ class QualifyForm extends React.Component {
     
     return (
       <Card className={classes.cardStyle}>
+        
         <CardContent className={classes.cardContentStyle}>
           <Typography variant="headline" gutterBottom>
             Chat with one of our
@@ -89,10 +91,7 @@ class QualifyForm extends React.Component {
               multiline
               rows="4"
               className={classes.inputStyle}
-              onChange={()=>{
-                this.props.handleChange;
-                this.props.enableButton;
-              }}
+              onChange={this.props.handleChange}
             />
           </FormControl>
           <div style={{ textAlign: 'center' }}>
@@ -101,7 +100,6 @@ class QualifyForm extends React.Component {
               className={classes.buttonStyle}
               onClick={()=>{
                 this.props.submitForm();
-                this.props.closeForm();
               }}
               disabled={this.props.buttonStatus}
             >

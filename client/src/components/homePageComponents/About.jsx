@@ -21,6 +21,7 @@ const styles = theme => ({
     margin: '0 auto'
   }
 });
+
 const About = ({ classes }) => {
   return (
     <Card className={classes.cardStyle}>

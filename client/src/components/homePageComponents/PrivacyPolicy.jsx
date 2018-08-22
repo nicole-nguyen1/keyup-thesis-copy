@@ -1,23 +1,26 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
-const PrivacyPolicy = () => {
-  const styles = {
-    body: {
-      padding: '50px 10px 20px 10px'
-    },
+const styles = {
+  body: {
+    padding: '50px 10px 20px 10px'
+  },
 
-    section: {
-      marginBottom: '30px'
-    }
+  section: {
+    marginBottom: '30px'
   }
+}
+
+const PrivacyPolicy = (props) => {
+  const { classes } = props;
 
   return (
     <div>
-      <Paper style={styles.body}>
+      <Paper className={classes.body}>
         <Typography paragraph variant='headline' component='h1'>Privacy Policy</Typography>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <div>
             <Typography paragraph variant='body1'>
               This privacy notice discloses the privacy practices for KeyUp. This privacy notice applies solely to information 
@@ -47,7 +50,7 @@ const PrivacyPolicy = () => {
             </ol>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>Information Collection, Use, and Sharing </Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -66,7 +69,7 @@ const PrivacyPolicy = () => {
             </Typography>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>Your Access to and Control Over Information</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -97,7 +100,7 @@ const PrivacyPolicy = () => {
             </ul>
           </div>
         </div>
-        <div style={styles.section}>
+        <div className={classes.section}>
           <Typography paragraph variant='title' component='h2'>Security</Typography>
           <div>
             <Typography paragraph variant='body1'>
@@ -125,4 +128,4 @@ const PrivacyPolicy = () => {
   )
 }
 
-export default PrivacyPolicy;
+export default withStyles(styles)(PrivacyPolicy);
