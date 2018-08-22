@@ -65,11 +65,7 @@ class NavBar extends React.Component {
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
               PopoverClasses={{paper: `${classes.menu}`}}
-              ListProps={{
-                classes: {
-                  root: classes.menuTop
-                }
-              }}
+              className={classes.top}
             >  
             <div className={classes.menuTop}>
               <Button
@@ -199,10 +195,15 @@ NavBar.styles = {
     marginBottom: '0em',
     height: '100%',
     outline: 'none',
-    marginTop: '0',
+    marginTop: '-10px',
     padding: '0',
     border: 'none!important'
   },
+
+  top: {
+    marginTop: '-10px'
+  },
+
   buttonStyle: {
     backgroundColor: '#1DCD8C',
     borderRadius: 0,
