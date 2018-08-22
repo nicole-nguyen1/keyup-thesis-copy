@@ -42,7 +42,8 @@ const styles = theme => ({
   },
 
   paper: {
-    top: '56px'
+    top: '56px',
+    backgroundColor: 'EDEDEE'
   },
 
   button: {

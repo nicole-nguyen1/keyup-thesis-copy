@@ -41,7 +41,12 @@ const ApplicationProcess = props => {
             <Button onClick={props.toggleDialog} variant="contained" color="primary" style={{ backgroundColor: '#4e74ff' }}>
               APPLY NOW
             </Button>
-            <Button variant="contained" color="primary" style={{ backgroundColor: '88888a' }}>
+            <Button 
+              variant="contained" 
+              color="primary" 
+              style={{ backgroundColor: '88888a' }}
+              onClick={props.toggleQualifyDialog}
+            >
               GET ADVICE
             </Button>
           </div>

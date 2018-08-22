@@ -1,5 +1,6 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
+const { signUpHelper, loginHelper } = require('../passport.js')
 
 const {
   GraphQLSchema,
@@ -223,7 +224,7 @@ const ContactFormType = new GraphQLObjectType({
           .then((obj) => obj.last_name);
       }
     },
-    email: { 
+    email: {
       type: GraphQLString,
       resolve(parent, args) {
         return knex('users')
@@ -231,9 +232,9 @@ const ContactFormType = new GraphQLObjectType({
           .where({ 'id': parent.user_id })
           .first()
           .then((obj) => obj.email);
-      } 
+      }
     },
-    phone_number: { 
+    phone_number: {
       type: GraphQLString,
       resolve(parent, args) {
         return knex('users')
@@ -241,7 +242,7 @@ const ContactFormType = new GraphQLObjectType({
           .where({ 'id': parent.user_id })
           .first()
           .then((obj) => obj.phone_number);
-      } 
+      }
     },
     page: { type: GraphQLString },
     career: { type: GraphQLString },
@@ -322,6 +323,17 @@ const RootQuery = new GraphQLObjectType({
         return knex('industries')
           .select();
       }
+    },
+    user: {
+      type: UserType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, { id }, { session }) {
+        console.log(session);
+        return knex('users')
+          .select()
+          .where({ id })
+          .first();
+      }
     }
   }
 });
@@ -329,6 +341,29 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
+    signUp: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+        first_name: { type: GraphQLString },
+        last_name: { type: GraphQLString },
+        phone_number: { type: GraphQLString }
+      },
+      resolve(parent, { email, password, first_name, last_name, phone_number }, req) {
+        return signUpHelper(email, password, first_name, last_name, phone_number, req);
+      }
+    },
+    login: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve(parent, { email, password }, req) {
+        return loginHelper(email, password, req);
+      }
+    },
     saveContactForm: {
       type: ContactFormType,
       args: {
@@ -427,8 +462,7 @@ const Mutation = new GraphQLObjectType({
               });
           })
       }
-    },
-
+    }
   }
 });
 
