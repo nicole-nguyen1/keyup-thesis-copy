@@ -8,24 +8,46 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../../store/index';
 import { findServices } from '../../actions/action';
 import { getServicesQuery } from '../graphql/graphql';
 
-
-
 const styles = theme => ({
   headerStyle: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
+
   groupStyle: {
-    fontSize: '12px'
+    fontSize: '12px',
+    fontWeight: 'bold'
   },
+
   formStyle: {
-    padding: '10px',
     maxWidth: '400px'
+  },
+
+  sectionStyle: {
+    display: 'inline-grid',
+    marginBottom: '30px'
+  },
+
+  backdrop: {
+    backgroundColor: "transparent"
+  },
+
+  paper: {
+    top: '56px'
+  },
+
+  button: {
+    backgroundColor: '#4e74ff',
+    borderRadius: 0
   }
 });
 
@@ -64,7 +86,6 @@ class FilterAndSortForm extends React.Component {
     this.fetch({
       query: getServicesQuery(this.props.careerID)
     }).then(res => {
-      console.log('this state', this.state)
     if (this.state.paidToLearn && !this.state.freeTraining) {
       let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings), career: res.data.career.name}
       let temp2 = this.checkSortState(temp.trainings);
@@ -91,7 +112,7 @@ class FilterAndSortForm extends React.Component {
   setSort = (e) => {
     this.setState({
       sortSelection: e.target.value
-    }, ()=>console.log('inside setSort function', this.state));
+    });
   }
 
   filterServicesByGetPaidToLearn = (services) => {
@@ -126,7 +147,6 @@ class FilterAndSortForm extends React.Component {
           filteredServices.push(service);
         }
       })
-      console.log('filtered services', filteredServices)
       return filteredServices;
     }
   }
@@ -217,54 +237,75 @@ class FilterAndSortForm extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <FormGroup className={classes.formStyle}>
-        <Typography variant="headline" className={classes.headerStyle}>
-          Filter and Sort Training
-          <br />
-        </Typography>
-        <Typography className={classes.groupStyle}>
-          FILTER
-        </Typography>
-        {this.filterOptions.map((label, index) => {
-          return (<Filter 
-            key={index}
-            label={label}
-            handlePaidClick={this.handlePaidClick}
-            handleFreeClick={this.handleFreeClick}
-          />
-          )
-        })}
-        <Typography className={classes.groupStyle}>
-          SORT BY
-        </Typography>
-        <RadioGroup name="sort">
-          {this.sortOptions.map((label, index)=>{
-            return (<Sort 
-              key={index} 
-              label={label}
-              select={this.setSort}
-              sortSelection={this.state.sortSelection}
-            />);
-          })}
-        </RadioGroup>
-        <Grid container>
-          <Grid item xs={6}>
-            <Button 
-              variant="contained" 
-              color="primary"
-              onClick={()=>{
-                this.props.hideFilter();
-                this.handleFormSubmission()
-              }}
-            >See Training Results</Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              onClick={this.props.hideFilter}
-            >CANCEL</Button>
-          </Grid>
-        </Grid>
-      </FormGroup>
+      <Dialog
+        fullScreen
+        open={this.props.open}
+        onClose={this.handleClose}
+        BackdropProps={{
+          classes: {
+            root: classes.backdrop
+          }
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.paper
+          }
+        }}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>
+          {"Filter and Sort Training"}
+        </DialogTitle>
+        <DialogContent>
+          <FormGroup className={classes.formStyle}>
+            <div className={classes.sectionStyle}>
+              {this.filterOptions.map((label, index) => {
+                return (<Filter
+                  key={index}
+                  label={label}
+                  handlePaidClick={this.handlePaidClick}
+                  handleFreeClick={this.handleFreeClick}
+                />
+                )
+              })}
+            </div>
+            <div className={classes.sectionStyle}>
+              <Typography className={classes.groupStyle}>
+                SORT BY
+              </Typography>
+              <RadioGroup name="sort">
+                {this.sortOptions.map((label, index) => {
+                  return (<Sort
+                    key={index}
+                    label={label}
+                    select={this.setSort}
+                    sortSelection={this.state.sortSelection}
+                  />);
+                })}
+              </RadioGroup>
+            </div>
+            <Grid container>
+              <Grid item xs={7}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={() => {
+                    this.props.hideFilter();
+                    this.handleFormSubmission()
+                  }}
+                >See Training Results</Button>
+              </Grid>
+              <Grid item xs={5}>
+                <Button
+                  onClick={this.props.hideFilter}
+                  style={{ marginLeft: '20px' }}
+                >CANCEL</Button>
+              </Grid>
+            </Grid>
+          </FormGroup>
+        </DialogContent>
+      </Dialog>
     );
   }
 }

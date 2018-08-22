@@ -42,8 +42,6 @@ class App extends React.Component {
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
-
-    console.log('MOUNTING')
   }
 
   getCareers = () => {
@@ -56,7 +54,7 @@ class App extends React.Component {
     .then(res => {
       store.dispatch(findCareers(res));
     }).catch((error) => {
-      console.log('ERROR ASDLK;JFDASKL;F', error)
+      console.error(error)
     });
   }
 
