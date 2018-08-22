@@ -1,5 +1,7 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
+const { passport, signUpHelper, loginHelper } = require('../passport.js')
+const bcrypt = require('bcryptjs');
 
 const {
   GraphQLSchema,
@@ -324,7 +326,8 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, { id }) {
+      resolve(parent, { id }, { session }) {
+        console.log(session);
         return knex('users')
           .select()
           .where({ id })
@@ -346,11 +349,28 @@ const Mutation = new GraphQLObjectType({
         last_name: { type: GraphQLString },
         phone_number: { type: GraphQLString }
       },
-      resolve(parent, { email, password, first_name, last_name, phone_number }) {
-        return knex('users')
-          .insert({ email, password, first_name, last_name, phone_number })
-          .returning('*')
-          .then(res => res[0]);
+      resolve(parent, { email, password, first_name, last_name, phone_number }, req) {
+        return signUpHelper(email, password, first_name, last_name, phone_number, req);
+      }
+    },
+    login: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve(parent, { email, password }, req) {
+        return new Promise((resolve, reject) => {
+          passport.authenticate('local', (err, user) => {
+            if (err) {
+              reject(new Error(err));
+            }
+            req.login(user, () => {
+              const { id, email, first_name, last_name, phone_number } = user;
+              resolve({ id, email, first_name, last_name, phone_number });
+            })
+          })({ body: { email, password }});
+        })
       }
     },
     saveContactForm: {
