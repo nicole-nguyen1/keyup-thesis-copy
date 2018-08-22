@@ -1,7 +1,6 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { passport, signUpHelper, loginHelper } = require('../passport.js')
-const bcrypt = require('bcryptjs');
+const { signUpHelper, loginHelper } = require('../passport.js')
 
 const {
   GraphQLSchema,
@@ -360,17 +359,7 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString }
       },
       resolve(parent, { email, password }, req) {
-        return new Promise((resolve, reject) => {
-          passport.authenticate('local', (err, user) => {
-            if (err) {
-              reject(new Error(err));
-            }
-            req.login(user, () => {
-              const { id, email, first_name, last_name, phone_number } = user;
-              resolve({ id, email, first_name, last_name, phone_number });
-            })
-          })({ body: { email, password }});
-        })
+        return loginHelper(email, password, req);
       }
     },
     saveContactForm: {

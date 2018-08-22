@@ -39,8 +39,18 @@ passport.deserializeUser((id, done) => {
     .catch(err => done(err))
 });
 
-const loginHelper = () => {
-
+const loginHelper = (email, password, req) => {
+  return new Promise((resolve, reject) => {
+    passport.authenticate('local', (err, user) => {
+      if (err) {
+        reject(new Error(err));
+      }
+      req.login(user, () => {
+        const { id, email, first_name, last_name, phone_number } = user;
+        resolve({ id, email, first_name, last_name, phone_number });
+      })
+    })({ body: { email, password } });
+  })
 };
 
 const signUpHelper = (email, password, first_name, last_name, phone_number, req) => {
