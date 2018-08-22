@@ -7,17 +7,13 @@ import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import Filter from '../filterAndSortComponents/Filter.jsx';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import FormGroup from '@material-ui/core/FormGroup';
 
 
 const styles = theme => ({
-  cardStyle: {
-    backgroundColor: 'EDEDEE',
-    borderRadius: '0'
-  },
-  cardContentStyle: {
-    maxWidth: '400px',
-    margin: '0 auto'
-  },
   inputStyle: {
     backgroundColor: 'white',
     margin: '5px 0px',
@@ -27,7 +23,28 @@ const styles = theme => ({
     backgroundColor: 'blue',
     color: 'white',
     borderRadius: 0,
-    marginTop: '1em'
+    marginTop: '2em',
+    float: 'left'
+  },
+  cancelButtonStyle: {
+    float: 'left',
+    marginTop: '2em',
+    marginLeft: '1em',
+    fontWeight: 'bold'
+  },
+  paper: {
+    top: '56px',
+    backgroundColor: 'EDEDEE'
+  },
+  backdrop: {
+    backgroundColor: 'transparent'
+  },
+  headerStyle: {
+    textAlign: 'left',
+    fontWeight: 'bold'
+  },
+  formStyle: {
+    maxWidth: '400px'
   }
 });
 
@@ -45,16 +62,32 @@ class QualifyForm extends React.Component {
 
   render() {
     const { classes } = this.props;
-    
+
     return (
-      <Card className={classes.cardStyle}>
-        
-        <CardContent className={classes.cardContentStyle}>
-          <Typography variant="headline" gutterBottom>
-            Chat with one of our
-            <br />
-            KeyUp Guides Today
-          </Typography>
+      <Dialog
+        fullScreen
+        open={this.props.dialogState}
+        BackdropProps={{
+          classes: {
+            root: classes.backdrop
+          }
+        }}
+        PaperProps={{
+          classes: {
+            root: classes.paper
+          }
+        }}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle
+          id="responsive-dialog-title"
+          className={classes.headerStyle}
+        >
+          Chat with one of our
+          <br />
+          KeyUp Guides Today
+        </DialogTitle>
+        <DialogContent className={classes.formStyle}>
           <Typography gutterBottom>
             We'll get back to you within 24 hours
           </Typography>
@@ -100,14 +133,21 @@ class QualifyForm extends React.Component {
               className={classes.buttonStyle}
               onClick={()=>{
                 this.props.submitForm();
+                this.props.toggleQualifyDialog();
               }}
               disabled={this.props.buttonStatus}
             >
               GET ADVICE
             </Button>
+            <Button 
+              className={classes.cancelButtonStyle}
+              onClick={this.props.toggleQualifyDialog}
+            >
+              CANCEL
+            </Button>
           </div>
-        </CardContent>
-      </Card>
+        </DialogContent>
+      </Dialog>
     );
   }
 }
