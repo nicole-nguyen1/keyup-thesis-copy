@@ -15,7 +15,8 @@ import ChatIcon from '@material-ui/icons/Chat';
 import InfoIcon from '@material-ui/icons/Info';
 import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
-import ProfileIcon from '@material-ui/icons/AccountCircle';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
@@ -76,9 +77,16 @@ class NavBar extends React.Component {
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
                 <ListItemIcon>
-                  <ProfileIcon />
+                  <AccountCircleIcon />
                 </ListItemIcon>
                 <ListItemText style={{float:'right'}}inset primary="My Profile">
+                </ListItemText>
+              </MenuItem>
+              <MenuItem onClick={this.handleClose}>
+                <ListItemIcon>
+                  <FavoriteIcon />
+                </ListItemIcon>
+                <ListItemText style={{float:'right'}}inset primary="My Favorites">
                 </ListItemText>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
