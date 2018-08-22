@@ -58,7 +58,12 @@ class TrainingServiceProfile extends React.Component {
         <Card className={classes.dark}>
           <Needs service={service} />
         </Card>
-        <ApplicationProcess service={service} open={this.state.open} toggleDialog={this.toggleDialog}/>
+        <ApplicationProcess 
+          service={service} 
+          open={this.state.open} 
+          toggleDialog={this.toggleDialog}
+          toggleQualifyDialog={this.toggleQualifyDialog}
+        />
       </div>
     );
   }
