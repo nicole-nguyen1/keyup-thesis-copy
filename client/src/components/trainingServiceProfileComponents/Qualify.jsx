@@ -33,10 +33,6 @@ const Qualify = props => {
   return (
     <div>
       <Card className={classes.card}>
-        <FormSubmitted 
-          open={props.formSubmitted}
-          onClose={props.closePopup}
-        />
         <CardContent>
           <Typography className={classes.text} gutterBottom variant='title'>What help do you qualify for?</Typography>
           <Typography className={classes.text} gutterBottom variant='body1'>Answer a few questions, and we can help you access financial support, free childcare, career services and more.</Typography>
