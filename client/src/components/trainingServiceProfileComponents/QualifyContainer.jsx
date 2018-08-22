@@ -1,8 +1,8 @@
 import React from 'react';
 import QualifyForm from './QualifyForm.jsx';
-import Qualify from './Qualify.jsx';
 import { addFormData } from '../graphql/graphql';
 import { createApolloFetch } from 'apollo-fetch';
+import Dialog from '@material-ui/core/Dialog';
 
 class QualifyContainer extends React.Component {
   constructor(props) {
@@ -76,7 +76,6 @@ class QualifyContainer extends React.Component {
   }
 
   submitForm = () => {
-    //add logic for email or phone
     let email = null;
     let phoneNumber = null;
     if (this.state.emailOrPhone.includes('@')) {
@@ -128,20 +127,15 @@ class QualifyContainer extends React.Component {
   }
 
   render() {
-
     return (
-      this.state.showForm ?
         <QualifyForm 
           service={this.props.service}
           handleChange={this.handleChange}
           setCheckbox={this.setCheckbox}
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
-        /> :
-        <Qualify 
-          openForm={this.openForm} 
-          formSubmitted={this.state.formSubmitted}
-          closePopup={this.closePopup}
+          toggleQualifyDialog={this.props.toggleQualifyDialog}
+          dialogState={this.props.dialogState}
         />
     );
   }
