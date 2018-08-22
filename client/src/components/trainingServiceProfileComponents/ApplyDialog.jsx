@@ -3,15 +3,76 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
+function ApplyOnline(props) {
+  return <Button onClick={props.toggleDialog} href={props.service.app_url} style={{ color: '4e74ff' }}>GO TO APPLICATION</Button>
+}
+
+function ApplyPhone(props) {
+  let phone = `tel:${props.service.phone_number}`
+  return (
+    <Button href={phone} 
+      style={{
+        width: '32px',
+        display: 'block',
+        bottom: '16px'
+      }}>
+      <img src='https://s3.amazonaws.com/key-up-assets/Phone-blue.png' 
+        style={{
+          height: '1.5em',
+          paddingBottom: '10px'
+        }}/>
+      <span style={{ color: '4e74ff' }}>CALL</span>
+    </Button>
+  )
+}
+
+function ConditionalButton(props) {
+  if (props.service.app_type === 'online') {
+    return <ApplyOnline service={props.service}/>
+  } else if (props.service.app_type === 'phone') {
+    return <ApplyPhone service={props.service} />
+  } else {
+    return null;
+  }
+}
+
+const styles = theme => ({
+  phone: {
+    margin: '20px 0',
+    display: 'inline-flex'
+  },
+
+  phoneIcon: {
+    height: '1.5em',
+    marginRight: '20px'
+  },
+
+  cancelButton: {
+    color: '#000'
+  }
+});
+
 const AlertDialogSlide = props => {
+  const { classes } = props;
+
+  let heading = '';
+  if (props.service.app_type === 'online') {
+    heading = 'Apply Online';
+  } else if (props.service.app_type === 'phone') {
+    heading = 'Apply by Phone';
+  } else if (props.service.app_type === 'in person') {
+    heading = 'Apply in Person'
+  }
+
   return (
     <div>
       <Dialog
@@ -22,21 +83,24 @@ const AlertDialogSlide = props => {
         aria-describedby="alert-dialog-slide-description"
       >
         {/* There is currently a warning of failed prop type because app_type values are all null until KeyUp gives us values */}
-        <DialogTitle id="alert-dialog-slide-title">{props.service.app_type}</DialogTitle>
+        <DialogTitle id="alert-dialog-slide-title">{heading}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            {props.service.apply_now_cta}
-          </DialogContentText>
+          <Typography variant='body1'>{props.service.apply_now_cta}</Typography>
+            {props.service.app_type === 'in person' ? 
+              <div className={classes.phone}>
+                <img src='https://s3.amazonaws.com/key-up-assets/Phone-blue.png' className={classes.phoneIcon} />
+                <Typography variant='body1'>{props.service.app_phone_number}</Typography>
+              </div> : null}
         </DialogContent>
         <DialogActions>
-          {props.service.app_url ? <Button onClick={props.toggleDialog} href={props.service.app_url} color="primary">GO TO APPLICATION</Button> : null}
-          <Button onClick={props.toggleDialog} color="primary">
-            CLOSE
-            </Button>
+          <ConditionalButton service={props.service}/>
+          <Button onClick={props.toggleDialog} className={classes.cancelButton}>
+            CANCEL
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
   );
 };
 
-export default AlertDialogSlide;
+export default withStyles(styles)(AlertDialogSlide);

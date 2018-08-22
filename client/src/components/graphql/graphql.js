@@ -97,8 +97,10 @@ export const getServiceQuery = (args) => (
         id
         description
       }
+      app_type
       program_url
       app_url
+      app_phone_number
       app_process
       apply_now_cta
     }
