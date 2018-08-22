@@ -7,7 +7,7 @@ import ProsCons from '../careerProfileComponents/ProsCons.jsx';
 import ApplicationProcess from './ApplicationProcess.jsx';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core';
-import QualifyContainer from './QualifyContainer.jsx';
+import AdviceFormContainer from './AdviceFormContainer.jsx';
 
 const styles = theme => ({
   dark: {
@@ -46,7 +46,7 @@ class TrainingServiceProfile extends React.Component {
           toggleDialog={this.toggleDialog}
           toggleQualifyDialog={this.toggleQualifyDialog}
         />
-        <QualifyContainer 
+        <AdviceFormContainer 
           service={service}
           toggleQualifyDialog={this.toggleQualifyDialog}
           dialogState={this.state.openQualifyContainer}
