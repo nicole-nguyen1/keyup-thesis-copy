@@ -67,11 +67,11 @@ PRIMARY KEY ("id")
 
 CREATE TABLE "users" (
 "id"  SERIAL ,
-"email" VARCHAR NOT NULL DEFAULT 'NULL' UNIQUE,
-"password" VARCHAR NOT NULL DEFAULT 'NULL' ,
-"first_name" VARCHAR DEFAULT 'NULL',
-"last_name" VARCHAR DEFAULT 'NULL',
-"phone_number" VARCHAR DEFAULT 'NULL' UNIQUE,
+"email" VARCHAR ,
+"password" VARCHAR ,
+"first_name" VARCHAR ,
+"last_name" VARCHAR ,
+"phone_number" VARCHAR ,
 PRIMARY KEY ("id")
 );
 
@@ -94,7 +94,21 @@ CREATE TABLE "contact_form" (
 "talk_to_grad" BOOLEAN ,
 "talk_to_working" BOOLEAN ,
 "other" BOOLEAN ,
-"message" VARCHAR NOT NULL DEFAULT 'NULL' ,
+"message" VARCHAR ,
+PRIMARY KEY ("id")
+);
+
+CREATE TABLE "questions" (
+"id"  SERIAL ,
+"data" JSONB ,
+PRIMARY KEY ("id")
+);
+
+CREATE TABLE "responses" (
+"id"  SERIAL ,
+"user_id" INTEGER ,
+"question_id" INTEGER ,
+"response" TEXT ,
 PRIMARY KEY ("id")
 );
 
@@ -106,3 +120,5 @@ ALTER TABLE "favorites" ADD FOREIGN KEY ("target_id") REFERENCES "services" ("id
 ALTER TABLE "favorites" ADD FOREIGN KEY ("target_id") REFERENCES "careers" ("id");
 ALTER TABLE "favorites" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "contact_form" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "responses" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "responses" ADD FOREIGN KEY ("question_id") REFERENCES "questions" ("id");
