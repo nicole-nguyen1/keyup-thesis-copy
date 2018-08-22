@@ -7,6 +7,7 @@ import ProsCons from '../careerProfileComponents/ProsCons.jsx';
 import ApplicationProcess from './ApplicationProcess.jsx';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core';
+import QualifyContainer from './QualifyContainer.jsx';
 
 const styles = theme => ({
   dark: {
@@ -19,7 +20,8 @@ class TrainingServiceProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
+      openQualifyContainer: false
     };
   }
 
@@ -27,13 +29,28 @@ class TrainingServiceProfile extends React.Component {
     this.setState({ open: !this.state.open });
   };
 
+  toggleQualifyDialog = () => {
+    this.setState({ openQualifyContainer: !this.state.openQualifyContainer})
+  }
+
   render() {
     const { classes } = this.props;
     const service = this.props.service;
+
     return (
       <div>
         <Intro service={service}/>
-        <About service={service} open={this.state.open} toggleDialog={this.toggleDialog}/>
+        <About 
+          service={service} 
+          open={this.state.open} 
+          toggleDialog={this.toggleDialog}
+          toggleQualifyDialog={this.toggleQualifyDialog}
+        />
+        <QualifyContainer 
+          service={service}
+          toggleQualifyDialog={this.toggleQualifyDialog}
+          dialogState={this.state.openQualifyContainer}
+        />
         <Card className={classes.dark}>
           <ProsCons info={service} />
         </Card>
