@@ -32,13 +32,19 @@ const styles = theme => ({
     marginLeft: '1em',
     fontWeight: 'bold'
   },
+  form: {
+    top: '56px'
+  },
+
+  backdrop: {
+    backgroundColor: "transparent",
+    top: '56px'
+  },
+
   paper: {
-    top: '56px',
     backgroundColor: 'EDEDEE'
   },
-  backdrop: {
-    backgroundColor: 'transparent'
-  },
+
   headerStyle: {
     textAlign: 'left',
     fontWeight: 'bold'
@@ -67,6 +73,7 @@ class QualifyForm extends React.Component {
       <Dialog
         fullScreen
         open={this.props.dialogState}
+        className={classes.form}
         BackdropProps={{
           classes: {
             root: classes.backdrop
