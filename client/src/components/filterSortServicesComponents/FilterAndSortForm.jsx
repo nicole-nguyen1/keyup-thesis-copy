@@ -37,12 +37,16 @@ const styles = theme => ({
     marginBottom: '30px'
   },
 
+  form: {
+    top: '56px'
+  },
+
   backdrop: {
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    top: '56px'
   },
 
   paper: {
-    top: '56px',
     backgroundColor: 'EDEDEE'
   },
 
@@ -242,6 +246,7 @@ class FilterAndSortForm extends React.Component {
         fullScreen
         open={this.props.open}
         onClose={this.handleClose}
+        className={classes.form}
         BackdropProps={{
           classes: {
             root: classes.backdrop
