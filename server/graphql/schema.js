@@ -423,7 +423,7 @@ const Mutation = new GraphQLObjectType({
                 contactForm(result[0]);
                 return result[0];
               });
-          })
+          });
       }
     },
 
