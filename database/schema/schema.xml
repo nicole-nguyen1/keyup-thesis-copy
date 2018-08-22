@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
-<!-- Active URL: http://ondras.zarovi.cz/sql/demo/?keyword=default -->
+<!-- Active URL: http://ondras.zarovi.cz/sql/demo/ -->
 <sql>
 <datatypes db="postgresql">
     <group label="Numeric" color="rgb(238,238,170)">
@@ -212,12 +212,12 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="email" null="0" autoincrement="0">
+<row name="email" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
-<default>'NULL'</default></row>
-<row name="password" null="0" autoincrement="0">
+<default>NULL</default></row>
+<row name="password" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
-<default>'NULL'</default></row>
+<default>NULL</default></row>
 <row name="first_name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
@@ -251,7 +251,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1147" y="146" name="contact_form">
+<table x="1202" y="135" name="contact_form">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -283,9 +283,39 @@
 <row name="other" null="1" autoincrement="0">
 <datatype>BOOLEAN</datatype>
 <default>NULL</default></row>
-<row name="message" null="0" autoincrement="0">
+<row name="message" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
-<default>'NULL'</default></row>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="958" y="494" name="questions">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="data" null="1" autoincrement="0">
+<datatype>JSONB</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1169" y="472" name="responses">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<row name="question_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="questions" row="id" />
+</row>
+<row name="response" null="1" autoincrement="0">
+<datatype>TEXT</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
