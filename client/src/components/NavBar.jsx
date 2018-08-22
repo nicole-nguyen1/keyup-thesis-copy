@@ -65,7 +65,24 @@ class NavBar extends React.Component {
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
               PopoverClasses={{paper: `${classes.menu}`}}
-            >
+              ListProps={{
+                classes: {
+                  root: classes.menuTop
+                }
+              }}
+            >  
+            <div className={classes.menuTop}>
+              <Button
+              variant="contained"
+              color="primary"
+              className={classes.buttonStyle}
+              >
+              SIGN IN
+              </Button>
+              <Typography style={{marginBottom: '3em'}}className={classes.menuTop}>
+              Create an account
+              </Typography>
+            </div>
               <MenuItem onClick={this.handleClose}>
                 <Link to="/home">
                   <ListItemIcon>
@@ -158,7 +175,8 @@ NavBar.styles = {
   menu: {
     top: '0!important',
     left: '0!important',
-    borderRadius: 0
+    borderRadius: '0',
+    padding: '0'
   },
   tools: {
     top: 0,
@@ -168,7 +186,30 @@ NavBar.styles = {
     backgroundColor: '2979ff'
   },
   home: {
-    padding: '5px'
+    padding: '0'
+  },
+  menuTop: {
+    background: '#232E49',
+    backgroundColor: '#232E49',
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: 'normal',
+    margin: '0',
+    height: '100px',
+    marginBottom: '0em',
+    height: '100%',
+    outline: 'none',
+    marginTop: '0',
+    padding: '0',
+    border: 'none!important'
+  },
+  buttonStyle: {
+    backgroundColor: '#1DCD8C',
+    borderRadius: 0,
+    marginTop: '3em',
+    marginBottom: '1em',
+    textDecoration: 'none',
+    borderRadius: '2px'
   }
   
 };
