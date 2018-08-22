@@ -1,6 +1,4 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
@@ -10,8 +8,6 @@ import Filter from '../filterAndSortComponents/Filter.jsx';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import FormGroup from '@material-ui/core/FormGroup';
-
 
 const styles = theme => ({
   inputStyle: {
@@ -54,7 +50,7 @@ const styles = theme => ({
   }
 });
 
-class QualifyForm extends React.Component {
+class AdviceForm extends React.Component {
   constructor(props) {
     super(props);
     this.labels = [
@@ -159,4 +155,4 @@ class QualifyForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(QualifyForm);
+export default withStyles(styles)(AdviceForm);
