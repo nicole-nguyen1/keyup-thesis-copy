@@ -34,7 +34,7 @@ const ApplicationProcess = props => {
       <Card className={classes.card} >
         <CardContent>
           <Typography gutterBottom variant='title'>Application Process</Typography>
-          <Typography gutterBottom variant='body1'>Use the buttons below to learn how to apply to this training service or contact one of our KeyUp guides for advice.</Typography>
+          <Typography gutterBottom variant='body1'>{props.service.app_process}</Typography>
         </CardContent>
         <CardActions >
           <div className={classes.buttons} >

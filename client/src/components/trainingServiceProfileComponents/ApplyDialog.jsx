@@ -21,15 +21,11 @@ const AlertDialogSlide = props => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle id="alert-dialog-slide-title">
-          How to apply:
-          </DialogTitle>
+        {/* There is currently a warning of failed prop type because app_type values are all null until KeyUp gives us values */}
+        <DialogTitle id="alert-dialog-slide-title">{props.service.app_type}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {props.service.apply_now_cta}
-            <br/>
-            <br/>
-            {props.service.app_process}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

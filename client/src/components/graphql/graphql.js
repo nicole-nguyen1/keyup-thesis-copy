@@ -116,8 +116,11 @@ export const getServicesQuery = (args) => (
       about
       financial_info
       location
+      app_type
       app_process
       apply_now_cta
+      app_url
+      app_phone_number
       program_url
       program_length_total
       program_total_weekly
