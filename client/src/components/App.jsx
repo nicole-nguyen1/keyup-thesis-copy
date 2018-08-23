@@ -15,6 +15,7 @@ import CareerProfileContainer from './CareerProfileContainer.jsx';
 import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.jsx';
 import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
+import LoginContainer from './loginComponents/loginContainer.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -155,6 +156,7 @@ class App extends React.Component {
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/terms-and-conditions" component={TermsConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+                <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
@@ -181,6 +183,7 @@ class App extends React.Component {
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/terms-and-conditions" component={TermsConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
+                <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}

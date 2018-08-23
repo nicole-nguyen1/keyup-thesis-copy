@@ -179,3 +179,20 @@ export const addFormData = (args) => (
   }
   `
 );
+
+export const loginData = (args) => (
+  `
+  mutation {
+    login (
+      email: ${args.email},
+      password: ${args.password}
+    ) {
+      id
+      email
+      first_name
+      last_name
+      phone_number
+    }
+  }
+  `
+);
