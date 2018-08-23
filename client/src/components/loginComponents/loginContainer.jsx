@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +17,8 @@ class LoginContainer extends React.Component {
     this.state = {
       email: '',
       password: '',
-      buttonStatus: true
+      buttonStatus: true,
+      toHome: false
     };
   }
 
@@ -61,7 +63,8 @@ class LoginContainer extends React.Component {
       this.setState({
         email: '',
         password: '',
-        buttonStatus: true
+        buttonStatus: true,
+        toHome: true
       })
       return res;
     }).then((res) => {
@@ -72,6 +75,10 @@ class LoginContainer extends React.Component {
   }
 
   render() {
+    if (this.state.toHome) {
+      return <Redirect to='/home' />
+    }
+
     return (
       <div>
         <LoginForm 
