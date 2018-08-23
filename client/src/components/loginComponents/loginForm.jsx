@@ -8,7 +8,23 @@ const styles = theme => ({
   inputStyle: {
     backgroundColor: 'white',
     margin: '5px 0px',
-    padding: '10px'
+    padding: '10px',
+    width: '90vw'
+  },
+  buttonStyle: {
+    backgroundColor: 'blue',
+    color: 'white',
+    borderRadius: 0,
+    marginTop: '2em',
+    float: 'left'
+  },
+  paper: {
+    top: '56px',
+    padding: '60px 10px',
+    backgroundColor: 'EDEDEE'
+  },
+  extraSpace: {
+    marginTop: '30px'
   }
 });
 
@@ -20,14 +36,14 @@ class LoginForm extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.paper}>
         <Typography variant="headline">
-        This works
+        Welcome!
         </Typography>
-        <Typography variant='body1'>
+        <Typography variant='body1' className={classes.extraSpace}>
           Sign in to access your KeyUp account
         </Typography>
-        <FormControl style={{ width: '98%' }}>
+        <FormControl>
           <Input
             type="text"
             name="email"
