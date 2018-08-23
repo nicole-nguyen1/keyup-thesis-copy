@@ -66,8 +66,6 @@ class LoginContainer extends React.Component {
       return res;
     }).then((res) => {
       store.dispatch(findUser(res.data.login))
-    }).then(() => {
-      console.log(store.getState())
     }).catch(err => {
       console.log(err)
     })
