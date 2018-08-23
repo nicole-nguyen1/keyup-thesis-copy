@@ -41,34 +41,6 @@ const styles = theme => ({
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      buttonStatus: true,
-      emailStatus: false,
-      passwordStatus: false
-    }
-  }
-
-  changeEmailAndButtonStatus = () => {
-    this.setState({
-      emailStatus: true
-    })
-    if (this.state.emailStatus && this.state.passwordStatus) {
-      this.setState({
-        buttonStatus: false
-      })
-    }
-  }
-
-  changePasswordAndButtonStatus = () => {
-    this.setState({
-      passwordStatus: true
-    })
-    if (this.state.emailStatus && this.state.passwordStatus) {
-      this.setState({
-        buttonStatus: false
-      })
-    }
   }
 
   render() {
@@ -88,7 +60,7 @@ class LoginForm extends React.Component {
             placeholder="Email Address"
             disableUnderline={true}
             className={classes.inputStyle}
-            onChange={this.changeEmailAndButtonStatus}
+            onChange={this.props.handleEmailChange}
           />
           <Input
             type="password"
@@ -96,14 +68,14 @@ class LoginForm extends React.Component {
             placeholder="Password"
             disableUnderline={true}
             className={classes.inputStyle}
-            onChange={this.changePasswordAndButtonStatus}
+            onChange={this.props.handlePasswordChange}
           />
           <div>
             <Button
               variant="contained"
               className={classes.buttonStyle}
-              onClick={() => console.log('you clicked the sign in button!')}
-              disabled={this.state.buttonStatus}
+              onClick={this.props.submitForm}
+              disabled={this.props.buttonStatus}
             >
         SIGN IN
             </Button>
