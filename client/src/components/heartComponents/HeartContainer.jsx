@@ -9,7 +9,6 @@ const styles = theme => ({
     position: 'relative',
     top: '-4px',
     left: '10px',
-    height: '0.8em',
     color: '#88888A',
     textAlign: 'right',
     flexDirection: 'column'
@@ -18,20 +17,23 @@ const styles = theme => ({
     position: 'relative',
     top: '-4px',
     left: '10px',
-    height: '0.8em',
     color: '#7A94F4',
     textAlign: 'right',
     flexDirection: 'column'
   },
   buttonStyle: {
     flexDirection: 'column'
+  },
+  largeSize: {
+    fontSize: 36
   }
 });
 class HeartContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      className: this.props.classes.icon
+      className: this.props.classes.icon,
+      iconSize: 20
     };
   }
 
@@ -41,14 +43,20 @@ class HeartContainer extends React.Component {
     })
   }
 
+  
+
   render() {
     const { classes } = this.props;
-    
+    if(this.props.size === 'large') {
+      this.state.iconSize = 36;
+    }
     return (
-      <Button classes={{label: classes.buttonStyle}}>
+      <Button classes={{label: classes.buttonStyle}} >
         <FavoriteIcon
           className={this.state.className}
+          height={classes.largeSize.height}
           onClick={this.handleClick}
+          style={{ fontSize: this.state.iconSize }}
         />
         <Typography 
           gutterBottom

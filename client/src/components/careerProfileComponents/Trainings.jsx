@@ -37,8 +37,10 @@ const Trainings = (props) => {
           <Button component={Link} to={`/services/${props.careerID}`} variant="contained" color="primary" className={classes.button}>
             SEE TRAINING SERVICES
           </Button>
-          <HeartContainer profile={true}/>
         </CardActions>
+        <div style={{ textAlign: 'center'}}>
+          <HeartContainer profile={true} size={'large'}/>
+        </div>
       </Card>
     </div>
   );
