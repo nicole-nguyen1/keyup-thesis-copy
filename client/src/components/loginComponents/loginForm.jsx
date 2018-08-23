@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
+import { Button } from '@material-ui/core';
 
 const styles = theme => ({
   inputStyle: {
@@ -25,6 +26,12 @@ const styles = theme => ({
   },
   extraSpace: {
     marginTop: '30px'
+  },
+  createButtonStyle: {
+    float: 'left',
+    marginTop: '2em',
+    marginLeft: '1em',
+    fontWeight: 'bold'
   }
 });
 
@@ -47,7 +54,7 @@ class LoginForm extends React.Component {
           <Input
             type="text"
             name="email"
-            placeholder="Email address"
+            placeholder="Email Address"
             disableUnderline={true}
             className={classes.inputStyle}
             onChange={() => console.log('the email input field is changing!')}
@@ -60,6 +67,21 @@ class LoginForm extends React.Component {
             className={classes.inputStyle}
             onChange={() => console.log('the password input field is changing!')}
           />
+          <div>
+        <Button
+          variant="contained"
+          className={classes.buttonStyle}
+          onClick={() => console.log('you clicked the sign in button!')}
+        >
+        SIGN IN
+        </Button>
+        <Button
+          className={classes.createButtonStyle}
+          onClick={() => console.log('you clicked the create an account button!')}
+        >
+        CREATE AN ACCOUNT
+        </Button>
+        </div>
         </FormControl>
       </div>
     );
