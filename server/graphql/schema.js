@@ -515,14 +515,33 @@ const Mutation = new GraphQLObjectType({
         service_id: { type: GraphQLID }
       },
       resolve(parent, args) {
-        return knex('favorites')
-          .insert({
-            user_id: args.user_id,
-            career_id: args.career_id,
-            service_id: args.service_id,
-          })
-          .returning('*')
-          .then((res) => res[0]);
+        //check if favorite currently exists
+        let checkFaves = knex('favorites');
+
+        if (args.career_id) {
+          checkFaves = checkFaves.where('career_id', args.career_id);
+        } else if (args.service_id) {
+          checkFaves = checkFaves.where('service_id', args.service_id);
+        }
+
+        return checkFaves
+          .select()
+          .first()
+          .then((res) => {
+            //add favorite if it does not currently exist
+            if (res === undefined) {
+              return knex('favorites')
+                .insert({
+                  user_id: args.user_id,
+                  career_id: args.career_id,
+                  service_id: args.service_id,
+                })
+                .returning('*')
+                .then((res) => res[0]);
+            }
+            
+            return res;
+          });
       }
     },
 
