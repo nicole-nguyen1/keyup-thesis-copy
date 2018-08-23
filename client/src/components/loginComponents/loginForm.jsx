@@ -13,10 +13,11 @@ const styles = theme => ({
     width: '90vw'
   },
   buttonStyle: {
-    backgroundColor: 'blue',
+    backgroundColor: '2979ff',
     color: 'white',
     borderRadius: 0,
     marginTop: '5em',
+    padding: '5px 30px',
     float: 'left',
     borderRadius: '2px'
   },
@@ -40,6 +41,34 @@ const styles = theme => ({
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      buttonStatus: true,
+      emailStatus: false,
+      passwordStatus: false
+    }
+  }
+
+  changeEmailAndButtonStatus = () => {
+    this.setState({
+      emailStatus: true
+    })
+    if (this.state.emailStatus && this.state.passwordStatus) {
+      this.setState({
+        buttonStatus: false
+      })
+    }
+  }
+
+  changePasswordAndButtonStatus = () => {
+    this.setState({
+      passwordStatus: true
+    })
+    if (this.state.emailStatus && this.state.passwordStatus) {
+      this.setState({
+        buttonStatus: false
+      })
+    }
   }
 
   render() {
@@ -59,7 +88,7 @@ class LoginForm extends React.Component {
             placeholder="Email Address"
             disableUnderline={true}
             className={classes.inputStyle}
-            onChange={() => console.log('the email input field is changing!')}
+            onChange={this.changeEmailAndButtonStatus}
           />
           <Input
             type="password"
@@ -67,13 +96,14 @@ class LoginForm extends React.Component {
             placeholder="Password"
             disableUnderline={true}
             className={classes.inputStyle}
-            onChange={() => console.log('the password input field is changing!')}
+            onChange={this.changePasswordAndButtonStatus}
           />
           <div>
             <Button
               variant="contained"
               className={classes.buttonStyle}
               onClick={() => console.log('you clicked the sign in button!')}
+              disabled={this.state.buttonStatus}
             >
         SIGN IN
             </Button>
