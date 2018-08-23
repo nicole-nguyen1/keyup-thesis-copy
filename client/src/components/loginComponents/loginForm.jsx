@@ -16,20 +16,22 @@ const styles = theme => ({
     backgroundColor: 'blue',
     color: 'white',
     borderRadius: 0,
-    marginTop: '2em',
-    float: 'left'
+    marginTop: '5em',
+    float: 'left',
+    borderRadius: '2px'
   },
   paper: {
     top: '56px',
     padding: '60px 10px',
-    backgroundColor: 'EDEDEE'
+    backgroundColor: 'EDEDEE',
+    height: '100vh'
   },
   extraSpace: {
     marginTop: '30px'
   },
   createButtonStyle: {
     float: 'left',
-    marginTop: '2em',
+    marginTop: '5em',
     marginLeft: '1em',
     fontWeight: 'bold'
   }
@@ -68,20 +70,20 @@ class LoginForm extends React.Component {
             onChange={() => console.log('the password input field is changing!')}
           />
           <div>
-        <Button
-          variant="contained"
-          className={classes.buttonStyle}
-          onClick={() => console.log('you clicked the sign in button!')}
-        >
+            <Button
+              variant="contained"
+              className={classes.buttonStyle}
+              onClick={() => console.log('you clicked the sign in button!')}
+            >
         SIGN IN
-        </Button>
-        <Button
-          className={classes.createButtonStyle}
-          onClick={() => console.log('you clicked the create an account button!')}
-        >
+            </Button>
+            <Button
+              className={classes.createButtonStyle}
+              onClick={() => console.log('you clicked the create an account button!')}
+            >
         CREATE AN ACCOUNT
-        </Button>
-        </div>
+            </Button>
+          </div>
         </FormControl>
       </div>
     );
