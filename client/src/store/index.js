@@ -5,6 +5,7 @@ import pageTitleReducers from '../reducers/pageTitleReducers';
 import serviceReducers from '../reducers/serviceReducers';
 import careerReducers from '../reducers/careerReducers';
 import trainingServiceReducers from '../reducers/trainingServiceReducers';
+import userReducers from '../reducers/userReducers';
 
 export const store = createStore(
   combineReducers({
@@ -13,7 +14,8 @@ export const store = createStore(
     pages: pageTitleReducers,
     career: careerReducers,
     trainingService: trainingServiceReducers,
-    services: serviceReducers
+    services: serviceReducers,
+    user: userReducers
   }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
