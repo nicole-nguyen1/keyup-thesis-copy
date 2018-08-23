@@ -2,7 +2,7 @@ import React from 'react';
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../../actions/action';
+import { getPageTitle, findUser } from '../../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
 import { loginData } from '../graphql/graphql';
 import LoginForm from './loginForm.jsx';
@@ -48,10 +48,6 @@ class LoginContainer extends React.Component {
     }
   }
 
-  handleLogin = e => {
-    e.preventDefault();
-  }
-
   submitForm = () => {
     const formArguments = {
       email: JSON.stringify(this.state.email),
@@ -67,6 +63,11 @@ class LoginContainer extends React.Component {
         password: '',
         buttonStatus: true
       })
+      return res;
+    }).then((res) => {
+      store.dispatch(findUser(res.data.login))
+    }).then(() => {
+      console.log(store.getState())
     }).catch(err => {
       console.log(err)
     })
@@ -90,12 +91,13 @@ class LoginContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    pages: state.pages.page
+    pages: state.pages.page,
+    user: state.user.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle }, dispatch);
+  return bindActionCreators({ getPageTitle, findUser}, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
