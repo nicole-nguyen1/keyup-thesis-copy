@@ -79,8 +79,7 @@ PRIMARY KEY ("id")
 
 CREATE TABLE "favorites" (
 "id"  SERIAL ,
-"type" VARCHAR NOT NULL DEFAULT 'NULL' ,
-"career_id" INTEGER NOT NULL ,
+"career_id" INTEGER ,
 "service_id" INTEGER ,
 "user_id" INTEGER NOT NULL ,
 PRIMARY KEY ("id")

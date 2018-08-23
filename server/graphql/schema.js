@@ -256,6 +256,14 @@ const ContactFormType = new GraphQLObjectType({
   })
 });
 
+const FavoriteType = new GraphQLObjectType({
+  name: 'Favorite',
+  fields: () => ({
+    id: { type: GraphQLID },
+    career_id: 
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -324,6 +332,7 @@ const RootQuery = new GraphQLObjectType({
           .select();
       }
     },
+
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },
