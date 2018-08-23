@@ -244,10 +244,13 @@
 <row name="type" null="0" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>'NULL'</default></row>
-<row name="target_id" null="0" autoincrement="0">
+<row name="career_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="careers" row="id" />
+</row>
+<row name="service_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="services" row="id" />
-<relation table="careers" row="id" />
 </row>
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
