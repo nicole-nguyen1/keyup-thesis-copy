@@ -260,7 +260,25 @@ const FavoriteType = new GraphQLObjectType({
   name: 'Favorite',
   fields: () => ({
     id: { type: GraphQLID },
-    career_id: 
+    career_id: { type: GraphQLID },
+    service_id: { type: GraphQLID },
+    user_id: { type: GraphQLID },
+    career: {
+      type: new GraphQLList(CareerType),
+      resolve(parent, args) {
+        return knex('careers')
+          .select()
+          .where('careers.id', parent.career_id);
+      }
+    },
+    training_service: {
+      type: new GraphQLList(TrainingType),
+      resolve(parent, args) {
+        return knex('services')
+          .select()
+          .where('services.id', parent.service_id);
+      }
+    }
   })
 });
 
@@ -325,6 +343,7 @@ const RootQuery = new GraphQLObjectType({
       }
     },
 
+    //GET list of industries
     industries: {
       type: new GraphQLList(IndustryType),
       resolve(parent, args) {
@@ -333,6 +352,7 @@ const RootQuery = new GraphQLObjectType({
       }
     },
 
+    //GET a specific user
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },
@@ -342,6 +362,18 @@ const RootQuery = new GraphQLObjectType({
           .select()
           .where({ id })
           .first();
+      }
+    },
+
+    //GET list of favorites for one user
+    favorites: {
+      type: new GraphQLList(FavoriteType),
+      args: { user_id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return knex('favorites')
+          .select()
+          .where('favorites.user_id', args.user_id)
+          // .then((res) => console.log('favorites', res));
       }
     }
   }
