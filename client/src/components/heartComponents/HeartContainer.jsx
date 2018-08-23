@@ -1,13 +1,20 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
-  card: {
-    borderRadius: 0,
-    padding: '5px'
+  icon: {
+    position: 'relative',
+    top: '-4px',
+    left: '10px',
+    height: '0.8em',
+    color: '#7A94F4',
+    textAlign: 'right'
   }
 });
-class CareerProfile extends React.Component {
+class HeartContainer extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -16,10 +23,23 @@ class CareerProfile extends React.Component {
     const { classes } = this.props;
     
     return (
-      <div>
-      </div>
+      <Button>
+        <Typography 
+          gutterBottom
+          variant='body1'  
+          className={classes.icon}
+        >
+          {this.props.profile === true ?
+            'FAVORITE' :
+            ' '
+          }
+        </Typography>
+        <FavoriteIcon
+          className={classes.icon}
+        />
+      </Button>
     );
   }
 }
 
-export default withStyles(styles)(CareerProfile);
+export default withStyles(styles)(HeartContainer);
