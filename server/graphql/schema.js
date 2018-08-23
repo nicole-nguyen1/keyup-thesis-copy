@@ -395,6 +395,7 @@ const Mutation = new GraphQLObjectType({
         return signUpHelper(email, password, first_name, last_name, phone_number, req);
       }
     },
+
     login: {
       type: UserType,
       args: {
@@ -405,6 +406,7 @@ const Mutation = new GraphQLObjectType({
         return loginHelper(email, password, req);
       }
     },
+
     saveContactForm: {
       type: ContactFormType,
       args: {
@@ -503,8 +505,39 @@ const Mutation = new GraphQLObjectType({
               });
           });
       }
+    },
+
+    saveFavorite: {
+      type: FavoriteType,
+      args: {
+        user_id: { type: GraphQLID },
+        career_id: { type: GraphQLID },
+        service_id: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        return knex('favorites')
+          .insert({
+            user_id: args.user_id,
+            career_id: args.career_id,
+            service_id: args.service_id,
+          })
+          .returning('*')
+          .then((res) => res[0]);
+      }
+    },
+
+    removeFavorite: {
+      type: FavoriteType,
+      args: {
+        id: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        return knex('favorites')
+          .where({ id: args.id })
+          .del();
+      }
     }
-  }
+  },
 });
 
 module.exports = new GraphQLSchema({
