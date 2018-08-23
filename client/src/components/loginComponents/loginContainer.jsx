@@ -16,9 +16,7 @@ class LoginContainer extends React.Component {
     this.state = {
       email: '',
       password: '',
-      buttonStatus: true,
-      emailStatus: false,
-      passwordStatus: false
+      buttonStatus: true
     };
   }
 
@@ -29,27 +27,23 @@ class LoginContainer extends React.Component {
   handleEmailChange = e => {
     this.setState({
       email: e.target.value
-    })
-    this.setState({
-      emailStatus: true
-    })
-    if (this.state.emailStatus && this.state.passwordStatus) {
-      this.setState({
-        buttonStatus: false
-      })
-    }
+    }, this.enableButton)
   }
 
   handlePasswordChange = e => {
     this.setState({
       password: e.target.value
-    })
-    this.setState({
-      passwordStatus: true
-    })
-    if (this.state.emailStatus && this.state.passwordStatus) {
+    }, this.enableButton)
+  }
+
+  enableButton = () => {
+    if (this.state.email.length > 0 && this.state.password.length > 0) {
       this.setState({
         buttonStatus: false
+      })
+    } else {
+      this.setState({
+        buttonStatus: true
       })
     }
   }
@@ -59,23 +53,23 @@ class LoginContainer extends React.Component {
   }
 
   submitForm = () => {
-    console.log('you submitted the form with email and password!')
-    console.log(this.state.email)
-    console.log(this.state.password)
-    // const formArguments = {
-    //   email: JSON.stringify(this.state.email),
-    //   password: JSON.stringify(this.state.password)
-    // }
-    // this.fetch({
-    //   query: loginData(formArguments)
-    // }).then(() => {
-    //   this.setState({
-    //     email: '',
-    //     password: ''
-    //   })
-    // }).catch(err => {
-    //   console.log(err)
-    // })
+    const formArguments = {
+      email: JSON.stringify(this.state.email),
+      password: JSON.stringify(this.state.password)
+    }
+    console.log(formArguments)
+    this.fetch({
+      query: loginData(formArguments)
+    }).then((res) => {
+      console.log('res', res);
+      this.setState({
+        email: '',
+        password: '',
+        buttonStatus: true
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render() {

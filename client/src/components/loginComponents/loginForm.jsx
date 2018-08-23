@@ -56,11 +56,12 @@ class LoginForm extends React.Component {
         <FormControl>
           <Input
             type="text"
-            name="email"
+            name="email" 
             placeholder="Email Address"
             disableUnderline={true}
             className={classes.inputStyle}
             onChange={this.props.handleEmailChange}
+            required
           />
           <Input
             type="password"
@@ -69,6 +70,7 @@ class LoginForm extends React.Component {
             disableUnderline={true}
             className={classes.inputStyle}
             onChange={this.props.handlePasswordChange}
+            required
           />
           <div>
             <Button
