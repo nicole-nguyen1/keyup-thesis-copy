@@ -1,10 +1,21 @@
 import React from 'react';
 import Career from '../Career.jsx';
 import Grid from '@material-ui/core/Grid';
+import { createApolloFetch } from 'apollo-fetch';
+import { getCareersQuery } from '../graphql/graphql';
 
 class FavoriteCareers extends React.Component {
   constructor(props) {
     super(props);
+    this.fetch = createApolloFetch({
+      uri: '/graphql'
+    }).bind(this);
+  }
+
+  getCareer = () => {
+    this.fetch({
+      query: getCareersQuery
+    })
   }
 
   render() {
