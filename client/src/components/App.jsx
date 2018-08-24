@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import Careers from './Careers.jsx';
-import { findCareers, getIndustries } from '../actions/action';
+import { findCareers, getIndustries, getFavorites } from '../actions/action';
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
@@ -23,7 +23,8 @@ import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
   getIndustriesQuery,
-  filterCareersQuery
+  filterCareersQuery,
+  getFavoritesQuery
 } from './graphql/graphql';
 
 
@@ -40,12 +41,17 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getCareers();
-
     this.fetch({
       query: getIndustriesQuery
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user.id !== prevProps.user.id) {
+      this.getFavorites();
+    }
   }
 
   getCareers = () => {
@@ -60,6 +66,15 @@ class App extends React.Component {
     }).catch((error) => {
       console.error(error)
     });
+  }
+
+  getFavorites = () => {
+    this.fetch({
+      query: getFavoritesQuery(this.props.user.id)
+    })
+    .then((res) => {
+      store.dispatch(getFavorites(res.data));
+    })
   }
 
   filterCareers = (args, sortBy) => {
@@ -162,9 +177,9 @@ class App extends React.Component {
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
                 <Route exact path="/profile" render={props => {
-                  return <UserProfileContainer 
+                  return <UserProfileContainer
                     router={props}
-                    />
+                  />;
                 }} />
                 <Route exact path="/favorites" render={props => {
                   return <FavoritesContainer 
@@ -174,6 +189,7 @@ class App extends React.Component {
                   return <Careers
                     router={props}
                     careers={this.props.careers}
+                    favorites={this.props.favorites}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                   />;
@@ -238,6 +254,8 @@ const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
     industries: state.industries.industries,
+    user: state.user,
+    favorites: state.favorites
   };
 };
 
