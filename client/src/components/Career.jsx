@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
 import { store } from '../store/index';
 import { getPageTitle } from '../actions/action';
+import HeartContainer from './heartComponents/HeartContainer.jsx';
 
 class Career extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Career extends React.Component {
     const style = {
       height: '20%'
     };
+    console.log('career props', this.props)
     return (
       <Grid item xs={12}>
         <Card>
@@ -48,15 +50,23 @@ class Career extends React.Component {
               </Grid>
             </Grid>
             <Grid container spacing={8}>
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <Button variant="contained" color="primary" style={{backgroundColor: '2979ff'}} component={Link} to={`/careers/${this.props.career.id}`}>
                   LEARN MORE
                 </Button>
               </Grid>
-              <Grid item xs={6}>
-                <Button variant='contained' color='primary' style={{backgroundColor: '2979ff'}} component={Link} to={`/services/${this.props.career.id}`}>
+              <Grid item xs={5}>
+                <Button style={{
+                  backgroundColor: 'transparent',
+                  color: 'grey'
+                }} component={Link} to={`/services/${this.props.career.id}`}>
                   FIND TRAINING
                 </Button>
+              </Grid>
+              <Grid item xs={2} >
+                <HeartContainer
+                  size={'large'}
+                />
               </Grid>
             </Grid>
           </CardContent>
