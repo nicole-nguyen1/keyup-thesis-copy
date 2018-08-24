@@ -46,3 +46,10 @@ export const findUser = (data) => (
     payload: data
   }
 );
+
+export const getFavorites = (data) => (
+  {
+    type: 'FAVORITE',
+    payload: data
+  }
+)
