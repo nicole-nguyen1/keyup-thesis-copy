@@ -1,27 +1,23 @@
 import React from 'react';
-import Favorites from './Favorites.jsx';
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPageTitle, findUser } from '../../actions/action';
+import UserProfile from './UserProfile.jsx';
 
-class FavoritesContainer extends React.Component {
+class UserProfileContainer extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  // componentDidMount() {
-
-  // }
-
   render() {
-    return <Favorites userId={this.props.user_id}/>
+    return <UserProfile user={this.props.user}/>
   }
 }
 
 const mapStateToProps = state => {
   return {
-    user_id: state.user.id
+    user: state.user
   };
 };
 
@@ -29,4 +25,4 @@ const mapStateToProps = state => {
 //   return bindActionCreators({ getPageTitle, findUser }, dispatch);
 // };
 
-export default connect(mapStateToProps)(FavoritesContainer);
+export default connect(mapStateToProps)(UserProfileContainer);

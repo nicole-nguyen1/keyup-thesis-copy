@@ -7,7 +7,9 @@ class Favorites extends React.Component {
 
   render() {
     return (
-      <p>Hello World</p>
+      <div>
+        <p>Favorites component</p>
+      </div>
     )
   }
 }

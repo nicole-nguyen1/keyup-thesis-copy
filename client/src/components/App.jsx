@@ -17,6 +17,8 @@ import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
 import LoginContainer from './loginComponents/loginContainer.jsx';
 import SignUpForm from './SignUpForm.jsx';
+import UserProfileContainer from './userProfileComponents/UserProfileContainer.jsx';
+import FavoritesContainer from './favoritesComponents/FavoritesContainer.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -159,6 +161,15 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path="/profile" render={props => {
+                  return <UserProfileContainer 
+                    router={props}
+                    />
+                }} />
+                <Route exact path="/favorites" render={props => {
+                  return <FavoritesContainer 
+                    router={props}/>
+                }} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
@@ -187,6 +198,15 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path="/profile" render={props => {
+                  return <UserProfileContainer
+                    router={props}
+                  />
+                }} />
+                <Route exact path="/favorites" render={props => {
+                  return <FavoritesContainer
+                    router={props} />
+                }} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}

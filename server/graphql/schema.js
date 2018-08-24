@@ -528,7 +528,7 @@ const Mutation = new GraphQLObjectType({
           .select()
           .first()
           .then((res) => {
-            //add favorite if it does not currently exist
+            //add favorite if it
             if (res === undefined) {
               return knex('favorites')
                 .insert({
