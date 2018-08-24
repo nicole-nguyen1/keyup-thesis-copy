@@ -256,6 +256,32 @@ const ContactFormType = new GraphQLObjectType({
   })
 });
 
+const FavoriteType = new GraphQLObjectType({
+  name: 'Favorite',
+  fields: () => ({
+    id: { type: GraphQLID },
+    career_id: { type: GraphQLID },
+    service_id: { type: GraphQLID },
+    user_id: { type: GraphQLID },
+    career: {
+      type: new GraphQLList(CareerType),
+      resolve(parent, args) {
+        return knex('careers')
+          .select()
+          .where('careers.id', parent.career_id);
+      }
+    },
+    training_service: {
+      type: new GraphQLList(TrainingType),
+      resolve(parent, args) {
+        return knex('services')
+          .select()
+          .where('services.id', parent.service_id);
+      }
+    }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -317,6 +343,7 @@ const RootQuery = new GraphQLObjectType({
       }
     },
 
+    //GET list of industries
     industries: {
       type: new GraphQLList(IndustryType),
       resolve(parent, args) {
@@ -324,6 +351,8 @@ const RootQuery = new GraphQLObjectType({
           .select();
       }
     },
+
+    //GET a specific user
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },
@@ -333,6 +362,18 @@ const RootQuery = new GraphQLObjectType({
           .select()
           .where({ id })
           .first();
+      }
+    },
+
+    //GET list of favorites for one user
+    favorites: {
+      type: new GraphQLList(FavoriteType),
+      args: { user_id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return knex('favorites')
+          .select()
+          .where('favorites.user_id', args.user_id)
+          // .then((res) => console.log('favorites', res));
       }
     }
   }
@@ -354,6 +395,7 @@ const Mutation = new GraphQLObjectType({
         return signUpHelper(email, password, first_name, last_name, phone_number, req);
       }
     },
+
     login: {
       type: UserType,
       args: {
@@ -364,6 +406,7 @@ const Mutation = new GraphQLObjectType({
         return loginHelper(email, password, req);
       }
     },
+
     saveContactForm: {
       type: ContactFormType,
       args: {
@@ -462,8 +505,58 @@ const Mutation = new GraphQLObjectType({
               });
           });
       }
+    },
+
+    saveFavorite: {
+      type: FavoriteType,
+      args: {
+        user_id: { type: GraphQLID },
+        career_id: { type: GraphQLID },
+        service_id: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        //check if favorite currently exists
+        let checkFaves = knex('favorites');
+
+        if (args.career_id) {
+          checkFaves = checkFaves.where('career_id', args.career_id);
+        } else if (args.service_id) {
+          checkFaves = checkFaves.where('service_id', args.service_id);
+        }
+
+        return checkFaves
+          .select()
+          .first()
+          .then((res) => {
+            //add favorite if it does not currently exist
+            if (res === undefined) {
+              return knex('favorites')
+                .insert({
+                  user_id: args.user_id,
+                  career_id: args.career_id,
+                  service_id: args.service_id,
+                })
+                .returning('*')
+                .then((res) => res[0]);
+            }
+            
+            return res;
+          });
+      }
+    },
+
+    removeFavorite: {
+      type: FavoriteType,
+      args: {
+        id: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        return knex('favorites')
+          .where({ id: args.id })
+          .del();
+      }
     }
-  }
+  },
 });
 
 module.exports = new GraphQLSchema({

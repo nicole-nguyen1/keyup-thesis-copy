@@ -39,3 +39,10 @@ export const findService = (data) => (
     payload: data
   }
 );
+
+export const findUser = (data) => (
+  {
+    type: 'USER',
+    payload: data
+  }
+);

@@ -68,13 +68,16 @@ class NavBar extends React.Component {
               className={classes.top}
             >  
             <div className={classes.menuTop}>
+             <Link to="/login">
               <Button
               variant="contained"
               color="primary"
               className={classes.buttonStyle}
+              onClick={this.handleClose}
               >
               SIGN IN
               </Button>
+              </Link>
               <Typography style={{marginBottom: '3em'}}className={classes.menuTop}>
               Create an account
               </Typography>
