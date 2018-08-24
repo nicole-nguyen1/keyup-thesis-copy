@@ -42,10 +42,12 @@ CREATE TABLE "services" (
 "financial_info" VARCHAR ,
 "program_length_total" VARCHAR ,
 "location" VARCHAR ,
+"app_type" VARCHAR ,
 "app_process" VARCHAR ,
 "apply_now_cta" VARCHAR ,
 "program_url" VARCHAR ,
 "app_url" VARCHAR ,
+"app_phone_number" VARCHAR ,
 "paid_to_learn" BOOLEAN ,
 "federal_student_aid" BOOLEAN ,
 "card_length" VARCHAR ,
@@ -77,8 +79,8 @@ PRIMARY KEY ("id")
 
 CREATE TABLE "favorites" (
 "id"  SERIAL ,
-"type" VARCHAR NOT NULL DEFAULT 'NULL' ,
-"target_id" INTEGER NOT NULL ,
+"career_id" INTEGER ,
+"service_id" INTEGER ,
 "user_id" INTEGER NOT NULL ,
 PRIMARY KEY ("id")
 );
@@ -116,8 +118,8 @@ ALTER TABLE "careers" ADD FOREIGN KEY ("industry_id") REFERENCES "industries" ("
 ALTER TABLE "career_traits" ADD FOREIGN KEY ("career_id") REFERENCES "careers" ("id");
 ALTER TABLE "services" ADD FOREIGN KEY ("career_id") REFERENCES "careers" ("id");
 ALTER TABLE "services_traits" ADD FOREIGN KEY ("service_id") REFERENCES "services" ("id");
-ALTER TABLE "favorites" ADD FOREIGN KEY ("target_id") REFERENCES "services" ("id");
-ALTER TABLE "favorites" ADD FOREIGN KEY ("target_id") REFERENCES "careers" ("id");
+ALTER TABLE "favorites" ADD FOREIGN KEY ("career_id") REFERENCES "careers" ("id");
+ALTER TABLE "favorites" ADD FOREIGN KEY ("service_id") REFERENCES "services" ("id");
 ALTER TABLE "favorites" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "contact_form" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 ALTER TABLE "responses" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");

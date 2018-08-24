@@ -97,8 +97,10 @@ export const getServiceQuery = (args) => (
         id
         description
       }
+      app_type
       program_url
       app_url
+      app_phone_number
       app_process
       apply_now_cta
     }
@@ -116,8 +118,11 @@ export const getServicesQuery = (args) => (
       about
       financial_info
       location
+      app_type
       app_process
       apply_now_cta
+      app_url
+      app_phone_number
       program_url
       program_length_total
       program_total_weekly
@@ -184,6 +189,23 @@ export const signUp = ({ email, password, first_name, last_name, phone_number })
       first_name: ${first_name},
       last_name: ${last_name},
       phone_number: ${phone_number || null}
+    ) {
+      id
+      email
+      first_name
+      last_name
+      phone_number
+    }
+  }
+  `
+);
+
+export const loginData = (args) => (
+  `
+  mutation {
+    login (
+      email: ${args.email},
+      password: ${args.password}
     ) {
       id
       email

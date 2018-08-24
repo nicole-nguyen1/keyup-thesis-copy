@@ -1,10 +1,9 @@
 import React from 'react';
-import QualifyForm from './QualifyForm.jsx';
+import AdviceForm from './AdviceForm.jsx';
 import { addFormData } from '../graphql/graphql';
 import { createApolloFetch } from 'apollo-fetch';
-import Dialog from '@material-ui/core/Dialog';
 
-class QualifyContainer extends React.Component {
+class AdviceFormContainer extends React.Component {
   constructor(props) {
     super(props);
     this.fetch = createApolloFetch({
@@ -128,7 +127,7 @@ class QualifyContainer extends React.Component {
 
   render() {
     return (
-        <QualifyForm 
+        <AdviceForm 
           service={this.props.service}
           handleChange={this.handleChange}
           setCheckbox={this.setCheckbox}
@@ -141,4 +140,4 @@ class QualifyContainer extends React.Component {
   }
 }
 
-export default QualifyContainer;
+export default AdviceFormContainer;
