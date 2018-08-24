@@ -37,6 +37,7 @@ class ServiceListContainer extends React.Component {
       services={this.props.services} 
       careerName={this.props.careerName}
       careerID={this.state.career_id}
+      favorites={this.props.favorites}
       />;
     }
   }

@@ -6,12 +6,14 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
+import HeartContainer from './heartComponents/HeartContainer.jsx';
 
 
 const Service = props => {
   const style = {
     height: '20%'
   };
+  console.log(props)
   return (
     <Grid item xs={12}>
       <Card>
@@ -45,10 +47,15 @@ const Service = props => {
           <Button variant="contained" color="primary" style={{backgroundColor: '2979ff', marginTop: '10px'}} component={Link} to={`/service/${props.service.id}`}>
             LEARN MORE
           </Button>
+          <HeartContainer 
+            size={'large'}
+            serviceID={props.service.id}
+            favorites={props.favorites}
+          />
         </CardContent>
       </Card>
     </Grid>
   );
-}
+};
 
 export default Service;

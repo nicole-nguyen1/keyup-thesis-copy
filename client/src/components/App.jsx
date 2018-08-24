@@ -285,10 +285,10 @@ class App extends React.Component {
                   return <CareerProfileContainer router={props} favorites={this.sampleFavoritesData.favorites} />;
                 }} />
                 <Route path='/services/:id' render={props => {
-                  return <ServiceListContainer router={props} />;
+                  return <ServiceListContainer router={props} favorites={this.sampleFavoritesData.favorites}/>;
                 }} />
                 <Route path='/service/:id' render={props => {
-                  return <TrainingServiceProfileContainer router={props} />;
+                  return <TrainingServiceProfileContainer router={props} favorites={this.sampleFavoritesData.favorites}/>;
                 }} />
               </Switch>
             </div>
