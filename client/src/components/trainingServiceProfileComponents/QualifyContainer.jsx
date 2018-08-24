@@ -32,7 +32,7 @@ class QualifyContainer extends React.Component {
   handleChange = (e) => {
     let thisState = {};
     thisState[e.target.name] = e.target.value;
-    this.setState(thisState, this.enableButton());
+    this.setState(thisState, this.enableButton()); //should enableButton be invoked here?
   }
 
   setCheckbox = (e) => {

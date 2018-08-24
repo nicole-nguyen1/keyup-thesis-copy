@@ -174,3 +174,23 @@ export const addFormData = (args) => (
   }
   `
 );
+
+export const signUp = ({ email, password, first_name, last_name, phone_number }) => (
+  `
+  mutation {
+    signUp (
+      email: ${email},
+      password: ${password},
+      first_name: ${first_name},
+      last_name: ${last_name},
+      phone_number: ${phone_number || null}
+    ) {
+      id
+      email
+      first_name
+      last_name
+      phone_number
+    }
+  }
+  `
+);
