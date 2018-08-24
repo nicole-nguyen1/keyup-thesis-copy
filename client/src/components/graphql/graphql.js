@@ -180,6 +180,26 @@ export const addFormData = (args) => (
   `
 );
 
+export const signUp = ({ email, password, first_name, last_name, phone_number }) => (
+  `
+  mutation {
+    signUp (
+      email: ${email},
+      password: ${password},
+      first_name: ${first_name},
+      last_name: ${last_name},
+      phone_number: ${phone_number || null}
+    ) {
+      id
+      email
+      first_name
+      last_name
+      phone_number
+    }
+  }
+  `
+);
+
 export const loginData = (args) => (
   `
   mutation {
@@ -192,6 +212,89 @@ export const loginData = (args) => (
       first_name
       last_name
       phone_number
+    }
+  }
+  `
+);
+
+export const getFavorites = (args) => (
+  `
+  {
+    favorites(user_id: ${args.user_id}) {
+      id
+      career_id
+      service_id
+      user_id
+      training_service {
+        career_name
+        name
+        logo_url
+        card_length
+        card_tuition
+        card_location
+      }
+      career {
+        name
+        industry_name
+        card_pro
+        card_image_url
+        annual_salary
+        training_length
+      }
+    }
+  }
+  `
+);
+
+export const saveCareer = (args) => (
+  `
+  mutation {
+    saveFavorite(
+      user_id: ${args.user_id},
+      career_id: ${args.career_id}
+    ) {
+      id
+      user_id
+      career_id
+      service_id
+      career {
+        name
+      }
+      training_service {
+        name
+      }
+    }
+  }
+  `
+);
+
+export const saveTraining = (args) => (
+  `
+  mutation {
+    saveFavorite(
+      user_id: ${args.user_id},
+      service_id: ${args.service_id}
+    ) {
+      id
+      user_id
+      career_ids
+      service_id
+      career {
+        name
+      }
+      training_service {
+        name
+      }
+    }
+  }
+  `
+);
+
+export const removeFavorite = (args) => (
+  `
+  mutation {
+    removeFavorite (id: ${args.id}) {
+      user_id
     }
   }
   `
