@@ -39,7 +39,7 @@ class NavBar extends React.Component {
   };
 
   handleClose = () => {
-    this.setState( { anchorEl: null });
+    this.setState({ anchorEl: null });
   };
 
   render() {
@@ -49,45 +49,47 @@ class NavBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar className={classes.tools}>
-            <IconButton 
-            className={classes.menuButton} 
-            color="inherit" 
-            aria-label="Menu"
-            aria-owns={anchorEl ? 'simple-menu' : null}
-            aria-haspopup="true"
-            onClick={this.handleClick}
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Menu"
+              aria-owns={anchorEl ? 'simple-menu' : null}
+              aria-haspopup="true"
+              onClick={this.handleClick}
             >
-              <MenuIcon image="#"/>
+              <MenuIcon image="#" />
             </IconButton>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
-              PopoverClasses={{paper: `${classes.menu}`}}
+              PopoverClasses={{ paper: `${classes.menu}` }}
               className={classes.top}
-            >  
-            <div className={classes.menuTop}>
-             <Link to="/login">
-              <Button
-              variant="contained"
-              color="primary"
-              className={classes.buttonStyle}
-              onClick={this.handleClose}
-              >
-              SIGN IN
-              </Button>
-              </Link>
-              <Typography style={{marginBottom: '3em'}}className={classes.menuTop}>
-              Create an account
-              </Typography>
-            </div>
+            >
+              <div className={classes.menuTop}>
+                <Link to="/login">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.buttonStyle}
+                    onClick={this.handleClose}
+                  >
+                    SIGN IN
+                  </Button>
+                </Link>
+                <Link to='/signup'>
+                  <Typography onClick={this.handleClose} style={{ marginBottom: '3em' }} className={classes.menuTop}>
+                    Create an account
+                  </Typography>
+                </Link>
+              </div>
               <MenuItem onClick={this.handleClose}>
                 <Link to="/home">
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
-                  <ListItemText style={{float:'right'}}inset primary="Home">
+                  <ListItemText style={{ float: 'right' }} inset primary="Home">
                   </ListItemText>
                 </Link>
               </MenuItem>
@@ -95,14 +97,14 @@ class NavBar extends React.Component {
                 <ListItemIcon>
                   <AccountCircleIcon />
                 </ListItemIcon>
-                <ListItemText style={{float:'right'}}inset primary="My Profile">
+                <ListItemText style={{ float: 'right' }} inset primary="My Profile">
                 </ListItemText>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
                 <ListItemIcon>
                   <FavoriteIcon />
                 </ListItemIcon>
-                <ListItemText style={{float:'right'}}inset primary="My Favorites">
+                <ListItemText style={{ float: 'right' }} inset primary="My Favorites">
                 </ListItemText>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
@@ -110,7 +112,7 @@ class NavBar extends React.Component {
                   <ListItemIcon>
                     <SearchIcon />
                   </ListItemIcon>
-                  <ListItemText style={{float:'right'}}inset primary="Browse Careers">
+                  <ListItemText style={{ float: 'right' }} inset primary="Browse Careers">
                   </ListItemText>
                 </Link>
               </MenuItem>
@@ -124,12 +126,12 @@ class NavBar extends React.Component {
                 </a>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <HashLink style={{textDecoration: 'none'}} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#about">
-                <ListItemIcon>
-                  <InfoIcon />
-                </ListItemIcon>
-                <ListItemText style={{float: 'right'}} inset primary="About KeyUp">
-                </ListItemText>
+                <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#about">
+                  <ListItemIcon>
+                    <InfoIcon />
+                  </ListItemIcon>
+                  <ListItemText style={{ float: 'right' }} inset primary="About KeyUp">
+                  </ListItemText>
                 </HashLink>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
@@ -145,12 +147,12 @@ class NavBar extends React.Component {
             <Typography variant="display1" color="inherit">
               <Link to="/home">
                 <Button onClick={this.handleClose} className={classes.home}>
-                  <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px'/>
+                  <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px' />
                 </Button>
               </Link>
             </Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
-            {this.props.pages}
+              {this.props.pages}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -215,12 +217,12 @@ NavBar.styles = {
     textDecoration: 'none',
     borderRadius: '2px'
   }
-  
+
 };
 
 const mapStateToProps = state => {
   return {
-    pages:state.pages.page
+    pages: state.pages.page
   };
 }
 
