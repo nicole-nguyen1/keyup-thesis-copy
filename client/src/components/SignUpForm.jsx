@@ -5,6 +5,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
+import { store } from '../store/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getPageTitle, findUser } from '../actions/action.js';
 import { signUp } from './graphql/graphql.js';
 import { createApolloFetch } from 'apollo-fetch';
 import { Redirect } from 'react-router';
@@ -68,6 +72,10 @@ class SignUpForm extends React.Component {
       passConfirmCheck: false,
       goHome: false
     }
+  }
+
+  componentDidMount() {
+    store.dispatch(getPageTitle('Create an Account'));
   }
 
   handleChange = (e) => {
@@ -273,4 +281,15 @@ class SignUpForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(SignUpForm);
+const mapStateToProps = state => {
+  return {
+    pages: state.pages.page,
+    user: state.user.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getPageTitle, findUser}, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignUpForm));
