@@ -22,7 +22,7 @@ class FavoritesContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    favorites: state.favorites
+    favorites: state.favorites.favorites
   };
 };
 
