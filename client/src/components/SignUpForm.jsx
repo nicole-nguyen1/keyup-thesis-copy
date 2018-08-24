@@ -155,7 +155,7 @@ class SignUpForm extends React.Component {
     })
     .then( res => {
       console.log(res);
-      //do we need to do something with the res (user object) here?
+        store.dispatch(findUser(res.data.signUp))
       this.setState({
         goHome: true
       });

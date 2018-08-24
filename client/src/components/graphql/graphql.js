@@ -217,30 +217,13 @@ export const loginData = (args) => (
   `
 );
 
-export const getFavorites = (args) => (
+export const getFavoritesQuery = (args) => (
   `
   {
-    favorites(user_id: ${args.user_id}) {
+    favorites(user_id: ${args}) {
       id
       career_id
       service_id
-      user_id
-      training_service {
-        career_name
-        name
-        logo_url
-        card_length
-        card_tuition
-        card_location
-      }
-      career {
-        name
-        industry_name
-        card_pro
-        card_image_url
-        annual_salary
-        training_length
-      }
     }
   }
   `
@@ -257,12 +240,6 @@ export const saveCareer = (args) => (
       user_id
       career_id
       service_id
-      career {
-        name
-      }
-      training_service {
-        name
-      }
     }
   }
   `
@@ -279,12 +256,6 @@ export const saveTraining = (args) => (
       user_id
       career_ids
       service_id
-      career {
-        name
-      }
-      training_service {
-        name
-      }
     }
   }
   `

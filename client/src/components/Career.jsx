@@ -6,8 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
-import { store } from '../store/index';
-import { getPageTitle } from '../actions/action';
 import HeartContainer from './heartComponents/HeartContainer.jsx';
 
 class Career extends React.Component {
@@ -19,7 +17,11 @@ class Career extends React.Component {
     const style = {
       height: '20%'
     };
+<<<<<<< HEAD
     //console.log('career props', this.props);
+=======
+
+>>>>>>> 08eb6ad57d9780af9f653e7ad5458a9497636f23
     return (
       <Grid item xs={12}>
         <Card>
