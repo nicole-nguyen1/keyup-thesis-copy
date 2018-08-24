@@ -216,3 +216,86 @@ export const loginData = (args) => (
   }
   `
 );
+
+export const getFavorites = (args) => (
+  `
+  {
+    favorites(user_id: ${args.user_id}) {
+      id
+      career_id
+      service_id
+      user_id
+      training_service {
+        career_name
+        name
+        logo_url
+        card_length
+        card_tuition
+        card_location
+      }
+      career {
+        name
+        industry_name
+        card_pro
+        card_image_url
+        annual_salary
+        training_length
+      }
+    }
+  }
+  `
+);
+
+export const saveCareer = (args) => (
+  `
+  mutation {
+    saveFavorite(
+      user_id: ${args.user_id},
+      career_id: ${args.career_id}
+    ) {
+      id
+      user_id
+      career_id
+      service_id
+      career {
+        name
+      }
+      training_service {
+        name
+      }
+    }
+  }
+  `
+);
+
+export const saveTraining = (args) => (
+  `
+  mutation {
+    saveFavorite(
+      user_id: ${args.user_id},
+      service_id: ${args.service_id}
+    ) {
+      id
+      user_id
+      career_ids
+      service_id
+      career {
+        name
+      }
+      training_service {
+        name
+      }
+    }
+  }
+  `
+);
+
+export const removeFavorite = (args) => (
+  `
+  mutation {
+    removeFavorite (id: ${args.id}) {
+      user_id
+    }
+  }
+  `
+);
