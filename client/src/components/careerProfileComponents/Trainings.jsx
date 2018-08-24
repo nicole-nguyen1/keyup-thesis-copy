@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import HeartContainer from '../heartComponents/HeartContainer.jsx';
 
 const styles = theme => ({
   card: {
@@ -17,7 +18,7 @@ const styles = theme => ({
     margin: '0px auto 10px',
     backgroundColor: '2979ff'
   }
-})
+});
 
 const Trainings = (props) => {
   const { classes } = props;
@@ -37,9 +38,12 @@ const Trainings = (props) => {
             SEE TRAINING SERVICES
           </Button>
         </CardActions>
+        <div style={{ textAlign: 'center'}}>
+          <HeartContainer profile={true} size={'large'}/>
+        </div>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 export default withStyles(styles)(Trainings);

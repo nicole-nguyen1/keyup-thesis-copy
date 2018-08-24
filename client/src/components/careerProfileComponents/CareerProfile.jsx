@@ -60,7 +60,7 @@ const CareerProfile = (props) => {
         </Card>
         <Trainings career={career} careerID={props.careerID}/>
       </div>
-    )
+    );
   } else {
     return null;
   }
