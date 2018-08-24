@@ -18,7 +18,8 @@ class LoginContainer extends React.Component {
       email: '',
       password: '',
       buttonStatus: true,
-      toHome: false
+      toHome: false,
+      showError: false
     };
   }
 
@@ -59,16 +60,25 @@ class LoginContainer extends React.Component {
     this.fetch({
       query: loginData(formArguments)
     }).then((res) => {
-      console.log('res', res);
-      this.setState({
-        email: '',
-        password: '',
-        buttonStatus: true,
-        toHome: true
-      })
-      return res;
+      console.log('res', res)
+      if (!res.errors) {
+        console.log('res', res);
+        this.setState({
+          email: '',
+          password: '',
+          buttonStatus: true,
+          toHome: true
+        })
+        return res;
+      } else {
+        this.setState({
+          showError: true
+        })
+      }
     }).then((res) => {
-      store.dispatch(findUser(res.data.login))
+      if (!res.errors) {
+        store.dispatch(findUser(res.data.login))
+      }
     }).catch(err => {
       console.log(err)
     })
