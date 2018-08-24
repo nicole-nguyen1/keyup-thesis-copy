@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +17,9 @@ class LoginContainer extends React.Component {
     this.state = {
       email: '',
       password: '',
-      buttonStatus: true
+      buttonStatus: true,
+      toHome: false,
+      showError: false
     };
   }
 
@@ -53,27 +56,36 @@ class LoginContainer extends React.Component {
       email: JSON.stringify(this.state.email),
       password: JSON.stringify(this.state.password)
     }
-    console.log(formArguments)
     this.fetch({
       query: loginData(formArguments)
     }).then((res) => {
-      console.log('res', res);
-      this.setState({
-        email: '',
-        password: '',
-        buttonStatus: true
-      })
-      return res;
+      if (!res.errors) {
+        this.setState({
+          email: '',
+          password: '',
+          buttonStatus: true,
+          toHome: true
+        })
+        return res;
+      } else {
+        this.setState({
+          showError: true
+        })
+      }
     }).then((res) => {
-      store.dispatch(findUser(res.data.login))
-    }).then(() => {
-      console.log(store.getState());
+      if (!res.errors) {
+        store.dispatch(findUser(res.data.login))
+      }
     }).catch(err => {
-      console.log(err)
-    })
+      console.error(err);
+    });
   }
 
   render() {
+    if (this.state.toHome) {
+      return <Redirect to='/home' />
+    }
+
     return (
       <div>
         <LoginForm 
@@ -97,7 +109,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle, findUser}, dispatch);
+  return bindActionCreators({ getPageTitle, findUser }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
