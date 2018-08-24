@@ -56,13 +56,10 @@ class LoginContainer extends React.Component {
       email: JSON.stringify(this.state.email),
       password: JSON.stringify(this.state.password)
     }
-    console.log(formArguments)
     this.fetch({
       query: loginData(formArguments)
     }).then((res) => {
-      console.log('res', res)
       if (!res.errors) {
-        console.log('res', res);
         this.setState({
           email: '',
           password: '',
@@ -79,11 +76,9 @@ class LoginContainer extends React.Component {
       if (!res.errors) {
         store.dispatch(findUser(res.data.login))
       }
-    }).then(() => {
-      console.log(store.getState());
     }).catch(err => {
-      console.log(err)
-    })
+      console.error(err);
+    });
   }
 
   render() {
@@ -114,7 +109,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle, findUser}, dispatch);
+  return bindActionCreators({ getPageTitle, findUser }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

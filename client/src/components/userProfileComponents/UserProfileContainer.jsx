@@ -11,6 +11,7 @@ class UserProfileContainer extends React.Component {
   }
 
   render() {
+    console.log(this.props.user);
     return <UserProfile user={this.props.user}/>
   }
 }
@@ -20,9 +21,5 @@ const mapStateToProps = state => {
     user: state.user
   };
 };
-
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({ getPageTitle, findUser }, dispatch);
-// };
 
 export default connect(mapStateToProps)(UserProfileContainer);

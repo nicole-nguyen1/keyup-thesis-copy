@@ -15,16 +15,6 @@ class FavoritesContainer extends React.Component {
     }).bind(this);
   }
 
-  componentDidMount() {
-    this.fetch({
-      query: getFavoritesQuery(this.props.user_id)
-    })
-    .then((res) => {
-      console.log(res);
-      store.dispatch(getFavorites(res.data));
-    })
-  }
-
   render() {
     return <Favorites favorites={this.props.favorites}/>
   }
@@ -32,12 +22,9 @@ class FavoritesContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user_id: state.user.id
+    favorites: state.favorites
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getFavorites }, dispatch);
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesContainer);
+export default connect(mapStateToProps)(FavoritesContainer);
