@@ -19,6 +19,7 @@ class Career extends React.Component {
     const style = {
       height: '20%'
     };
+    console.log('career props', this.props)
     return (
       <Grid item xs={12}>
         <Card>
@@ -62,8 +63,10 @@ class Career extends React.Component {
                   FIND TRAINING
                 </Button>
               </Grid>
-              <Grid item xs={2}>
-                <HeartContainer size={'large'}/>
+              <Grid item xs={2} >
+                <HeartContainer
+                  size={'large'}
+                />
               </Grid>
             </Grid>
           </CardContent>
