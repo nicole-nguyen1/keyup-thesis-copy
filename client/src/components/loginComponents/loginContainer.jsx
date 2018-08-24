@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +17,9 @@ class LoginContainer extends React.Component {
     this.state = {
       email: '',
       password: '',
-      buttonStatus: true
+      buttonStatus: true,
+      toHome: false,
+      showError: false
     };
   }
 
@@ -57,15 +60,25 @@ class LoginContainer extends React.Component {
     this.fetch({
       query: loginData(formArguments)
     }).then((res) => {
-      console.log('res', res);
-      this.setState({
-        email: '',
-        password: '',
-        buttonStatus: true
-      })
-      return res;
+      console.log('res', res)
+      if (!res.errors) {
+        console.log('res', res);
+        this.setState({
+          email: '',
+          password: '',
+          buttonStatus: true,
+          toHome: true
+        })
+        return res;
+      } else {
+        this.setState({
+          showError: true
+        })
+      }
     }).then((res) => {
-      store.dispatch(findUser(res.data.login))
+      if (!res.errors) {
+        store.dispatch(findUser(res.data.login))
+      }
     }).then(() => {
       console.log(store.getState());
     }).catch(err => {
@@ -74,6 +87,10 @@ class LoginContainer extends React.Component {
   }
 
   render() {
+    if (this.state.toHome) {
+      return <Redirect to='/home' />
+    }
+
     return (
       <div>
         <LoginForm 
