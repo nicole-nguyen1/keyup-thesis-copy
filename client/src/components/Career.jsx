@@ -13,13 +13,62 @@ import HeartContainer from './heartComponents/HeartContainer.jsx';
 class Career extends React.Component {
   constructor(props) {
     super(props);
+    this.sampleFavoritesData = {
+      favorites: [
+        {
+          'career_id': null,
+          'service_id': '14',
+          'user_id': '45'
+        },
+        {
+          'career_id': '1',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '5',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '6',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '3',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '2',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': null,
+          'service_id': '13',
+          'user_id': '45'
+        },
+        {
+          'career_id': null,
+          'service_id': '12',
+          'user_id': '45'
+        },
+        {
+          'career_id': null,
+          'service_id': '11',
+          'user_id': '45'
+        }
+      ]
+    };
   }
 
   render() {
     const style = {
       height: '20%'
     };
-    console.log('career props', this.props)
+    //console.log('career props', this.props);
     return (
       <Grid item xs={12}>
         <Card>
@@ -66,8 +115,8 @@ class Career extends React.Component {
               <Grid item xs={2} >
                 <HeartContainer
                   size={'large'}
+                  favorites={this.sampleFavoritesData}
                   careerID={this.props.career.id}
-                  userID={1}
                 />
               </Grid>
             </Grid>

@@ -193,6 +193,7 @@ class App extends React.Component {
                     careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
+                    favorites={this.props.favorites}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
