@@ -217,10 +217,10 @@ export const loginData = (args) => (
   `
 );
 
-export const getFavorites = (args) => (
+export const getFavoritesQuery = (args) => (
   `
   {
-    favorites(user_id: ${args.user_id}) {
+    favorites(user_id: ${args}) {
       id
       career_id
       service_id
