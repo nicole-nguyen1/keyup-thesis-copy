@@ -1,4 +1,6 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import Service from '../Service.jsx';
 
 class FavoriteTrainings extends React.Component {
   constructor(props) {
@@ -7,7 +9,11 @@ class FavoriteTrainings extends React.Component {
 
   render() {
     return (
-      <div>Hello trainings</div>
+      <Grid container spacing={8}>
+        {this.props.services.map((service, index) => {
+          return <Service key={service.id || index} service={service} />;
+        })}
+      </Grid>
     )
   }
 }

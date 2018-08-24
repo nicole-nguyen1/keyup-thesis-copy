@@ -4,6 +4,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import FavoriteCareers from './FavoriteCareers.jsx';
 import FavoriteTrainings from './FavoriteTrainings.jsx';
+import { createApolloFetch } from 'apollo-fetch';
+import { getCareerFave, getTrainingFave } from '../graphql/graphql';
 
 class Favorites extends React.Component {
   constructor(props) {
@@ -13,6 +15,9 @@ class Favorites extends React.Component {
       careerFaves: [],
       trainingFaves: []
     }
+    this.fetch = createApolloFetch({
+      uri: '/graphql'
+    }).bind(this);
   }
 
   componentDidMount() {
@@ -22,16 +27,25 @@ class Favorites extends React.Component {
     if (this.props.favorites.length > 0) {
       for (let fave of this.props.favorites) {
         if (fave.career_id !== null) {
-          careers.push(fave);
+          careers.push(fave.career_id);
         } else if (fave.service_id !== null) {
-          trainings.push(fave);
+          trainings.push(fave.service_id);
         }
       }
     }
 
-    this.setState({
-      careerFaves: careers,
-      trainingFaves: trainings
+    this.fetch({
+      query: getCareerFave(careers)
+    })
+    .then((res) => {
+      this.setState({ careerFaves: res.data.careers })
+    });
+
+    this.fetch({
+      query: getTrainingFave(trainings)
+    })
+    .then((res) => {
+      this.setState({ trainingFaves: res.data.trainings })
     });
   }
 
@@ -55,7 +69,7 @@ class Favorites extends React.Component {
             <Tab label="Favorite Training" />
           </Tabs>
           {this.state.value === 0 && <FavoriteCareers careers={this.state.careerFaves}/>}
-          {this.state.value === 1 && <FavoriteTrainings trainings={this.state.trainingFaves}/>}
+          {this.state.value === 1 && <FavoriteTrainings services={this.state.trainingFaves}/>}
         </Paper>
       </div>
     )
