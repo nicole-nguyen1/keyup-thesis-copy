@@ -35,15 +35,37 @@ class HeartContainer extends React.Component {
       className: this.props.classes.icon,
       iconSize: 20
     };
+    
   }
 
-  handleClick = () => {
+  componentDidMount () {
+    this.isFavorite();
+  }
+
+  isFavorite = () => {
+    let favoriteFound = false;
+    if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
+        for(let favorite in this.props.favorites) {
+          if (this.props.favorites[favorite].career_id === this.props.careerID) {
+            console.log('favorite found:', this.props.careerID)
+            this.turnMeBlue()
+            break;
+          }
+        }
+    }
+    return favoriteFound;
+  }
+
+  turnMeBlue = () => {
     this.setState({
       className: this.props.classes.favoriteSelected
     })
   }
 
-  
+  handleClick = () => {
+    //add or remove item from favorites
+    console.log('Fire off graphQL Mutation!!!!!!!!!!')
+  }
 
   render() {
     const { classes } = this.props;

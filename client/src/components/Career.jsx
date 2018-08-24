@@ -17,7 +17,6 @@ class Career extends React.Component {
     const style = {
       height: '20%'
     };
-
     return (
       <Grid item xs={12}>
         <Card>
@@ -64,6 +63,8 @@ class Career extends React.Component {
               <Grid item xs={2} >
                 <HeartContainer
                   size={'large'}
+                  favorites={this.props.favorites}
+                  careerID={this.props.career.id}
                 />
               </Grid>
             </Grid>
