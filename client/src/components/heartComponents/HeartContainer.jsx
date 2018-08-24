@@ -45,10 +45,10 @@ class HeartContainer extends React.Component {
   isFavorite = () => {
     let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
-        for(let favorite in this.props.favorites.favorites) {
-          if (this.props.favorites.favorites[favorite].career_id === this.props.careerID) {
+        for(let favorite in this.props.favorites) {
+          if (this.props.favorites[favorite].career_id === this.props.careerID) {
             console.log('favorite found:', this.props.careerID)
-            this.handleClick()
+            this.turnMeBlue()
             break;
           }
         }
@@ -56,10 +56,15 @@ class HeartContainer extends React.Component {
     return favoriteFound;
   }
 
-  handleClick = () => {
+  turnMeBlue = () => {
     this.setState({
       className: this.props.classes.favoriteSelected
     })
+  }
+
+  handleClick = () => {
+    //add or remove item from favorites
+    console.log('Fire off graphQL Mutation!!!!!!!!!!')
   }
 
   render() {

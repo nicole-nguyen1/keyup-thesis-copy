@@ -13,55 +13,6 @@ import HeartContainer from './heartComponents/HeartContainer.jsx';
 class Career extends React.Component {
   constructor(props) {
     super(props);
-    this.sampleFavoritesData = {
-      favorites: [
-        {
-          'career_id': null,
-          'service_id': '14',
-          'user_id': '45'
-        },
-        {
-          'career_id': '1',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '5',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '6',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '3',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '2',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': null,
-          'service_id': '13',
-          'user_id': '45'
-        },
-        {
-          'career_id': null,
-          'service_id': '12',
-          'user_id': '45'
-        },
-        {
-          'career_id': null,
-          'service_id': '11',
-          'user_id': '45'
-        }
-      ]
-    };
   }
 
   render() {
@@ -115,7 +66,7 @@ class Career extends React.Component {
               <Grid item xs={2} >
                 <HeartContainer
                   size={'large'}
-                  favorites={this.sampleFavoritesData}
+                  favorites={this.props.favorites}
                   careerID={this.props.career.id}
                 />
               </Grid>
