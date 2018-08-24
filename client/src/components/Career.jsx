@@ -66,6 +66,8 @@ class Career extends React.Component {
               <Grid item xs={2} >
                 <HeartContainer
                   size={'large'}
+                  careerID={this.props.career.id}
+                  userID={1}
                 />
               </Grid>
             </Grid>

@@ -35,6 +35,8 @@ class HeartContainer extends React.Component {
       className: this.props.classes.icon,
       iconSize: 20
     };
+
+    
   }
 
   handleClick = () => {
