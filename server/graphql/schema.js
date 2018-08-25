@@ -423,6 +423,7 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString }
       },
       resolve(parent, { email, password }, req) {
+        console.log('req session', req.session)
         return loginHelper(email, password, req);
       }
     },
@@ -430,7 +431,14 @@ const Mutation = new GraphQLObjectType({
     logout: {
       type: MessageType,
       resolve(parent, args, req) {
-        req.logout();
+        req.session.destroy(err => {
+          console.log('mason is awesome!!')
+          if (err) {
+            console.log('ERROR', err)
+          }
+          req.logOut();
+          console.log('req session', req.session)
+        });
         return {message: 'SUCCESS'};
       }
     },

@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   inputStyle: {
@@ -70,6 +71,14 @@ class LoginForm extends React.Component {
             className={classes.inputStyle}
             onChange={this.props.handlePasswordChange}
           />
+          {this.props.showError ? 
+            (<Typography variant="body1" align="left" color="secondary">
+              Them email address and password you entered <br />
+              did not match any KeyUp accounts. <br />
+              Please try again.
+            </Typography>  
+            ) : null
+          }
           <Typography variant="body1" align="center">
             <a href='#'>
           Forgot your password?
@@ -84,12 +93,13 @@ class LoginForm extends React.Component {
             >
         SIGN IN
             </Button>
-            <Button
-              className={classes.createButtonStyle}
-              onClick={() => console.log('you clicked the create an account button!')}
-            >
+            <Link to='/signup'>
+              <Button
+                className={classes.createButtonStyle}
+              >
         CREATE AN ACCOUNT
-            </Button>
+              </Button>
+            </Link>
           </div>
         </FormControl>
       </div>
