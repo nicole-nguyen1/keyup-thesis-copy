@@ -4,11 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import Careers from './Careers.jsx';
-<<<<<<< HEAD
-import { findCareers, getIndustries, findUser } from '../actions/action';
-=======
-import { findCareers, getIndustries, getFavorites } from '../actions/action';
->>>>>>> 330a5d9e2f802d92ab0a65381148e5c2ef061f26
+import { findCareers, getIndustries, findUser, getFavorites } from '../actions/action';
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
@@ -28,11 +24,8 @@ import {
   getCareersQuery,
   getIndustriesQuery,
   filterCareersQuery,
-<<<<<<< HEAD
-  getLoggedInUser
-=======
+  getLoggedInUser,
   getFavoritesQuery
->>>>>>> 330a5d9e2f802d92ab0a65381148e5c2ef061f26
 } from './graphql/graphql';
 
 
