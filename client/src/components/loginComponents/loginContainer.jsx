@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -95,6 +95,7 @@ class LoginContainer extends React.Component {
           email={this.state.email} 
           password={this.state.password}
           buttonStatus={this.state.buttonStatus}
+          showError={this.state.showError}
         />
       </div>
     );
@@ -112,4 +113,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPageTitle, findUser }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginContainer));

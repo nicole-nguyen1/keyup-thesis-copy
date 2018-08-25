@@ -199,6 +199,13 @@ const UserType = new GraphQLObjectType({
   })
 });
 
+const MessageType = new GraphQLObjectType({
+  name: 'Message',
+  fields: () => ({
+    message: { type: GraphQLString }
+  })
+});
+
 const ContactFormType = new GraphQLObjectType({
   name: 'ContactForm',
   fields: () => ({
@@ -365,13 +372,12 @@ const RootQuery = new GraphQLObjectType({
     },
 
     //GET a specific user
-    user: {
+    loggedInUser: {
       type: UserType,
-      args: { id: { type: GraphQLID } },
-      resolve(parent, { id }, { session }) {
-        console.log(session);
+      resolve(parent, args, { session }) {
+        let id = session.passport.user;
         return knex('users')
-          .select()
+          .select('id', 'email', 'phone_number', 'first_name', 'last_name')
           .where({ id })
           .first();
       }
@@ -416,6 +422,14 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, { email, password }, req) {
         return loginHelper(email, password, req);
+      }
+    },
+
+    logout: {
+      type: MessageType,
+      resolve(parent, args, req) {
+        req.logout();
+        return {message: 'SUCCESS'};
       }
     },
 

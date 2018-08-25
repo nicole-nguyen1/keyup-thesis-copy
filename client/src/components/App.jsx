@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import Careers from './Careers.jsx';
-import { findCareers, getIndustries, getFavorites } from '../actions/action';
+import { findCareers, getIndustries, findUser, getFavorites } from '../actions/action';
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
@@ -24,6 +24,7 @@ import {
   getCareersQuery,
   getIndustriesQuery,
   filterCareersQuery,
+  getLoggedInUser,
   getFavoritesQuery
 } from './graphql/graphql';
 
@@ -37,6 +38,10 @@ class App extends React.Component {
       uri: '/graphql'
     }).bind(this);
     this.sortBy = 'Highest salary';
+
+    this.state = {
+      showSignOutButton: false
+    }
     this.sampleFavoritesData = {
       favorites: [
         {
@@ -97,6 +102,31 @@ class App extends React.Component {
     });
   }
 
+  getUser = () => {
+    this.fetch({
+      query: getLoggedInUser
+    }).then(res => {
+      store.dispatch(findUser(res.data.loggedInUser));
+    }).then(() => {
+      return store.getState();
+    }).then((res) => {
+      if (res.user.id.length > 0) {
+        this.setState({
+          showSignOutButton: true
+        })
+      } else {
+        this.setState({
+          showSignOutButton: false
+        })
+      }
+    })
+  }
+
+  toggle = () => {
+    this.setState({
+      showSignOutButton: false
+    })
+    
   componentDidUpdate(prevProps) {
     if (this.props.user.id !== prevProps.user.id) {
       this.getFavorites();
@@ -216,11 +246,16 @@ class App extends React.Component {
     return (
       <Router history={newHistory} >
         <div>
-          <NavBar />
+          <NavBar toggle={this.toggle} showSignOutButton={this.state.showSignOutButton}/>
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
               <Switch>
-                <Route exact path="/home" component={Home} />
+                <Route exact path="/home" render={props => {
+                  return <Home 
+                  router={props}
+                  getUser={this.getUser}
+                  />
+                }} />
                 <Route exact path="/terms-and-conditions" component={TermsConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
@@ -258,7 +293,12 @@ class App extends React.Component {
           <MediaQuery query="(max-width: 599px)">
             <div style={{ marginTop: '56px' }}>
               <Switch>
-                <Route exact path="/home" component={Home} />
+              <Route exact path="/home" render={props => {
+                  return <Home 
+                  router={props}
+                  getUser={this.getUser}
+                  />
+                }} />
                 <Route exact path="/terms-and-conditions" component={TermsConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
@@ -304,8 +344,8 @@ const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
     industries: state.industries.industries,
-    user: state.user,
-    favorites: state.favorites
+    user: state.user.user,
+    favorites: state.favorites.favorites
   };
 };
 
