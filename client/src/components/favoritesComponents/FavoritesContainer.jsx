@@ -3,9 +3,8 @@ import Favorites from './Favorites.jsx';
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getFavorites } from '../../actions/action';
+import { getPageTitle } from '../../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { getFavoritesQuery } from '../graphql/graphql';
 
 class FavoritesContainer extends React.Component {
   constructor(props) {
@@ -13,6 +12,10 @@ class FavoritesContainer extends React.Component {
     this.fetch = createApolloFetch({
       uri: '../graphql'
     }).bind(this);
+  }
+
+  componentDidMount() {
+    store.dispatch(getPageTitle('My Favorites List'));
   }
 
   render() {
@@ -26,5 +29,9 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getPageTitle }, dispatch);
+};
 
-export default connect(mapStateToProps)(FavoritesContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesContainer);
