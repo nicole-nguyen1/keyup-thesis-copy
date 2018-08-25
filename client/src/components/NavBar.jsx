@@ -173,7 +173,9 @@ class NavBar extends React.Component {
               {this.props.showSignOutButton ? 
                       (<MenuItem onClick={this.handleSignOut}>
                       <Link to="/home">
-                        
+                        <ListItemIcon>
+                          <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
+                        </ListItemIcon>
                         <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
                         </ListItemText>
                       </Link>
@@ -253,6 +255,13 @@ NavBar.styles = {
     marginBottom: '1em',
     textDecoration: 'none',
     borderRadius: '2px'
+  },
+
+  logoutIcon: {
+    height: '24px',
+    width: '24px',
+    marginLeft: '3px',
+    marginRight: '13px'
   }
 
 };
