@@ -28,7 +28,7 @@ const styles = theme => ({
     width: '95%'
   },
   buttonStyle: {
-    backgroundColor: '2979ff',
+    backgroundColor: '#4469FF',
     borderRadius: 0,
     marginTop: '1em'
   }

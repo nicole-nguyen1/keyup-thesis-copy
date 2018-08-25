@@ -6,7 +6,50 @@ import FavoriteCareers from './FavoriteCareers.jsx';
 import FavoriteTrainings from './FavoriteTrainings.jsx';
 import { createApolloFetch } from 'apollo-fetch';
 import { getCareerFave, getTrainingFave } from '../graphql/graphql';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 
+const styles = theme => ({
+  background: {
+    backgroundColor: '#CFCFCE'
+  },
+
+  tabs: {
+    backgroundColor: '#3651C5'
+  },
+
+  tabsIndicator: {
+    backgroundColor: '#02ED96'
+  },
+
+  tabRoot: {
+    color: '#EDEDEE',
+    padding: '10px',
+    '&$tabSelected': {
+      color: '#02ED96'
+    }
+  },
+
+  tabSelected: {}
+});
+
+function NoFaves(props) {
+  return (
+    <div>
+      <Paper style={{ padding: '30px 15px', borderRadius: '0' }}>
+        <Typography variant='body1' paragraph>No favorites yet?</Typography>
+        <Typography variant='body1' paragraph>
+          <Link to='/careers'
+            style={{
+              color: '#4469FF',
+              textDecoration: 'none'
+            }}>Browser Careers and Training</Link> to pick out some likely-looking {props.type}.
+      </Typography>
+      </Paper>
+    </div>
+  )
+}
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +67,7 @@ class Favorites extends React.Component {
     let careers = [];
     let trainings = [];
     //parsing the different types of favorites
-    if (this.props.favorites.length > 0) {
+    if (this.props.favorites && this.props.favorites.length > 0) {
       for (let fave of this.props.favorites) {
         if (fave.career_id !== null) {
           careers.push(fave.career_id);
@@ -54,26 +97,53 @@ class Favorites extends React.Component {
   };
 
   render() {
-    // div with tabs - background color #3651C5
+    const { classes } = this.props;
+    let info;
+
+    //for rendering different information based on whether or not a user has favorites
+    //nested conditional statements need to be done this way for easier readability than 
+    //ternary statements
+    if (this.props.favorites === undefined || this.props.favorites[0].id === '') {
+      if (this.state.value === 0) {
+        info = <NoFaves type='careers' />
+      } else if (this.state.value === 1) {
+        info = <NoFaves type='training services' />
+      }
+    } else {
+      if (this.state.value === 0) {
+        info = <FavoriteCareers careers={this.state.careerFaves} favorites={this.props.favorites} />
+      } else if (this.state.value === 1) {
+        info = <FavoriteTrainings services={this.state.trainingFaves} favorites={this.props.favorites} />
+      }
+    }
+
     return (
-      <div>
-        <Paper>
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="Favorite Careers" />
-            <Tab label="Favorite Training" />
-          </Tabs>
-          {this.state.value === 0 && <FavoriteCareers careers={this.state.careerFaves} favorites={this.props.favorites}/>}
-          {this.state.value === 1 && <FavoriteTrainings services={this.state.trainingFaves} favorites={this.props.favorites}/>}
-        </Paper>
+      <div className={classes.background}>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          classes={{
+            indicator: classes.tabsIndicator
+          }}
+          className={classes.tabs}
+          centered
+        >
+          <Tab label="Favorite Careers"
+            classes={{
+              root: classes.tabRoot,
+              selected: classes.tabSelected
+            }} />
+          <Tab label="Favorite Training" 
+            classes={{
+              root: classes.tabRoot,
+              selected: classes.tabSelected
+            }}
+          />
+        </Tabs>
+        {info}
       </div>
     )
   }
 }
 
-export default Favorites;
+export default withStyles(styles)(Favorites);
