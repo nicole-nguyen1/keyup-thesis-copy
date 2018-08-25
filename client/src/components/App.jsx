@@ -207,7 +207,7 @@ class App extends React.Component {
           toggle={this.toggle} 
           showSignOutButton={this.state.showSignOutButton} 
           showAccountInfo={this.state.showAccountInfo}
-          user={this.props.user.email}
+          getUser={this.getUser}
           />
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
