@@ -68,8 +68,8 @@ class Favorites extends React.Component {
             <Tab label="Favorite Careers" />
             <Tab label="Favorite Training" />
           </Tabs>
-          {this.state.value === 0 && <FavoriteCareers careers={this.state.careerFaves}/>}
-          {this.state.value === 1 && <FavoriteTrainings services={this.state.trainingFaves}/>}
+          {this.state.value === 0 && <FavoriteCareers careers={this.state.careerFaves} favorites={this.props.favorites}/>}
+          {this.state.value === 1 && <FavoriteTrainings services={this.state.trainingFaves} favorites={this.props.favorites}/>}
         </Paper>
       </div>
     )

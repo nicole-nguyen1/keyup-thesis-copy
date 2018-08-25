@@ -11,7 +11,7 @@ class FavoriteCareers extends React.Component {
     return (
       <Grid container spacing={8}>
         {this.props.careers.map((career, index) => {
-          return < Career key = { career.id || index } career = { career } />;
+          return <Career key={career.id || index} career={career} favorites={this.props.favorites}/>;
         })}
       </Grid>
     )

@@ -11,7 +11,7 @@ class FavoriteTrainings extends React.Component {
     return (
       <Grid container spacing={8}>
         {this.props.services.map((service, index) => {
-          return <Service key={service.id || index} service={service} />;
+          return <Service key={service.id || index} service={service} favorites={this.props.favorites}/>;
         })}
       </Grid>
     )
