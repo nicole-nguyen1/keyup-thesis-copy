@@ -67,7 +67,7 @@ class Favorites extends React.Component {
     let careers = [];
     let trainings = [];
     //parsing the different types of favorites
-    if (this.props.favorites.length > 0) {
+    if (this.props.favorites && this.props.favorites.length > 0) {
       for (let fave of this.props.favorites) {
         if (fave.career_id !== null) {
           careers.push(fave.career_id);
@@ -103,7 +103,7 @@ class Favorites extends React.Component {
     //for rendering different information based on whether or not a user has favorites
     //nested conditional statements need to be done this way for easier readability than 
     //ternary statements
-    if (this.props.favorites[0].id === '' || this.props.favorites === undefined) {
+    if (this.props.favorites === undefined || this.props.favorites[0].id === '') {
       if (this.state.value === 0) {
         info = <NoFaves type='careers' />
       } else if (this.state.value === 1) {
