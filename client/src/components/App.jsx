@@ -37,55 +37,6 @@ class App extends React.Component {
       uri: '/graphql'
     }).bind(this);
     this.sortBy = 'Highest salary';
-    this.sampleFavoritesData = {
-      favorites: [
-        {
-          'career_id': null,
-          'service_id': '14',
-          'user_id': '45'
-        },
-        {
-          'career_id': '1',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '5',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '6',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '3',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': '2',
-          'service_id': null,
-          'user_id': '45'
-        },
-        {
-          'career_id': null,
-          'service_id': '13',
-          'user_id': '45'
-        },
-        {
-          'career_id': null,
-          'service_id': '12',
-          'user_id': '45'
-        },
-        {
-          'career_id': null,
-          'service_id': '11',
-          'user_id': '45'
-        }
-      ]
-    };
   }
 
   componentDidMount() {
@@ -278,11 +229,11 @@ class App extends React.Component {
                     careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
-                    favorites={this.sampleFavoritesData.favorites}
+                    favorites={this.props.favorites}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
-                  return <CareerProfileContainer router={props} favorites={this.sampleFavoritesData.favorites} />;
+                  return <CareerProfileContainer router={props} favorites={this.props.favorites} />;
                 }} />
                 <Route path='/services/:id' render={props => {
                   return <ServiceListContainer router={props} />;
@@ -305,7 +256,7 @@ const mapStateToProps = state => {
     careers: state.careers.careers,
     industries: state.industries.industries,
     user: state.user,
-    favorites: state.favorites
+    favorites: state.favorites.favorites
   };
 };
 
