@@ -29,7 +29,7 @@ class TrainingServiceProfileContainer extends React.Component {
 
   render() {
     return (
-      <TrainingServiceProfile service={this.props.service}/>
+      <TrainingServiceProfile service={this.props.service} favorites={this.props.favorites}/>
     );
   }
 }
