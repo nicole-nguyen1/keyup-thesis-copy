@@ -109,49 +109,17 @@ export const getServiceQuery = (args) => (
 
 export const getServicesQuery = (args) => (
   `{
-    trainings(id:${args}) {
+    trainings(career_id:${args}) {
       id
       career_id
+      career_name
       name
-      subheading
       logo_url
-      about
-      financial_info
-      location
-      app_type
-      app_process
-      apply_now_cta
-      app_url
-      app_phone_number
-      program_url
-      program_length_total
-      program_total_weekly
-      program_class_times
       paid_to_learn
       federal_student_aid
       card_length
       card_location
       card_tuition
-      page_title
-      outcomes {
-        id
-        description
-      }
-      requirements {
-        id
-        description
-      }
-      pros {
-        id
-        description
-      }
-      cons {
-        id
-        description
-      }
-    }
-    career(id:${args}) {
-      name
     }
   }`
 );
@@ -227,6 +195,38 @@ export const getFavoritesQuery = (args) => (
     }
   }
   `
+);
+
+export const getCareerFave = (args) => (
+  `{
+    careers(career_ids: [${args}]) {
+      id
+      industry_name
+      name
+      card_pro
+      annual_salary
+      training_length
+      card_image_url
+      openings
+    }
+  }`
+);
+
+export const getTrainingFave = (args) => (
+  `{
+    trainings(service_ids: [${args}]) {
+      id
+      career_id
+      career_name
+      name
+      logo_url
+      paid_to_learn
+      federal_student_aid
+      card_length
+      card_location
+      card_tuition
+    }
+  }`
 );
 
 export const saveCareer = (args) => (

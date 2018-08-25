@@ -19,10 +19,10 @@ class Services extends React.Component {
   render() {
     return (
       <div>
-        <FilterAndSort services={this.props.services} careerName={this.props.careerName} careerID={this.props.careerID}/>
+        <FilterAndSort services={this.props.services} careerID={this.props.careerID}/>
         <Grid container spacing={8}>
           {this.props.services.map((service, index) => {
-            return <Service key={service.id || index} service={service} careerName={this.props.careerName}/>;
+            return <Service key={service.id || index} service={service}/>;
           })}
         </Grid>
       </div>
