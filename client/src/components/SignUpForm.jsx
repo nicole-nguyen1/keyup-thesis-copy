@@ -23,7 +23,7 @@ const styles = theme => ({
     maxWidth: '350px'
   },
   buttonStyle: {
-    backgroundColor: '#2979ff',
+    backgroundColor: '##4469FF',
     color: 'white',
     borderRadius: 0,
     marginTop: '2em'

@@ -200,6 +200,13 @@ const UserType = new GraphQLObjectType({
   })
 });
 
+const MessageType = new GraphQLObjectType({
+  name: 'Message',
+  fields: () => ({
+    message: { type: GraphQLString }
+  })
+});
+
 const ContactFormType = new GraphQLObjectType({
   name: 'ContactForm',
   fields: () => ({
@@ -292,7 +299,8 @@ const RootQuery = new GraphQLObjectType({
       args: {
         industry_ids: { type: new GraphQLList(GraphQLID) },
         paid_to_learn: { type: GraphQLBoolean },
-        free_training: { type: GraphQLBoolean }
+        free_training: { type: GraphQLBoolean },
+        career_ids: { type: new GraphQLList(GraphQLID) }
       },
       resolve(parent, args) {
         let newQuery = knex('careers');
@@ -304,6 +312,9 @@ const RootQuery = new GraphQLObjectType({
         }
         if (args.free_training === true) {
           newQuery = newQuery.where('free_training', true);
+        }
+        if (args.career_ids) {
+          newQuery = newQuery.whereIn('id', args.career_ids);
         }
         return newQuery.select();
       }
@@ -324,11 +335,19 @@ const RootQuery = new GraphQLObjectType({
     //GET list of training services related to specific career
     trainings: {
       type: new GraphQLList(TrainingType),
-      args: { id: { type: GraphQLID } },
+      args: { 
+        career_id: { type: GraphQLID },
+        service_ids: { type: new GraphQLList(GraphQLID) } 
+      },
       resolve(parent, args) {
-        return knex('services')
-          .select()
-          .where('services.career_id', args.id);
+        let newQuery = knex('services');
+        if (args.career_id) {
+          newQuery = newQuery.where('services.career_id', args.career_id);
+        }
+        if (args.service_ids) {
+          newQuery = newQuery.whereIn('services.id', args.service_ids);
+        }
+        return newQuery.select();
       }
     },
 
@@ -354,13 +373,12 @@ const RootQuery = new GraphQLObjectType({
     },
 
     //GET a specific user
-    user: {
+    loggedInUser: {
       type: UserType,
-      args: { id: { type: GraphQLID } },
-      resolve(parent, { id }, { session }) {
-        console.log(session);
+      resolve(parent, args, { session }) {
+        let id = session.passport.user;
         return knex('users')
-          .select()
+          .select('id', 'email', 'phone_number', 'first_name', 'last_name')
           .where({ id })
           .first();
       }
@@ -406,6 +424,14 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, { email, password }, req) {
         return loginHelper(email, password, req);
+      }
+    },
+
+    logout: {
+      type: MessageType,
+      resolve(parent, args, req) {
+        req.logout();
+        return {message: 'SUCCESS'};
       }
     },
 

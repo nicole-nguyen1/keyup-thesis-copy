@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import ApplyDialog from './ApplyDialog.jsx';
 import { withStyles } from '@material-ui/core/styles';
+import HeartContainer from '../heartComponents/HeartContainer.jsx';
+import MultiLineParagraph from '../MultiLineParagraph.jsx';
 
 const styles = theme => ({
   card: {
@@ -34,7 +36,7 @@ const ApplicationProcess = props => {
       <Card className={classes.card} >
         <CardContent>
           <Typography gutterBottom variant='title'>Application Process</Typography>
-          <Typography gutterBottom variant='body1'>{props.service.app_process}</Typography>
+          {props.service.app_process ? <MultiLineParagraph text={props.service.app_process} /> : props.service.app_process}
         </CardContent>
         <CardActions >
           <div className={classes.buttons} >
@@ -51,6 +53,14 @@ const ApplicationProcess = props => {
             </Button>
           </div>
         </CardActions>
+        <div style={{ textAlign: 'center' }}>
+          <HeartContainer 
+            size={'large'}
+            profile={true}
+            serviceID={props.service.id}
+            favorites={props.favorites}
+          />
+        </div>
         <CardContent className={classes.linkContainer}>
           <Typography gutterBottom variant='body1'><a className={classes.link} href={props.service.program_url}>Go to {props.service.name} website</a></Typography>
         </CardContent>

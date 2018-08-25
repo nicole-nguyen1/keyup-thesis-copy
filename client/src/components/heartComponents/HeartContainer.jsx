@@ -6,20 +6,12 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   icon: {
-    position: 'relative',
-    top: '-4px',
-    left: '10px',
-    color: '#88888A',
-    textAlign: 'right',
-    flexDirection: 'column'
+    right: '8px',
+    color: '#88888A'
   },
   favoriteSelected: {
-    position: 'relative',
-    top: '-4px',
-    left: '10px',
-    color: '#7A94F4',
-    textAlign: 'right',
-    flexDirection: 'column'
+    right: '8px',
+    color: '#7A94F4'
   },
   buttonStyle: {
     flexDirection: 'column'
@@ -35,15 +27,43 @@ class HeartContainer extends React.Component {
       className: this.props.classes.icon,
       iconSize: 20
     };
+    
   }
 
-  handleClick = () => {
+  componentDidMount () {
+    this.isFavorite();
+  }
+
+  isFavorite = () => {
+    console.log('props in icon', this.props)
+    if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
+        for(let favorite in this.props.favorites) {
+          if (this.props.favorites[favorite].career_id === this.props.careerID) {
+            console.log('favorite found:', this.props.careerID)
+            this.turnMeBlue()
+            break;
+          }
+        }
+    } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
+      for(let favorite in this.props.favorites) {
+        if (this.props.favorites[favorite].service_id === this.props.serviceID) {
+          console.log('favorite found:', this.props.serviceID)
+          this.turnMeBlue()
+        }
+      }
+    }
+  }
+
+  turnMeBlue = () => {
     this.setState({
       className: this.props.classes.favoriteSelected
     })
   }
 
-  
+  handleClick = () => {
+    //add or remove item from favorites
+    console.log('Fire off graphQL Mutation!!!!!!!!!!')
+  }
 
   render() {
     const { classes } = this.props;

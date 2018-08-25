@@ -25,6 +25,7 @@ class ServiceListContainer extends React.Component {
     this.fetch({
       query: getServicesQuery(this.state.career_id)
     }).then(res => {
+      console.log(res);
       store.dispatch(findServices(res.data));
     });
   }
@@ -35,8 +36,8 @@ class ServiceListContainer extends React.Component {
     } else {
       return <Services 
       services={this.props.services} 
-      careerName={this.props.careerName}
       careerID={this.state.career_id}
+      favorites={this.props.favorites}
       />;
     }
   }
@@ -44,8 +45,7 @@ class ServiceListContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    services: state.services.services,
-    careerName: state.services.careerName
+    services: state.services.services
   };
 };
 

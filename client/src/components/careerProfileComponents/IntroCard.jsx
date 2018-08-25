@@ -54,7 +54,6 @@ class IntroCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    
     return (
       <div>
         <Card style={{ borderRadius: 0 }}>
@@ -70,7 +69,11 @@ class IntroCard extends React.Component {
               <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
               <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' className={classes.icon} />
             </Button>
-            <HeartContainer profile={true}/>
+            <HeartContainer 
+              profile={true}
+              favorites={this.props.favorites}
+              careerID={String(this.props.careerID)}
+            />
           </CardActions>
           <CardContent style={{ paddingTop: 0 }}>
             <Typography gutterBottom variant='headline'>{this.props.career.name}</Typography>

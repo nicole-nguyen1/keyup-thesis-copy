@@ -19,6 +19,7 @@ class Home extends React.Component {
   componentDidMount() {
     window.scrollTo(0,0);
     store.dispatch(getPageTitle(''));
+    this.props.getUser();
   }
 
   render() {

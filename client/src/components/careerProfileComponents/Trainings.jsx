@@ -16,13 +16,12 @@ const styles = theme => ({
 
   button: {
     margin: '0px auto 10px',
-    backgroundColor: '2979ff'
+    backgroundColor: '#4469FF'
   }
 });
 
 const Trainings = (props) => {
   const { classes } = props;
-
   return (
     <div>
       <Card className={classes.card}>
@@ -39,7 +38,12 @@ const Trainings = (props) => {
           </Button>
         </CardActions>
         <div style={{ textAlign: 'center'}}>
-          <HeartContainer profile={true} size={'large'}/>
+          <HeartContainer 
+            profile={true} 
+            size={'large'}
+            favorites={props.favorites}
+            careerID={String(props.careerID)}
+          />
         </div>
       </Card>
     </div>
