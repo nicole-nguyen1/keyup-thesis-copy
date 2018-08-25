@@ -7,56 +7,98 @@ import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
 import HeartContainer from './heartComponents/HeartContainer.jsx';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  grid: {
+    maxWidth: '97%', 
+    margin: '0 auto 8px'
+  },
+
+  card: {
+    borderRadius: '3px'
+  },
+
+  cardContent: {
+    paddingBottom: '5px!important'
+  },
+
+  text: {
+    paddingRight: '6px'
+  },
+
+  image: {
+    height: '110px'
+  },
+
+  learnButton: {
+    backgroundColor: '#4469FF',
+    top: '8px'
+  },
+
+  trainingButton: {
+    backgroundColor: 'transparent',
+    color: 'grey',
+    top: '8px'
+  }
+});
 class Career extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const style = {
-      height: '20%'
-    };
+    const { classes } = this.props;
+
     return (
-      <Grid item xs={12}>
-        <Card>
-          <CardContent>
+      <Grid item xs={12} className={classes.grid}>
+        <Card className={classes.card}>
+          <CardContent className={classes.cardContent}>
             <Grid container>
-              <Grid item xs={9}>
-                <Typography color="textSecondary">
+              <Grid item xs={8} className={classes.text}>
+                <Typography color="textSecondary" gutterBottom>
                   {this.props.career.industry_name}
                 </Typography>
-                <Typography variant="headline">
+                <Typography variant="headline" paragraph>
                   {this.props.career.name}
                 </Typography>
-                <Typography color="textSecondary">
+                <Typography color="textSecondary" paragraph>
                   {this.props.career.card_pro}
-                  <br />
-                  <br />
-                  Salary: {this.props.career.annual_salary}
-                  <br/>
-                  Training length: {this.props.career.training_length}
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <CardMedia 
                   image={this.props.career.card_image_url || '#'}
                   title="Dummy Title"
-                  style={style}
+                  className={classes.image}
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={8}>
+            <Grid>
+              <Grid item xs={12}>
+                <Typography color="textSecondary" paragraph>
+                  Salary: {this.props.career.annual_salary}
+                  <br />
+                  Training length: {this.props.career.training_length}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container>
               <Grid item xs={5}>
-                <Button variant="contained" color="primary" style={{backgroundColor: '#4469FF'}} component={Link} to={`/careers/${this.props.career.id}`}>
+                <Button 
+                  variant="contained" 
+                  color="primary" 
+                  className={classes.learnButton} 
+                  component={Link} 
+                  to={`/careers/${this.props.career.id}`}>
                   LEARN MORE
                 </Button>
               </Grid>
               <Grid item xs={5}>
-                <Button style={{
-                  backgroundColor: 'transparent',
-                  color: 'grey'
-                }} component={Link} to={`/services/${this.props.career.id}`}>
+                <Button 
+                  className={classes.trainingButton} 
+                  component={Link} 
+                  to={`/services/${this.props.career.id}`}>
                   FIND TRAINING
                 </Button>
               </Grid>
@@ -75,4 +117,4 @@ class Career extends React.Component {
   }
 } 
 
-export default Career;
+export default withStyles(styles)(Career);

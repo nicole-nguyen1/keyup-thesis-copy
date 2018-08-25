@@ -38,6 +38,9 @@ class App extends React.Component {
       uri: '/graphql'
     }).bind(this);
     this.sortBy = 'Highest salary';
+    this.state = {
+      showSignOutButton: false
+    }
   }
 
   componentDidMount() {
