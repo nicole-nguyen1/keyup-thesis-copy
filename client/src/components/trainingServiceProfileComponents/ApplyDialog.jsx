@@ -7,6 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
+import MultiLineParagraph from '../MultiLineParagraph.jsx';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -82,10 +83,9 @@ const AlertDialogSlide = props => {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        {/* There is currently a warning of failed prop type because app_type values are all null until KeyUp gives us values */}
         <DialogTitle id="alert-dialog-slide-title">{heading}</DialogTitle>
         <DialogContent>
-          <Typography variant='body1'>{props.service.apply_now_cta}</Typography>
+          {props.service.apply_now_cta ? <MultiLineParagraph text={props.service.apply_now_cta} /> : props.service.apply_now_cta}
             {props.service.app_type === 'in person' ? 
               <div className={classes.phone}>
                 <img src='https://s3.amazonaws.com/key-up-assets/Phone-blue.png' className={classes.phoneIcon} />
