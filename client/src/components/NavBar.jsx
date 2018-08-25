@@ -1,4 +1,5 @@
 import React from 'react';
+import { logout } from './graphql/graphql';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,15 +23,19 @@ import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
-import { getPageTitle } from '../actions/action';
+import { getPageTitle, findUser } from '../actions/action';
 import { HashLink } from 'react-router-hash-link';
+import { createApolloFetch } from 'apollo-fetch';
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
+    this.fetch = createApolloFetch({
+      uri: '../graphql'
+    }).bind(this);
 
     this.state = {
-      anchorEl: null
+      anchorEl: null,
     };
   }
 
@@ -41,6 +46,24 @@ class NavBar extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  handleSignOut = () => {
+    this.fetch({
+      query: logout
+    }).then(() => {
+      const nullObj = {
+        id: '',
+        email: '',
+        first_name: '',
+        last_name: '',
+        phone_number: ''
+      };
+      store.dispatch(findUser(nullObj))
+    }).then(() => {
+      this.props.toggle();
+    })
+    this.handleClose()
+  }
 
   render() {
     const { classes } = this.props;
@@ -147,6 +170,18 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </HashLink>
               </MenuItem>
+              {this.props.showSignOutButton ? 
+                      (<MenuItem onClick={this.handleSignOut}>
+                      <Link to="/home">
+                        <ListItemIcon>
+                          <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
+                        </ListItemIcon>
+                        <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
+                        </ListItemText>
+                      </Link>
+                    </MenuItem>) : null
+              }
+              
             </Menu>
             <Typography variant="display1" color="inherit">
               <Link to="/home">
@@ -188,7 +223,7 @@ NavBar.styles = {
     left: 0,
     borderRadius: 0,
     display: 'flex',
-    backgroundColor: '2979ff'
+    backgroundColor: '#4469FF'
   },
   home: {
     padding: '0'
@@ -220,18 +255,26 @@ NavBar.styles = {
     marginBottom: '1em',
     textDecoration: 'none',
     borderRadius: '2px'
+  },
+
+  logoutIcon: {
+    height: '24px',
+    width: '24px',
+    marginLeft: '3px',
+    marginRight: '13px'
   }
 
 };
 
 const mapStateToProps = state => {
   return {
-    pages: state.pages.page
+    pages: state.pages.page,
+    user: state.user.user
   };
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle }, dispatch);
+  return bindActionCreators({ getPageTitle, findUser }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(NavBar.styles)(withRouter(NavBar)));

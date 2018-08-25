@@ -3,6 +3,7 @@ let defaultState = {
     {
       id: '',
       career_id: '',
+      career_name: '',
       name: '',
       subheading: '',
       logo_url: '',
@@ -31,7 +32,7 @@ let defaultState = {
 const serviceReducers = (state = defaultState, action) => {
   switch (action.type) {
     case 'SERVICES':
-      return Object.assign({}, {services: action.payload.trainings, careerName: action.payload.career.name});
+      return Object.assign({}, {services: action.payload.trainings});
     default: return state;
   }
 };

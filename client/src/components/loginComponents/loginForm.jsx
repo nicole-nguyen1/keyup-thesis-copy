@@ -13,7 +13,7 @@ const styles = theme => ({
     width: '90vw'
   },
   buttonStyle: {
-    backgroundColor: '2979ff',
+    backgroundColor: '#4469FF',
     color: 'white',
     borderRadius: 0,
     marginTop: '5em',
@@ -70,6 +70,11 @@ class LoginForm extends React.Component {
             className={classes.inputStyle}
             onChange={this.props.handlePasswordChange}
           />
+          <Typography variant="body1" align="center">
+            <a href='#'>
+          Forgot your password?
+            </a>
+          </Typography>
           <div>
             <Button
               variant="contained"
