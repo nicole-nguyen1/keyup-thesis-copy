@@ -28,18 +28,21 @@ const styles = theme => ({
   },
 
   image: {
-    height: '110px'
+    maxHeight: '110px',
+    width: '110px'
   },
 
   learnButton: {
     backgroundColor: '#4469FF',
-    top: '8px'
+    top: '8px',
+    borderRadius: '3px'
   },
 
   trainingButton: {
     backgroundColor: 'transparent',
     color: 'grey',
-    top: '8px'
+    top: '8px',
+    borderRadius: '3px'
   }
 });
 class Career extends React.Component {
@@ -67,8 +70,8 @@ class Career extends React.Component {
                 </Typography>
               </Grid>
               <Grid item xs={4}>
-                <CardMedia 
-                  image={this.props.career.card_image_url || '#'}
+                <img 
+                  src={this.props.career.card_image_url || '#'}
                   title="Dummy Title"
                   className={classes.image}
                 />
