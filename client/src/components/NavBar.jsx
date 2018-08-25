@@ -77,7 +77,6 @@ class NavBar extends React.Component {
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const user = store.getState();
-    console.log('user', user)
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
