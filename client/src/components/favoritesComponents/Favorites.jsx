@@ -11,8 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
 const styles = theme => ({
-  paper: {
-    height: '100%'
+  background: {
+    backgroundColor: '#CFCFCE'
   },
 
   tabs: {
@@ -36,15 +36,17 @@ const styles = theme => ({
 
 function NoFaves(props) {
   return (
-    <div style={{ padding: '30px 15px' }}>
-      <Typography variant='body1' paragraph>No favorites yet?</Typography>
-      <Typography variant='body1' paragraph>
-        <Link to='/careers' 
-          style={{
-            color: '#4469FF',
-            textDecoration: 'none'
-          }}>Browser Careers and Training</Link> to pick out some likely-looking {props.type}.
+    <div>
+      <Paper style={{ padding: '30px 15px', borderRadius: '0' }}>
+        <Typography variant='body1' paragraph>No favorites yet?</Typography>
+        <Typography variant='body1' paragraph>
+          <Link to='/careers'
+            style={{
+              color: '#4469FF',
+              textDecoration: 'none'
+            }}>Browser Careers and Training</Link> to pick out some likely-looking {props.type}.
       </Typography>
+      </Paper>
     </div>
   )
 }
@@ -116,31 +118,29 @@ class Favorites extends React.Component {
     }
 
     return (
-      <div>
-        <Paper className={classes.paper}>
-          <Tabs
-            value={this.state.value}
-            onChange={this.handleChange}
+      <div className={classes.background}>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          classes={{
+            indicator: classes.tabsIndicator
+          }}
+          className={classes.tabs}
+          centered
+        >
+          <Tab label="Favorite Careers"
             classes={{
-              indicator: classes.tabsIndicator
+              root: classes.tabRoot,
+              selected: classes.tabSelected
+            }} />
+          <Tab label="Favorite Training" 
+            classes={{
+              root: classes.tabRoot,
+              selected: classes.tabSelected
             }}
-            className={classes.tabs}
-            centered
-          >
-            <Tab label="Favorite Careers"
-              classes={{
-                root: classes.tabRoot,
-                selected: classes.tabSelected
-              }} />
-            <Tab label="Favorite Training" 
-              classes={{
-                root: classes.tabRoot,
-                selected: classes.tabSelected
-              }}
-            />
-          </Tabs>
-          {info}
-        </Paper>
+          />
+        </Tabs>
+        {info}
       </div>
     )
   }
