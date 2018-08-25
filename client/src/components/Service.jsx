@@ -42,7 +42,7 @@ const Service = props => {
               />
             </Grid>
           </Grid>
-          <Button variant="contained" color="primary" style={{backgroundColor: '2979ff', marginTop: '10px'}} component={Link} to={`/service/${props.service.id}`}>
+          <Button variant="contained" color="primary" style={{backgroundColor: '#4469FF', marginTop: '10px'}} component={Link} to={`/service/${props.service.id}`}>
             LEARN MORE
           </Button>
         </CardContent>

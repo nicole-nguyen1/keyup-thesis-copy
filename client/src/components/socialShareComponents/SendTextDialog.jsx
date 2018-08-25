@@ -53,7 +53,7 @@ class SendTextDialog extends React.Component {
               Cancel
             </Button>
             <a href={this.state.textLink} style={{ textDecoration: 'none' }}>
-              <Button color="primary" autoFocus style={{ backgroundColor: '2979ff', color: 'EDEDEE' }}>
+              <Button color="primary" autoFocus style={{ backgroundColor: '#4469FF', color: 'EDEDEE' }}>
                 Send Text
               </Button>
             </a>

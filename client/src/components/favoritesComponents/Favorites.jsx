@@ -121,8 +121,6 @@ class Favorites extends React.Component {
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
-            // indicatorColor="primary"
-            textColor="primary"
             classes={{
               indicator: classes.tabsIndicator
             }}
