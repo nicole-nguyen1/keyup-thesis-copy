@@ -6,7 +6,28 @@ import FavoriteCareers from './FavoriteCareers.jsx';
 import FavoriteTrainings from './FavoriteTrainings.jsx';
 import { createApolloFetch } from 'apollo-fetch';
 import { getCareerFave, getTrainingFave } from '../graphql/graphql';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  tabs: {
+    backgroundColor: '#3651C5',
+    height: '3.5em'
+  },
+
+  tabsIndicator: {
+    backgroundColor: '#02ED96'
+  },
+
+  tabRoot: {
+    color: '#EDEDEE',
+    padding: '10px',
+    '&$tabSelected': {
+      color: '#02ED96'
+    }
+  },
+
+  tabSelected: {}
+});
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +75,7 @@ class Favorites extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     // div with tabs - background color #3651C5
     return (
       <div>
@@ -61,12 +83,25 @@ class Favorites extends React.Component {
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
-            indicatorColor="primary"
+            // indicatorColor="primary"
             textColor="primary"
+            classes={{
+              indicator: classes.tabsIndicator
+            }}
+            className={classes.tabs}
             centered
           >
-            <Tab label="Favorite Careers" />
-            <Tab label="Favorite Training" />
+            <Tab label="Favorite Careers"
+              classes={{
+                root: classes.tabRoot,
+                selected: classes.tabSelected
+              }} />
+            <Tab label="Favorite Training" 
+              classes={{
+                root: classes.tabRoot,
+                selected: classes.tabSelected
+              }}
+            />
           </Tabs>
           {this.state.value === 0 && <FavoriteCareers careers={this.state.careerFaves} favorites={this.props.favorites}/>}
           {this.state.value === 1 && <FavoriteTrainings services={this.state.trainingFaves} favorites={this.props.favorites}/>}
@@ -76,4 +111,4 @@ class Favorites extends React.Component {
   }
 }
 
-export default Favorites;
+export default withStyles(styles)(Favorites);

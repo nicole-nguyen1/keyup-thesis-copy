@@ -188,7 +188,7 @@ NavBar.styles = {
     left: 0,
     borderRadius: 0,
     display: 'flex',
-    backgroundColor: '2979ff'
+    backgroundColor: '#4469FF'
   },
   home: {
     padding: '0'
