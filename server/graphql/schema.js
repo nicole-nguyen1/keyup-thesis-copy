@@ -195,7 +195,8 @@ const UserType = new GraphQLObjectType({
     password: { type: GraphQLString },
     first_name: { type: GraphQLString },
     last_name: { type: GraphQLString },
-    phone_number: { type: GraphQLString }
+    phone_number: { type: GraphQLString },
+    zip: { type: GraphQLString }
   })
 });
 
@@ -389,10 +390,11 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString },
         first_name: { type: GraphQLString },
         last_name: { type: GraphQLString },
-        phone_number: { type: GraphQLString }
+        phone_number: { type: GraphQLString },
+        zip: { type: GraphQLString }
       },
-      resolve(parent, { email, password, first_name, last_name, phone_number }, req) {
-        return signUpHelper(email, password, first_name, last_name, phone_number, req);
+      resolve(parent, { email, password, first_name, last_name, phone_number, zip }, req) {
+        return signUpHelper(email, password, first_name, last_name, phone_number, zip, req);
       }
     },
 

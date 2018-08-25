@@ -144,13 +144,15 @@ class SignUpForm extends React.Component {
     let first_name = JSON.stringify(this.state.first_name);
     let last_name = JSON.stringify(this.state.last_name);
     let phone_number = JSON.stringify(this.state.phone_number);
+    let zip = JSON.stringify(this.state.zip);
     this.fetch({
       query: signUp({
         email,
         password,
         first_name,
         last_name,
-        phone_number
+        phone_number,
+        zip
       })
     })
     .then( res => {

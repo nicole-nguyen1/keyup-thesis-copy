@@ -180,7 +180,7 @@ export const addFormData = (args) => (
   `
 );
 
-export const signUp = ({ email, password, first_name, last_name, phone_number }) => (
+export const signUp = ({ email, password, first_name, last_name, phone_number, zip }) => (
   `
   mutation {
     signUp (
@@ -188,13 +188,15 @@ export const signUp = ({ email, password, first_name, last_name, phone_number })
       password: ${password},
       first_name: ${first_name},
       last_name: ${last_name},
-      phone_number: ${phone_number || null}
+      phone_number: ${phone_number || null},
+      zip: ${zip || null}
     ) {
       id
       email
       first_name
       last_name
       phone_number
+      zip
     }
   }
   `
