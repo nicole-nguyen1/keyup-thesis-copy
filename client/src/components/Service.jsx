@@ -19,7 +19,7 @@ const Service = props => {
           <Grid container>
             <Grid item xs={9}>
               <Typography color="textSecondary">
-                {props.careerName}
+                {props.service.career_name}
               </Typography>
               <Typography variant="headline">
                 {props.service.name}

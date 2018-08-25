@@ -77,8 +77,8 @@ class LoginContainer extends React.Component {
         store.dispatch(findUser(res.data.login))
       }
     }).catch(err => {
-      console.log('error in login container', err)
-    })
+      console.error(err);
+    });
   }
 
   render() {
@@ -110,7 +110,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle, findUser}, dispatch);
+  return bindActionCreators({ getPageTitle, findUser }, dispatch);
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginContainer));

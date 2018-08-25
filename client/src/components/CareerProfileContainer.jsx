@@ -30,7 +30,7 @@ class CareerProfileContainer extends React.Component {
 
   render() {
     return (
-      <CareerProfile career={this.props.career} careerID={this.state.career_id}/>
+      <CareerProfile career={this.props.career} careerID={this.state.career_id} favorites={this.props.favorites}/>
     );
   }
 }

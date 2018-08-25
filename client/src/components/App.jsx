@@ -4,7 +4,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import Careers from './Careers.jsx';
+<<<<<<< HEAD
 import { findCareers, getIndustries, findUser } from '../actions/action';
+=======
+import { findCareers, getIndustries, getFavorites } from '../actions/action';
+>>>>>>> 330a5d9e2f802d92ab0a65381148e5c2ef061f26
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
@@ -17,12 +21,18 @@ import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
 import LoginContainer from './loginComponents/loginContainer.jsx';
 import SignUpForm from './SignUpForm.jsx';
+import UserProfileContainer from './userProfileComponents/UserProfileContainer.jsx';
+import FavoritesContainer from './favoritesComponents/FavoritesContainer.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
   getIndustriesQuery,
   filterCareersQuery,
+<<<<<<< HEAD
   getLoggedInUser
+=======
+  getFavoritesQuery
+>>>>>>> 330a5d9e2f802d92ab0a65381148e5c2ef061f26
 } from './graphql/graphql';
 
 
@@ -39,6 +49,55 @@ class App extends React.Component {
     this.state = {
       showSignOutButton: false
     }
+    this.sampleFavoritesData = {
+      favorites: [
+        {
+          'career_id': null,
+          'service_id': '14',
+          'user_id': '45'
+        },
+        {
+          'career_id': '1',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '5',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '6',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '3',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': '2',
+          'service_id': null,
+          'user_id': '45'
+        },
+        {
+          'career_id': null,
+          'service_id': '13',
+          'user_id': '45'
+        },
+        {
+          'career_id': null,
+          'service_id': '12',
+          'user_id': '45'
+        },
+        {
+          'career_id': null,
+          'service_id': '11',
+          'user_id': '45'
+        }
+      ]
+    };
   }
 
   componentDidMount() {
@@ -74,6 +133,11 @@ class App extends React.Component {
     this.setState({
       showSignOutButton: false
     })
+    
+  componentDidUpdate(prevProps) {
+    if (this.props.user.id !== prevProps.user.id) {
+      this.getFavorites();
+    }
   }
 
   getCareers = () => {
@@ -88,6 +152,15 @@ class App extends React.Component {
     }).catch((error) => {
       console.error(error)
     });
+  }
+
+  getFavorites = () => {
+    this.fetch({
+      query: getFavoritesQuery(this.props.user.id)
+    })
+    .then((res) => {
+      store.dispatch(getFavorites(res.data));
+    })
   }
 
   filterCareers = (args, sortBy) => {
@@ -194,10 +267,20 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path="/profile" render={props => {
+                  return <UserProfileContainer
+                    router={props}
+                  />;
+                }} />
+                <Route exact path="/favorites" render={props => {
+                  return <FavoritesContainer 
+                    router={props}/>
+                }} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
                     careers={this.props.careers}
+                    favorites={this.props.favorites}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                   />;
@@ -227,16 +310,26 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path="/profile" render={props => {
+                  return <UserProfileContainer
+                    router={props}
+                  />
+                }} />
+                <Route exact path="/favorites" render={props => {
+                  return <FavoritesContainer
+                    router={props} />
+                }} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
                     careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
+                    favorites={this.sampleFavoritesData.favorites}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
-                  return <CareerProfileContainer router={props} />;
+                  return <CareerProfileContainer router={props} favorites={this.sampleFavoritesData.favorites} />;
                 }} />
                 <Route path='/services/:id' render={props => {
                   return <ServiceListContainer router={props} />;
@@ -258,7 +351,8 @@ const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
     industries: state.industries.industries,
-    user: state.user.user
+    user: state.user.user,
+    favorites: state.favorites.favorites
   };
 };
 

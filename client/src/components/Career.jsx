@@ -6,8 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
-import { store } from '../store/index';
-import { getPageTitle } from '../actions/action';
 import HeartContainer from './heartComponents/HeartContainer.jsx';
 
 class Career extends React.Component {
@@ -19,7 +17,6 @@ class Career extends React.Component {
     const style = {
       height: '20%'
     };
-    console.log('career props', this.props)
     return (
       <Grid item xs={12}>
         <Card>
@@ -66,6 +63,8 @@ class Career extends React.Component {
               <Grid item xs={2} >
                 <HeartContainer
                   size={'large'}
+                  favorites={this.props.favorites}
+                  careerID={this.props.career.id}
                 />
               </Grid>
             </Grid>

@@ -117,18 +117,22 @@ class NavBar extends React.Component {
                 </Link>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                </ListItemIcon>
-                <ListItemText style={{ float: 'right' }} inset primary="My Profile">
-                </ListItemText>
+                <Link to="/profile">
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText style={{ float: 'right' }} inset primary="My Profile">
+                  </ListItemText>
+                </Link>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
-                <ListItemIcon>
-                  <FavoriteIcon />
-                </ListItemIcon>
-                <ListItemText style={{ float: 'right' }} inset primary="My Favorites">
-                </ListItemText>
+                <Link to="/favorites">
+                  <ListItemIcon>
+                    <FavoriteIcon />
+                  </ListItemIcon>
+                  <ListItemText style={{ float: 'right' }} inset primary="My Favorites">
+                  </ListItemText>
+                </Link>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
                 <Link to="/careers">

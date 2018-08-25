@@ -298,7 +298,8 @@ const RootQuery = new GraphQLObjectType({
       args: {
         industry_ids: { type: new GraphQLList(GraphQLID) },
         paid_to_learn: { type: GraphQLBoolean },
-        free_training: { type: GraphQLBoolean }
+        free_training: { type: GraphQLBoolean },
+        career_ids: { type: new GraphQLList(GraphQLID) }
       },
       resolve(parent, args) {
         let newQuery = knex('careers');
@@ -310,6 +311,9 @@ const RootQuery = new GraphQLObjectType({
         }
         if (args.free_training === true) {
           newQuery = newQuery.where('free_training', true);
+        }
+        if (args.career_ids) {
+          newQuery = newQuery.whereIn('id', args.career_ids);
         }
         return newQuery.select();
       }
@@ -330,11 +334,19 @@ const RootQuery = new GraphQLObjectType({
     //GET list of training services related to specific career
     trainings: {
       type: new GraphQLList(TrainingType),
-      args: { id: { type: GraphQLID } },
+      args: { 
+        career_id: { type: GraphQLID },
+        service_ids: { type: new GraphQLList(GraphQLID) } 
+      },
       resolve(parent, args) {
-        return knex('services')
-          .select()
-          .where('services.career_id', args.id);
+        let newQuery = knex('services');
+        if (args.career_id) {
+          newQuery = newQuery.where('services.career_id', args.career_id);
+        }
+        if (args.service_ids) {
+          newQuery = newQuery.whereIn('services.id', args.service_ids);
+        }
+        return newQuery.select();
       }
     },
 
@@ -542,7 +554,7 @@ const Mutation = new GraphQLObjectType({
           .select()
           .first()
           .then((res) => {
-            //add favorite if it does not currently exist
+            //add favorite if it
             if (res === undefined) {
               return knex('favorites')
                 .insert({
