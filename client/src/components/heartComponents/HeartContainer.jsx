@@ -35,7 +35,7 @@ class HeartContainer extends React.Component {
   }
 
   isFavorite = () => {
-    let favoriteFound = false;
+    console.log('props in icon', this.props)
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
@@ -44,8 +44,14 @@ class HeartContainer extends React.Component {
             break;
           }
         }
+    } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
+      for(let favorite in this.props.favorites) {
+        if (this.props.favorites[favorite].service_id === this.props.serviceID) {
+          console.log('favorite found:', this.props.serviceID)
+          this.turnMeBlue()
+        }
+      }
     }
-    return favoriteFound;
   }
 
   turnMeBlue = () => {
