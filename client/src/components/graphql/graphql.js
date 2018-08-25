@@ -197,6 +197,19 @@ export const getFavoritesQuery = (args) => (
   `
 );
 
+export const getLoggedInUser = 
+  `
+  {
+    loggedInUser {
+      id
+      email
+      first_name
+      last_name
+      phone_number
+    }
+  }
+  `;
+
 export const getCareerFave = (args) => (
   `{
     careers(career_ids: [${args}]) {
@@ -270,3 +283,13 @@ export const removeFavorite = (args) => (
   }
   `
 );
+
+export const logout = `
+
+  mutation {
+    logout {
+      message
+    }
+  }
+
+`;

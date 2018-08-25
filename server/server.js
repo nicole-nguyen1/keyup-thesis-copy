@@ -16,6 +16,7 @@ const app = express();
 //====================
 app.use(express.static(path.join(__dirname, '../client/dist'), { index: false }));
 app.use(bodyParser.json());
+app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session());
 //====================
