@@ -2,22 +2,9 @@ let defaultState = {
   favorites: [
     {
       id: '',
-      career: [{
-        name: '',
-        industry_name: '',
-        card_pro: '',
-        card_image_url: '',
-        annual_salary: '',
-        training_length: ''
-      }],
-      training_service: [{
-        career_name: '',
-        name: '',
-        logo_url: '',
-        card_length: '',
-        card_tuition: '',
-        card_location: ''
-      }]
+      career_id: '',
+      service_id: '',
+      user_id: ''
     }
   ]
 };

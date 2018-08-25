@@ -6,20 +6,12 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   icon: {
-    position: 'relative',
-    top: '-4px',
-    left: '10px',
-    color: '#88888A',
-    textAlign: 'right',
-    flexDirection: 'column'
+    right: '8px',
+    color: '#88888A'
   },
   favoriteSelected: {
-    position: 'relative',
-    top: '-4px',
-    left: '10px',
-    color: '#7A94F4',
-    textAlign: 'right',
-    flexDirection: 'column'
+    right: '8px',
+    color: '#7A94F4'
   },
   buttonStyle: {
     flexDirection: 'column'

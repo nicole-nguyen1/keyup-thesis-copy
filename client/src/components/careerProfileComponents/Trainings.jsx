@@ -16,7 +16,7 @@ const styles = theme => ({
 
   button: {
     margin: '0px auto 10px',
-    backgroundColor: '2979ff'
+    backgroundColor: '#4469FF'
   }
 });
 

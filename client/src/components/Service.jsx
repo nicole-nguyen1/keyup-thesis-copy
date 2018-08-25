@@ -6,18 +6,48 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  grid: {
+    maxWidth: '97%',
+    margin: '0 auto 8px'
+  },
+
+  card: {
+    borderRadius: '3px'
+  },
+
+  text: {
+    paddingRight: '6px'
+  },
+
+  image: {
+    maxHeight: '110px',
+    width: '110px'
+  },
+
+  imageGrid: {
+    flexGrow: '1',
+    marginTop: '10px'
+  },
+
+  learnButton: {
+    backgroundColor: '#4469FF',
+    top: '8px',
+    borderRadius: '3px'
+  }
+});
 
 const Service = props => {
-  const style = {
-    height: '20%'
-  };
+  const { classes } = props;
+
   return (
-    <Grid item xs={12}>
-      <Card>
+    <Grid item xs={12} className={classes.grid}>
+      <Card className={classes.card}>
         <CardContent>
           <Grid container>
-            <Grid item xs={9}>
+            <Grid item xs={8} className={classes.text}>
               <Typography color="textSecondary">
                 {props.service.career_name}
               </Typography>
@@ -29,20 +59,25 @@ const Service = props => {
                 Training length: {props.service.card_length}
                 <br/>
                 Tuition range: {props.service.card_tuition}
-                <br/>
-                Locations: {props.service.card_location}
-                <br/>
               </Typography>
             </Grid>
-            <Grid item xs={3}>
-              <CardMedia
-                image={props.service.logo_url || '#'}
+            <Grid item xs={4} className={classes.imageGrid}>
+              <img
+                src={props.service.logo_url || '#'}
                 title="Dummy Title"
-                style={style}
+                className={classes.image}
               />
             </Grid>
           </Grid>
-          <Button variant="contained" color="primary" style={{backgroundColor: '2979ff', marginTop: '10px'}} component={Link} to={`/service/${props.service.id}`}>
+          <Typography color="textSecondary">
+            Locations: {props.service.card_location}
+          </Typography>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            className={classes.learnButton} 
+            component={Link} 
+            to={`/service/${props.service.id}`}>
             LEARN MORE
           </Button>
         </CardContent>
@@ -51,4 +86,4 @@ const Service = props => {
   );
 }
 
-export default Service;
+export default withStyles(styles)(Service);

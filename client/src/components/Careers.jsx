@@ -6,8 +6,17 @@ import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPageTitle } from '../actions/action';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  background: {
+    backgroundColor: '#CFCFCE'
+  },
 
+  grid: {
+    marginTop: '8px'
+  }
+});
 
 class Careers extends React.Component {
   constructor(props) {
@@ -21,13 +30,14 @@ class Careers extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.background}>
         <FilterandSort 
           industries={this.props.industries}
           filterCareers={this.props.filterCareers}
         />
-        <Grid container spacing={8}>
+        <Grid container className={classes.grid}>
           {this.props.careers.map((career, index) => {
             return <Career key={career.id || index} career={career} favorites={this.props.favorites}/>;
           })}
@@ -47,4 +57,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPageTitle}, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Careers);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Careers));
