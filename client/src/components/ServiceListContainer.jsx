@@ -25,7 +25,6 @@ class ServiceListContainer extends React.Component {
     this.fetch({
       query: getServicesQuery(this.state.career_id)
     }).then(res => {
-      console.log(res);
       store.dispatch(findServices(res.data));
     });
   }

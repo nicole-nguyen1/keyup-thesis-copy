@@ -37,7 +37,7 @@ const styles = theme => ({
 function NoFaves(props) {
   return (
     <div>
-      <Paper style={{ padding: '30px 15px', borderRadius: '0' }}>
+      <Paper style={{ padding: '30px 15px', borderRadius: '0', height: '100%' }}>
         <Typography variant='body1' paragraph>No favorites yet?</Typography>
         <Typography variant='body1' paragraph>
           <Link to='/careers'

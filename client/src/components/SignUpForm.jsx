@@ -153,9 +153,8 @@ class SignUpForm extends React.Component {
         phone_number
       })
     })
-    .then( res => {
-      console.log(res);
-        store.dispatch(findUser(res.data.signUp))
+    .then(res => {
+      store.dispatch(findUser(res.data.signUp))
       this.setState({
         goHome: true
       });
