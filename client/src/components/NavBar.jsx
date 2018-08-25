@@ -68,6 +68,7 @@ class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
+    console.log('props in nav bar component', this.props)
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -90,7 +91,16 @@ class NavBar extends React.Component {
               PopoverClasses={{ paper: `${classes.menu}` }}
               className={classes.top}
             >
-              <div className={classes.menuTop}>
+            {this.props.showAccountInfo ? 
+                      (<div className={classes.menuTop}>
+                      <Typography variant="body1" align="center" style={{color: '#02ED96'}}>
+                        Account
+                      </Typography>
+                      <Typography variant="body1" align="center" style={{color: 'white'}}>
+                      {this.props.user}
+                      </Typography>
+                      </div>) : 
+              (<div className={classes.menuTop}>
                 <Link to="/login">
                   <Button
                     variant="contained"
@@ -106,7 +116,8 @@ class NavBar extends React.Component {
                     Create an account
                   </Typography>
                 </Link>
-              </div>
+              </div>)
+              }
               <MenuItem onClick={this.handleClose}>
                 <Link to="/home">
                   <ListItemIcon>

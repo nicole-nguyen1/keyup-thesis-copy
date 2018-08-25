@@ -39,7 +39,8 @@ class App extends React.Component {
     }).bind(this);
     this.sortBy = 'Highest salary';
     this.state = {
-      showSignOutButton: false
+      showSignOutButton: false,
+      showAccountInfo: false
     }
   }
 
@@ -62,11 +63,13 @@ class App extends React.Component {
     }).then((res) => {
       if (res.user.id.length > 0) {
         this.setState({
-          showSignOutButton: true
+          showSignOutButton: true,
+          showAccountInfo: true
         })
       } else {
         this.setState({
-          showSignOutButton: false
+          showSignOutButton: false,
+          showAccountInfo: false
         })
       }
     })
@@ -74,7 +77,8 @@ class App extends React.Component {
 
   toggle = () => {
     this.setState({
-      showSignOutButton: false
+      showSignOutButton: false,
+      showAccountInfo: false
     });
   }
     
@@ -194,10 +198,17 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('store state', store.getState())
+    console.log('props in app', this.props)
     return (
       <Router history={newHistory} >
         <div>
-          <NavBar toggle={this.toggle} showSignOutButton={this.state.showSignOutButton}/>
+          <NavBar 
+          toggle={this.toggle} 
+          showSignOutButton={this.state.showSignOutButton} 
+          showAccountInfo={this.state.showAccountInfo}
+          user={this.props.user.email}
+          />
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
               <Switch>
@@ -301,7 +312,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ findCareers, getIndustries }, dispatch);
+  return bindActionCreators({ findCareers, getIndustries, findUser }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
