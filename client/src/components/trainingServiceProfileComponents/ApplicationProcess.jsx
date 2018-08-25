@@ -59,6 +59,8 @@ const ApplicationProcess = props => {
             profile={true}
             serviceID={props.service.id}
             favorites={props.favorites}
+            removeFavorite={props.removeFavorite}
+            addFavorite={props.addFavorite}
           />
         </div>
         <CardContent className={classes.linkContainer}>

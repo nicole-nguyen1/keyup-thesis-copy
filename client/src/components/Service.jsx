@@ -85,6 +85,8 @@ const Service = props => {
             size={'large'}
             serviceID={props.service.id}
             favorites={props.favorites}
+            removeFavorite={props.removeFavorite}
+            addFavorite={props.addFavorite}
           />
         </CardContent>
       </Card>

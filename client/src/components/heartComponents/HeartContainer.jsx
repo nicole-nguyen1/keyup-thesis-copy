@@ -4,6 +4,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HeartButton from './HeartButton.jsx';
+import { removeFavorite } from '../graphql/graphql';
 
 const styles = theme => ({
   icon: {
@@ -29,7 +30,12 @@ class HeartContainer extends React.Component {
       iconSize: 20,
       isFavorite: false
     };
-    this.favoriteID = ''
+    this.updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      favoriteID: '',
+      
+    }
   }
 
   componentDidMount () {
@@ -41,7 +47,8 @@ class HeartContainer extends React.Component {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
             console.log('favorite found:', this.props.careerID)
-            this.favoriteID = this.props.favorites[favorite].id;
+            console.log('FAVORITE ID ', this.props.favorites[favorite].id)
+            this.updateArgs.favoriteID = this.props.favorites[favorite].id;
             this.turnMeBlue()
             break;
           }
@@ -50,7 +57,7 @@ class HeartContainer extends React.Component {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
           console.log('favorite found:', this.props.serviceID)
-          this.favoriteID = this.props.favorites[favorite].id;
+          this.updateArgs.favoriteID = this.props.favorites[favorite].id;
           this.turnMeBlue();
           break;
         }
@@ -66,20 +73,23 @@ class HeartContainer extends React.Component {
   }
 
   removeFavorite = () => {
-    //add or remove item from favorites
     console.log('Remove a favorite from the list!!!!!!!!!!')
+    this.props.removeFavorite(this.updateArgs.favoriteID);
   }
 
   addFavorite = () => {
     console.log('Add a favorite to the list!!!!!')
     console.log(this.props)
+    console.log('favoriteID', this.favoriteID)
     //this.props.serviceID
     //this.props.careerID
-    //this.props.favorites
+    //this.props.favoriteID
+    this.props.addFavorite(this.updateArgs);
   }
 
   render() {
     const { classes } = this.props;
+    console.log('PROPS IN HEART CONTAINER', this.props)
     return (
       this.state.isFavorite ?
         <HeartButton 

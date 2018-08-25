@@ -39,7 +39,13 @@ class Careers extends React.Component {
         />
         <Grid container className={classes.grid}>
           {this.props.careers.map((career, index) => {
-            return <Career key={career.id || index} career={career} favorites={this.props.favorites}/>;
+            return <Career
+              key={career.id || index} 
+              career={career} 
+              favorites={this.props.favorites}
+              removeFavorite={this.props.removeFavorite}
+              addFavorite={this.props.addFavorite}
+            />;
           })}
         </Grid>
       </div>

@@ -25,7 +25,9 @@ import {
   getIndustriesQuery,
   filterCareersQuery,
   getLoggedInUser,
-  getFavoritesQuery
+  getFavoritesQuery,
+  addFavoriteToList,
+  removeFavoriteFromList
 } from './graphql/graphql';
 
 
@@ -108,6 +110,27 @@ class App extends React.Component {
     })
     .then((res) => {
       store.dispatch(getFavorites(res.data));
+    })
+  }
+
+  addFavorite = (args) => {
+    args.userID = this.props.user.id;
+    console.log(addFavoriteToList (args))
+    this.fetch({
+      query: addFavoriteToList (args)
+    })
+    .then(()=> {
+      getFavorites();
+    })
+  }
+
+  removeFavorite = (favoriteID) => {
+    console.log(removeFavoriteFromList (favoriteID))
+    this.fetch({
+      query: removeFavoriteFromList (favoriteID)
+    })
+    .then(()=> {
+      getFavorites();
     })
   }
 
@@ -238,16 +261,33 @@ class App extends React.Component {
                     favorites={this.props.favorites}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
-                  return <CareerProfileContainer router={props} favorites={this.props.favorites}/>;
+                  return <CareerProfileContainer 
+                    router={props} 
+                    favorites={this.props.favorites}
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
+                  />;
                 }} />
                 <Route path='/services/:id' render={props => {
-                  return <ServiceListContainer router={props} favorites={this.props.favorites}/>;
+                  return <ServiceListContainer
+                    router={props}
+                    favorites={this.props.favorites}
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
+                  />;
                 }} />
                 <Route path='/service/:id' render={props => {
-                  return <TrainingServiceProfileContainer router={props} favorites={this.props.favorites}/>;
+                  return <TrainingServiceProfileContainer 
+                    router={props} 
+                    favorites={this.props.favorites}
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
+                  />;
                 }} />
               </Switch>
             </div>
@@ -281,16 +321,33 @@ class App extends React.Component {
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                     favorites={this.props.favorites}
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
-                  return <CareerProfileContainer router={props} favorites={this.props.favorites} />;
+                  return <CareerProfileContainer
+                    router={props} 
+                    favorites={this.props.favorites} 
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
+                  />;
                 }} />
                 <Route path='/services/:id' render={props => {
-                  return <ServiceListContainer router={props} favorites={this.props.favorites}/>;
+                  return <ServiceListContainer 
+                    router={props} 
+                    favorites={this.props.favorites}
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
+                  />;
                 }} />
                 <Route path='/service/:id' render={props => {
-                  return <TrainingServiceProfileContainer router={props} favorites={this.props.favorites}/>;
+                  return <TrainingServiceProfileContainer 
+                    router={props} 
+                    favorites={this.props.favorites}
+                    removeFavorite={this.removeFavorite}
+                    addFavorite={this.addFavorite}
+                  />;
                 }} />
               </Switch>
             </div>

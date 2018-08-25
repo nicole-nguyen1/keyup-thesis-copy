@@ -43,6 +43,8 @@ const Trainings = (props) => {
             size={'large'}
             favorites={props.favorites}
             careerID={String(props.careerID)}
+            removeFavorite={props.removeFavorite}
+            addFavorite={props.addFavorite}
           />
         </div>
       </Card>
