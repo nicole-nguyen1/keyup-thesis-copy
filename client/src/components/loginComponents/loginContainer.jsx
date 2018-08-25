@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -56,13 +56,10 @@ class LoginContainer extends React.Component {
       email: JSON.stringify(this.state.email),
       password: JSON.stringify(this.state.password)
     }
-    console.log(formArguments)
     this.fetch({
       query: loginData(formArguments)
     }).then((res) => {
-      console.log('res', res)
       if (!res.errors) {
-        console.log('res', res);
         this.setState({
           email: '',
           password: '',
@@ -79,10 +76,8 @@ class LoginContainer extends React.Component {
       if (!res.errors) {
         store.dispatch(findUser(res.data.login))
       }
-    }).then(() => {
-      console.log(store.getState());
     }).catch(err => {
-      console.log(err)
+      console.log('error in login container', err)
     })
   }
 
@@ -100,6 +95,7 @@ class LoginContainer extends React.Component {
           email={this.state.email} 
           password={this.state.password}
           buttonStatus={this.state.buttonStatus}
+          showError={this.state.showError}
         />
       </div>
     );
@@ -117,4 +113,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPageTitle, findUser}, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginContainer));

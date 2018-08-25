@@ -246,6 +246,20 @@ export const getFavorites = (args) => (
   `
 );
 
+export const getLoggedInUser = 
+  `
+  {
+    loggedInUser {
+      id
+      email
+      first_name
+      last_name
+      phone_number
+    }
+  }
+  `;
+
+
 export const saveCareer = (args) => (
   `
   mutation {
@@ -299,3 +313,13 @@ export const removeFavorite = (args) => (
   }
   `
 );
+
+export const logout = `
+
+  mutation {
+    logout {
+      message
+    }
+  }
+
+`;

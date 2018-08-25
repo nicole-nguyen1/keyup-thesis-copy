@@ -70,6 +70,11 @@ class LoginForm extends React.Component {
             className={classes.inputStyle}
             onChange={this.props.handlePasswordChange}
           />
+          <Typography variant="body1" align="center">
+            <a href='#'>
+          Forgot your password?
+            </a>
+          </Typography>
           <div>
             <Button
               variant="contained"
