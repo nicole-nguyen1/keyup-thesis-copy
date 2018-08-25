@@ -21,7 +21,6 @@ const styles = theme => ({
     overflow: 'hidden'
   },
   image: {
-    height: '70%',
     maxWidth: '150px',
     margin: 'auto'
   },

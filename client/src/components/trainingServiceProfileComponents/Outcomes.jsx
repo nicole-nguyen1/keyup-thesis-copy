@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import MultiLineParagraph from '../MultiLineParagraph.jsx';
 
 const styles = theme => ({
   outcomes: {
@@ -36,9 +37,7 @@ const Outcomes = props => {
       <div>
         <Typography gutterBottom variant='title'>Location</Typography>
         <div>
-          {props.service.location ? (props.service.location).split("\\n").map((i, key) => {
-            return <Typography key={key} style={{ whiteSpace: 'pre-wrap' }}>{i}</Typography>;
-          }) : props.service.location }
+          {props.service.location ? <MultiLineParagraph text={props.service.location}/> : props.service.location }
         </div>
       </div>
     </div>
