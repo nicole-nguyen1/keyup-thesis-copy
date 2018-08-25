@@ -126,7 +126,8 @@ class App extends React.Component {
     this.setState({
       showSignOutButton: false
     })
-    
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.user.id !== prevProps.user.id) {
       this.getFavorites();
@@ -243,6 +244,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Router history={newHistory} >
         <div>
@@ -344,7 +346,7 @@ const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
     industries: state.industries.industries,
-    user: state.user.user,
+    user: state.user,
     favorites: state.favorites.favorites
   };
 };

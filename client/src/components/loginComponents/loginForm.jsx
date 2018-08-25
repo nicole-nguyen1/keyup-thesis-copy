@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   inputStyle: {
@@ -84,12 +85,13 @@ class LoginForm extends React.Component {
             >
         SIGN IN
             </Button>
-            <Button
-              className={classes.createButtonStyle}
-              onClick={() => console.log('you clicked the create an account button!')}
-            >
+            <Link to='/signup'>
+              <Button
+                className={classes.createButtonStyle}
+              >
         CREATE AN ACCOUNT
-            </Button>
+              </Button>
+            </Link>
           </div>
         </FormControl>
       </div>
