@@ -15,6 +15,8 @@ const styles = theme => ({
 
 const Outcomes = props => {
   const { classes } = props;
+  //{props.service.location ? console.log(props.service.location.split('\\n')) : null}
+  //console.log(props.service.location);
 
   return (
     <div>
@@ -33,7 +35,11 @@ const Outcomes = props => {
       </div>
       <div>
         <Typography gutterBottom variant='title'>Location</Typography>
-        <Typography gutterBottom variant='body1'>{props.service.location}</Typography>
+        <div>
+          {props.service.location ? (props.service.location).split("\\n").map((i, key) => {
+            return <Typography key={key} style={{ whiteSpace: 'pre-wrap' }}>{i}</Typography>;
+          }) : props.service.location }
+        </div>
       </div>
     </div>
   );
