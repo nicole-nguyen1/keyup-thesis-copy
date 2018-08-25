@@ -28,12 +28,13 @@ class Services extends React.Component {
 
   render() {
     const { classes } = this.props;
+    
     return (
       <div className={classes.background}>
         <FilterAndSort services={this.props.services} careerID={this.props.careerID}/>
         <Grid container className={classes.grid}>
           {this.props.services.map((service, index) => {
-            return <Service key={service.id || index} service={service}/>;
+            return <Service key={service.id || index} service={service} careerName={this.props.careerName} favorites={this.props.favorites}/>;
           })}
         </Grid>
       </div>

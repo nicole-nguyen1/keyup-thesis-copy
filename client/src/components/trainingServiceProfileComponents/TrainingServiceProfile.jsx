@@ -36,6 +36,7 @@ class TrainingServiceProfile extends React.Component {
   render() {
     const { classes } = this.props;
     const service = this.props.service;
+    console.log('props in training service profile', this.props.favorites)
 
     return (
       <div>
@@ -45,6 +46,7 @@ class TrainingServiceProfile extends React.Component {
           open={this.state.open} 
           toggleDialog={this.toggleDialog}
           toggleQualifyDialog={this.toggleQualifyDialog}
+          favorites={this.props.favorites}
         />
         <AdviceFormContainer 
           service={service}
@@ -63,6 +65,7 @@ class TrainingServiceProfile extends React.Component {
           open={this.state.open} 
           toggleDialog={this.toggleDialog}
           toggleQualifyDialog={this.toggleQualifyDialog}
+          favorites={this.props.favorites}
         />
       </div>
     );

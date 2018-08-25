@@ -109,7 +109,7 @@ class Career extends React.Component {
                 <HeartContainer
                   size={'large'}
                   favorites={this.props.favorites}
-                  careerID={this.props.career.id}
+                  careerID={String(this.props.career.id)}
                 />
               </Grid>
             </Grid>
