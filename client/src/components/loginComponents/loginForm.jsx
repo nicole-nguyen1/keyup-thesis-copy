@@ -71,6 +71,14 @@ class LoginForm extends React.Component {
             className={classes.inputStyle}
             onChange={this.props.handlePasswordChange}
           />
+          {this.props.showError ? 
+            (<Typography variant="body1" align="left" color="secondary">
+              Them email address and password you entered <br />
+              did not match any KeyUp accounts. <br />
+              Please try again.
+            </Typography>  
+            ) : null
+          }
           <Typography variant="body1" align="center">
             <a href='#'>
           Forgot your password?
