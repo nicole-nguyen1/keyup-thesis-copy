@@ -295,7 +295,7 @@ const mapStateToProps = state => {
   return {
     careers: state.careers.careers,
     industries: state.industries.industries,
-    user: state.user.user,
+    user: state.user,
     favorites: state.favorites.favorites
   };
 };
