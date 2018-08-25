@@ -9,6 +9,9 @@ import { getCareerFave, getTrainingFave } from '../graphql/graphql';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import { store } from '../../store/index';
+import { connect } from 'react-redux';
+import { getPageTitle } from '../../actions/action';
 
 const styles = theme => ({
   background: {
@@ -64,11 +67,15 @@ class Favorites extends React.Component {
   }
 
   componentDidMount() {
+    store.dispatch(getPageTitle('My Favorites List'));
+    this.props.getUser();
     let careers = [];
     let trainings = [];
+    const faves = (store.getState()).favorites.favorites;
+
     //parsing the different types of favorites
-    if (this.props.favorites && this.props.favorites.length > 0) {
-      for (let fave of this.props.favorites) {
+    if (faves && faves.length > 0) {
+      for (let fave of faves) {
         if (fave.career_id !== null) {
           careers.push(fave.career_id);
         } else if (fave.service_id !== null) {
@@ -98,22 +105,23 @@ class Favorites extends React.Component {
 
   render() {
     const { classes } = this.props;
-    let info;
+    const faves = (store.getState()).favorites.favorites;
+    let component;
 
     //for rendering different information based on whether or not a user has favorites
     //nested conditional statements need to be done this way for easier readability than 
     //ternary statements
-    if (this.props.favorites === undefined || this.props.favorites[0].id === '') {
+    if (faves[0].id === undefined || faves[0].id === '') {
       if (this.state.value === 0) {
-        info = <NoFaves type='careers' />
+        component = <NoFaves type='careers' />
       } else if (this.state.value === 1) {
-        info = <NoFaves type='training services' />
+        component = <NoFaves type='training services' />
       }
     } else {
       if (this.state.value === 0) {
-        info = <FavoriteCareers careers={this.state.careerFaves} favorites={this.props.favorites} />
+        component = <FavoriteCareers careers={this.state.careerFaves} favorites={faves} />
       } else if (this.state.value === 1) {
-        info = <FavoriteTrainings services={this.state.trainingFaves} favorites={this.props.favorites} />
+        component = <FavoriteTrainings services={this.state.trainingFaves} favorites={faves} />
       }
     }
 
@@ -140,10 +148,10 @@ class Favorites extends React.Component {
             }}
           />
         </Tabs>
-        {info}
+        {component}
       </div>
     )
   }
 }
 
-export default withStyles(styles)(Favorites);
+export default connect()(withStyles(styles)(Favorites));
