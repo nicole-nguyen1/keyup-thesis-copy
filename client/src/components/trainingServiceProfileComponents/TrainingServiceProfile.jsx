@@ -36,6 +36,7 @@ class TrainingServiceProfile extends React.Component {
   render() {
     const { classes } = this.props;
     const service = this.props.service;
+    console.log('props in training service profile', this.props.favorites)
 
     return (
       <div>
