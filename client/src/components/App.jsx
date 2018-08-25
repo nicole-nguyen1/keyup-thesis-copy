@@ -198,8 +198,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('store state', store.getState())
-    console.log('props in app', this.props)
     return (
       <Router history={newHistory} >
         <div>
@@ -207,7 +205,7 @@ class App extends React.Component {
           toggle={this.toggle} 
           showSignOutButton={this.state.showSignOutButton} 
           showAccountInfo={this.state.showAccountInfo}
-          user={this.props.user.email}
+          getUser={this.getUser}
           />
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
