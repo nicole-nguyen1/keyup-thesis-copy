@@ -38,6 +38,7 @@ class HeartContainer extends React.Component {
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
+            console.log(`${this.props.careerID} is favorited`)
             this.turnMeBlue()
             break;
           }
@@ -45,6 +46,7 @@ class HeartContainer extends React.Component {
     } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
+          console.log(`${this.props.serviceID} is favorited`)
           this.turnMeBlue()
         }
       }

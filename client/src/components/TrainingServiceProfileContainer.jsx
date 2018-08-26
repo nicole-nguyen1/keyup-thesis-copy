@@ -19,6 +19,7 @@ class TrainingServiceProfileContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getUser();
     this.fetch({
       query: getServiceQuery(this.state.service_id)
     }).then(res => {
@@ -28,8 +29,9 @@ class TrainingServiceProfileContainer extends React.Component {
   }
 
   render() {
+    const faves = (store.getState()).favorites.favorites;
     return (
-      <TrainingServiceProfile service={this.props.service} favorites={this.props.favorites}/>
+      <TrainingServiceProfile service={this.props.service} favorites={faves}/>
     );
   }
 }

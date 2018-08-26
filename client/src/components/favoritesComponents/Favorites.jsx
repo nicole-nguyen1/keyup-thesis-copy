@@ -4,8 +4,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import FavoriteCareers from './FavoriteCareers.jsx';
 import FavoriteTrainings from './FavoriteTrainings.jsx';
-import { createApolloFetch } from 'apollo-fetch';
-import { getCareerFave, getTrainingFave } from '../graphql/graphql';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
@@ -57,46 +55,12 @@ class Favorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0,
-      careerFaves: [],
-      trainingFaves: []
+      value: 0
     }
-    this.fetch = createApolloFetch({
-      uri: '/graphql'
-    }).bind(this);
   }
 
   componentDidMount() {
     store.dispatch(getPageTitle('My Favorites List'));
-    this.props.getUser();
-    let careers = [];
-    let trainings = [];
-    const faves = (store.getState()).favorites.favorites;
-
-    //parsing the different types of favorites
-    if (faves && faves.length > 0) {
-      for (let fave of faves) {
-        if (fave.career_id !== null) {
-          careers.push(fave.career_id);
-        } else if (fave.service_id !== null) {
-          trainings.push(fave.service_id);
-        }
-      }
-    }
-
-    this.fetch({
-      query: getCareerFave(careers)
-    })
-    .then((res) => {
-      this.setState({ careerFaves: res.data.careers })
-    });
-
-    this.fetch({
-      query: getTrainingFave(trainings)
-    })
-    .then((res) => {
-      this.setState({ trainingFaves: res.data.trainings })
-    });
   }
 
   handleChange = (e, value) => {
@@ -119,9 +83,9 @@ class Favorites extends React.Component {
       }
     } else {
       if (this.state.value === 0) {
-        component = <FavoriteCareers careers={this.state.careerFaves} favorites={faves} />
+        component = <FavoriteCareers getUser={this.props.getUser} />
       } else if (this.state.value === 1) {
-        component = <FavoriteTrainings services={this.state.trainingFaves} favorites={faves} />
+        component = <FavoriteTrainings getUser={this.props.getUser} />
       }
     }
 
