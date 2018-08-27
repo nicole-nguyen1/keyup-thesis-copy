@@ -5,7 +5,7 @@ import { Typography, Button } from '@material-ui/core';
 
 const styles = theme => ({
   background: {
-    padding: '25px 10px'
+    padding: '25px 15px'
   },
 
   title: {
