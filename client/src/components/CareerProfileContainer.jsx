@@ -30,7 +30,7 @@ class CareerProfileContainer extends React.Component {
   }
 
   render() {
-    const faves = this.props.favorites;
+    const faves = this.props.favorites.favorites;
     return (
       <CareerProfile 
         career={this.props.career} 

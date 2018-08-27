@@ -31,7 +31,7 @@ class Careers extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const faves = this.props.favorites;
+    const faves = this.props.favorites.favorites;
     return (
       <div className={classes.background}>
         <FilterandSort 

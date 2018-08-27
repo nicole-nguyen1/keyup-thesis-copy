@@ -38,7 +38,7 @@ class Services extends React.Component {
               key={service.id || index} 
               service={service} 
               careerName={this.props.careerName} 
-              favorites={this.props.favorites}
+              favorites={this.props.favorites.favorites}
               removeFavorite={this.props.removeFavorite}
               addFavorite={this.props.addFavorite}
             />;
