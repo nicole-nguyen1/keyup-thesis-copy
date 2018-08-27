@@ -19,13 +19,13 @@ class TrainingServiceProfileContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUser();
     this.fetch({
       query: getServiceQuery(this.state.service_id)
     }).then(res => {
       store.dispatch(findService(res.data));
       store.dispatch(getPageTitle(res.data.training.name));
     });
+    this.props.getUser();
   }
 
   render() {

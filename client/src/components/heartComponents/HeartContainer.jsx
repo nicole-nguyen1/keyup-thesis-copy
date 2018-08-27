@@ -34,6 +34,12 @@ class HeartContainer extends React.Component {
     this.isFavorite();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.favorites !== prevProps.favorites) {
+      this.isFavorite();
+    }
+  } 
+
   isFavorite = () => {
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {

@@ -27,6 +27,7 @@ class ServiceListContainer extends React.Component {
     }).then(res => {
       store.dispatch(findServices(res.data));
     });
+    this.props.getUser();
   }
   
   render() {
