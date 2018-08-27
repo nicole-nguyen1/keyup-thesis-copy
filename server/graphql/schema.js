@@ -422,10 +422,11 @@ const Mutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         first_name: { type: GraphQLString },
         last_name: { type: GraphQLString },
-        phone_number: { type: GraphQLString }
+        phone_number: { type: GraphQLString },
+        zip: { type: GraphQLString }
       },
-      resolve(parent, { id, email, first_name, last_name, phone_number }, req) {
-        return updateInfoHelper(id, email, first_name, last_name, phone_number, req);
+      resolve(parent, { id, email, first_name, last_name, phone_number, zip }, req) {
+        return updateInfoHelper(id, email, first_name, last_name, phone_number, zip, req);
       }
     },
 

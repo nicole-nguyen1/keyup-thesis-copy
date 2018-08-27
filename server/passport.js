@@ -84,14 +84,12 @@ const signUpHelper = (email, password, first_name, last_name, phone_number, zip,
     .catch(err => console.log(err));
 };
 
-const updateInfoHelper = (id, email, first_name, last_name, phone_number, req) => {
+const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, req) => {
   return knex('users')
     .select()
     .where({ id })
     .first()
     .then((user) => {
-      console.log(user);
-      
       let thisUpdate = {};
       if (user.email !== email) {
         thisUpdate.email = email;
@@ -101,12 +99,14 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, req) =
         thisUpdate.last_name = last_name;
       } else if (user.phone_number !== phone_number) {
         thisUpdate.phone_number = phone_number;
+      } else if (user.zip !== zip) {
+        thisUpdate.zip = zip;
       }
 
       return knex('users')
         .where({ id })
         .update(thisUpdate)
-        .returning(['id', 'email', 'first_name', 'last_name', 'phone_number'])
+        .returning(['id', 'email', 'first_name', 'last_name', 'phone_number', 'zip'])
         .then((res) => res[0]);
     })
 }

@@ -3,8 +3,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import CheckIcon from '@material-ui/icons/Check';
-import ErrorIcon from '@material-ui/icons/ErrorOutline';
 import { store } from '../../store/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -59,20 +57,28 @@ class EditAccountForm extends React.Component {
       uri: '/graphql'
     }).bind(this);
     this.state = {
+      id: '',
       first_name: '',
       last_name: '',
       email: '',
       phone_number: '',
       zip: '',
-      buttonDisabled: true,
-      passCheck: false,
-      passConfirmCheck: false
+      buttonDisabled: true
     }
   }
 
   componentDidMount() {
     store.dispatch(getPageTitle('Edit Account Info'));
     this.props.getUser();
+    const user = (store.getState()).user;
+    this.setState({
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      phone_number: user.phone_number,
+      zip: user.zip
+    })
   }
 
   handleChange = (e) => {
@@ -83,85 +89,40 @@ class EditAccountForm extends React.Component {
 
   enableButton = () => {
     if (this.state.first_name && this.state.last_name && this.state.email) {
-      if (this.state.passCheck && this.state.passConfirmCheck) {
-        this.setState({
-          buttonDisabled: false
-        });
-      } else {
-        this.setState({
-          buttonDisabled: true
-        });
-      }
-    } else {
       this.setState({
-        buttonDisabled: true
+        buttonDisabled: false
       });
     }
   }
 
-  handlePassChange = (e) => {
-    this.setState({
-      password: e.target.value
-    }, this.checkPassword);
-  }
-
-  checkPassword = () => {
-    if (this.state.password.length > 7) {
-      this.setState({
-        passCheck: true
-      }, this.enableButton);
-    } else {
-      this.setState({
-        passCheck: false
-      }, this.enableButton);
-    }
-  }
-
-  handlePassConfirmChange = (e) => {
-    this.setState({
-      passwordConfirm: e.target.value
-    }, this.checkPasswordConfirm);
-  }
-
-  checkPasswordConfirm = (e) => {
-    if (this.state.password === this.state.passwordConfirm) {
-      this.setState({
-        passConfirmCheck: true
-      }, this.enableButton);
-    } else {
-      this.setState({
-        passConfirmCheck: false
-      }, this.enableButton);
-    }
-  }
-
   onSubmit = () => {
+    let id = JSON.stringify(this.state.id);
     let email = JSON.stringify(this.state.email);
-    // let password = JSON.stringify(this.state.password);
     let first_name = JSON.stringify(this.state.first_name);
     let last_name = JSON.stringify(this.state.last_name);
     let phone_number = JSON.stringify(this.state.phone_number);
+    let zip = JSON.stringify(this.state.zip);
     this.fetch({
       query: updateInfo({
         id,
         email,
-        // password,
         first_name,
         last_name,
-        phone_number
+        phone_number,
+        zip
       })
     })
     .then(res => {
-      console.log(res.data);
-      //store.dispatch(findUser(res.data.signUp));
-      //this.props.history.goBack();
+      store.dispatch(findUser(res.data.updateInfo));
+      console.log(store.getState());
+      this.props.history.push('/profile');
     })
   }
 
   render() {
     const { classes } = this.props;
     const user = (store.getState()).user;
-
+    console.log(this.props);
     return (
       <div className={classes.paper}>
         <Typography variant='headline'>Edit Your Account Information</Typography>
@@ -226,6 +187,7 @@ class EditAccountForm extends React.Component {
           type="text"
           name="zip"
           placeholder="Zip Code (optional)"
+          defaultValue={user.zip}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{
@@ -233,35 +195,6 @@ class EditAccountForm extends React.Component {
           }}
         />
         <Typography variant='caption'>We ask so we can recommend the training services and support programs closest to you</Typography>
-        <Typography variant='body2' className={classes.header}>Password</Typography>
-        <TextField
-          autoFocus
-          fullWidth
-          required
-          type="password"
-          name="password"
-          placeholder="Password (at least 8 characters)"
-          className={classes.inputStyle}
-          onChange={this.handlePassChange}
-          InputProps={{
-            disableUnderline: true,
-            endAdornment: this.state.passCheck ? <CheckIcon className={classes.check} /> : null
-          }}
-        />
-        <TextField
-          autoFocus
-          fullWidth
-          required
-          type="password"
-          name="passwordConfirm"
-          placeholder="Re-Type Password"
-          className={classes.inputStyle}
-          onChange={this.handlePassConfirmChange}
-          InputProps={{
-            disableUnderline: true,
-            endAdornment: this.state.passConfirmCheck ? <CheckIcon className={classes.check} /> : this.state.passwordConfirm ? <ErrorIcon className={classes.error} /> : null
-          }}
-        />
         <Button
           variant="contained"
           className={classes.buttonStyle}

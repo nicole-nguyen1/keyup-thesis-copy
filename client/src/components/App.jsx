@@ -52,6 +52,7 @@ class App extends React.Component {
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
+    this.getFavorites();
   }
 
   getUser = () => {
@@ -82,11 +83,11 @@ class App extends React.Component {
     });
   }
     
-  componentDidUpdate(prevProps) {
-    if (this.props.user.id !== prevProps.user.id) {
-      this.getFavorites();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.user.user.id !== prevProps.user.user.id) {
+  //     this.getFavorites();
+  //   }
+  // }
 
   getCareers = () => {
     this.fetch({
@@ -103,11 +104,12 @@ class App extends React.Component {
   }
 
   getFavorites = () => {
-    if (this.props.user.id) {
+    if (this.props.user.user.id) {
       this.fetch({
-        query: getFavoritesQuery(this.props.user.id)
+        query: getFavoritesQuery(this.props.user.user.id)
       })
       .then((res) => {
+        console.log(res);
         store.dispatch(getFavorites(res.data));
       })
     }
@@ -219,8 +221,8 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('props in app', this.props)
-    console.log('store state', store.getState())
+    // console.log('props in app', this.props)
+    // console.log('store state', store.getState())
     return (
       <Router history={newHistory} >
         <div>
@@ -238,6 +240,7 @@ class App extends React.Component {
                   return <Home 
                   router={props}
                   getUser={this.getUser}
+                  getFavorites={this.getFavorites}
                   />
                 }} />
                 <Route exact path="/terms-and-conditions" component={TermsConditions} />
@@ -324,6 +327,7 @@ class App extends React.Component {
                   return <Home 
                   router={props}
                   getUser={this.getUser}
+                  getFavorites={this.getFavorites}
                   />
                 }} />
                 <Route exact path="/terms-and-conditions" component={TermsConditions} />

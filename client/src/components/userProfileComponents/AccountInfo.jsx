@@ -2,6 +2,7 @@ import React from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   background: {
@@ -72,12 +73,9 @@ class AccountInfo extends React.Component {
             }
           </div>
           <div className={classes.buttonSection}>
-            <Button
-              variant='contained'
-              color='primary'
-              className={classes.button}
-              href='/profile/edit'
-            >Edit Account Info</Button>
+            <Button variant='contained' color='primary' className={classes.button}>
+              <Link to={{ pathname: '/profile/edit', state: { user: this.props.user }}}>Edit Account Info</Link>
+            </Button>
           </div>
         </div>
         <div className={classes.background}>
