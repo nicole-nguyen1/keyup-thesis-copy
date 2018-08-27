@@ -1,5 +1,5 @@
 let defaultState = {
-  user: [
+  user: 
     {
       id: '',
       email: '',
@@ -7,13 +7,13 @@ let defaultState = {
       last_name: '',
       phone_number: ''
     }
-  ]
+  
 };
 
 const userReducers = (state = defaultState, action) => {
   switch (action.type) {
   case 'USER':
-    return Object.assign({}, action.payload);
+    return Object.assign({}, {user: action.payload});
   default: return state;
   }
 };
