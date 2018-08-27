@@ -36,17 +36,10 @@ class NavBar extends React.Component {
 
     this.state = {
       anchorEl: null,
-      user: {
-
-      }
+      
     };
   }
 
-  componentDidMount() {
-    this.props.getUser()
-  }
-
-  
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -76,7 +69,7 @@ class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
-    const user = store.getState();
+    console.log('props in navbar', this.props)
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -106,7 +99,7 @@ class NavBar extends React.Component {
                         Account
                       </Typography>
                       <Typography variant="body1" align="center" style={{color: 'white'}}>
-                      {user.user.email}
+                      {this.props.user.email}
                       </Typography>
                       
                       </div>) : 
