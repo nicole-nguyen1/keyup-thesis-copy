@@ -26,11 +26,12 @@ class Careers extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     store.dispatch(getPageTitle('Career List'));
-    console.log(store.getState());
+    this.props.getUser();
   }
 
   render() {
     const { classes } = this.props;
+    const faves = (store.getState()).favorites.favorites;
     return (
       <div className={classes.background}>
         <FilterandSort 
@@ -42,7 +43,7 @@ class Careers extends React.Component {
             return <Career
               key={career.id || index} 
               career={career} 
-              favorites={this.props.favorites}
+              favorites={faves}
               removeFavorite={this.props.removeFavorite}
               addFavorite={this.props.addFavorite}
             />;
@@ -60,7 +61,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle}, dispatch);
+  return bindActionCreators({ getPageTitle }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Careers));

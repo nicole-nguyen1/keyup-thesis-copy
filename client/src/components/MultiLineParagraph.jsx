@@ -19,7 +19,6 @@ const MultiLineParagraph = (props) => {
     }
   } else if ((props.text).includes("\\n")) {
     paragraph = (props.text).split("\\n");
-    console.log(paragraph);
   } else {
     paragraph.push(props.text);
   }

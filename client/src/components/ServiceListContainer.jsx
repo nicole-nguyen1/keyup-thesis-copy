@@ -6,7 +6,6 @@ import { findServices } from '../actions/action';
 import { store } from '../store/index';
 import Services from './Services.jsx';
 import { getServicesQuery } from './graphql/graphql';
-
 class ServiceListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -19,25 +18,27 @@ class ServiceListContainer extends React.Component {
   
   componentDidMount() {
     this.getServices();
+    this.props.getUser();
   }
 
   getServices = () => {
     this.fetch({
       query: getServicesQuery(this.state.career_id)
     }).then(res => {
-      console.log(res);
       store.dispatch(findServices(res.data));
     });
+    this.props.getUser();
   }
   
   render() {
+    const faves = (store.getState()).favorites.favorites;
     if (!this.props.services) {
       return <div>Loading...</div>
     } else {
       return <Services 
         services={this.props.services} 
         careerID={this.state.career_id}
-        favorites={this.props.favorites}
+        favorites={faves}
         removeFavorite={this.props.removeFavorite}
         addFavorite={this.props.addFavorite}
       />;

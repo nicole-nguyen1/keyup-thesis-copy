@@ -15,7 +15,7 @@ class CareerProfileContainer extends React.Component {
     const career_id = +props.router.match.params.id || null;
     this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
     this.state = {
-      career_id,
+      career_id
     };
   }
 
@@ -26,14 +26,16 @@ class CareerProfileContainer extends React.Component {
       store.dispatch(findCareer(res.data));
       store.dispatch(getPageTitle(res.data.career.name))
     });
+    this.props.getUser();
   }
 
   render() {
+    const faves = (store.getState()).favorites.favorites;
     return (
       <CareerProfile 
         career={this.props.career} 
         careerID={this.state.career_id} 
-        favorites={this.props.favorites}
+        favorites={faves}
         removeFavorite={this.props.removeFavorite}
         addFavorite={this.props.addFavorite}
       />
