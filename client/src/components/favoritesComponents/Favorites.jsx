@@ -70,7 +70,7 @@ class Favorites extends React.Component {
       this.setState({ value: 1 });
     }
     this.props.getUser();
-    // this.props.getFavorites();
+    this.props.getFavorites();
   }
 
   handleChange = (e, value) => {
