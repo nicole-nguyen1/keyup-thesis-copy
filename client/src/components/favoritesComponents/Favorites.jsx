@@ -61,6 +61,14 @@ class Favorites extends React.Component {
 
   componentDidMount() {
     store.dispatch(getPageTitle('My Favorites List'));
+
+    //the "active" prop is passed when a user goes to a specific favorites URL
+    //this will trigger the correct active tab for the user
+    if (this.props.active === 'careers') {
+      this.setState({ value: 0 });
+    } else if (this.props.active === 'trainings') {
+      this.setState({ value: 1 });
+    }
   }
 
   handleChange = (e, value) => {
@@ -75,7 +83,6 @@ class Favorites extends React.Component {
     //for rendering different information based on whether or not a user has favorites
     //nested conditional statements need to be done this way for easier readability than 
     //ternary statements
-    console.log(faves);
     if (faves === undefined || faves === [] || faves[0].id === '') {
       if (this.state.value === 0) {
         component = <NoFaves type='careers' />

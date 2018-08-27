@@ -230,6 +230,20 @@ class App extends React.Component {
                     getUser={this.getUser}
                   />
                 }} />
+                <Route exact path="/favorites/careers" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='careers'
+                  />
+                }} />
+                <Route exact path="/favorites/training-services" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='trainings'
+                  />
+                }} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
@@ -274,6 +288,20 @@ class App extends React.Component {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}  
+                  />
+                }} />
+                <Route exact path="/favorites/careers" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='careers'
+                  />
+                }} />
+                <Route exact path="/favorites/training-services" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='trainings'
                   />
                 }} />
                 <Route exact path="/careers" render={props => {
