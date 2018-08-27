@@ -63,8 +63,7 @@ class LoginContainer extends React.Component {
         this.setState({
           email: '',
           password: '',
-          buttonStatus: true,
-          toHome: true
+          buttonStatus: true
         })
         return res;
       } else {
@@ -74,7 +73,8 @@ class LoginContainer extends React.Component {
       }
     }).then((res) => {
       if (!res.errors) {
-        store.dispatch(findUser(res.data.login))
+        store.dispatch(findUser(res.data.login));
+        this.props.history.goBack();
       }
     }).catch(err => {
       console.error(err);
@@ -82,10 +82,6 @@ class LoginContainer extends React.Component {
   }
 
   render() {
-    if (this.state.toHome) {
-      return <Redirect to='/home' />
-    }
-
     return (
       <div>
         <LoginForm 

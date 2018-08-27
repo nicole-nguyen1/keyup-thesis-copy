@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
+import HeartContainer from './heartComponents/HeartContainer.jsx';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -80,10 +81,15 @@ const Service = props => {
             to={`/service/${props.service.id}`}>
             LEARN MORE
           </Button>
+          <HeartContainer 
+            size={'large'}
+            serviceID={props.service.id}
+            favorites={props.favorites}
+          />
         </CardContent>
       </Card>
     </Grid>
   );
-}
+};
 
 export default withStyles(styles)(Service);

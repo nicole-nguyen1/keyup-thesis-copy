@@ -17,8 +17,8 @@ import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
 import LoginContainer from './loginComponents/loginContainer.jsx';
 import SignUpForm from './SignUpForm.jsx';
-import UserProfileContainer from './userProfileComponents/UserProfileContainer.jsx';
-import FavoritesContainer from './favoritesComponents/FavoritesContainer.jsx';
+import UserProfile from './userProfileComponents/UserProfile.jsx';
+import Favorites from './favoritesComponents/Favorites.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -28,9 +28,7 @@ import {
   getFavoritesQuery
 } from './graphql/graphql';
 
-
 const newHistory = createBrowserHistory();
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +37,8 @@ class App extends React.Component {
     }).bind(this);
     this.sortBy = 'Highest salary';
     this.state = {
-      showSignOutButton: false
+      showSignOutButton: false,
+      showAccountInfo: false
     }
   }
 
@@ -62,11 +61,13 @@ class App extends React.Component {
     }).then((res) => {
       if (res.user.id.length > 0) {
         this.setState({
-          showSignOutButton: true
+          showSignOutButton: true,
+          showAccountInfo: true
         })
       } else {
         this.setState({
-          showSignOutButton: false
+          showSignOutButton: false,
+          showAccountInfo: false
         })
       }
     })
@@ -74,7 +75,8 @@ class App extends React.Component {
 
   toggle = () => {
     this.setState({
-      showSignOutButton: false
+      showSignOutButton: false,
+      showAccountInfo: false
     });
   }
     
@@ -197,7 +199,12 @@ class App extends React.Component {
     return (
       <Router history={newHistory} >
         <div>
-          <NavBar toggle={this.toggle} showSignOutButton={this.state.showSignOutButton}/>
+          <NavBar 
+          toggle={this.toggle} 
+          showSignOutButton={this.state.showSignOutButton} 
+          showAccountInfo={this.state.showAccountInfo}
+          getUser={this.getUser}
+          />
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>
               <Switch>
@@ -212,31 +219,48 @@ class App extends React.Component {
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
                 <Route exact path="/profile" render={props => {
-                  return <UserProfileContainer
+                  return <UserProfile
                     router={props}
+                    getUser={this.getUser}
                   />;
                 }} />
                 <Route exact path="/favorites" render={props => {
-                  return <FavoritesContainer 
-                    router={props}/>
+                  return <Favorites 
+                    router={props}
+                    getUser={this.getUser}
+                  />
+                }} />
+                <Route exact path="/favorites/careers" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='careers'
+                  />
+                }} />
+                <Route exact path="/favorites/training-services" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='trainings'
+                  />
                 }} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
+                    getUser={this.getUser}
                     careers={this.props.careers}
-                    favorites={this.props.favorites}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
-                  return <CareerProfileContainer router={props} />;
+                  return <CareerProfileContainer router={props} getUser={this.getUser} />;
                 }} />
                 <Route path='/services/:id' render={props => {
-                  return <ServiceListContainer router={props} />;
+                  return <ServiceListContainer router={props} getUser={this.getUser} />;
                 }} />
                 <Route path='/service/:id' render={props => {
-                  return <TrainingServiceProfileContainer router={props} />;
+                  return <TrainingServiceProfileContainer router={props} getUser={this.getUser} />;
                 }} />
               </Switch>
             </div>
@@ -255,31 +279,48 @@ class App extends React.Component {
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
                 <Route exact path="/profile" render={props => {
-                  return <UserProfileContainer
+                  return <UserProfile
                     router={props}
+                    getUser={this.getUser}
                   />
                 }} />
                 <Route exact path="/favorites" render={props => {
-                  return <FavoritesContainer
-                    router={props} />
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}  
+                  />
+                }} />
+                <Route exact path="/favorites/careers" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='careers'
+                  />
+                }} />
+                <Route exact path="/favorites/training-services" render={props => {
+                  return <Favorites
+                    router={props}
+                    getUser={this.getUser}
+                    active='trainings'
+                  />
                 }} />
                 <Route exact path="/careers" render={props => {
                   return <Careers
                     router={props}
+                    getUser={this.getUser}
                     careers={this.props.careers}
                     industries={this.props.industries}
                     filterCareers={this.filterCareers}
-                    favorites={this.props.favorites}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
-                  return <CareerProfileContainer router={props} favorites={this.props.favorites} />;
+                  return <CareerProfileContainer router={props} getUser={this.getUser} />;
                 }} />
                 <Route path='/services/:id' render={props => {
-                  return <ServiceListContainer router={props} />;
+                  return <ServiceListContainer router={props} getUser={this.getUser} />;
                 }} />
                 <Route path='/service/:id' render={props => {
-                  return <TrainingServiceProfileContainer router={props} />;
+                  return <TrainingServiceProfileContainer router={props} getUser={this.getUser} />;
                 }} />
               </Switch>
             </div>
@@ -301,7 +342,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ findCareers, getIndustries }, dispatch);
+  return bindActionCreators({ findCareers, getIndustries, findUser }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

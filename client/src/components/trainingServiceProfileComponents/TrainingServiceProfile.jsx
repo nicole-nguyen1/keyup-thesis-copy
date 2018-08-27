@@ -45,6 +45,7 @@ class TrainingServiceProfile extends React.Component {
           open={this.state.open} 
           toggleDialog={this.toggleDialog}
           toggleQualifyDialog={this.toggleQualifyDialog}
+          favorites={this.props.favorites}
         />
         <AdviceFormContainer 
           service={service}
@@ -63,6 +64,7 @@ class TrainingServiceProfile extends React.Component {
           open={this.state.open} 
           toggleDialog={this.toggleDialog}
           toggleQualifyDialog={this.toggleQualifyDialog}
+          favorites={this.props.favorites}
         />
       </div>
     );

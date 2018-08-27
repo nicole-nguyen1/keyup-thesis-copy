@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Qualify from './Qualify.jsx';
 import Outcomes from './Outcomes.jsx';
 import { withStyles } from '@material-ui/core/styles';
+import MultiLineParagraph from '../MultiLineParagraph.jsx';
 
 const styles = {
   card: {
@@ -24,7 +25,7 @@ const Financial = props => {
       <Card className={classes.card}>
         <CardContent>
           <Typography gutterBottom variant='title'>Financial Information</Typography>
-          <Typography gutterBottom variant='body1'>{props.service.financial_info}</Typography>
+          {props.service.financial_info ? <MultiLineParagraph text={props.service.financial_info} /> : props.service.financial_info}
           <div className={classes.qualify}>
             <Qualify />
           </div>

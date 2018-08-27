@@ -391,7 +391,6 @@ const RootQuery = new GraphQLObjectType({
         return knex('favorites')
           .select()
           .where('favorites.user_id', args.user_id)
-          // .then((res) => console.log('favorites', res));
       }
     }
   }
@@ -428,7 +427,13 @@ const Mutation = new GraphQLObjectType({
     logout: {
       type: MessageType,
       resolve(parent, args, req) {
-        req.logout();
+        req.session.destroy(err => {
+          if (err) {
+            console.log('ERROR', err)
+          }
+          req.logOut();
+          console.log('req session', req.session)
+        });
         return {message: 'SUCCESS'};
       }
     },

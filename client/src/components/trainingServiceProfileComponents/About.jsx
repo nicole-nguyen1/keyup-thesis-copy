@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import SocialShare from '../socialShareComponents/SocialShare.jsx';
 import { withStyles } from '@material-ui/core';
+import HeartComponent from '../heartComponents/HeartContainer.jsx';
 
 const styles = theme => ({
   cardAction: {
@@ -53,6 +54,7 @@ class About extends React.Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <div>
         <Card style={{ borderRadius: 0 }}>
@@ -65,6 +67,11 @@ class About extends React.Component {
               <Typography gutterBottom variant='body1' className={classes.link}>APPLY</Typography>
               <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' className={classes.icon} />
             </Button>
+            <HeartComponent 
+              profile={true}
+              serviceID={this.props.service.id}
+              favorites={this.props.favorites}
+            />
             <Button onClick={this.toggleDrawer}>
               <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
               <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' className={classes.icon} />

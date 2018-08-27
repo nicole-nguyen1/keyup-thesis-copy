@@ -36,9 +36,17 @@ class NavBar extends React.Component {
 
     this.state = {
       anchorEl: null,
+      user: {
+
+      }
     };
   }
 
+  componentDidMount() {
+    this.props.getUser()
+  }
+
+  
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -68,6 +76,7 @@ class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
+    const user = store.getState();
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -90,7 +99,18 @@ class NavBar extends React.Component {
               PopoverClasses={{ paper: `${classes.menu}` }}
               className={classes.top}
             >
-              <div className={classes.menuTop}>
+            {this.props.showAccountInfo ? 
+                      (<div className={classes.logoutStyles}>
+                      
+                      <Typography variant="body1" align="center" style={{color: '#02ED96', marginBottom: '10px'}}>
+                        Account
+                      </Typography>
+                      <Typography variant="body1" align="center" style={{color: 'white'}}>
+                      {user.user.email}
+                      </Typography>
+                      
+                      </div>) : 
+              (<div className={classes.menuTop}>
                 <Link to="/login">
                   <Button
                     variant="contained"
@@ -106,7 +126,8 @@ class NavBar extends React.Component {
                     Create an account
                   </Typography>
                 </Link>
-              </div>
+              </div>)
+              }
               <MenuItem onClick={this.handleClose}>
                 <Link to="/home">
                   <ListItemIcon>
@@ -239,7 +260,7 @@ NavBar.styles = {
     marginBottom: '0em',
     height: '100%',
     outline: 'none',
-    marginTop: '-10px',
+    // marginTop: '-10px',
     padding: '0',
     border: 'none!important'
   },
@@ -262,6 +283,12 @@ NavBar.styles = {
     width: '24px',
     marginLeft: '3px',
     marginRight: '13px'
+  },
+
+  logoutStyles: {
+    padding: '2em',
+    background: '#232E49',
+    backgroundColor: '#232E49'
   }
 
 };
