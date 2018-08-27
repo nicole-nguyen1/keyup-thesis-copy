@@ -1,5 +1,4 @@
 import React from 'react';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography, Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
@@ -25,6 +24,11 @@ const styles = theme => ({
   button: {
     backgroundColor: '#4469FF',
     borderRadius: '0'
+  },
+
+  buttonText: {
+    color: '#FFFFFF',
+    textDecoration: 'none'
   },
 
   password: {
@@ -74,7 +78,9 @@ class AccountInfo extends React.Component {
           </div>
           <div className={classes.buttonSection}>
             <Button variant='contained' color='primary' className={classes.button}>
-              <Link to={{ pathname: '/profile/edit', state: { user: this.props.user }}}>Edit Account Info</Link>
+              <Link to={{ pathname: '/profile/edit', state: { user: this.props.user }}}
+                className={classes.buttonText}
+              >Edit Account Info</Link>
             </Button>
           </div>
         </div>

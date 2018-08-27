@@ -208,7 +208,8 @@ export const getLoggedInUser =
       email
       first_name
       last_name
-      phone_number
+      phone_number,
+      zip
     }
   }
   `;

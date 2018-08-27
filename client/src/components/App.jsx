@@ -41,18 +41,21 @@ class App extends React.Component {
     this.sortBy = 'Highest salary';
     this.state = {
       showSignOutButton: false,
-      showAccountInfo: false
+      showAccountInfo: false,
+      showProfile: false,
+      showFavorites: false
     }
   }
 
   componentDidMount() {
+    this.getUser()
     this.getCareers();
+    // this.getFavorites();
     this.fetch({
       query: getIndustriesQuery
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
-    this.getFavorites();
   }
 
   getUser = () => {
@@ -63,14 +66,19 @@ class App extends React.Component {
       return res;
     }).then((res) => {
       if (res.data.loggedInUser.id) {
+        this.getFavorites(res.data.loggedInUser.id)
         this.setState({
           showSignOutButton: true,
-          showAccountInfo: true
+          showAccountInfo: true,
+          showProfile: true,
+          showFavorites: true
         })
       } else {
         this.setState({
           showSignOutButton: false,
-          showAccountInfo: false
+          showAccountInfo: false,
+          showProfile: false,
+          showFavorites: false
         })
       }
     })
@@ -79,7 +87,9 @@ class App extends React.Component {
   toggle = () => {
     this.setState({
       showSignOutButton: false,
-      showAccountInfo: false
+      showAccountInfo: false,
+      showProfile: false,
+      showFavorites: false
     });
   }
     
@@ -103,22 +113,19 @@ class App extends React.Component {
     });
   }
 
-  getFavorites = () => {
-    if (this.props.user.user.id) {
-      this.fetch({
-        query: getFavoritesQuery(this.props.user.user.id)
-      })
-      .then((res) => {
-        console.log(res);
-        store.dispatch(getFavorites(res.data));
-      })
-    }
+  getFavorites = (id) => {
+    this.fetch({
+      query: getFavoritesQuery(id || null)
+    })
+    .then((res) => {
+      store.dispatch(getFavorites(res.data));
+    });
   }
 
   addFavorite = (args) => {
-    args.userID = this.props.user.id;
+    args.userID = this.props.user.user.id;
     this.fetch({
-      query: addFavoriteToList (args)
+      query: addFavoriteToList(args)
     })
     .then(()=> {
       this.getFavorites();
@@ -221,8 +228,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log('props in app', this.props)
-    // console.log('store state', store.getState())
     return (
       <Router history={newHistory} >
         <div>
@@ -230,6 +235,8 @@ class App extends React.Component {
           toggle={this.toggle} 
           showSignOutButton={this.state.showSignOutButton} 
           showAccountInfo={this.state.showAccountInfo}
+          showProfile={this.state.showProfile}
+          showFavorites={this.state.showFavorites}
           getUser={this.getUser}
           user={this.props.user}
           />
@@ -251,24 +258,30 @@ class App extends React.Component {
                   return <UserProfile
                     router={props}
                     getUser={this.getUser}
+                    user={this.props.user.user}
                   />;
                 }} />
                 <Route exact path="/profile/edit" render={props => {
                   return <EditAccountForm
                     router={props}
                     getUser={this.getUser}
+                    user={this.props.user.user}
                   />;
                 }} />
                 <Route exact path="/favorites" render={props => {
                   return <Favorites 
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='careers'
                   />
                 }} />
@@ -276,6 +289,8 @@ class App extends React.Component {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='trainings'
                   />
                 }} />
@@ -338,24 +353,30 @@ class App extends React.Component {
                   return <UserProfile
                     router={props}
                     getUser={this.getUser}
+                    user={this.props.user.user}
                   />
                 }} />
                 <Route exact path="/profile/edit" render={props => {
                   return <EditAccountForm
                     router={props}
                     getUser={this.getUser}
+                    user={this.props.user.user}
                   />;
                 }} />
                 <Route exact path="/favorites" render={props => {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}  
+                    favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='careers'
                   />
                 }} />
@@ -363,6 +384,8 @@ class App extends React.Component {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='trainings'
                   />
                 }} />
@@ -425,7 +448,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ findCareers, getIndustries, findUser }, dispatch);
+  return bindActionCreators({ findCareers, getIndustries, findUser, getFavorites }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

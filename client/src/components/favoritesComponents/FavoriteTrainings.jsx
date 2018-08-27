@@ -25,36 +25,37 @@ class FavoriteTrainings extends React.Component {
 
   componentDidMount() {
     this.props.getUser();
-    this.parseFaves();
+    // this.props.getFavorites();
+    //this.parseFaves();
   }
 
-  parseFaves = () => {
-    let trainings = [];
-    const faves = (store.getState()).favorites.favorites;
+  // parseFaves = () => {
+  //   let trainings = [];
+  //   const faves = this.props.favorites
 
-    if (faves && faves.length > 0) {
-      for (let fave of faves) {
-        if (fave.service_id !== null) {
-          trainings.push(fave.service_id);
-        }
-      }
-    }
+  //   if (faves && faves.length > 0) {
+  //     for (let fave of faves) {
+  //       if (fave.service_id !== null) {
+  //         trainings.push(fave.service_id);
+  //       }
+  //     }
+  //   }
 
-    this.fetch({
-      query: getTrainingFave(trainings)
-    })
-    .then((res) => {
-      this.setState({ trainingFaves: res.data.trainings })
-    });
-  }
+  //   this.fetch({
+  //     query: getTrainingFave(trainings)
+  //   })
+  //   .then((res) => {
+  //     this.setState({ trainingFaves: res.data.trainings })
+  //   });
+  // }
 
   render() {
     const { classes } = this.props;
-    const faves = (store.getState()).favorites.favorites;
+    const faves = this.props.favorites;
 
     return (
       <Grid container className={classes.grid}>
-        {this.state.trainingFaves.map((service, index) => {
+        {this.props.trainings.map((service, index) => {
           return <Service key={service.id || index} service={service} favorites={faves}/>;
         })}
       </Grid>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { createApolloFetch } from 'apollo-fetch';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -10,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { getPageTitle } from '../../actions/action';
+import { getCareerFave, getTrainingFave } from '../graphql/graphql';
 
 const styles = theme => ({
   background: {
@@ -55,8 +57,13 @@ class Favorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
+      value: 0,
+      careerFaves: [],
+      trainingFaves: []
     }
+    this.fetch = createApolloFetch({
+      uri: '/graphql'
+    }).bind(this);
   }
 
   componentDidMount() {
@@ -69,21 +76,59 @@ class Favorites extends React.Component {
     } else if (this.props.active === 'trainings') {
       this.setState({ value: 1 });
     }
+    this.props.getUser();
+    this.props.getFavorites();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.favorites !== prevProps.favorites) {
+      this.parseFaves();
+    }
   }
 
   handleChange = (e, value) => {
     this.setState({ value });
   };
 
+  parseFaves = () => {
+    let careers = [];
+    let trainings = [];
+    const faves = this.props.favorites.favorites;
+
+    if (faves && faves.length > 0) {
+      for (let fave of faves) {
+        if (fave.career_id !== null) {
+          careers.push(fave.career_id);
+        } else if (fave.service_id !== null) {
+          trainings.push(fave.service_id);
+        }
+      }
+    }
+
+    this.fetch({
+      query: getCareerFave(careers)
+    })
+    .then((res) => {
+      this.setState({ careerFaves: res.data.careers })
+    });
+
+    this.fetch({
+      query: getTrainingFave(trainings)
+    })
+    .then((res) => {
+      this.setState({ trainingFaves: res.data.trainings })
+    });
+  }
+
   render() {
     const { classes } = this.props;
-    const faves = (store.getState()).favorites.favorites;
+    const faves = this.props.favorites.favorites
     let component;
 
     //for rendering different information based on whether or not a user has favorites
     //nested conditional statements need to be done this way for easier readability than 
     //ternary statements
-    if (faves === undefined || faves === [] || faves[0].id === '') {
+    if (faves === undefined || faves === []) {
       if (this.state.value === 0) {
         component = <NoFaves type='careers' />
       } else if (this.state.value === 1) {
@@ -91,9 +136,9 @@ class Favorites extends React.Component {
       }
     } else {
       if (this.state.value === 0) {
-        component = <FavoriteCareers getUser={this.props.getUser} />
+        component = <FavoriteCareers getUser={this.props.getUser} careers={this.state.careerFaves} getFavorites={this.props.getFavorites}/>
       } else if (this.state.value === 1) {
-        component = <FavoriteTrainings getUser={this.props.getUser} />
+        component = <FavoriteTrainings getUser={this.props.getUser} trainings={this.state.trainingFaves} getFavorites={this.props.getFavorites}/>
       }
     }
 

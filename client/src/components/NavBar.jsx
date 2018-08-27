@@ -69,7 +69,7 @@ class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
-    //console.log('props in navbar', this.props)
+
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -99,7 +99,7 @@ class NavBar extends React.Component {
                         Account
                       </Typography>
                       <Typography variant="body1" align="center" style={{color: 'white'}}>
-                      {this.props.user.email}
+                      {this.props.user.email || null}
                       </Typography>
                       
                       </div>) : 
@@ -130,7 +130,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </HashLink>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              {this.props.showProfile ? (<MenuItem onClick={this.handleClose}>
                 <Link to="/profile">
                   <ListItemIcon>
                     <AccountCircleIcon />
@@ -138,8 +138,8 @@ class NavBar extends React.Component {
                   <ListItemText style={{ float: 'right' }} inset primary="My Profile">
                   </ListItemText>
                 </Link>
-              </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              </MenuItem>) : null}
+              {this.props.showFavorites ? (<MenuItem onClick={this.handleClose}>
                 <Link to="/favorites">
                   <ListItemIcon>
                     <FavoriteIcon />
@@ -147,7 +147,7 @@ class NavBar extends React.Component {
                   <ListItemText style={{ float: 'right' }} inset primary="My Favorites">
                   </ListItemText>
                 </Link>
-              </MenuItem>
+              </MenuItem>) : null}
               <MenuItem onClick={this.handleClose}>
                 <Link to="/careers">
                   <ListItemIcon>
