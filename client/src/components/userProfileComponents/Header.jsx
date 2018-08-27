@@ -36,7 +36,7 @@ class Header extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    
     return (
       <div className={classes.background}>
         <AccountCircleIcon className={classes.icon} />
