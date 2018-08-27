@@ -211,6 +211,26 @@ export const getLoggedInUser =
   }
   `;
 
+export const updateInfo = (args) => (
+  `
+  mutation {
+    updateInfo(
+      id: ${args.id},
+      email: ${args.email},
+      first_name: ${args.first_name},
+      last_name: ${args.last_name},
+      phone_number: ${args.phone_number}
+    ) {
+      id
+      email
+      first_name
+      last_name
+      phone_number
+    }
+  }
+  `
+)
+
 export const getCareerFave = (args) => (
   `{
     careers(career_ids: [${args}]) {

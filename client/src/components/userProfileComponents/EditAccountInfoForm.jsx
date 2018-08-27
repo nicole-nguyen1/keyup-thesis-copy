@@ -9,7 +9,7 @@ import { store } from '../../store/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getPageTitle, findUser } from '../../actions/action.js';
-import { signUp } from '../graphql/graphql.js';
+import { updateInfo } from '../graphql/graphql.js';
 import { createApolloFetch } from 'apollo-fetch';
 
 
@@ -64,8 +64,6 @@ class EditAccountForm extends React.Component {
       email: '',
       phone_number: '',
       zip: '',
-      password: '',
-      passwordConfirm: '',
       buttonDisabled: true,
       passCheck: false,
       passConfirmCheck: false
@@ -84,7 +82,7 @@ class EditAccountForm extends React.Component {
   }
 
   enableButton = () => {
-    if (this.state.first_name && this.state.last_name && this.state.email && this.state.password && this.state.passwordConfirm) {
+    if (this.state.first_name && this.state.last_name && this.state.email) {
       if (this.state.passCheck && this.state.passConfirmCheck) {
         this.setState({
           buttonDisabled: false
@@ -139,22 +137,24 @@ class EditAccountForm extends React.Component {
 
   onSubmit = () => {
     let email = JSON.stringify(this.state.email);
-    let password = JSON.stringify(this.state.password);
+    // let password = JSON.stringify(this.state.password);
     let first_name = JSON.stringify(this.state.first_name);
     let last_name = JSON.stringify(this.state.last_name);
     let phone_number = JSON.stringify(this.state.phone_number);
     this.fetch({
-      query: signUp({
+      query: updateInfo({
+        id,
         email,
-        password,
+        // password,
         first_name,
         last_name,
         phone_number
       })
     })
     .then(res => {
-      store.dispatch(findUser(res.data.signUp));
-      this.props.history.goBack();
+      console.log(res.data);
+      //store.dispatch(findUser(res.data.signUp));
+      //this.props.history.goBack();
     })
   }
 

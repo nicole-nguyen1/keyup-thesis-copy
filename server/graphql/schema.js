@@ -1,6 +1,6 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { signUpHelper, loginHelper } = require('../passport.js')
+const { signUpHelper, loginHelper, updateInfoHelper } = require('../passport.js')
 
 const {
   GraphQLSchema,
@@ -410,6 +410,20 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, { email, password, first_name, last_name, phone_number }, req) {
         return signUpHelper(email, password, first_name, last_name, phone_number, req);
+      }
+    },
+
+    updateInfo: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLString },
+        email: { type: GraphQLString },
+        first_name: { type: GraphQLString },
+        last_name: { type: GraphQLString },
+        phone_number: { type: GraphQLString }
+      },
+      resolve(parent, { id, email, first_name, last_name, phone_number }, req) {
+        return updateInfoHelper(id, email, first_name, last_name, phone_number, req);
       }
     },
 
