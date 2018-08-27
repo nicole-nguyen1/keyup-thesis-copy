@@ -25,6 +25,7 @@ class FavoriteTrainings extends React.Component {
 
   componentDidMount() {
     this.props.getUser();
+    // this.props.getFavorites();
     this.parseFaves();
   }
 

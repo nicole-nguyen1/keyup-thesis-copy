@@ -69,6 +69,8 @@ class Favorites extends React.Component {
     } else if (this.props.active === 'trainings') {
       this.setState({ value: 1 });
     }
+    this.props.getUser();
+    // this.props.getFavorites();
   }
 
   handleChange = (e, value) => {
@@ -77,7 +79,8 @@ class Favorites extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const faves = this.props.favorites
+    const faves = this.props.favorites.favorites
+    console.log('props in favorites', this.props)
     let component;
 
     //for rendering different information based on whether or not a user has favorites
@@ -91,9 +94,9 @@ class Favorites extends React.Component {
       }
     } else {
       if (this.state.value === 0) {
-        component = <FavoriteCareers getUser={this.props.getUser} favorites={faves}/>
+        component = <FavoriteCareers getUser={this.props.getUser} favorites={faves} getFavorites={this.props.getFavorites}/>
       } else if (this.state.value === 1) {
-        component = <FavoriteTrainings getUser={this.props.getUser} favorites={faves}/>
+        component = <FavoriteTrainings getUser={this.props.getUser} favorites={faves} getFavorites={this.props.getFavorites}/>
       }
     }
 

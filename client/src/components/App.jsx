@@ -47,12 +47,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getCareers();
+    this.getFavorites();
     this.fetch({
       query: getIndustriesQuery
     }).then(res => {
       store.dispatch(getIndustries(res.data));
     });
-    this.getFavorites();
   }
 
   getUser = () => {
@@ -62,6 +62,7 @@ class App extends React.Component {
       store.dispatch(findUser(res.data.loggedInUser));
       return res;
     }).then((res) => {
+      console.log('getuser in app', res)
       if (res.data.loggedInUser.id) {
         this.setState({
           showSignOutButton: true,
@@ -104,15 +105,15 @@ class App extends React.Component {
   }
 
   getFavorites = () => {
-    if (this.props.user.user.id) {
+    // if (this.props.user.user.id) {
       this.fetch({
-        query: getFavoritesQuery(this.props.user.user.id)
+        query: getFavoritesQuery(this.props.user.user.id || null)
       })
       .then((res) => {
-        console.log(res);
+        console.log('this is what is being dispatched', res);
         store.dispatch(getFavorites(res.data));
       })
-    }
+    // }
   }
 
   addFavorite = (args) => {
@@ -265,6 +266,7 @@ class App extends React.Component {
                     router={props}
                     getUser={this.getUser}
                     favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
@@ -272,6 +274,7 @@ class App extends React.Component {
                     router={props}
                     getUser={this.getUser}
                     favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='careers'
                   />
                 }} />
@@ -280,6 +283,7 @@ class App extends React.Component {
                     router={props}
                     getUser={this.getUser}
                     favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='trainings'
                   />
                 }} />
@@ -355,6 +359,7 @@ class App extends React.Component {
                     router={props}
                     getUser={this.getUser}  
                     favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
@@ -362,6 +367,7 @@ class App extends React.Component {
                     router={props}
                     getUser={this.getUser}
                     favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='careers'
                   />
                 }} />
@@ -370,6 +376,7 @@ class App extends React.Component {
                     router={props}
                     getUser={this.getUser}
                     favorites={this.props.favorites}
+                    getFavorites={this.getFavorites}
                     active='trainings'
                   />
                 }} />
@@ -432,7 +439,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ findCareers, getIndustries, findUser }, dispatch);
+  return bindActionCreators({ findCareers, getIndustries, findUser, getFavorites }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
