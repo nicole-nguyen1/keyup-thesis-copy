@@ -116,7 +116,8 @@ class App extends React.Component {
   }
 
   addFavorite = (args) => {
-    args.userID = this.props.user.id;
+    console.log('args in app', args)
+    args.userID = this.props.user.user.id;
     this.fetch({
       query: addFavoriteToList (args)
     })
@@ -221,7 +222,7 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log('props in app', this.props)
+    console.log('props in app', this.props)
     // console.log('store state', store.getState())
     return (
       <Router history={newHistory} >
@@ -263,12 +264,14 @@ class App extends React.Component {
                   return <Favorites 
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
                     active='careers'
                   />
                 }} />
@@ -276,6 +279,7 @@ class App extends React.Component {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
                     active='trainings'
                   />
                 }} />
@@ -350,12 +354,14 @@ class App extends React.Component {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}  
+                    favorites={this.props.favorites}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
                     active='careers'
                   />
                 }} />
@@ -363,6 +369,7 @@ class App extends React.Component {
                   return <Favorites
                     router={props}
                     getUser={this.getUser}
+                    favorites={this.props.favorites}
                     active='trainings'
                   />
                 }} />
