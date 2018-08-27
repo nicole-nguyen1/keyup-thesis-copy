@@ -19,6 +19,7 @@ import LoginContainer from './loginComponents/loginContainer.jsx';
 import SignUpForm from './SignUpForm.jsx';
 import UserProfile from './userProfileComponents/UserProfile.jsx';
 import Favorites from './favoritesComponents/Favorites.jsx';
+import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -224,6 +225,12 @@ class App extends React.Component {
                     getUser={this.getUser}
                   />;
                 }} />
+                <Route exact path="/profile/edit" render={props => {
+                  return <EditAccountForm
+                    router={props}
+                    getUser={this.getUser}
+                  />;
+                }} />
                 <Route exact path="/favorites" render={props => {
                   return <Favorites 
                     router={props}
@@ -283,6 +290,12 @@ class App extends React.Component {
                     router={props}
                     getUser={this.getUser}
                   />
+                }} />
+                <Route exact path="/profile/edit" render={props => {
+                  return <EditAccountForm
+                    router={props}
+                    getUser={this.getUser}
+                  />;
                 }} />
                 <Route exact path="/favorites" render={props => {
                   return <Favorites
