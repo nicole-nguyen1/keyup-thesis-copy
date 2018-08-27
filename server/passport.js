@@ -84,4 +84,31 @@ const signUpHelper = (email, password, first_name, last_name, phone_number, zip,
     .catch(err => console.log(err));
 };
 
-module.exports = { passport, loginHelper, signUpHelper };
+const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, req) => {
+  return knex('users')
+    .select()
+    .where({ id })
+    .first()
+    .then((user) => {
+      let thisUpdate = {};
+      if (user.email !== email) {
+        thisUpdate.email = email;
+      } else if (user.first_name !== first_name) {
+        thisUpdate.first_name = first_name;
+      } else if (user.last_name !== last_name) {
+        thisUpdate.last_name = last_name;
+      } else if (user.phone_number !== phone_number) {
+        thisUpdate.phone_number = phone_number;
+      } else if (user.zip !== zip) {
+        thisUpdate.zip = zip;
+      }
+
+      return knex('users')
+        .where({ id })
+        .update(thisUpdate)
+        .returning(['id', 'email', 'first_name', 'last_name', 'phone_number', 'zip'])
+        .then((res) => res[0]);
+    })
+}
+
+module.exports = { passport, loginHelper, signUpHelper, updateInfoHelper };

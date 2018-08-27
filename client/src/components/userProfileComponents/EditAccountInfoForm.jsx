@@ -1,0 +1,222 @@
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { store } from '../../store/index';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getPageTitle, findUser } from '../../actions/action.js';
+import { updateInfo } from '../graphql/graphql.js';
+import { createApolloFetch } from 'apollo-fetch';
+
+
+const styles = theme => ({
+  inputStyle: {
+    backgroundColor: 'white',
+    margin: '5px 10px 5px 0',
+    padding: '10px',
+    width: '89vw',
+    maxWidth: '350px'
+  },
+  buttonStyle: {
+    backgroundColor: '##4469FF',
+    color: 'white',
+    borderRadius: 0,
+    marginTop: '2em'
+  },
+  paper: {
+    top: '56px',
+    backgroundColor: 'EDEDEE',
+    padding: '30px 10px'
+  },
+  header: {
+    paddingTop: '20px',
+    fontWeight: 'bold'
+  },
+  fieldError: {
+    backgroundColor: 'white',
+    margin: '5px 10px 5px 0',
+    padding: '10px',
+    width: '89vw',
+    maxWidth: '350px',
+    border: '2px solid red'
+  },
+  check: {
+    color: 'green'
+  },
+  error: {
+    color: 'red'
+  }
+});
+
+class EditAccountForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.fetch = createApolloFetch({
+      uri: '/graphql'
+    }).bind(this);
+    this.state = {
+      id: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone_number: '',
+      zip: '',
+      buttonDisabled: true
+    }
+  }
+
+  componentDidMount() {
+    store.dispatch(getPageTitle('Edit Account Info'));
+    this.props.getUser();
+    const user = (store.getState()).user;
+    this.setState({
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
+      phone_number: user.phone_number,
+      zip: user.zip
+    })
+  }
+
+  handleChange = (e) => {
+    let thisState = {};
+    thisState[e.target.name] = e.target.value;
+    this.setState(thisState, this.enableButton);
+  }
+
+  enableButton = () => {
+    if (this.state.first_name && this.state.last_name && this.state.email) {
+      this.setState({
+        buttonDisabled: false
+      });
+    }
+  }
+
+  onSubmit = () => {
+    let id = JSON.stringify(this.state.id);
+    let email = JSON.stringify(this.state.email);
+    let first_name = JSON.stringify(this.state.first_name);
+    let last_name = JSON.stringify(this.state.last_name);
+    let phone_number = JSON.stringify(this.state.phone_number);
+    let zip = JSON.stringify(this.state.zip);
+    this.fetch({
+      query: updateInfo({
+        id,
+        email,
+        first_name,
+        last_name,
+        phone_number,
+        zip
+      })
+    })
+    .then(res => {
+      store.dispatch(findUser(res.data.updateInfo));
+      console.log(store.getState());
+      this.props.history.push('/profile');
+    })
+  }
+
+  render() {
+    const { classes } = this.props;
+    const user = (store.getState()).user;
+    console.log(this.props);
+    return (
+      <div className={classes.paper}>
+        <Typography variant='headline'>Edit Your Account Information</Typography>
+        <Typography variant='body2' className={classes.header}>Name</Typography>
+        <TextField
+          autoFocus
+          fullWidth
+          required
+          type="text"
+          name="first_name"
+          defaultValue={user.first_name}
+          className={classes.inputStyle}
+          onChange={this.handleChange}
+          InputProps={{
+            disableUnderline: true
+          }}
+        />
+        <TextField
+          autoFocus
+          fullWidth
+          required
+          type="text"
+          name="last_name"
+          defaultValue={user.last_name}
+          className={classes.inputStyle}
+          onChange={this.handleChange}
+          InputProps={{
+            disableUnderline: true
+          }}
+        />
+        <Typography variant='body2' className={classes.header}>Contact Information</Typography>
+        <TextField
+          autoFocus
+          fullWidth
+          required
+          type="email"
+          name="email"
+          defaultValue={user.email}
+          className={classes.inputStyle}
+          onChange={this.handleChange}
+          InputProps={{
+            disableUnderline: true
+          }}
+        />
+        <TextField
+          autoFocus
+          fullWidth
+          type="text"
+          name="phone_number"
+          placeholder="Phone Number (optional)"
+          defaultValue={user.phone_number}
+          className={classes.inputStyle}
+          onChange={this.handleChange}
+          InputProps={{
+            disableUnderline: true
+          }}
+        />
+        <Typography variant='body2' className={classes.header}>Zip Code</Typography>
+        <TextField
+          autoFocus
+          fullWidth
+          type="text"
+          name="zip"
+          placeholder="Zip Code (optional)"
+          defaultValue={user.zip}
+          className={classes.inputStyle}
+          onChange={this.handleChange}
+          InputProps={{
+            disableUnderline: true
+          }}
+        />
+        <Typography variant='caption'>We ask so we can recommend the training services and support programs closest to you</Typography>
+        <Button
+          variant="contained"
+          className={classes.buttonStyle}
+          onClick={this.onSubmit}
+          disabled={this.state.buttonDisabled}
+        >
+          Save Changes
+        </Button>
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    pages: state.pages.page,
+    user: state.user.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ getPageTitle, findUser }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(EditAccountForm));
