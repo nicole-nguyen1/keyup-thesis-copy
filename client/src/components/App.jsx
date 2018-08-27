@@ -106,6 +106,7 @@ class App extends React.Component {
 
   getFavorites = () => {
     // if (this.props.user.user.id) {
+      console.log('in get favorites', this.props.user.user.id)
       this.fetch({
         query: getFavoritesQuery(this.props.user.user.id || null)
       })

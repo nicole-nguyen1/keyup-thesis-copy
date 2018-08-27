@@ -20,7 +20,7 @@ class Home extends React.Component {
     window.scrollTo(0,0);
     store.dispatch(getPageTitle(''));
     this.props.getUser();
-    // this.props.getFavorites();
+    this.props.getFavorites();
   }
 
   render() {
