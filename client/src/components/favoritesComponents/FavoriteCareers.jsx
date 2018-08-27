@@ -25,12 +25,13 @@ class FavoriteCareers extends React.Component {
 
   componentDidMount() {
     this.props.getUser();
+    // this.props.getFavorites();
     this.parseFaves();
   }
 
   parseFaves = () => {
     let careers = [];
-    const faves = (store.getState()).favorites.favorites;
+    const faves = this.props.favorites
 
     if (faves && faves.length > 0) {
       for (let fave of faves) {
@@ -50,8 +51,8 @@ class FavoriteCareers extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const faves = (store.getState()).favorites.favorites;
-
+    const faves = this.props.favorites
+    console.log('props in favorite careers', this.props)
     return (
       <Grid container className={classes.grid}>
         {this.state.careerFaves.map((career, index) => {

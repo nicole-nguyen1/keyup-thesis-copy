@@ -25,12 +25,13 @@ class FavoriteTrainings extends React.Component {
 
   componentDidMount() {
     this.props.getUser();
+    // this.props.getFavorites();
     this.parseFaves();
   }
 
   parseFaves = () => {
     let trainings = [];
-    const faves = (store.getState()).favorites.favorites;
+    const faves = this.props.favorites
 
     if (faves && faves.length > 0) {
       for (let fave of faves) {
@@ -50,7 +51,7 @@ class FavoriteTrainings extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const faves = (store.getState()).favorites.favorites;
+    const faves = this.props.favorites;
 
     return (
       <Grid container className={classes.grid}>
