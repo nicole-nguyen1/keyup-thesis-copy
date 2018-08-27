@@ -74,12 +74,13 @@ CREATE TABLE "users" (
 "first_name" VARCHAR ,
 "last_name" VARCHAR ,
 "phone_number" VARCHAR ,
+"zip" INTEGER ,
 PRIMARY KEY ("id")
 );
 
 CREATE TABLE "favorites" (
 "id"  SERIAL ,
-"career_id" INTEGER ,
+"career_id" INTEGER NOT NULL ,
 "service_id" INTEGER ,
 "user_id" INTEGER NOT NULL ,
 PRIMARY KEY ("id")
@@ -102,7 +103,7 @@ PRIMARY KEY ("id")
 
 CREATE TABLE "questions" (
 "id"  SERIAL ,
-"data" JSONB ,
+"data" INTEGER ,
 PRIMARY KEY ("id")
 );
 
