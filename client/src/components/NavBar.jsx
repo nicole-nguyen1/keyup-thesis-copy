@@ -129,13 +129,13 @@ class NavBar extends React.Component {
               </div>)
               }
               <MenuItem onClick={this.handleClose}>
-                <Link to="/home">
+                <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
                   <ListItemText style={{ float: 'right' }} inset primary="Home">
                   </ListItemText>
-                </Link>
+                </HashLink>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
                 <Link to="/profile">
