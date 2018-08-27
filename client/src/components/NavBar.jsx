@@ -205,11 +205,11 @@ class NavBar extends React.Component {
               
             </Menu>
             <Typography variant="display1" color="inherit">
-              <Link to="/home">
+              <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                 <Button onClick={this.handleClose} className={classes.home}>
                   <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px' />
                 </Button>
-              </Link>
+              </HashLink>
             </Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
               {this.props.pages}

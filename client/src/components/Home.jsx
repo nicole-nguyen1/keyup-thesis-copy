@@ -25,7 +25,9 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <Intro />
+        <div id="intro">
+          <Intro />
+        </div>
         <HomePageCards />
         <div id="about">
           <About />
