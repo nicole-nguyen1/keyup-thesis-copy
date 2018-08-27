@@ -45,6 +45,7 @@ class FavoriteCareers extends React.Component {
       query: getCareerFave(careers)
     })
     .then((res) => {
+      console.log('res in favorite careers', res)
       this.setState({ careerFaves: res.data.careers })
     });
   }
