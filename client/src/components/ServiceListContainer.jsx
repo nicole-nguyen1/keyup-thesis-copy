@@ -36,9 +36,11 @@ class ServiceListContainer extends React.Component {
       return <div>Loading...</div>
     } else {
       return <Services 
-      services={this.props.services} 
-      careerID={this.state.career_id}
-      favorites={faves}
+        services={this.props.services} 
+        careerID={this.state.career_id}
+        favorites={faves}
+        removeFavorite={this.props.removeFavorite}
+        addFavorite={this.props.addFavorite}
       />;
     }
   }

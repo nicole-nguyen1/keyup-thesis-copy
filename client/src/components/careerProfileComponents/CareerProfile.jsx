@@ -49,7 +49,13 @@ const CareerProfile = (props) => {
 
     return (
       <div>
-        <IntroCard career={career} careerID={props.careerID} favorites={props.favorites}/>
+        <IntroCard 
+          career={career} 
+          careerID={props.careerID} 
+          favorites={props.favorites}
+          removeFavorite={props.removeFavorite}
+          addFavorite={props.addFavorite}
+        />
         <EarningsOpenings career={career} />
         <TasksSkills career={career}/>
         <Card className={classes.dark}>
@@ -58,7 +64,13 @@ const CareerProfile = (props) => {
           </CardContent>
           <ProsCons info={career} />
         </Card>
-        <Trainings career={career} careerID={props.careerID} favorites={props.favorites}/>
+        <Trainings 
+          career={career} 
+          careerID={props.careerID} 
+          favorites={props.favorites}
+          removeFavorite={props.removeFavorite}
+          addFavorite={props.addFavorite}
+        />
       </div>
     );
   } else {
