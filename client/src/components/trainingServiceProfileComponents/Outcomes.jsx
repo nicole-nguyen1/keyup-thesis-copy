@@ -16,8 +16,6 @@ const styles = theme => ({
 
 const Outcomes = props => {
   const { classes } = props;
-  //{props.service.location ? console.log(props.service.location.split('\\n')) : null}
-  //console.log(props.service.location);
 
   return (
     <div>

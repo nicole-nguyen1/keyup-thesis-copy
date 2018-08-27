@@ -54,7 +54,7 @@ class About extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log('props in about', this.props)
+
     return (
       <div>
         <Card style={{ borderRadius: 0 }}>

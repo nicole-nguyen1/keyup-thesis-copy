@@ -4,11 +4,12 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import FavoriteCareers from './FavoriteCareers.jsx';
 import FavoriteTrainings from './FavoriteTrainings.jsx';
-import { createApolloFetch } from 'apollo-fetch';
-import { getCareerFave, getTrainingFave } from '../graphql/graphql';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import { store } from '../../store/index';
+import { connect } from 'react-redux';
+import { getPageTitle } from '../../actions/action';
 
 const styles = theme => ({
   background: {
@@ -37,7 +38,7 @@ const styles = theme => ({
 function NoFaves(props) {
   return (
     <div>
-      <Paper style={{ padding: '30px 15px', borderRadius: '0' }}>
+      <Paper style={{ padding: '30px 15px', borderRadius: '0', height: '100%' }}>
         <Typography variant='body1' paragraph>No favorites yet?</Typography>
         <Typography variant='body1' paragraph>
           <Link to='/careers'
@@ -54,42 +55,20 @@ class Favorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0,
-      careerFaves: [],
-      trainingFaves: []
+      value: 0
     }
-    this.fetch = createApolloFetch({
-      uri: '/graphql'
-    }).bind(this);
   }
 
   componentDidMount() {
-    let careers = [];
-    let trainings = [];
-    //parsing the different types of favorites
-    if (this.props.favorites && this.props.favorites.length > 0) {
-      for (let fave of this.props.favorites) {
-        if (fave.career_id !== null) {
-          careers.push(fave.career_id);
-        } else if (fave.service_id !== null) {
-          trainings.push(fave.service_id);
-        }
-      }
+    store.dispatch(getPageTitle('My Favorites List'));
+
+    //the "active" prop is passed when a user goes to a specific favorites URL
+    //this will trigger the correct active tab for the user
+    if (this.props.active === 'careers') {
+      this.setState({ value: 0 });
+    } else if (this.props.active === 'trainings') {
+      this.setState({ value: 1 });
     }
-
-    this.fetch({
-      query: getCareerFave(careers)
-    })
-    .then((res) => {
-      this.setState({ careerFaves: res.data.careers })
-    });
-
-    this.fetch({
-      query: getTrainingFave(trainings)
-    })
-    .then((res) => {
-      this.setState({ trainingFaves: res.data.trainings })
-    });
   }
 
   handleChange = (e, value) => {
@@ -98,22 +77,23 @@ class Favorites extends React.Component {
 
   render() {
     const { classes } = this.props;
-    let info;
+    const faves = (store.getState()).favorites.favorites;
+    let component;
 
     //for rendering different information based on whether or not a user has favorites
     //nested conditional statements need to be done this way for easier readability than 
     //ternary statements
-    if (this.props.favorites === undefined || this.props.favorites[0].id === '') {
+    if (faves === undefined || faves === [] || faves[0].id === '') {
       if (this.state.value === 0) {
-        info = <NoFaves type='careers' />
+        component = <NoFaves type='careers' />
       } else if (this.state.value === 1) {
-        info = <NoFaves type='training services' />
+        component = <NoFaves type='training services' />
       }
     } else {
       if (this.state.value === 0) {
-        info = <FavoriteCareers careers={this.state.careerFaves} favorites={this.props.favorites} />
+        component = <FavoriteCareers getUser={this.props.getUser} />
       } else if (this.state.value === 1) {
-        info = <FavoriteTrainings services={this.state.trainingFaves} favorites={this.props.favorites} />
+        component = <FavoriteTrainings getUser={this.props.getUser} />
       }
     }
 
@@ -140,10 +120,10 @@ class Favorites extends React.Component {
             }}
           />
         </Tabs>
-        {info}
+        {component}
       </div>
     )
   }
 }
 
-export default withStyles(styles)(Favorites);
+export default connect()(withStyles(styles)(Favorites));
