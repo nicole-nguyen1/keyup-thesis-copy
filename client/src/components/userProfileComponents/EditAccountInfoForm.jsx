@@ -11,7 +11,6 @@ import { updateInfo } from '../graphql/graphql.js';
 import { createApolloFetch } from 'apollo-fetch';
 import { Redirect } from 'react-router-dom';
 
-
 const styles = theme => ({
   inputStyle: {
     backgroundColor: 'white',
@@ -72,14 +71,23 @@ class EditAccountForm extends React.Component {
   componentDidMount() {
     store.dispatch(getPageTitle('Edit Account Info'));
     this.props.getUser();
-    this.setState({
-      id: this.props.user.id,
-      first_name: this.props.user.first_name,
-      last_name: this.props.user.last_name,
-      email: this.props.user.email,
-      phone_number: this.props.user.phone_number,
-      zip: this.props.user.zip
-    })
+  }
+
+  componentDidUpdate(prevProps) {
+    let zip;
+    if (this.props.user.zip === null) {
+      zip = '';
+    }
+    if (this.props.user !== prevProps.user) {
+      this.setState({
+        id: this.props.user.id,
+        first_name: this.props.user.first_name,
+        last_name: this.props.user.last_name,
+        email: this.props.user.email,
+        phone_number: this.props.user.phone_number,
+        zip: zip
+      })
+    }
   }
 
   handleChange = (e) => {
@@ -117,7 +125,6 @@ class EditAccountForm extends React.Component {
       store.dispatch(findUser(res.data.updateInfo));
       console.log(store.getState());
       this.setState({ redirect: true });
-      //this.props.router.history.push('/profile');
     })
   }
 
@@ -138,7 +145,7 @@ class EditAccountForm extends React.Component {
           required
           type="text"
           name="first_name"
-          defaultValue={this.props.user.first_name}
+          value={this.state.first_name}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{
@@ -151,7 +158,7 @@ class EditAccountForm extends React.Component {
           required
           type="text"
           name="last_name"
-          defaultValue={this.props.user.last_name}
+          value={this.state.last_name}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{
@@ -165,7 +172,7 @@ class EditAccountForm extends React.Component {
           required
           type="email"
           name="email"
-          defaultValue={this.props.user.email}
+          value={this.state.email}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{
@@ -178,7 +185,7 @@ class EditAccountForm extends React.Component {
           type="text"
           name="phone_number"
           placeholder="Phone Number (optional)"
-          defaultValue={this.props.user.phone_number}
+          value={this.state.phone_number}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{
@@ -192,7 +199,7 @@ class EditAccountForm extends React.Component {
           type="text"
           name="zip"
           placeholder="Zip Code (optional)"
-          defaultValue={this.props.user.zip}
+          value={"" || this.state.zip}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{

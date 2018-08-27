@@ -21,6 +21,7 @@ class UserProfile extends React.Component {
     if (this.props.router.location.state && this.props.router.location.state.updatedInfo) {
       this.setState({ updatedInfo: true});
     }
+    this.props.getUser();
   }
 
   render() {
