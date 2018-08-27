@@ -58,10 +58,9 @@ class App extends React.Component {
       query: getLoggedInUser
     }).then(res => {
       store.dispatch(findUser(res.data.loggedInUser));
-    }).then(() => {
-      return store.getState();
+      return res;
     }).then((res) => {
-      if (res.user.id) {
+      if (res.data.loggedInUser.id) {
         this.setState({
           showSignOutButton: true,
           showAccountInfo: true
@@ -219,6 +218,8 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('props in app', this.props)
+    console.log('store state', store.getState())
     return (
       <Router history={newHistory} >
         <div>
@@ -227,6 +228,7 @@ class App extends React.Component {
           showSignOutButton={this.state.showSignOutButton} 
           showAccountInfo={this.state.showAccountInfo}
           getUser={this.getUser}
+          user={this.props.user}
           />
           <MediaQuery query="(min-width: 600px)">
             <div style={{ marginTop: '64px' }}>

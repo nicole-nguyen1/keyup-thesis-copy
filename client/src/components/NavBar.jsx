@@ -36,17 +36,10 @@ class NavBar extends React.Component {
 
     this.state = {
       anchorEl: null,
-      user: {
-
-      }
+      
     };
   }
 
-  componentDidMount() {
-    this.props.getUser()
-  }
-
-  
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -76,7 +69,7 @@ class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
-    const user = store.getState();
+    console.log('props in navbar', this.props)
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -106,7 +99,7 @@ class NavBar extends React.Component {
                         Account
                       </Typography>
                       <Typography variant="body1" align="center" style={{color: 'white'}}>
-                      {user.user.email}
+                      {this.props.user.email}
                       </Typography>
                       
                       </div>) : 
@@ -129,13 +122,13 @@ class NavBar extends React.Component {
               </div>)
               }
               <MenuItem onClick={this.handleClose}>
-                <Link to="/home">
+                <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
                   <ListItemText style={{ float: 'right' }} inset primary="Home">
                   </ListItemText>
-                </Link>
+                </HashLink>
               </MenuItem>
               <MenuItem onClick={this.handleClose}>
                 <Link to="/profile">
@@ -205,11 +198,11 @@ class NavBar extends React.Component {
               
             </Menu>
             <Typography variant="display1" color="inherit">
-              <Link to="/home">
+              <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                 <Button onClick={this.handleClose} className={classes.home}>
                   <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px' />
                 </Button>
-              </Link>
+              </HashLink>
             </Typography>
             <Typography variant="title" color="inherit" className={classes.flex}>
               {this.props.pages}
