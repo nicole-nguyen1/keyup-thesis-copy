@@ -63,8 +63,7 @@ class LoginContainer extends React.Component {
         this.setState({
           email: '',
           password: '',
-          buttonStatus: true,
-          toHome: true
+          buttonStatus: true
         })
         return res;
       } else {
