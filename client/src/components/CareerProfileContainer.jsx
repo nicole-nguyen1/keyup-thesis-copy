@@ -35,7 +35,10 @@ class CareerProfileContainer extends React.Component {
       <CareerProfile 
         career={this.props.career} 
         careerID={this.state.career_id} 
-        favorites={faves}/>
+        favorites={faves}
+        removeFavorite={this.props.removeFavorite}
+        addFavorite={this.props.addFavorite}
+      />
     );
   }
 }

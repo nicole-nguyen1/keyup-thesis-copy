@@ -1,38 +1,23 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
-const styles = theme => ({
-  icon: {
-    right: '8px',
-    color: '#88888A'
-  },
-  favoriteSelected: {
-    right: '8px',
-    color: '#7A94F4'
-  },
-  buttonStyle: {
-    flexDirection: 'column'
-  },
-  largeSize: {
-    fontSize: 36
-  }
-});
+import HeartButton from './HeartButton.jsx';
 class HeartContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      className: this.props.classes.icon,
-      iconSize: 20
+      iconSize: 20,
+      isFavorite: false
     };
-    
+    this.updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      favoriteID: '',
+      
+    }
   }
 
-  componentDidMount () {
-    this.isFavorite();
-  }
+  // componentDidMount () {
+  //   this.isFavorite();
+  // }
 
   componentDidUpdate(prevProps) {
     if (this.props.favorites !== prevProps.favorites) {
@@ -41,10 +26,12 @@ class HeartContainer extends React.Component {
   } 
 
   isFavorite = () => {
+    let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
-            console.log(`${this.props.careerID} is favorited`)
+            this.updateArgs.favoriteID = this.props.favorites[favorite].id;
+            favoriteFound = true;
             this.turnMeBlue()
             break;
           }
@@ -52,8 +39,10 @@ class HeartContainer extends React.Component {
     } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
-          console.log(`${this.props.serviceID} is favorited`)
-          this.turnMeBlue()
+          this.updateArgs.favoriteID = this.props.favorites[favorite].id;
+          this.turnMeBlue();
+          favoriteFound = true;
+          break;
         }
       }
     }
@@ -61,41 +50,41 @@ class HeartContainer extends React.Component {
 
   turnMeBlue = () => {
     this.setState({
-      className: this.props.classes.favoriteSelected
+      isFavorite: true
     })
   }
 
-  handleClick = () => {
-    //add or remove item from favorites
-    console.log('Fire off graphQL Mutation!!!!!!!!!!')
+  removeFavorite = () => {
+    this.setState({
+      isFavorite: false
+    })
+    this.props.removeFavorite(this.updateArgs.favoriteID);
+  }
+
+  addFavorite = () => {
+    this.setState({
+      isFavorite: true
+    })
+    this.props.addFavorite(this.updateArgs);
   }
 
   render() {
-    const { classes } = this.props;
-    if(this.props.size === 'large') {
-      this.state.iconSize = 36;
-    }
     return (
-      <Button classes={{label: classes.buttonStyle}} >
-        <FavoriteIcon
-          className={this.state.className}
-          height={classes.largeSize.height}
-          onClick={this.handleClick}
-          style={{ fontSize: this.state.iconSize }}
+      this.state.isFavorite ?
+        <HeartButton 
+          size={this.props.size}
+          profile={this.props.profile}
+          isBlue={true}
+          handleClick={this.removeFavorite}
+        /> :
+        <HeartButton 
+          size={this.props.size}
+          profile={this.props.profile}
+          isBlue={false}
+          handleClick={this.addFavorite}
         />
-        <Typography 
-          gutterBottom
-          variant='body1'  
-          className={this.state.className}
-        >
-          {this.props.profile === true ?
-            'FAVORITE' :
-            ' '
-          }
-        </Typography>
-      </Button>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(HeartContainer);
+export default HeartContainer;

@@ -71,6 +71,8 @@ class About extends React.Component {
               profile={true}
               serviceID={this.props.service.id}
               favorites={this.props.favorites}
+              removeFavorite={this.props.removeFavorite}
+              addFavorite={this.props.addFavorite}
             />
             <Button onClick={this.toggleDrawer}>
               <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>

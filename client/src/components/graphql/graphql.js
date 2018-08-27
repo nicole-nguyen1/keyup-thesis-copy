@@ -277,13 +277,27 @@ export const saveTraining = (args) => (
   `
 );
 
-export const removeFavorite = (args) => (
+export const removeFavoriteFromList = (args) => (
   `
   mutation {
-    removeFavorite (id: ${args.id}) {
+    removeFavorite (id: ${args}) {
       user_id
     }
   }
+  `
+);
+
+export const addFavoriteToList = (args) => (
+  `
+    mutation {
+      saveFavorite(
+        user_id: ${args.userID || null}
+        career_id: ${args.careerID || null}
+        service_id: ${args.serviceID || null}
+      ){
+        id
+      }
+    }
   `
 );
 
