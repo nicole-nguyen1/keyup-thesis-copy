@@ -46,8 +46,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.getUser()
     this.getCareers();
-    this.getFavorites();
+    // this.getFavorites();
     this.fetch({
       query: getIndustriesQuery
     }).then(res => {
@@ -64,6 +65,7 @@ class App extends React.Component {
     }).then((res) => {
       console.log('getuser in app', res)
       if (res.data.loggedInUser.id) {
+        this.getFavorites(res.data.loggedInUser.id)
         this.setState({
           showSignOutButton: true,
           showAccountInfo: true
@@ -98,20 +100,21 @@ class App extends React.Component {
       return this.sortByHighestSalary(res.data.careers);
     })
     .then(res => {
+      console.log('careers res', res)
       store.dispatch(findCareers(res));
     }).catch((error) => {
       console.error(error)
     });
   }
 
-  getFavorites = () => {
+  getFavorites = (id) => {
     // if (this.props.user.user.id) {
       console.log('in get favorites', this.props.user.user.id)
       this.fetch({
-        query: getFavoritesQuery(this.props.user.user.id || null)
+        query: getFavoritesQuery(id || null)
       })
       .then((res) => {
-        console.log('this is what is being dispatched', res);
+        console.log('this is what is being dispatched', res.data);
         store.dispatch(getFavorites(res.data));
       })
     // }
