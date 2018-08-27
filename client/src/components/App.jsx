@@ -118,7 +118,7 @@ class App extends React.Component {
       query: addFavoriteToList (args)
     })
     .then(()=> {
-      getFavorites();
+      this.getFavorites();
     })
   }
 
