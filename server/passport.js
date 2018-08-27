@@ -46,14 +46,14 @@ const loginHelper = (email, password, req) => {
         reject(new Error(err));
       }
       req.login(user, () => {
-        const { id, email, first_name, last_name, phone_number } = user;
-        resolve({ id, email, first_name, last_name, phone_number });
+        const { id, email, first_name, last_name, phone_number, zip } = user;
+        resolve({ id, email, first_name, last_name, phone_number, zip });
       });
     })({ body: { email, password } });
   });
 };
 
-const signUpHelper = (email, password, first_name, last_name, phone_number, req) => {
+const signUpHelper = (email, password, first_name, last_name, phone_number, zip, req) => {
   return knex('users')
     .select()
     .where({ email })
@@ -65,7 +65,7 @@ const signUpHelper = (email, password, first_name, last_name, phone_number, req)
       return bcrypt.hash(password, 10)
         .then(hash => {
           return knex('users')
-            .insert({ email, password: hash, first_name, last_name, phone_number });
+            .insert({ email, password: hash, first_name, last_name, phone_number, zip });
         })
         .then(() => {
           return new Promise((resolve, reject) => {
@@ -74,8 +74,8 @@ const signUpHelper = (email, password, first_name, last_name, phone_number, req)
                 reject(new Error(err));
               }
               req.login(user, () => {
-                const { id, email, first_name, last_name, phone_number } = user;
-                resolve({ id, email, first_name, last_name, phone_number });
+                const { id, email, first_name, last_name, phone_number, zip } = user;
+                resolve({ id, email, first_name, last_name, phone_number, zip });
               });
             })({ body: { email, password } });
           });

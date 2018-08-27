@@ -61,7 +61,7 @@ class App extends React.Component {
     }).then(() => {
       return store.getState();
     }).then((res) => {
-      if (res.user.id.length > 0) {
+      if (res.user.id) {
         this.setState({
           showSignOutButton: true,
           showAccountInfo: true
@@ -103,12 +103,14 @@ class App extends React.Component {
   }
 
   getFavorites = () => {
-    this.fetch({
-      query: getFavoritesQuery(this.props.user.id)
-    })
-    .then((res) => {
-      store.dispatch(getFavorites(res.data));
-    })
+    if (this.props.user.id) {
+      this.fetch({
+        query: getFavoritesQuery(this.props.user.id)
+      })
+      .then((res) => {
+        store.dispatch(getFavorites(res.data));
+      })
+    }
   }
 
   addFavorite = (args) => {
