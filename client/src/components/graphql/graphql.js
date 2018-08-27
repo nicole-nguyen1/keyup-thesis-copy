@@ -149,7 +149,7 @@ export const addFormData = (args) => (
   `
 );
 
-export const signUp = ({ email, password, first_name, last_name, phone_number }) => (
+export const signUp = ({ email, password, first_name, last_name, phone_number, zip }) => (
   `
   mutation {
     signUp (
@@ -157,13 +157,15 @@ export const signUp = ({ email, password, first_name, last_name, phone_number })
       password: ${password},
       first_name: ${first_name},
       last_name: ${last_name},
-      phone_number: ${phone_number || null}
+      phone_number: ${phone_number || null},
+      zip: ${zip || null}
     ) {
       id
       email
       first_name
       last_name
       phone_number
+      zip
     }
   }
   `
@@ -275,13 +277,27 @@ export const saveTraining = (args) => (
   `
 );
 
-export const removeFavorite = (args) => (
+export const removeFavoriteFromList = (args) => (
   `
   mutation {
-    removeFavorite (id: ${args.id}) {
+    removeFavorite (id: ${args}) {
       user_id
     }
   }
+  `
+);
+
+export const addFavoriteToList = (args) => (
+  `
+    mutation {
+      saveFavorite(
+        user_id: ${args.userID || null}
+        career_id: ${args.careerID || null}
+        service_id: ${args.serviceID || null}
+      ){
+        id
+      }
+    }
   `
 );
 

@@ -31,11 +31,16 @@ class CareerProfileContainer extends React.Component {
 
   render() {
     const faves = (store.getState()).favorites.favorites;
+    console.log('faves in career profile container', faves)
+    console.log('props in career profile container', this.props)
     return (
       <CareerProfile 
         career={this.props.career} 
         careerID={this.state.career_id} 
-        favorites={faves}/>
+        favorites={faves}
+        removeFavorite={this.props.removeFavorite}
+        addFavorite={this.props.addFavorite}
+      />
     );
   }
 }

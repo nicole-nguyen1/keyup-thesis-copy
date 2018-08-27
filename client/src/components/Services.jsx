@@ -34,7 +34,14 @@ class Services extends React.Component {
         <FilterAndSort services={this.props.services} careerID={this.props.careerID}/>
         <Grid container className={classes.grid}>
           {this.props.services.map((service, index) => {
-            return <Service key={service.id || index} service={service} careerName={this.props.careerName} favorites={this.props.favorites}/>;
+            return <Service 
+              key={service.id || index} 
+              service={service} 
+              careerName={this.props.careerName} 
+              favorites={this.props.favorites}
+              removeFavorite={this.props.removeFavorite}
+              addFavorite={this.props.addFavorite}
+            />;
           })}
         </Grid>
       </div>

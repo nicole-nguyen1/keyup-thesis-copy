@@ -73,6 +73,8 @@ class IntroCard extends React.Component {
               profile={true}
               favorites={this.props.favorites}
               careerID={String(this.props.careerID)}
+              removeFavorite={this.props.removeFavorite}
+              addFavorite={this.props.addFavorite}
             />
           </CardActions>
           <CardContent style={{ paddingTop: 0 }}>

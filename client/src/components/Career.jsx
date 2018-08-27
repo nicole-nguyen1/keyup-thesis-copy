@@ -110,6 +110,8 @@ class Career extends React.Component {
                   size={'large'}
                   favorites={this.props.favorites}
                   careerID={String(this.props.career.id)}
+                  removeFavorite={this.props.removeFavorite}
+                  addFavorite={this.props.addFavorite}
                 />
               </Grid>
             </Grid>
