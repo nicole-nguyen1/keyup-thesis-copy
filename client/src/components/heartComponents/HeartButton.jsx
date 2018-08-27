@@ -38,6 +38,8 @@ class HeartButton extends React.Component {
     }
     if (this.props.isBlue) {
       this.state.className = this.props.classes.favoriteSelected;
+    } else {
+      this.state.className = this.props.classes.icon;
     }
     return (
       <Button classes={{label: classes.buttonStyle}} >

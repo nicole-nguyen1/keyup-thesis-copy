@@ -278,7 +278,7 @@ export const saveTraining = (args) => (
 export const removeFavoriteFromList = (args) => (
   `
   mutation {
-    removeFavorite (id: ${args.id}) {
+    removeFavorite (id: ${args}) {
       user_id
     }
   }

@@ -1,32 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import HeartButton from './HeartButton.jsx';
-import { removeFavorite } from '../graphql/graphql';
-
-const styles = theme => ({
-  icon: {
-    right: '8px',
-    color: '#88888A'
-  },
-  favoriteSelected: {
-    right: '8px',
-    color: '#7A94F4'
-  },
-  buttonStyle: {
-    flexDirection: 'column'
-  },
-  largeSize: {
-    fontSize: 36
-  }
-});
 class HeartContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      className: this.props.classes.icon,
       iconSize: 20,
       isFavorite: false
     };
@@ -38,9 +15,9 @@ class HeartContainer extends React.Component {
     }
   }
 
-  componentDidMount () {
-    this.isFavorite();
-  }
+  // componentDidMount () {
+  //   this.isFavorite();
+  // }
 
   componentDidUpdate(prevProps) {
     if (this.props.favorites !== prevProps.favorites) {
@@ -49,12 +26,12 @@ class HeartContainer extends React.Component {
   } 
 
   isFavorite = () => {
+    let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
-            console.log('favorite found:', this.props.careerID)
-            console.log('FAVORITE ID ', this.props.favorites[favorite].id)
             this.updateArgs.favoriteID = this.props.favorites[favorite].id;
+            favoriteFound = true;
             this.turnMeBlue()
             break;
           }
@@ -62,9 +39,9 @@ class HeartContainer extends React.Component {
     } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
-          console.log('favorite found:', this.props.serviceID)
           this.updateArgs.favoriteID = this.props.favorites[favorite].id;
           this.turnMeBlue();
+          favoriteFound = true;
           break;
         }
       }
@@ -73,29 +50,25 @@ class HeartContainer extends React.Component {
 
   turnMeBlue = () => {
     this.setState({
-      className: this.props.classes.favoriteSelected,
       isFavorite: true
     })
   }
 
   removeFavorite = () => {
-    console.log('Remove a favorite from the list!!!!!!!!!!')
+    this.setState({
+      isFavorite: false
+    }, console.log( 'removing favorite', this.state ))
     this.props.removeFavorite(this.updateArgs.favoriteID);
   }
 
   addFavorite = () => {
-    console.log('Add a favorite to the list!!!!!')
-    console.log(this.props)
-    console.log('favoriteID', this.favoriteID)
-    //this.props.serviceID
-    //this.props.careerID
-    //this.props.favoriteID
+    this.setState({
+      isFavorite: true
+    }, console.log( 'Adding favorite', this.state ))
     this.props.addFavorite(this.updateArgs);
   }
 
   render() {
-    const { classes } = this.props;
-    console.log('PROPS IN HEART CONTAINER', this.props)
     return (
       this.state.isFavorite ?
         <HeartButton 
@@ -114,4 +87,4 @@ class HeartContainer extends React.Component {
   }
 }
 
-export default withStyles(styles)(HeartContainer);
+export default HeartContainer;
