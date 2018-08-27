@@ -78,7 +78,6 @@ class Favorites extends React.Component {
     }
     this.props.getUser();
     this.props.getFavorites();
-    //this.parseFaves();
   }
 
   componentDidUpdate(prevProps) {
@@ -110,7 +109,6 @@ class Favorites extends React.Component {
       query: getCareerFave(careers)
     })
     .then((res) => {
-      console.log('res in favorite careers', res)
       this.setState({ careerFaves: res.data.careers })
     });
 
@@ -125,7 +123,6 @@ class Favorites extends React.Component {
   render() {
     const { classes } = this.props;
     const faves = this.props.favorites.favorites
-    // console.log('props in favorites', this.props)
     let component;
 
     //for rendering different information based on whether or not a user has favorites

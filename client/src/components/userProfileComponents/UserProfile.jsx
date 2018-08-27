@@ -25,11 +25,6 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    // const user = (store.getState()).user;
-    // console.log(user);
-
-    console.log(this.props);
-
     return (
       <div>
         <Header user={this.props.user}/>

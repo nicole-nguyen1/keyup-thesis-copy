@@ -65,7 +65,6 @@ class App extends React.Component {
       store.dispatch(findUser(res.data.loggedInUser));
       return res;
     }).then((res) => {
-      console.log('getuser in app', res)
       if (res.data.loggedInUser.id) {
         this.getFavorites(res.data.loggedInUser.id)
         this.setState({
@@ -108,7 +107,6 @@ class App extends React.Component {
       return this.sortByHighestSalary(res.data.careers);
     })
     .then(res => {
-      console.log('careers res', res)
       store.dispatch(findCareers(res));
     }).catch((error) => {
       console.error(error)
@@ -116,16 +114,12 @@ class App extends React.Component {
   }
 
   getFavorites = (id) => {
-    // if (this.props.user.user.id) {
-      console.log('in get favorites', this.props.user.user.id)
-      this.fetch({
-        query: getFavoritesQuery(id || null)
-      })
-      .then((res) => {
-        console.log('this is what is being dispatched', res.data);
-        store.dispatch(getFavorites(res.data));
-      })
-    // }
+    this.fetch({
+      query: getFavoritesQuery(id || null)
+    })
+    .then((res) => {
+      store.dispatch(getFavorites(res.data));
+    });
   }
 
   addFavorite = (args) => {
@@ -234,8 +228,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('props in app', this.props)
-    // console.log('store state', store.getState())
     return (
       <Router history={newHistory} >
         <div>
