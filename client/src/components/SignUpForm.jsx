@@ -69,8 +69,7 @@ class SignUpForm extends React.Component {
       passwordConfirm: '',
       buttonDisabled: true,
       passCheck: false,
-      passConfirmCheck: false,
-      goHome: false
+      passConfirmCheck: false
     }
   }
 
@@ -155,21 +154,14 @@ class SignUpForm extends React.Component {
         zip
       })
     })
-    .then( res => {
-      console.log(res);
-        store.dispatch(findUser(res.data.signUp))
-      this.setState({
-        goHome: true
-      });
+    .then(res => {
+      store.dispatch(findUser(res.data.signUp));
+      this.props.history.goBack();
     })
   }
 
   render() {
     const { classes } = this.props;
-
-    if (this.state.goHome) {
-      return <Redirect to='/home' />
-    }
 
     return (
       <div className={classes.paper}>
