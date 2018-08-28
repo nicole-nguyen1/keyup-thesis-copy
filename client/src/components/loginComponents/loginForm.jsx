@@ -22,6 +22,13 @@ const styles = theme => ({
     float: 'left',
     borderRadius: '2px'
   },
+  buttons: {
+    margin: '0 auto'
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#4469FF'
+  },
   paper: {
     top: '56px',
     padding: '60px 10px',
@@ -36,6 +43,9 @@ const styles = theme => ({
     marginTop: '5em',
     marginLeft: '1em',
     fontWeight: 'bold'
+  },
+  error: {
+    marginBottom: '20px'
   }
 });
 
@@ -72,7 +82,7 @@ class LoginForm extends React.Component {
             onChange={this.props.handlePasswordChange}
           />
           {this.props.showError ? 
-            (<Typography variant="body1" align="left" color="secondary">
+            (<Typography variant="body1" align="left" color="secondary" className={classes.error}>
               Them email address and password you entered <br />
               did not match any KeyUp accounts. <br />
               Please try again.
@@ -80,11 +90,11 @@ class LoginForm extends React.Component {
             ) : null
           }
           <Typography variant="body1" align="center">
-            <a href='#'>
+            <a href='#' className={classes.link}>
           Forgot your password?
             </a>
           </Typography>
-          <div>
+          <div className={classes.buttons}>
             <Button
               variant="contained"
               className={classes.buttonStyle}
