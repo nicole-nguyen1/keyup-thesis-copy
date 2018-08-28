@@ -1,6 +1,6 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { signUpHelper, loginHelper, updateInfoHelper } = require('../passport.js')
+const { signUp, login, updateInfoHelper, checkAuth } = require('../passport.js')
 
 const {
   GraphQLSchema,
@@ -290,6 +290,14 @@ const FavoriteType = new GraphQLObjectType({
   })
 });
 
+const TokenType = new GraphQLObjectType({
+  name: 'Token',
+  fields: () => ({
+    user: { type: GraphQLString },
+    token: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -375,23 +383,26 @@ const RootQuery = new GraphQLObjectType({
     //GET a specific user
     loggedInUser: {
       type: UserType,
-      resolve(parent, args, { session }) {
-        let id = session.passport.user;
-        return knex('users')
-          .select('id', 'email', 'phone_number', 'first_name', 'last_name')
-          .where({ id })
-          .first();
+      args: { token: { type: GraphQLString } },
+      resolve(parent, { token }, context) {
+        return checkAuth(token);
       }
     },
 
     //GET list of favorites for one user
     favorites: {
       type: new GraphQLList(FavoriteType),
-      args: { user_id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return knex('favorites')
-          .select()
-          .where('favorites.user_id', args.user_id)
+      args: { token: { type: GraphQLString } },
+      resolve(parent, { token }) {
+        let user = new Promise((resolve, reject) => {
+          resolve(checkAuth(token))
+        });
+
+        return user.then((userObj) => {
+          return knex('favorites')
+            .select()
+            .where('favorites.user_id', userObj.id);
+        })
       }
     }
   }
@@ -401,7 +412,7 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     signUp: {
-      type: UserType,
+      type: TokenType,
       args: {
         email: { type: GraphQLString },
         password: { type: GraphQLString },
@@ -410,8 +421,8 @@ const Mutation = new GraphQLObjectType({
         phone_number: { type: GraphQLString },
         zip: { type: GraphQLString }
       },
-      resolve(parent, { email, password, first_name, last_name, phone_number, zip }, req) {
-        return signUpHelper(email, password, first_name, last_name, phone_number, zip, req);
+      resolve(parent, { email, password, first_name, last_name, phone_number, zip }, context) {
+        return signUp(email, password, first_name, last_name, phone_number, zip, context);
       }
     },
 
@@ -431,13 +442,13 @@ const Mutation = new GraphQLObjectType({
     },
 
     login: {
-      type: UserType,
+      type: TokenType,
       args: {
         email: { type: GraphQLString },
         password: { type: GraphQLString }
       },
-      resolve(parent, { email, password }, req) {
-        return loginHelper(email, password, req);
+      resolve(parent, { email, password }, context) {
+        return login(email, password, context);
       }
     },
 

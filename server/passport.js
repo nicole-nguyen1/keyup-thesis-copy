@@ -2,11 +2,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const { knex } = require('../database/db');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const passportJWT = require('passport-jwt');
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
 
-passport.use(new LocalStrategy({
-  usernameField: 'email'
-},
-(email, password, done) => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
   knex('users')
     .select()
     .where({ email })
@@ -39,21 +40,36 @@ passport.deserializeUser((id, done) => {
     .catch(err => done(err));
 });
 
-const loginHelper = (email, password, req) => {
+passport.use(new JWTStrategy({
+  jwtFromRequest: ExtractJWT.fromBodyField('token'),
+  secretOrKey: process.env.SECRET
+}, 
+  (jwtPayload, done) => {
+    return knex('users')
+      .select()
+      .where({id: jwtPayload.id})
+      .first()
+      .then( user => {
+        return done(null, user);
+      })
+      .catch( err => {
+        return done(err);
+      })
+  })
+)
+
+const checkAuth = token => {
   return new Promise((resolve, reject) => {
-    passport.authenticate('local', (err, user) => {
+    passport.authenticate('jwt', {session: false}, (err, user) => {
       if (err) {
         reject(new Error(err));
       }
-      req.login(user, () => {
-        const { id, email, first_name, last_name, phone_number, zip } = user;
-        resolve({ id, email, first_name, last_name, phone_number, zip });
-      });
-    })({ body: { email, password } });
-  });
-};
+      resolve(user);
+    })({ body: { token }})
+  })
+}
 
-const signUpHelper = (email, password, first_name, last_name, phone_number, zip, req) => {
+const signUp = (email, password, first_name, last_name, phone_number, zip, context) => {
   return knex('users')
     .select()
     .where({ email })
@@ -63,25 +79,33 @@ const signUpHelper = (email, password, first_name, last_name, phone_number, zip,
         throw new Error('User already exists');
       }
       return bcrypt.hash(password, 10)
-        .then(hash => {
-          return knex('users')
-            .insert({ email, password: hash, first_name, last_name, phone_number, zip });
-        })
-        .then(() => {
-          return new Promise((resolve, reject) => {
-            passport.authenticate('local', (err, user) => {
-              if (err) {
-                reject(new Error(err));
-              }
-              req.login(user, () => {
-                const { id, email, first_name, last_name, phone_number, zip } = user;
-                resolve({ id, email, first_name, last_name, phone_number, zip });
-              });
-            })({ body: { email, password } });
-          });
-        });
+    })
+    .then(hash => {
+      return knex('users')
+        .insert({ email, password: hash, first_name, last_name, phone_number, zip });
+    })
+    .then(() => {
+      return login(email, password, context);
     })
     .catch(err => console.log(err));
+};
+
+const login = (email, password, context) => {
+  return new Promise((resolve, reject) => {
+    passport.authenticate('local', {session: false}, (err, user) => {
+      if (err) {
+        reject(new Error(err));
+      }
+      context.req.login(user, {session: false}, (err) => {
+        if (err) {
+          reject(new Error(err));
+        }
+        const timestamp = new Date().getTime();        
+        const token = jwt.sign({ id: user.id, iat: timestamp }, process.env.SECRET)
+        resolve({ user: user.email, token })
+      });
+    })({ body: { email, password } });
+  });
 };
 
 const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, req) => {
@@ -111,4 +135,4 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
     })
 }
 
-module.exports = { passport, loginHelper, signUpHelper, updateInfoHelper };
+module.exports = { passport, login, signUp, updateInfoHelper, checkAuth };
