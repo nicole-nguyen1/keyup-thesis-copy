@@ -1,6 +1,4 @@
 const nodemailer = require('nodemailer');
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
 const crypto = require('crypto');
 const { knex } = require('../../database/db');
 
@@ -16,7 +14,6 @@ const sendPasswordEmail =  async (id, email) => {
       })
       .returning(['id', 'email', 'first_name', 'resetPasswordToken']))[0];
 
-    console.log(updateUser);
     const transporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
       port: 587,

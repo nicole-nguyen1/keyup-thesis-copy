@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import { Button } from '@material-ui/core';
-import { Redirect, withRouter } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   inputStyle: {

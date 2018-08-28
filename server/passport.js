@@ -40,6 +40,7 @@ passport.deserializeUser((id, done) => {
 });
 
 const loginHelper = (email, password, req) => {
+  console.log(email, password);
   return new Promise((resolve, reject) => {
     passport.authenticate('local', (err, user) => {
       if (err) {
@@ -130,8 +131,10 @@ const resetPassword = (email, password, req) => {
         .returning('*');
     })
     .then((res) => {
-      console.log(res);
-      return loginHelper(res[0].email, res[0].password, req);
+      let user = res[0];
+      req.login(user, () => {
+        return user;
+      });
     })
     .catch((err) => {
       throw new Error('Could not reset password', err);

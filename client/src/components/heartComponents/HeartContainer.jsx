@@ -30,7 +30,6 @@ class HeartContainer extends React.Component {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
             this.updateArgs.favoriteID = this.props.favorites[favorite].id;
-            console.log(`${this.props.careerID} is selected`);
             favoriteFound = true;
             this.turnMeBlue()
             break;
@@ -40,7 +39,6 @@ class HeartContainer extends React.Component {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
           this.updateArgs.favoriteID = this.props.favorites[favorite].id;
-          console.log(`${this.props.serviceID} is selected`);
           this.turnMeBlue();
           favoriteFound = true;
           break;
@@ -59,7 +57,6 @@ class HeartContainer extends React.Component {
     this.setState({
       isFavorite: false
     })
-    console.log(`args`, this.updateArgs);
     this.props.removeFavorite(this.updateArgs.favoriteID);
   }
 
