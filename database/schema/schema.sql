@@ -74,7 +74,9 @@ CREATE TABLE "users" (
 "first_name" VARCHAR ,
 "last_name" VARCHAR ,
 "phone_number" VARCHAR ,
-"zip" INTEGER ,
+"zip" VARCHAR ,
+"resetPasswordToken" VARCHAR ,
+"resetPasswordExpiry" INTEGER ,
 PRIMARY KEY ("id")
 );
 

@@ -1,6 +1,7 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { signUpHelper, loginHelper, updateInfoHelper } = require('../passport.js')
+const { signUpHelper, loginHelper, updateInfoHelper } = require('../passport.js');
+const { sendPasswordEmail } = require('../helpers/passwordReset');
 
 const {
   GraphQLSchema,
@@ -402,7 +403,10 @@ const RootQuery = new GraphQLObjectType({
         return knex('users')
           .select()
           .where('email', args.email)
-          .first();
+          .first()
+          .then((res) => {
+            return sendPasswordEmail(res.id, res.email);
+          })
       }
     }
   }
