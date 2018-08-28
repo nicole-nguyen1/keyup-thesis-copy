@@ -4,7 +4,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../../actions/action';
+import { getPageTitle, findUser } from '../../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
 import { checkToken, resetPassword } from '../graphql/graphql';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
@@ -139,7 +139,6 @@ class CreatePasswordContainer extends React.Component {
       }
     })
     .then((res) => {
-      console.log(store.getState());
       this.props.router.history.push('/home');
     })
     .catch((err) => {
@@ -198,7 +197,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle }, dispatch);
+  return bindActionCreators({ getPageTitle, findUser }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePasswordContainer);
