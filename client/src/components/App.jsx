@@ -20,6 +20,9 @@ import SignUpForm from './SignUpForm.jsx';
 import UserProfile from './userProfileComponents/UserProfile.jsx';
 import Favorites from './favoritesComponents/Favorites.jsx';
 import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
+import EnterEmailContainer from './passwordResetComponents/EnterEmailContainer.jsx';
+import PasswordEmailSuccess from './passwordResetComponents/PasswordEmailSuccess.jsx';
+import CreatePasswordContainer from './passwordResetComponents/CreatePasswordContainer.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -65,7 +68,7 @@ class App extends React.Component {
       store.dispatch(findUser(res.data.loggedInUser));
       return res;
     }).then((res) => {
-      if (res.data.loggedInUser.id) {
+      if (res.data.loggedInUser && res.data.loggedInUser.id) {
         this.getFavorites(res.data.loggedInUser.id)
         this.setState({
           showSignOutButton: true,
@@ -256,6 +259,13 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path='/password/request' component={EnterEmailContainer}/>
+                <Route exact path='/password/email-sent' render={props => {
+                  return <PasswordEmailSuccess router={props} />
+                }}/>
+                <Route path='/password/reset/:token' render={props => {
+                  return <CreatePasswordContainer router={props} />
+                }} />
                 <Route exact path="/profile" render={props => {
                   return <UserProfile
                     router={props}
@@ -351,6 +361,13 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path='/password/request' component={EnterEmailContainer} />
+                <Route exact path='/password/email-sent' render={props => {
+                  return <PasswordEmailSuccess router={props} />
+                }} />
+                <Route path='/password/reset/:token' render={props => {
+                  return <CreatePasswordContainer router={props}/>
+                }} />
                 <Route exact path="/profile" render={props => {
                   return <UserProfile
                     router={props}
