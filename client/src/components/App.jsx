@@ -65,7 +65,7 @@ class App extends React.Component {
       store.dispatch(findUser(res.data.loggedInUser));
       return res;
     }).then((res) => {
-      if (res.data.loggedInUser.id) {
+      if (res.data.loggedInUser && res.data.loggedInUser.id) {
         this.getFavorites(res.data.loggedInUser.id)
         this.setState({
           showSignOutButton: true,
