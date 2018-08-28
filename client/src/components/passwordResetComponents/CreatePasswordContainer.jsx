@@ -1,10 +1,9 @@
 import React from 'react';
 import CreatePassword from './CreatePassword.jsx';
-import { Redirect, withRouter } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../../actions/action';
+import { getPageTitle, findUser } from '../../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
 import { checkToken, resetPassword } from '../graphql/graphql';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
@@ -22,7 +21,8 @@ class CreatePasswordContainer extends React.Component {
       passwordConfirm: '',
       passCheck: false,
       passConfirmCheck: false,
-      showError: false
+      showError: false,
+      redirect: false
     }
   }
 
@@ -37,7 +37,6 @@ class CreatePasswordContainer extends React.Component {
       query: checkToken(token)
     })
     .then((res) => {
-      console.log(res);
       if (res.errors) {
         this.setState({
           invalidToken: true
@@ -123,7 +122,6 @@ class CreatePasswordContainer extends React.Component {
       query: resetPassword(formArguments)
     })
     .then((res) => {
-      console.log(res);
       if (!res.errors) {
         return res;
       } else {
@@ -133,14 +131,12 @@ class CreatePasswordContainer extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
       if (!res.errors) {
         store.dispatch(findUser(res.data.resetPassword));
       }
     })
     .then((res) => {
-      console.log(store.getState());
-      this.props.router.history.push('/home');
+      this.setState({ redirect: true });
     })
     .catch((err) => {
       console.error(err);
@@ -163,6 +159,7 @@ class CreatePasswordContainer extends React.Component {
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
           showError={this.state.showError}
+          redirect={this.state.redirect}
         />
         <Dialog 
           open={this.state.invalidToken}  
@@ -178,7 +175,6 @@ class CreatePasswordContainer extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button
-              variant="contained"
               color="primary"
               href="/password/request"
             >
@@ -198,7 +194,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ getPageTitle }, dispatch);
+  return bindActionCreators({ getPageTitle, findUser }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePasswordContainer);

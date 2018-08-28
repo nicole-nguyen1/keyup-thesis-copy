@@ -50,7 +50,6 @@ class EnterEmailContainer extends React.Component {
       query: findUserEmail(email)
     })
     .then((res) => {
-      console.log(res);
       if (res.data.userEmail) {
         this.setState({
           buttonStatus: true,

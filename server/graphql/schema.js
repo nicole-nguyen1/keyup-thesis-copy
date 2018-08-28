@@ -482,7 +482,6 @@ const Mutation = new GraphQLObjectType({
             console.log('ERROR', err)
           }
           req.logOut();
-          console.log('req session', req.session)
         });
         return {message: 'SUCCESS'};
       }

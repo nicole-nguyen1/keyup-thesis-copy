@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
+import { Redirect } from 'react-router-dom'
 import { Button } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
@@ -49,6 +49,11 @@ class CreatePassword extends React.Component {
 
   render() {
     const { classes } = this.props;
+
+    if (this.props.redirect === true) {
+      return (<Redirect to={{ pathname: '/home', state: { passwordResetSuccess: true } }} />);
+    }
+
     return (
       <div className={classes.paper}>
         <Typography variant="headline" paragraph>
