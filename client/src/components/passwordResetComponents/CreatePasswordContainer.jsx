@@ -22,7 +22,8 @@ class CreatePasswordContainer extends React.Component {
       passwordConfirm: '',
       passCheck: false,
       passConfirmCheck: false,
-      showError: false
+      showError: false,
+      redirect: false
     }
   }
 
@@ -139,7 +140,7 @@ class CreatePasswordContainer extends React.Component {
       }
     })
     .then((res) => {
-      this.props.router.history.push('/home');
+      this.setState({ redirect: true });
     })
     .catch((err) => {
       console.error(err);
@@ -162,6 +163,7 @@ class CreatePasswordContainer extends React.Component {
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
           showError={this.state.showError}
+          redirect={this.state.redirect}
         />
         <Dialog 
           open={this.state.invalidToken}  
@@ -177,7 +179,6 @@ class CreatePasswordContainer extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button
-              variant="contained"
               color="primary"
               href="/password/request"
             >
