@@ -393,6 +393,17 @@ const RootQuery = new GraphQLObjectType({
           .select()
           .where('favorites.user_id', args.user_id)
       }
+    },
+
+    userEmail: {
+      type: UserType,
+      args: { email: { type: GraphQLString }},
+      resolve(parent, args) {
+        return knex('users')
+          .select()
+          .where('email', args.email)
+          .first();
+      }
     }
   }
 });

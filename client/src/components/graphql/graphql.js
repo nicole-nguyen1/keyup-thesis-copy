@@ -331,3 +331,14 @@ export const logout = `
   }
 
 `;
+
+export const findUserEmail = (args) => (
+  `
+  {
+    userEmail(email: ${args}) {
+      id
+      email
+    }
+  }
+  `
+)

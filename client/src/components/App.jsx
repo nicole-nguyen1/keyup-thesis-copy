@@ -20,6 +20,9 @@ import SignUpForm from './SignUpForm.jsx';
 import UserProfile from './userProfileComponents/UserProfile.jsx';
 import Favorites from './favoritesComponents/Favorites.jsx';
 import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
+import EnterEmailContainer from './passwordResetComponents/EnterEmailContainer.jsx';
+import PasswordEmailSuccess from './passwordResetComponents/PasswordEmailSuccess.jsx';
+import CreatePasswordContainer from './passwordResetComponents/CreatePasswordContainer.jsx';
 import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
@@ -256,6 +259,9 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path='/password/request' component={EnterEmailContainer}/>
+                <Route exact path='/password/email-sent' component={PasswordEmailSuccess}/>
+                <Route exact path='/password/reset' component={CreatePasswordContainer}/>
                 <Route exact path="/profile" render={props => {
                   return <UserProfile
                     router={props}
@@ -351,6 +357,11 @@ class App extends React.Component {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
                 <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path='/password/request' component={EnterEmailContainer} />
+                <Route exact path='/password/email-sent' component={PasswordEmailSuccess} />
+                <Route exact path='/password/reset' render={props => {
+                  return <PasswordEmailSuccess router={props}/>
+                }} />
                 <Route exact path="/profile" render={props => {
                   return <UserProfile
                     router={props}

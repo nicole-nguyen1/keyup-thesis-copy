@@ -83,16 +83,16 @@ class LoginForm extends React.Component {
           />
           {this.props.showError ? 
             (<Typography variant="body1" align="left" color="secondary" className={classes.error}>
-              Them email address and password you entered <br />
+              The email address and password you entered <br />
               did not match any KeyUp accounts. <br />
               Please try again.
             </Typography>  
             ) : null
           }
           <Typography variant="body1" align="center">
-            <a href='#' className={classes.link}>
+            <Link to='/password/request' className={classes.link}>
           Forgot your password?
-            </a>
+            </Link>
           </Typography>
           <div className={classes.buttons}>
             <Button
