@@ -130,6 +130,7 @@ const resetPassword = (email, password, req) => {
         .returning('*');
     })
     .then((res) => {
+      console.log(res);
       return loginHelper(res[0].email, res[0].password, req);
     })
     .catch((err) => {

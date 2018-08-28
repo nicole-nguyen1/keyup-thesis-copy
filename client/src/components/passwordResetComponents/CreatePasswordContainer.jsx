@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPageTitle } from '../../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { checkToken } from '../graphql/graphql';
+import { checkToken, resetPassword } from '../graphql/graphql';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 
 class CreatePasswordContainer extends React.Component {
@@ -16,7 +16,7 @@ class CreatePasswordContainer extends React.Component {
       uri: '../../graphql'
     }).bind(this);
     this.state = {
-      invalidToken: true,
+      invalidToken: false,
       buttonStatus: true,
       password: '',
       passwordConfirm: '',
@@ -33,20 +33,23 @@ class CreatePasswordContainer extends React.Component {
 
   checkToken = () => {
     let token = JSON.stringify(this.props.router.match.params.token);
-    console.log(token);
     this.fetch({
       query: checkToken(token)
     })
     .then((res) => {
-      if (!res.data.errors) {
-        this.setState({
-          invalidToken: false
-        });
-      } else {
+      console.log(res);
+      if (res.errors) {
         this.setState({
           invalidToken: true
         });
+      } else {
+        this.setState({
+          invalidToken: false
+        });
       }
+    })
+    .catch((err) => {
+      console.error(err);
     });
   }
 
@@ -120,6 +123,7 @@ class CreatePasswordContainer extends React.Component {
       query: resetPassword(formArguments)
     })
     .then((res) => {
+      console.log(res);
       if (!res.errors) {
         return res;
       } else {
@@ -129,15 +133,18 @@ class CreatePasswordContainer extends React.Component {
       }
     })
     .then((res) => {
+      console.log(res);
       if (!res.errors) {
         store.dispatch(findUser(res.data.resetPassword));
-        this.props.router.history.push('/home');
       }
+    })
+    .then((res) => {
+      console.log(store.getState());
+      this.props.router.history.push('/home');
     })
     .catch((err) => {
       console.error(err);
     })
-    
   }
 
   render() {
