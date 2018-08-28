@@ -1,6 +1,6 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { signUpHelper, loginHelper, updateInfoHelper } = require('../passport.js');
+const { signUpHelper, loginHelper, updateInfoHelper, resetPassword } = require('../passport.js');
 const { sendPasswordEmail } = require('../helpers/passwordReset');
 
 const {
@@ -408,6 +408,24 @@ const RootQuery = new GraphQLObjectType({
             return sendPasswordEmail(res.id, res.email);
           })
       }
+    },
+
+    token: {
+      type: UserType,
+      args: { token: { type: GraphQLString }},
+      resolve(parent, args) {
+        return knex('users')
+          .select('id', 'email', 'resetPasswordToken', 'resetPasswordExpiry')
+          .where('resetPasswordToken', args.token)
+          .first()
+          .then((res) => {
+            if (Date.now() < res.resetPasswordExpiry) {
+              return res;
+            } else {
+              throw new Error('Invalid or expired token');
+            }
+          })
+      }
     }
   }
 });
@@ -467,6 +485,23 @@ const Mutation = new GraphQLObjectType({
           console.log('req session', req.session)
         });
         return {message: 'SUCCESS'};
+      }
+    },
+
+    resetPassword: {
+      type: UserType,
+      args: { 
+        token: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve(parent, args, req) {
+        return knex('users')
+          .select()
+          .where('resetPasswordToken', args.token)
+          .first()
+          .then((res) => {
+            return resetPassword(res.email, args.password, req);
+          })
       }
     },
 

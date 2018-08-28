@@ -24,8 +24,8 @@ class PasswordEmailSuccess extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.location.state && this.props.location.state.email) {
-      this.setState({ email: this.props.location.state.email})
+    if (this.props.router.location.state && this.props.router.location.state.email) {
+      this.setState({ email: this.props.router.location.state.email})
     }
   }
 

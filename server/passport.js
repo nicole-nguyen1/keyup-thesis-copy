@@ -111,4 +111,30 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
     })
 }
 
-module.exports = { passport, loginHelper, signUpHelper, updateInfoHelper };
+const resetPassword = (email, password, req) => {
+  return knex('users')
+    .select()
+    .where({ email })
+    .first()
+    .then((user) => {
+      return bcrypt.hash(password, 10);
+    })
+    .then((hash) => {
+      return knex('users')
+        .where({ email })
+        .update({ 
+          password: hash,
+          resetPasswordToken: null,
+          resetPasswordExpiry: null
+         })
+        .returning('*');
+    })
+    .then((res) => {
+      return loginHelper(res[0].email, res[0].password, req);
+    })
+    .catch((err) => {
+      throw new Error('Could not reset password', err);
+    })
+}
+
+module.exports = { passport, loginHelper, signUpHelper, updateInfoHelper, resetPassword };

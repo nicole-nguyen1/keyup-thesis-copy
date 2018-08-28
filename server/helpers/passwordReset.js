@@ -26,7 +26,7 @@ const sendPasswordEmail =  async (id, email) => {
       }
     });
 
-    const url = `https://localhost:1337/password/reset/${token}`;
+    const url = `localhost:1337/password/reset/${token}`;
     let mailOptions = {
       from: `"KeyUp Austin", ${process.env.EMAIL}`,
       to: `"${updateUser.first_name}", ${updateUser.email}`,

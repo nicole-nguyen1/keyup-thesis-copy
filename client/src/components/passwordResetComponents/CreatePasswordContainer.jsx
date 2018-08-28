@@ -6,24 +6,48 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPageTitle } from '../../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
+import { checkToken } from '../graphql/graphql';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 
 class CreatePasswordContainer extends React.Component {
   constructor(props) {
     super(props);
     this.fetch = createApolloFetch({
-      uri: '../graphql'
+      uri: '../../graphql'
     }).bind(this);
     this.state = {
+      invalidToken: true,
       buttonStatus: true,
       password: '',
       passwordConfirm: '',
       passCheck: false,
-      passConfirmCheck: false
+      passConfirmCheck: false,
+      showError: false
     }
   }
 
   componentDidMount() {
     store.dispatch(getPageTitle('Create New Password'));
+    this.checkToken();
+  }
+
+  checkToken = () => {
+    let token = JSON.stringify(this.props.router.match.params.token);
+    console.log(token);
+    this.fetch({
+      query: checkToken(token)
+    })
+    .then((res) => {
+      if (!res.data.errors) {
+        this.setState({
+          invalidToken: false
+        });
+      } else {
+        this.setState({
+          invalidToken: true
+        });
+      }
+    });
   }
 
   handleChange = (e) => {
@@ -86,11 +110,41 @@ class CreatePasswordContainer extends React.Component {
     }
   }
 
+  submitForm = () => {
+    const formArguments = {
+      token: JSON.stringify(this.props.router.match.params.token),
+      password: JSON.stringify(this.state.password)
+    }
+
+    this.fetch({
+      query: resetPassword(formArguments)
+    })
+    .then((res) => {
+      if (!res.errors) {
+        return res;
+      } else {
+        this.setState({
+          showError: true
+        })
+      }
+    })
+    .then((res) => {
+      if (!res.errors) {
+        store.dispatch(findUser(res.data.resetPassword));
+        this.props.router.history.push('/home');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    
+  }
+
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <CreatePassword 
+        <CreatePassword
           handlePassChange={this.handlePassChange}
           handlePassConfirmChange={this.handlePassConfirmChange}
           checkPassword={this.checkPassword}
@@ -100,8 +154,31 @@ class CreatePasswordContainer extends React.Component {
           passConfirmCheck={this.state.passConfirmCheck}
           email={this.state.email}
           buttonStatus={this.state.buttonStatus}
+          submitForm={this.submitForm}
           showError={this.state.showError}
         />
+        <Dialog 
+          open={this.state.invalidToken}  
+          disableBackdropClick={true} 
+          disableEscapeKeyDown={true}>
+          <DialogTitle>
+            Your Password Reset Link Has Expired
+          </DialogTitle>
+          <DialogContent>
+            <Typography variant="body1">
+              Please click the button below to request another password reset link to be sent via email.
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="primary"
+              href="/password/request"
+            >
+              Reset Password
+          </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }

@@ -90,6 +90,7 @@ class CreatePassword extends React.Component {
             <Button
               variant="contained"
               className={classes.buttonStyle}
+              onClick={this.props.submitForm}
               disabled={this.props.buttonStatus}
             >
               Save New Password
