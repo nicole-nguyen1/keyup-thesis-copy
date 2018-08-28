@@ -1,6 +1,5 @@
 import React from 'react';
 import CreatePassword from './CreatePassword.jsx';
-import { Redirect, withRouter } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -132,7 +131,6 @@ class CreatePasswordContainer extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
       if (!res.errors) {
         store.dispatch(findUser(res.data.resetPassword));
       }
