@@ -23,40 +23,13 @@ class FavoriteTrainings extends React.Component {
     }).bind(this);
   }
 
-  componentDidMount() {
-    this.props.getUser();
-    // this.props.getFavorites();
-    //this.parseFaves();
-  }
-
-  // parseFaves = () => {
-  //   let trainings = [];
-  //   const faves = this.props.favorites
-
-  //   if (faves && faves.length > 0) {
-  //     for (let fave of faves) {
-  //       if (fave.service_id !== null) {
-  //         trainings.push(fave.service_id);
-  //       }
-  //     }
-  //   }
-
-  //   this.fetch({
-  //     query: getTrainingFave(trainings)
-  //   })
-  //   .then((res) => {
-  //     this.setState({ trainingFaves: res.data.trainings })
-  //   });
-  // }
-
   render() {
     const { classes } = this.props;
-    const faves = this.props.favorites;
 
     return (
       <Grid container className={classes.grid}>
         {this.props.trainings.map((service, index) => {
-          return <Service key={service.id || index} service={service} favorites={faves}/>;
+          return <Service key={service.id || index} service={service} favorites={this.props.favorites}/>;
         })}
       </Grid>
     )

@@ -23,17 +23,13 @@ class FavoriteCareers extends React.Component {
     }).bind(this);
   }
 
-  componentDidMount() {
-    this.props.getUser();
-  }
-
   render() {
     const { classes } = this.props;
-    const faves = this.props.favorites
+  
     return (
       <Grid container className={classes.grid}>
         {this.props.careers.map((career, index) => {
-          return <Career key={career.id || index} career={career} favorites={faves}/>;
+          return <Career key={career.id || index} career={career} favorites={this.props.favorites}/>;
         })}
       </Grid>
     )
