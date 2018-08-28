@@ -136,12 +136,10 @@ class App extends React.Component {
   }
 
   removeFavorite = (favoriteID) => {
-    console.log(favoriteID)
     this.fetch({
       query: removeFavoriteFromList(favoriteID)
     })
     .then((res)=> {
-
       this.getFavorites(this.props.user.user.id);
     })
   }

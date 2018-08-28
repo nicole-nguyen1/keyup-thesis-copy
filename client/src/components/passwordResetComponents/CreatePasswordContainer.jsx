@@ -38,7 +38,6 @@ class CreatePasswordContainer extends React.Component {
       query: checkToken(token)
     })
     .then((res) => {
-      console.log(res);
       if (res.errors) {
         this.setState({
           invalidToken: true
@@ -124,7 +123,6 @@ class CreatePasswordContainer extends React.Component {
       query: resetPassword(formArguments)
     })
     .then((res) => {
-      console.log(res);
       if (!res.errors) {
         return res;
       } else {
