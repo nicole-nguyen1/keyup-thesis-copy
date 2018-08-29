@@ -52,7 +52,7 @@ class Career extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    
     return (
       <Grid item xs={12} className={classes.grid}>
         <Card className={classes.card}>
