@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import { CardActions } from '@material-ui/core';
 
 const styles = theme => ({
   cardStyle: {
@@ -14,11 +15,21 @@ const styles = theme => ({
   headerStyle: {
     fontWeight: 'bold'
   },
+  cardContentStyle: {
+    display: 'flex', 
+    alignItems: 'center'
+  },
   divStyle: {
     background: '#232E49',
     padding: '20px 5px'
   },
-  icon: {}
+  icon: {
+    height: '26px',
+    marginRight: '16px'
+  },
+  cardActionStyle: {
+    padding: '0'
+  }
 });
 
 class HomePageCards extends React.Component {
@@ -32,8 +43,11 @@ class HomePageCards extends React.Component {
       <div className={classes.divStyle}>
         <a style={{ textDecoration: 'none' }} href='https://keyup.typeform.com/to/dlfXQi'>
           <Card className={classes.cardStyle}>
-            <CardContent >
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+            <CardContent>
+              <div className={classes.cardContentStyle}>
+                <img src='https://s3.amazonaws.com/key-up-assets/White-chat-on-blue-circle.png' 
+                  className={classes.icon}
+                />
                 <div style={{ flexGrow: '4' }}>
                   <Typography variant="body1" className={classes.headerStyle}>
                     Get Recommendations
@@ -46,12 +60,16 @@ class HomePageCards extends React.Component {
                 <KeyboardArrowRightIcon style={{ flexGrow: '1' }} />
               </div>
             </CardContent>
+            <CardActions className={classes.cardActionStyle}></CardActions>
           </Card>
         </a>
         <Link style={{textDecoration: 'none'}} to="/careers">
           <Card className={classes.cardStyle}>
-            <CardContent >
-              <div style={{display: 'flex', alignItems: 'center'}}>
+            <CardContent>
+              <div className={classes.cardContentStyle}>
+                <img src='https://s3.amazonaws.com/key-up-assets/white-suitcase-on-blue-circle.png' 
+                  className={classes.icon}
+                />
                 <div style={{flexGrow: '4'}}>
                   <Typography variant="body1"className={classes.headerStyle}>
             Browse Careers and Training Services
@@ -61,10 +79,10 @@ class HomePageCards extends React.Component {
             time, and more
                   </Typography>
                 </div>
-            
                 <KeyboardArrowRightIcon style={{flexGrow: '1'}} />
               </div>
             </CardContent>
+            <CardActions className={classes.cardActionStyle}></CardActions>
           </Card>
         </Link>
       </div>
