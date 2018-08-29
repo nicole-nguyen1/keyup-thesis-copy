@@ -26,7 +26,9 @@ const styles = theme => ({
     background: 'white',
     margin: '5px',
     [theme.breakpoints.up('sm')]: {
-      maxWidth: '360px'
+      maxWidth: '360px',
+      display: 'table',
+      minHeight: '355px'
     }
   },
   headerStyle: {
@@ -44,6 +46,12 @@ const styles = theme => ({
     }
   },
   cardContentStyle: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'table-cell',
+      verticalAlign: 'middle'
+    }
+  },
+  cardTextStyle: {
     display: 'flex', 
     alignItems: 'center',
     [theme.breakpoints.up('sm')]: {
@@ -90,8 +98,8 @@ class HomePageCards extends React.Component {
         <div className={classes.innerDivStyle}>
           <a style={{ textDecoration: 'none' }} href='https://keyup.typeform.com/to/dlfXQi'>
             <Card className={classes.cardStyle}>
-              <CardContent>
-                <div className={classes.cardContentStyle}>
+              <CardContent className={classes.cardContentStyle}>
+                <div className={classes.cardTextStyle}>
                   <div className={classes.iconDiv}>
                     <img src='https://s3.amazonaws.com/key-up-assets/White-chat-on-blue-circle.png'
                       className={classes.icon}
@@ -119,8 +127,8 @@ class HomePageCards extends React.Component {
           </a>
           <Link style={{ textDecoration: 'none' }} to="/careers">
             <Card className={classes.cardStyle}>
-              <CardContent>
-                <div className={classes.cardContentStyle}>
+              <CardContent className={classes.cardContentStyle}>
+                <div className={classes.cardTextStyle}>
                   <div className={classes.iconDiv}>
                     <img src='https://s3.amazonaws.com/key-up-assets/white-suitcase-on-blue-circle.png'
                       className={classes.icon}

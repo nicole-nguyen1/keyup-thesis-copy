@@ -52,13 +52,17 @@ const styles = theme => ({
   },
   headline: {
     [theme.breakpoints.up('sm')]: {
-      fontSize: '3em'
+      fontSize: '3em',
+      maxWidth: '800px',
+      margin: '0 auto'
     }
   },
   subheading: {
     fontWeight: '300',
     [theme.breakpoints.up('sm')]: {
-      fontSize: '1.5em'
+      fontSize: '1.5em',
+      maxWidth: '800px',
+      margin: '0 auto'
     }
   }
 });

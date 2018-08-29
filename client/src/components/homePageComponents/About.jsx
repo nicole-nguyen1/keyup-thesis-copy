@@ -2,16 +2,26 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import MediaQuery from 'react-responsive';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   cardStyle: {
     background: 'white',
-    borderRadius: '0'
+    maxWidth: '800px',
+    margin: '0 auto',
+    [theme.breakpoints.up('sm')]: {
+      display: 'table'
+    }
   },
   cardContentStyle: {
-    maxWidth: '400px',
-    margin: '0 auto'
+    margin: '0 auto',
+    padding: '40px 16px',
+    [theme.breakpoints.up('sm')]: {
+      display: 'table-cell',
+      verticalAlign: 'middle',
+      padding: '40px 30px'
+    }
   },
   headerStyle: {
     fontWeight: 'bold'
@@ -19,13 +29,20 @@ const styles = theme => ({
   textStyle: {
     textAlign: 'justify',
     margin: '0 auto'
+  },
+  imageDiv: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'table-cell',
+      verticalAlign: 'middle',
+      padding: '30px 70px'
+    }
   }
 });
 
 const About = ({ classes }) => {
   return (
-    <Card className={classes.cardStyle}>
-      <CardContent className={classes.cardContentStyle}>
+    <div className={classes.cardStyle}>
+      <div className={classes.cardContentStyle}>
         <Typography variant="headline"className={classes.headerStyle} gutterBottom>
           About KeyUp
         </Typography>
@@ -40,8 +57,15 @@ const About = ({ classes }) => {
           and support propgrams that could help them get to those 
           new careers.
         </Typography>
-      </CardContent>
-    </Card>
+      </div>
+      <MediaQuery query='(min-device-width: 600px)'>
+        <div className={classes.imageDiv}>
+          <img src='https://s3.amazonaws.com/key-up-assets/Key-Detail-Blue-logo---big-for-Home-Page-About-KeyUp-Section.png'
+            height='200px'
+          />
+        </div>
+      </MediaQuery>
+    </div>
   );
 }
 
