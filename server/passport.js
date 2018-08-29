@@ -91,6 +91,8 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
     .where({ id })
     .first()
     .then((user) => {
+      console.log(user.zip);
+      console.log(zip);
       let thisUpdate = {};
       if (user.email !== email) {
         thisUpdate.email = email;
@@ -103,6 +105,8 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
       } else if (user.zip !== zip) {
         thisUpdate.zip = zip;
       }
+
+      console.log(thisUpdate);
 
       return knex('users')
         .where({ id })

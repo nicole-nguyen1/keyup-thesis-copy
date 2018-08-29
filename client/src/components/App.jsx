@@ -53,7 +53,6 @@ class App extends React.Component {
   componentDidMount() {
     this.getUser()
     this.getCareers();
-    // this.getFavorites();
     this.fetch({
       query: getIndustriesQuery
     }).then(res => {
@@ -65,6 +64,7 @@ class App extends React.Component {
     this.fetch({
       query: getLoggedInUser
     }).then(res => {
+      console.log(`loggedinuser`, res);
       store.dispatch(findUser(res.data.loggedInUser));
       return res;
     }).then((res) => {
@@ -284,6 +284,7 @@ class App extends React.Component {
                     getUser={this.getUser}
                     favorites={this.props.favorites}
                     getFavorites={this.getFavorites}
+                    removeFavorite={this.removeFavorite}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
@@ -292,6 +293,7 @@ class App extends React.Component {
                     getUser={this.getUser}
                     favorites={this.props.favorites}
                     getFavorites={this.getFavorites}
+                    removeFavorite={this.removeFavorite}
                     active='careers'
                   />
                 }} />
@@ -301,6 +303,7 @@ class App extends React.Component {
                     getUser={this.getUser}
                     favorites={this.props.favorites}
                     getFavorites={this.getFavorites}
+                    removeFavorite={this.removeFavorite}
                     active='trainings'
                   />
                 }} />
@@ -386,6 +389,7 @@ class App extends React.Component {
                     getUser={this.getUser}  
                     favorites={this.props.favorites}
                     getFavorites={this.getFavorites}
+                    removeFavorite={this.removeFavorite}
                   />
                 }} />
                 <Route exact path="/favorites/careers" render={props => {
@@ -394,6 +398,7 @@ class App extends React.Component {
                     getUser={this.getUser}
                     favorites={this.props.favorites}
                     getFavorites={this.getFavorites}
+                    removeFavorite={this.removeFavorite}
                     active='careers'
                   />
                 }} />
@@ -403,6 +408,7 @@ class App extends React.Component {
                     getUser={this.getUser}
                     favorites={this.props.favorites}
                     getFavorites={this.getFavorites}
+                    removeFavorite={this.removeFavorite}
                     active='trainings'
                   />
                 }} />

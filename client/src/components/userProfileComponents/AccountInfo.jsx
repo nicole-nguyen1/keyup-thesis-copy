@@ -67,9 +67,9 @@ class AccountInfo extends React.Component {
                 <span className={classes.item}>Phone Number (optional):</span>
               </Typography>
             }
-            {this.props.user.zip_code ? 
+            {this.props.user.zip ? 
               <Typography variant='body1'>
-                <span className={classes.item}>Zip Code:</span>{this.props.user.zip_code}
+                <span className={classes.item}>Zip Code:</span>{this.props.user.zip}
               </Typography> : 
               <Typography variant='body1'>
                 <span className={classes.item}>Zip Code (optional):</span>

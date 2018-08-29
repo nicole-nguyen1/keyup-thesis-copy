@@ -128,7 +128,7 @@ class Favorites extends React.Component {
     //for rendering different information based on whether or not a user has favorites
     //nested conditional statements need to be done this way for easier readability than 
     //ternary statements
-    if (faves === undefined || faves === []) {
+    if (!faves || faves.length === 0) {
       if (this.state.value === 0) {
         component = <NoFaves type='careers' />
       } else if (this.state.value === 1) {
@@ -136,9 +136,19 @@ class Favorites extends React.Component {
       }
     } else {
       if (this.state.value === 0) {
-        component = <FavoriteCareers getUser={this.props.getUser} careers={this.state.careerFaves} favorites={faves}/>
+        component = <FavoriteCareers 
+          getUser={this.props.getUser} 
+          careers={this.state.careerFaves} 
+          favorites={faves}
+          removeFavorite={this.props.removeFavorite}
+        />
       } else if (this.state.value === 1) {
-        component = <FavoriteTrainings getUser={this.props.getUser} trainings={this.state.trainingFaves} favorites={faves}/>
+        component = <FavoriteTrainings 
+          getUser={this.props.getUser} 
+          trainings={this.state.trainingFaves} 
+          favorites={faves}
+          removeFavorite={this.props.removeFavorite}
+        />
       }
     }
 

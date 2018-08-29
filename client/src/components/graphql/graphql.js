@@ -240,13 +240,15 @@ export const updateInfo = (args) => (
       email: ${args.email},
       first_name: ${args.first_name},
       last_name: ${args.last_name},
-      phone_number: ${args.phone_number}
+      phone_number: ${args.phone_number},
+      zip: ${args.zip}
     ) {
       id
       email
       first_name
       last_name
       phone_number
+      zip
     }
   }
   `

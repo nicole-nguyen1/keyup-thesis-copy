@@ -155,6 +155,7 @@ class SignUpForm extends React.Component {
       })
     })
     .then(res => {
+      console.log(res);
       store.dispatch(findUser(res.data.signUp));
       this.props.history.goBack();
     })

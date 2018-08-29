@@ -20,7 +20,7 @@ const styles = theme => ({
     maxWidth: '350px'
   },
   buttonStyle: {
-    backgroundColor: '##4469FF',
+    backgroundColor: '#4469FF',
     color: 'white',
     borderRadius: 0,
     marginTop: '2em'
@@ -85,7 +85,7 @@ class EditAccountForm extends React.Component {
         last_name: this.props.user.last_name,
         email: this.props.user.email,
         phone_number: this.props.user.phone_number,
-        zip: zip
+        zip: this.props.user.zip
       })
     }
   }
@@ -122,6 +122,7 @@ class EditAccountForm extends React.Component {
       })
     })
     .then(res => {
+      console.log(res);
       store.dispatch(findUser(res.data.updateInfo));
       this.setState({ redirect: true });
     })
@@ -198,7 +199,7 @@ class EditAccountForm extends React.Component {
           type="text"
           name="zip"
           placeholder="Zip Code (optional)"
-          value={"" || this.state.zip}
+          value={this.state.zip}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{

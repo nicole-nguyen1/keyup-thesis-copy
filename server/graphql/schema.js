@@ -379,7 +379,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args, { session }) {
         let id = session.passport.user;
         return knex('users')
-          .select('id', 'email', 'phone_number', 'first_name', 'last_name')
+          .select('id', 'email', 'phone_number', 'first_name', 'last_name', 'zip')
           .where({ id })
           .first();
       }
