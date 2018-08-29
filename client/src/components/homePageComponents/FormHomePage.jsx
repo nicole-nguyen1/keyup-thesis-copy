@@ -55,7 +55,13 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'table-cell',
       verticalAlign: 'middle',
-      padding: '30px 70px'
+      padding: '10% 5%'
+    }
+  },
+  image: {
+    width: '150px',
+    [theme.breakpoints.up('md')]: {
+      width: '225px'
     }
   }
 });
@@ -117,10 +123,10 @@ const FormHomePage = (props) => {
           </Button>
           </div>
         </div>
-        <MediaQuery query='(min-device-width: 600px)'>
+        <MediaQuery query='(min-width: 600px)'>
           <div className={classes.imageDiv}>
             <img src='https://s3.amazonaws.com/key-up-assets/Colorful-Chat-Icon-for-Home-Page.png'
-              height='300px'
+              className={classes.image}
             />
           </div>
         </MediaQuery>

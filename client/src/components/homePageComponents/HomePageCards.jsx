@@ -114,7 +114,7 @@ class HomePageCards extends React.Component {
                       that fit your life
                   </Typography>
                   </div>
-                  <MediaQuery query='(max-device-width: 599px)'>
+                  <MediaQuery query='(max-width: 599px)'>
                     <KeyboardArrowRightIcon style={{ flexGrow: '1' }} />
                   </MediaQuery>
                   <Button variant='contained' className={classes.button}>
@@ -143,7 +143,7 @@ class HomePageCards extends React.Component {
                       time, and more
                   </Typography>
                   </div>
-                  <MediaQuery query='(max-device-width: 599px)'>
+                  <MediaQuery query='(max-width: 599px)'>
                     <KeyboardArrowRightIcon style={{ flexGrow: '1' }} />
                   </MediaQuery>
                   <Button variant='contained' className={classes.button}>
