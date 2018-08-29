@@ -40,7 +40,6 @@ passport.deserializeUser((id, done) => {
 });
 
 const loginHelper = (email, password, req) => {
-  console.log(email, password);
   return new Promise((resolve, reject) => {
     passport.authenticate('local', (err, user) => {
       if (err) {
@@ -91,8 +90,6 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
     .where({ id })
     .first()
     .then((user) => {
-      console.log(user.zip);
-      console.log(zip);
       let thisUpdate = {};
       if (user.email !== email) {
         thisUpdate.email = email;
@@ -105,8 +102,6 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
       } else if (user.zip !== zip) {
         thisUpdate.zip = zip;
       }
-
-      console.log(thisUpdate);
 
       return knex('users')
         .where({ id })

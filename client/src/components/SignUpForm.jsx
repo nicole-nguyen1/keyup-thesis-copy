@@ -69,7 +69,9 @@ class SignUpForm extends React.Component {
       passwordConfirm: '',
       buttonDisabled: true,
       passCheck: false,
-      passConfirmCheck: false
+      passConfirmCheck: false,
+      invalidEmail: false,
+      inputClassName: this.props.classes.inputStyle
     }
   }
 
@@ -81,6 +83,18 @@ class SignUpForm extends React.Component {
     let thisState = {};
     thisState[e.target.name] = e.target.value;
     this.setState(thisState, this.enableButton);
+
+    if (!(this.state.email).includes('@')) {
+      this.setState({
+        invalidEmail: true,
+        inputClassName: this.props.classes.fieldError
+      })
+    } else {
+      this.setState({
+        invalidEmail: false,
+        inputClassName: this.props.classes.inputStyle
+      })
+    }
   }
 
   enableButton = () => {
@@ -155,7 +169,6 @@ class SignUpForm extends React.Component {
       })
     })
     .then(res => {
-      console.log(res);
       store.dispatch(findUser(res.data.signUp));
       this.props.history.goBack();
     })
@@ -202,16 +215,18 @@ class SignUpForm extends React.Component {
           type="email"
           name="email"
           placeholder="Email Address"
-          className={classes.inputStyle}
+          error={this.state.invalidEmail}
+          className={this.state.inputClassName}
           onChange={this.handleChange}
           InputProps={{
             disableUnderline: true
           }}
         />
+        {this.state.invalidEmail ? <Typography color="secondary" variant="body1" gutterBottom>Please enter a valid email address.</Typography> : null}
         <TextField
           autoFocus
           fullWidth
-          type="text"
+          type="number"
           name="phone_number"
           placeholder="Phone Number (optional)"
           className={classes.inputStyle}
@@ -224,7 +239,7 @@ class SignUpForm extends React.Component {
         <TextField
           autoFocus
           fullWidth
-          type="text"
+          type="number"
           name="zip"
           placeholder="Zip Code (optional)"
           className={classes.inputStyle}
@@ -263,6 +278,8 @@ class SignUpForm extends React.Component {
             endAdornment: this.state.passConfirmCheck ? <CheckIcon className={classes.check} /> : this.state.passwordConfirm ? <ErrorIcon className={classes.error} /> : null
           }}
         />
+        {this.state.password !== this.state.passwordConfirm ? <Typography variant="body1" color="secondary" paragraph>The passwords do not match. Please try again.</Typography> : null}
+        {this.state.buttonDisabled ? <Typography variant="body1" color="secondary" gutterBottom>Some required information is missing.</Typography> : null}
         <Button
           variant="contained"
           className={classes.buttonStyle}

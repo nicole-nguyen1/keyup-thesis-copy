@@ -122,7 +122,6 @@ class EditAccountForm extends React.Component {
       })
     })
     .then(res => {
-      console.log(res);
       store.dispatch(findUser(res.data.updateInfo));
       this.setState({ redirect: true });
     })

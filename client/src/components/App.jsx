@@ -64,7 +64,6 @@ class App extends React.Component {
     this.fetch({
       query: getLoggedInUser
     }).then(res => {
-      console.log(`loggedinuser`, res);
       store.dispatch(findUser(res.data.loggedInUser));
       return res;
     }).then((res) => {
