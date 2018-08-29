@@ -7,7 +7,9 @@ import HomePageCards from './homePageComponents/HomePageCards.jsx';
 import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../actions/action'; import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
+import { getPageTitle } from '../actions/action';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
