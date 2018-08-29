@@ -343,9 +343,9 @@ const RootQuery = new GraphQLObjectType({
     //GET list of training services related to specific career
     trainings: {
       type: new GraphQLList(TrainingType),
-      args: { 
+      args: {
         career_id: { type: GraphQLID },
-        service_ids: { type: new GraphQLList(GraphQLID) } 
+        service_ids: { type: new GraphQLList(GraphQLID) }
       },
       resolve(parent, args) {
         let newQuery = knex('services');
@@ -452,20 +452,6 @@ const Mutation = new GraphQLObjectType({
       }
     },
 
-    logout: {
-      type: MessageType,
-      resolve(parent, args, req) {
-        req.session.destroy(err => {
-          if (err) {
-            console.log('ERROR', err)
-          }
-          req.logOut();
-          console.log('req session', req.session)
-        });
-        return {message: 'SUCCESS'};
-      }
-    },
-
     saveContactForm: {
       type: ContactFormType,
       args: {
@@ -569,38 +555,46 @@ const Mutation = new GraphQLObjectType({
     saveFavorite: {
       type: FavoriteType,
       args: {
-        user_id: { type: GraphQLID },
+        token: { type: GraphQLString },
         career_id: { type: GraphQLID },
         service_id: { type: GraphQLID }
       },
-      resolve(parent, args) {
+      resolve(parent, { token, career_id, service_id }) {
         //check if favorite currently exists
-        let checkFaves = knex('favorites');
+        let params = {};
 
-        if (args.career_id) {
-          checkFaves = checkFaves.where('career_id', args.career_id);
-        } else if (args.service_id) {
-          checkFaves = checkFaves.where('service_id', args.service_id);
+        if (career_id) {
+          params.career_id = career_id;
+        } else if (service_id) {
+          params.service_id = service_id;
         }
 
-        return checkFaves
-          .select()
-          .first()
-          .then((res) => {
-            //add favorite if it
-            if (res === undefined) {
-              return knex('favorites')
-                .insert({
-                  user_id: args.user_id,
-                  career_id: args.career_id,
-                  service_id: args.service_id,
-                })
-                .returning('*')
-                .then((res) => res[0]);
-            }
-            
-            return res;
-          });
+        let user = new Promise((resolve, reject) => {
+          resolve(checkAuth(token))
+        });
+
+        return user.then(userObj => {
+          params.user_id = userObj.id;
+          return knex('favorites')
+            .select()
+            .where(params)
+            .first()
+            .then((res) => {
+              //add favorite if it
+              if (res === undefined) {
+                return knex('favorites')
+                  .insert({
+                    user_id: userObj.id,
+                    career_id: career_id,
+                    service_id: service_id,
+                  })
+                  .returning('*')
+              }
+              return res;
+            })
+            .then((res) => res[0]);
+        })
+
       }
     },
 
