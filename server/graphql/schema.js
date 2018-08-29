@@ -428,15 +428,16 @@ const Mutation = new GraphQLObjectType({
     updateInfo: {
       type: UserType,
       args: {
-        id: { type: GraphQLString },
+        token: { type: GraphQLString },
         email: { type: GraphQLString },
         first_name: { type: GraphQLString },
         last_name: { type: GraphQLString },
         phone_number: { type: GraphQLString },
         zip: { type: GraphQLString }
       },
-      resolve(parent, { id, email, first_name, last_name, phone_number, zip }, req) {
-        return updateInfoHelper(id, email, first_name, last_name, phone_number, zip, req);
+      resolve(parent, { token, email, first_name, last_name, phone_number, zip }, req) {
+        return checkAuth(token)
+          .then(user => updateInfoHelper(user.id, email, first_name, last_name, phone_number, zip, req))
       }
     },
 

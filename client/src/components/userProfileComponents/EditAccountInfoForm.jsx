@@ -20,7 +20,7 @@ const styles = theme => ({
     maxWidth: '350px'
   },
   buttonStyle: {
-    backgroundColor: '##4469FF',
+    backgroundColor: '#4469FF',
     color: 'white',
     borderRadius: 0,
     marginTop: '2em'
@@ -57,7 +57,6 @@ class EditAccountForm extends React.Component {
       uri: '/graphql'
     }).bind(this);
     this.state = {
-      id: '',
       first_name: '',
       last_name: '',
       email: '',
@@ -80,7 +79,6 @@ class EditAccountForm extends React.Component {
     }
     if (this.props.user !== prevProps.user) {
       this.setState({
-        id: this.props.user.id,
         first_name: this.props.user.first_name,
         last_name: this.props.user.last_name,
         email: this.props.user.email,
@@ -105,7 +103,7 @@ class EditAccountForm extends React.Component {
   }
 
   onSubmit = () => {
-    let id = JSON.stringify(this.state.id);
+    let token = JSON.stringify(localStorage.getItem('jwt'));
     let email = JSON.stringify(this.state.email);
     let first_name = JSON.stringify(this.state.first_name);
     let last_name = JSON.stringify(this.state.last_name);
@@ -113,7 +111,7 @@ class EditAccountForm extends React.Component {
     let zip = JSON.stringify(this.state.zip);
     this.fetch({
       query: updateInfo({
-        id,
+        token,
         email,
         first_name,
         last_name,

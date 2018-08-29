@@ -182,7 +182,7 @@ export const loginData = (args) => (
 export const getFavoritesQuery = (args) => (
   `
   {
-    favorites(user_id: ${args}) {
+    favorites(token: ${args}) {
       id
       career_id
       service_id
@@ -191,11 +191,10 @@ export const getFavoritesQuery = (args) => (
   `
 );
 
-export const getLoggedInUser = 
+export const getLoggedInUser = token => (
   `
   {
-    loggedInUser {
-      id
+    loggedInUser(token:${token}) {
       email
       first_name
       last_name
@@ -203,23 +202,25 @@ export const getLoggedInUser =
       zip
     }
   }
-  `;
+  `
+);
 
 export const updateInfo = (args) => (
   `
   mutation {
     updateInfo(
-      id: ${args.id},
+      token: ${args.token},
       email: ${args.email},
       first_name: ${args.first_name},
       last_name: ${args.last_name},
-      phone_number: ${args.phone_number}
+      phone_number: ${args.phone_number},
+      zip: ${args.zip}
     ) {
-      id
       email
       first_name
       last_name
       phone_number
+      zip
     }
   }
   `
@@ -303,7 +304,7 @@ export const addFavoriteToList = (args) => (
   `
     mutation {
       saveFavorite(
-        user_id: ${args.userID || null}
+        token: ${args.token || null}
         career_id: ${args.careerID || null}
         service_id: ${args.serviceID || null}
       ){
