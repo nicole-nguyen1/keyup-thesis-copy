@@ -59,7 +59,6 @@ class HeartContainer extends React.Component {
     this.setState({
       isFavorite: false
     })
-    console.log(`args`, this.updateArgs);
     this.props.removeFavorite(this.updateArgs.favoriteID);
   }
 

@@ -294,7 +294,7 @@ export const removeFavoriteFromList = (args) => (
   `
   mutation {
     removeFavorite (id: ${args}) {
-      user_id
+      id
     }
   }
   `
