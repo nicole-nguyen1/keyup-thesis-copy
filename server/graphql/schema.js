@@ -293,7 +293,6 @@ const FavoriteType = new GraphQLObjectType({
 const TokenType = new GraphQLObjectType({
   name: 'Token',
   fields: () => ({
-    user: { type: GraphQLString },
     token: { type: GraphQLString }
   })
 });

@@ -160,12 +160,7 @@ export const signUp = ({ email, password, first_name, last_name, phone_number, z
       phone_number: ${phone_number || null},
       zip: ${zip || null}
     ) {
-      id
-      email
-      first_name
-      last_name
-      phone_number
-      zip
+      token
     }
   }
   `
@@ -178,7 +173,6 @@ export const loginData = (args) => (
       email: ${args.email},
       password: ${args.password}
     ) {
-      user
       token
     }
   }

@@ -100,7 +100,7 @@ const login = (email, password, context) => {
         }
         const timestamp = new Date().getTime();        
         const token = jwt.sign({ id: user.id, iat: timestamp }, process.env.SECRET)
-        resolve({ user: user.email, token })
+        resolve({ token })
       });
     })({ body: { email, password } });
   });

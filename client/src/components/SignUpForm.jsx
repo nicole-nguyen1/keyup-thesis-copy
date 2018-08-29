@@ -23,7 +23,7 @@ const styles = theme => ({
     maxWidth: '350px'
   },
   buttonStyle: {
-    backgroundColor: '##4469FF',
+    backgroundColor: '#4469FF',
     color: 'white',
     borderRadius: 0,
     marginTop: '2em'
@@ -155,7 +155,7 @@ class SignUpForm extends React.Component {
       })
     })
     .then(res => {
-      store.dispatch(findUser(res.data.signUp));
+      localStorage.setItem('jwt', res.data.signUp.token);
       this.props.history.goBack();
     })
   }
