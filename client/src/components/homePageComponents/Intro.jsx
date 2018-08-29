@@ -12,7 +12,7 @@ const styles = theme => ({
       height: '50vh'
     },
     [theme.breakpoints.up('lg')]: {
-      height: '70vh'
+      height: '60vh'
     }
   },
   foreground: {
@@ -23,7 +23,7 @@ const styles = theme => ({
       height: '50vh'
     },
     [theme.breakpoints.up('lg')]: {
-      height: '70vh'
+      height: '60vh'
     }
   },
   textSection: {
@@ -46,7 +46,7 @@ const styles = theme => ({
       display: 'table'
     },
     [theme.breakpoints.up('lg')]: {
-      height: '70vh',
+      height: '60vh',
       display: 'table'
     }
   },
