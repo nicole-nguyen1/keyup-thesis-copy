@@ -133,4 +133,33 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
     })
 }
 
-module.exports = { passport, login, signUp, updateInfoHelper, checkAuth };
+const resetPassword = (email, password, req) => {
+  return knex('users')
+    .select()
+    .where({ email })
+    .first()
+    .then((user) => {
+      return bcrypt.hash(password, 10);
+    })
+    .then((hash) => {
+      return knex('users')
+        .where({ email })
+        .update({ 
+          password: hash,
+          resetPasswordToken: null,
+          resetPasswordExpiry: null
+         })
+        .returning('*');
+    })
+    .then((res) => {
+      let user = res[0];
+      req.login(user, () => {
+        return user;
+      });
+    })
+    .catch((err) => {
+      throw new Error('Could not reset password', err);
+    })
+}
+
+module.exports = { passport, login, signUp, updateInfoHelper, resetPassword, checkAuth };

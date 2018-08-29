@@ -33,13 +33,13 @@ const MultiLineParagraph = (props) => {
                 return <Typography key={key} style={{ whiteSpace: 'pre-wrap' }}>{i}</Typography>;
               })}
             </div>
-          )
+          );
         } else {
           return <Typography key={index} style={{ whiteSpace: 'pre-wrap' }}>{section}</Typography>;
         }
       })}
     </div>
-  )
-}
+  );
+};
 
 export default MultiLineParagraph;

@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header.jsx';
 import ViewFavorites from './ViewFavorites.jsx';
 import AccountInfo from './AccountInfo.jsx';
-import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
 class UserProfile extends React.Component {

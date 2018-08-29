@@ -100,7 +100,7 @@ class NavBar extends React.Component {
                       
                       </div>) : 
               (<div className={classes.menuTop}>
-                <Link to="/login">
+                <Link to="/login" className={classes.link}>
                   <Button
                     variant="contained"
                     color="primary"
@@ -110,7 +110,7 @@ class NavBar extends React.Component {
                     SIGN IN
                   </Button>
                 </Link>
-                <Link to='/signup'>
+                  <Link to='/signup' className={classes.link}>
                   <Typography onClick={this.handleClose} style={{ marginBottom: '3em' }} className={classes.menuTop}>
                     Create an account
                   </Typography>
@@ -256,6 +256,10 @@ NavBar.styles = {
 
   top: {
     marginTop: '-10px'
+  },
+
+  link: {
+    textDecoration: 'none'
   },
 
   buttonStyle: {

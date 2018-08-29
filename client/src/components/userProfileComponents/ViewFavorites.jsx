@@ -63,7 +63,7 @@ class ViewFavorites extends React.Component {
             href='/favorites/training-services'>View Favorited Training Services</Button>
         </div>
       </div>
-    )
+    );
   }
 }
 

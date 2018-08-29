@@ -179,6 +179,24 @@ export const loginData = (args) => (
   `
 );
 
+export const resetPassword = (args) => (
+  `
+  mutation {
+    resetPassword(
+      token: ${args.token},
+      password: ${args.password}
+    ) {
+      id
+      email
+      phone_number
+      first_name
+      last_name
+      zip
+    }
+  }
+  `
+);
+
 export const getFavoritesQuery = (args) => (
   `
   {
@@ -224,7 +242,7 @@ export const updateInfo = (args) => (
     }
   }
   `
-)
+);
 
 export const getCareerFave = (args) => (
   `{
@@ -323,3 +341,25 @@ export const logout = `
   }
 
 `;
+
+export const findUserEmail = (args) => (
+  `
+  {
+    userEmail(email: ${args}) {
+      id
+      email
+    }
+  }
+  `
+);
+
+export const checkToken = (args) => (
+  `
+  {
+    token(token: ${args}) {
+      id
+      email
+    }
+  }
+  `
+);

@@ -2,10 +2,8 @@ import React from 'react';
 import Career from '../Career.jsx';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
-import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { createApolloFetch } from 'apollo-fetch';
-import { getCareerFave } from '../graphql/graphql';
 
 const styles = theme => ({
   grid: {

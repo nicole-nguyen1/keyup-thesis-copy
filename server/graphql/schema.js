@@ -1,6 +1,7 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { signUp, login, updateInfoHelper, checkAuth } = require('../passport.js')
+const { signUp, login, updateInfoHelper, resetPassword, checkAuth } = require('../passport.js');
+const { sendPasswordEmail } = require('../helpers/passwordReset');
 
 const {
   GraphQLSchema,
@@ -403,6 +404,38 @@ const RootQuery = new GraphQLObjectType({
             .where('favorites.user_id', userObj.id);
         })
       }
+    },
+
+    userEmail: {
+      type: UserType,
+      args: { email: { type: GraphQLString }},
+      resolve(parent, args) {
+        return knex('users')
+          .select()
+          .where('email', args.email)
+          .first()
+          .then((res) => {
+            return sendPasswordEmail(res.id, res.email);
+          })
+      }
+    },
+
+    token: {
+      type: UserType,
+      args: { token: { type: GraphQLString }},
+      resolve(parent, args) {
+        return knex('users')
+          .select('id', 'email', 'resetPasswordToken', 'resetPasswordExpiry')
+          .where('resetPasswordToken', args.token)
+          .first()
+          .then((res) => {
+            if (Date.now() < res.resetPasswordExpiry) {
+              return res;
+            } else {
+              throw new Error('Invalid or expired token');
+            }
+          })
+      }
     }
   }
 });
@@ -449,6 +482,23 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, { email, password }, context) {
         return login(email, password, context);
+      }
+    },
+
+    resetPassword: {
+      type: UserType,
+      args: { 
+        token: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve(parent, args, req) {
+        return knex('users')
+          .select()
+          .where('resetPasswordToken', args.token)
+          .first()
+          .then((res) => {
+            return resetPassword(res.email, args.password, req);
+          })
       }
     },
 

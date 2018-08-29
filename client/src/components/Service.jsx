@@ -4,7 +4,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import CardMedia from '@material-ui/core/CardMedia';
 import { Link } from 'react-router-dom';
 import HeartContainer from './heartComponents/HeartContainer.jsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -37,6 +36,11 @@ const styles = theme => ({
     backgroundColor: '#4469FF',
     top: '8px',
     borderRadius: '3px'
+  },
+
+  heartButton: {
+    top: '20px',
+    position: 'relative'
   }
 });
 
@@ -70,24 +74,30 @@ const Service = props => {
               />
             </Grid>
           </Grid>
-          <Typography color="textSecondary">
-            Locations: {props.service.card_location}
-          </Typography>
-          <Button 
-            variant="contained" 
-            color="primary" 
-            className={classes.learnButton} 
-            component={Link} 
-            to={`/service/${props.service.id}`}>
-            LEARN MORE
-          </Button>
-          <HeartContainer 
-            size={'large'}
-            serviceID={props.service.id}
-            favorites={props.favorites}
-            removeFavorite={props.removeFavorite}
-            addFavorite={props.addFavorite}
-          />
+          <Grid container>
+            <Grid item xs={10}>
+              <Typography color="textSecondary">
+                Locations: {props.service.card_location}
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.learnButton}
+                component={Link}
+                to={`/service/${props.service.id}`}>
+                LEARN MORE
+              </Button>
+            </Grid>
+            <Grid item xs={2} className={classes.heartButton}>
+              <HeartContainer
+                size={'large'}
+                serviceID={props.service.id}
+                favorites={props.favorites}
+                removeFavorite={props.removeFavorite}
+                addFavorite={props.addFavorite}
+              />
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </Grid>

@@ -234,6 +234,12 @@
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="zip" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="resetPasswordToken" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="resetPasswordExpiry" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">

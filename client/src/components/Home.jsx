@@ -7,20 +7,28 @@ import HomePageCards from './homePageComponents/HomePageCards.jsx';
 import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../actions/action';
-
-
-
+import { getPageTitle } from '../actions/action'; import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      passwordResetSuccess: false
+    }
   }
 
   componentDidMount() {
     window.scrollTo(0,0);
     store.dispatch(getPageTitle(''));
     this.props.getUser();
-    // this.props.getFavorites();
+    if (this.props.router.location.state && this.props.router.location.state.passwordResetSuccess) {
+      this.setState({ passwordResetSuccess: this.props.router.location.state.passwordResetSuccess })
+    }
+  }
+
+  handleClose = (e) => {
+    this.setState({
+      passwordResetSuccess: false
+    })
   }
 
   render() {
@@ -37,6 +45,24 @@ class Home extends React.Component {
           <SubmitFormHomePage />
         </div>
         <HowItWorks />
+        <Dialog open={this.state.passwordResetSuccess}>
+          <DialogTitle>
+            Password Updated
+          </DialogTitle>
+          <DialogContent>
+            <Typography variant="body1">
+              You are logged in and ready to go.
+            </Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              color="primary"
+              onClick={this.handleClose}
+            >
+              Okay
+          </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
