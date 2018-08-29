@@ -250,7 +250,7 @@ export const updateInfo = (args) => (
     }
   }
   `
-)
+);
 
 export const getCareerFave = (args) => (
   `{
@@ -370,4 +370,4 @@ export const checkToken = (args) => (
     }
   }
   `
-)
+);

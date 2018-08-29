@@ -2,10 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Service from '../Service.jsx';
 import { withStyles } from '@material-ui/core/styles';
-import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { createApolloFetch } from 'apollo-fetch';
-import { getTrainingFave } from '../graphql/graphql';
 
 const styles = theme => ({
   grid: {
@@ -17,7 +15,7 @@ class FavoriteTrainings extends React.Component {
     super(props);
     this.state = {
       trainingFaves: []
-    }
+    };
     this.fetch = createApolloFetch({
       uri: '/graphql'
     }).bind(this);
@@ -32,7 +30,7 @@ class FavoriteTrainings extends React.Component {
           return <Service key={service.id || index} service={service} favorites={this.props.favorites}/>;
         })}
       </Grid>
-    )
+    );
   }
 }
 
