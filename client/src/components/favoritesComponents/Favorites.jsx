@@ -136,9 +136,9 @@ class Favorites extends React.Component {
       }
     } else {
       if (this.state.value === 0) {
-        component = <FavoriteCareers getUser={this.props.getUser} careers={this.state.careerFaves} favorites={faves}/>
+        component = <FavoriteCareers getUser={this.props.getUser} careers={this.state.careerFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>
       } else if (this.state.value === 1) {
-        component = <FavoriteTrainings getUser={this.props.getUser} trainings={this.state.trainingFaves} favorites={faves}/>
+        component = <FavoriteTrainings getUser={this.props.getUser} trainings={this.state.trainingFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>
       }
     }
 

@@ -160,12 +160,7 @@ export const signUp = ({ email, password, first_name, last_name, phone_number, z
       phone_number: ${phone_number || null},
       zip: ${zip || null}
     ) {
-      id
-      email
-      first_name
-      last_name
-      phone_number
-      zip
+      token
     }
   }
   `
@@ -178,11 +173,7 @@ export const loginData = (args) => (
       email: ${args.email},
       password: ${args.password}
     ) {
-      id
-      email
-      first_name
-      last_name
-      phone_number
+      token
     }
   }
   `
@@ -209,7 +200,7 @@ export const resetPassword = (args) => (
 export const getFavoritesQuery = (args) => (
   `
   {
-    favorites(user_id: ${args}) {
+    favorites(token: ${args}) {
       id
       career_id
       service_id
@@ -218,11 +209,10 @@ export const getFavoritesQuery = (args) => (
   `
 );
 
-export const getLoggedInUser = 
+export const getLoggedInUser = token => (
   `
   {
-    loggedInUser {
-      id
+    loggedInUser(token:${token}) {
       email
       first_name
       last_name
@@ -230,23 +220,25 @@ export const getLoggedInUser =
       zip
     }
   }
-  `;
+  `
+);
 
 export const updateInfo = (args) => (
   `
   mutation {
     updateInfo(
-      id: ${args.id},
+      token: ${args.token},
       email: ${args.email},
       first_name: ${args.first_name},
       last_name: ${args.last_name},
-      phone_number: ${args.phone_number}
+      phone_number: ${args.phone_number},
+      zip: ${args.zip}
     ) {
-      id
       email
       first_name
       last_name
       phone_number
+      zip
     }
   }
   `
@@ -320,7 +312,7 @@ export const removeFavoriteFromList = (args) => (
   `
   mutation {
     removeFavorite (id: ${args}) {
-      user_id
+      id
     }
   }
   `
@@ -330,7 +322,7 @@ export const addFavoriteToList = (args) => (
   `
     mutation {
       saveFavorite(
-        user_id: ${args.userID || null}
+        token: ${args.token || null}
         career_id: ${args.careerID || null}
         service_id: ${args.serviceID || null}
       ){

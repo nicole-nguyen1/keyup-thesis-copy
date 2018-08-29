@@ -72,13 +72,12 @@ class LoginContainer extends React.Component {
         })
       }
     }).then((res) => {
+      console.log('2:  ', res)
       if (!res.errors) {
-        store.dispatch(findUser(res.data.login));
+        localStorage.setItem('jwt', res.data.login.token);
         this.props.history.goBack();
       }
-    }).catch(err => {
-      console.error(err);
-    });
+    }).catch(console.error);
   }
 
   render() {
