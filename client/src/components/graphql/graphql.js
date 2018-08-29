@@ -178,11 +178,8 @@ export const loginData = (args) => (
       email: ${args.email},
       password: ${args.password}
     ) {
-      id
-      email
-      first_name
-      last_name
-      phone_number
+      user
+      token
     }
   }
   `

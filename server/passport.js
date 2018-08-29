@@ -84,10 +84,8 @@ const signUp = (email, password, first_name, last_name, phone_number, zip, conte
       return knex('users')
         .insert({ email, password: hash, first_name, last_name, phone_number, zip });
     })
-    .then(() => {
-      return login(email, password, context);
-    })
-    .catch(err => console.log(err));
+    .then(() => login(email, password, context))
+    .catch(console.error);
 };
 
 const login = (email, password, context) => {

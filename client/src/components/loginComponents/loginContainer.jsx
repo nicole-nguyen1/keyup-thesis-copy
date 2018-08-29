@@ -59,6 +59,7 @@ class LoginContainer extends React.Component {
     this.fetch({
       query: loginData(formArguments)
     }).then((res) => {
+      console.log('1:  ', res);
       if (!res.errors) {
         this.setState({
           email: '',
@@ -72,13 +73,13 @@ class LoginContainer extends React.Component {
         })
       }
     }).then((res) => {
+      console.log('2:  ', res)
       if (!res.errors) {
-        store.dispatch(findUser(res.data.login));
+        localStorage.setItem('jwt', JSON.stringify(res.data.login));
+        console.log(localStorage);
         this.props.history.goBack();
       }
-    }).catch(err => {
-      console.error(err);
-    });
+    }).catch(console.error);
   }
 
   render() {
