@@ -17,7 +17,7 @@ export const findCareer = (data) => (
     type: 'CAREER',
     payload: data
   }
-)
+);
 
 export const findServices = (data) => (
   {
@@ -52,4 +52,4 @@ export const getFavorites = (data) => (
     type: 'FAVORITE',
     payload: data
   }
-)
+);
