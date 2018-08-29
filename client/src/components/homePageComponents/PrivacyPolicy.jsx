@@ -11,7 +11,7 @@ const styles = {
   section: {
     marginBottom: '30px'
   }
-}
+};
 
 const PrivacyPolicy = (props) => {
   const { classes } = props;
@@ -125,7 +125,7 @@ const PrivacyPolicy = (props) => {
         </div>
       </Paper>
     </div>
-  )
-}
+  );
+};
 
 export default withStyles(styles)(PrivacyPolicy);

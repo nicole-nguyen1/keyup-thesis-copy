@@ -8,7 +8,7 @@ class CopyLink extends React.Component {
     super(props);
     this.state = {
       copied: false
-    }
+    };
   }
 
   render() {
@@ -25,7 +25,7 @@ class CopyLink extends React.Component {
           </Grid>
         </CopyToClipboard>
       </div>
-    )
+    );
   }
 }
 

@@ -16,7 +16,7 @@ const Reddit = (props) => {
         </Grid>
       </a>
     </div>
-  )
-}
+  );
+};
 
 export default Reddit;
