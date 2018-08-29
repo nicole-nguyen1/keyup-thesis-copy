@@ -73,7 +73,7 @@ class AccountInfo extends React.Component {
               </Typography> : 
               <Typography variant='body1'>
                 <span className={classes.item}>Zip Code (optional):</span>
-            </Typography>
+              </Typography>
             }
           </div>
           <div className={classes.buttonSection}>
