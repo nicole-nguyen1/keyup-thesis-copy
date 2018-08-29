@@ -4,6 +4,9 @@ import ViewFavorites from './ViewFavorites.jsx';
 import AccountInfo from './AccountInfo.jsx';
 import { connect } from 'react-redux';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
+import { store } from '../../store/index';
+import { getPageTitle } from '../../actions/action';
+
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +20,7 @@ class UserProfile extends React.Component {
   };
 
   componentDidMount() {
+    store.dispatch(getPageTitle('My Profile'));
     if (this.props.router.location.state && this.props.router.location.state.updatedInfo) {
       this.setState({ updatedInfo: true});
     }
