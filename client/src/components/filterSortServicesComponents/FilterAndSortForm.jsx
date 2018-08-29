@@ -47,7 +47,7 @@ const styles = theme => ({
   },
 
   paper: {
-    backgroundColor: 'EDEDEE'
+    backgroundColor: 'white'
   },
 
   button: {

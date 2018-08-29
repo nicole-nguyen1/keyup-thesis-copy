@@ -10,18 +10,18 @@ class Facebook extends React.Component {
 
   render() {
     return (
-        <div style={this.props.styles.row}>
+      <div style={this.props.styles.row}>
         <FacebookProvider appId={process.env.FB_APP_ID}>
-            <Share href={this.props.url}>
-              <Grid item
-                role="button">
-                <img src='https://s3.amazonaws.com/key-up-assets/facebook-logo-true.png' style={this.props.styles.topIcon} />
-                <Typography variant='caption'>Facebook</Typography>
-              </Grid>
-            </Share>
-          </FacebookProvider>
-        </div>
-    )
+          <Share href={this.props.url}>
+            <Grid item
+              role="button">
+              <img src='https://s3.amazonaws.com/key-up-assets/facebook-logo-true.png' style={this.props.styles.topIcon} />
+              <Typography variant='caption'>Facebook</Typography>
+            </Grid>
+          </Share>
+        </FacebookProvider>
+      </div>
+    );
   }
 }
 
