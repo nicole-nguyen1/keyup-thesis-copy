@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-const styles = {
+const styles = theme => ({
   component: {
     background: '#232e49',
     textAlign: 'center',
@@ -12,12 +12,20 @@ const styles = {
     borderRadius: 0
   },
   grid: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    maxWidth: '360px',
+    margin: '0 auto',
+    [theme.breakpoints.up('lg')]: {
+      display: 'flex',
+      maxWidth: '1280px'
+    }
   },
   cell: {
-    margin: '10px 100px'
+    padding: '30px 0',
+    maxWidth: '200px',
+    margin: '0 auto',
+    [theme.breakpoints.up('lg')]: {
+      padding: '0 50px'
+    }
   },
   image: {
     maxWidth: '150px',
@@ -28,14 +36,14 @@ const styles = {
     padding: '30px 0 5px 0',
     color: '#ededee'
   }
-};
+});
 
 const HowItWorks = props => {
   const { classes } = props;
   return (
     <Card className={classes.component}>
       <CardContent>
-        <Typography variant='subheading' className={classes.title}>How KeyUp Works</Typography>
+        <Typography variant='subheading' className={classes.title} paragraph>How KeyUp Works</Typography>
         <div className={classes.grid}>
           <div className={classes.cell}>
             <img src='https://s3.amazonaws.com/key-up-assets/lightbulb-white.png' className={classes.image} />
