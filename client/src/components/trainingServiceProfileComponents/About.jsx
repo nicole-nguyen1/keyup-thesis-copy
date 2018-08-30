@@ -79,11 +79,11 @@ class About extends React.Component {
         <Card style={{ borderRadius: 0 }}>
           <div className={classes.cardAction}>
             <Button onClick={this.props.toggleQualifyDialog} className={classes.button}>
-              <img src='https://s3.amazonaws.com/key-up-assets/Get-Advice-Symbol-Gray.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Get-Advice-Symbol-Gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>ADVICE</Typography>
             </Button>
             <Button onClick={this.props.toggleDialog} className={classes.button}>
-              <img src='https://s3.amazonaws.com/key-up-assets/graduation-cap-gray.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/graduation-cap-gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>APPLY</Typography>
             </Button>
             <HeartComponent 
@@ -94,7 +94,7 @@ class About extends React.Component {
               addFavorite={this.props.addFavorite}
             />
             <Button onClick={this.toggleDrawer} className={classes.button}>
-              <img src='https://s3.amazonaws.com/key-up-assets/Share-gray.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Share-gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
             </Button>
           </div>

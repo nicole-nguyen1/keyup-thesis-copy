@@ -60,7 +60,7 @@ const About = ({ classes }) => {
       </div>
       <MediaQuery query='(min-width: 600px)'>
         <div className={classes.imageDiv}>
-          <img src='https://s3.amazonaws.com/key-up-assets/Key-Detail-Blue-logo---big-for-Home-Page-About-KeyUp-Section.png'
+          <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Key-Detail-Blue-logo---big-for-Home-Page-About-KeyUp-Section.png'
             height='200px'
           />
         </div>

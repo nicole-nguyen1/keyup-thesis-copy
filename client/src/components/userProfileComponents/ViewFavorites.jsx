@@ -76,7 +76,7 @@ class ViewFavorites extends React.Component {
         <div className={classes.favorites}>
           <div className={classes.section}>
             <div className={classes.imageDiv}>
-              <img src='https://s3.amazonaws.com/key-up-assets/Detailed-Briefcase-for-User-Profile-Page-black.png' className={classes.image} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Detailed-Briefcase-for-User-Profile-Page-black.png' className={classes.image} />
             </div>
             <div className={classes.buttonDiv}>
               <Button
@@ -88,7 +88,7 @@ class ViewFavorites extends React.Component {
           </div>
           <div className={classes.section}>
             <div className={classes.imageDiv}>
-              <img src='https://s3.amazonaws.com/key-up-assets/Schoolhouse-black.png' className={classes.image} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Schoolhouse-black.png' className={classes.image} />
             </div>
             <div className={classes.buttonDiv}>
               <Button

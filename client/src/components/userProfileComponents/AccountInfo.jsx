@@ -132,7 +132,7 @@ class AccountInfo extends React.Component {
           <Typography variant='title'>Password</Typography>
           <div className={classes.section}>
             <div className={classes.imageDiv}>
-              <img src='https://s3.amazonaws.com/key-up-assets/Password-Logo-black.png' className={classes.image} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Password-Logo-black.png' className={classes.image} />
             </div>
             <div className={classes.buttonDiv}>
               <Button

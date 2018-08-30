@@ -81,7 +81,7 @@ class IntroCard extends React.Component {
             className={classes.image} />
           <div className={classes.cardAction}>
             <Button component={Link} to={`/services/${this.props.careerID}`} className={classes.button}>
-              <img src='https://s3.amazonaws.com/key-up-assets/graduation-cap-gray.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/graduation-cap-gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>FIND TRAINING</Typography>
             </Button>
             <HeartContainer 
@@ -92,7 +92,7 @@ class IntroCard extends React.Component {
               addFavorite={this.props.addFavorite}
             />
             <Button onClick={this.toggleDrawer} className={classes.button}>
-              <img src='https://s3.amazonaws.com/key-up-assets/Share-gray.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Share-gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
             </Button>
           </div>
