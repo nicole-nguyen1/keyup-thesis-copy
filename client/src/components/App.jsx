@@ -113,9 +113,7 @@ class App extends React.Component {
   }
 
   getFavorites = (token) => {
-    if (token === 'null') {
-      console.log('also no')
-    } else {
+    if (token !== 'null') {
       this.fetch({
         query: getFavoritesQuery(token || null)
       })
