@@ -10,11 +10,14 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   background: {
-    backgroundColor: '#CFCFCE'
+    backgroundColor: '#CFCFCE',
+    paddingBottom: '1px',
+    borderRadius: '0'
   },
 
   grid: {
-    marginTop: '8px'
+    margin: '8px auto',
+    width: '97%'
   }
 });
 class Services extends React.Component {

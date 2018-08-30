@@ -35,11 +35,7 @@ const styles = theme => ({
 
   image: {
     height: '110px',
-    width: '130px',
-    [theme.breakpoints.up('sm')]: {
-      height: '189px',
-      width: '189px'
-    }
+    width: '130px'
   },
 
   learnButton: {
@@ -56,15 +52,11 @@ const styles = theme => ({
     borderRadius: '3px',
     fontSize: '0.8rem'
   },
-  right: {
-    position: 'relative',
-    right: '8px'
-  },
 
   // DESKTOP STYLES BEGIN HERE
   cardDesktop: {
     display: 'flex',
-    marginBottom: '10px',
+    margin: '0 auto',
     width: '589px'
   },
   textDesktop: {
