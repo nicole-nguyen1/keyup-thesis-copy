@@ -12,11 +12,14 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography }
 
 const styles = theme => ({
   background: {
-    backgroundColor: '#CFCFCE'
+    backgroundColor: '#CFCFCE',
+    paddingBottom: '1px',
+    borderRadius: '0'
   },
 
   grid: {
-    marginTop: '8px'
+    margin: '8px auto',
+    width: '97%'
   },
 
   popUpText: {

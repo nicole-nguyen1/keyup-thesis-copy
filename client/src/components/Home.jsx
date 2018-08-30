@@ -35,7 +35,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ marginLeft: '-1px' }}>
         <div id="intro">
           <Intro />
         </div>

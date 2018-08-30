@@ -10,6 +10,13 @@ import { withStyles } from '@material-ui/core';
 import AdviceFormContainer from './AdviceFormContainer.jsx';
 
 const styles = theme => ({
+  profile: {
+    [theme.breakpoints.up('sm')]: {
+      width: '550px',
+      margin: '0 auto'
+    }
+  },
+
   dark: {
     backgroundColor: '#232E49',
     borderRadius: 0,
@@ -38,7 +45,7 @@ class TrainingServiceProfile extends React.Component {
     const service = this.props.service;
 
     return (
-      <div>
+      <div className={classes.profile}>
         <Intro service={service}/>
         <About 
           service={service} 

@@ -37,6 +37,7 @@
     "graphql": "^0.13.2",
     "jsonwebtoken": "^8.3.0",
     "knex": "^0.15.2",
+    "mailgun-js": "^0.20.0",
     "nodemailer": "^4.6.8",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",

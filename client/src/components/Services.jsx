@@ -13,11 +13,14 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography }
 
 const styles = theme => ({
   background: {
-    backgroundColor: '#CFCFCE'
+    backgroundColor: '#CFCFCE',
+    paddingBottom: '1px',
+    borderRadius: '0'
   },
 
   grid: {
-    marginTop: '8px'
+    margin: '8px auto',
+    width: '97%'
   },
 
   popUpText: {
@@ -97,10 +100,7 @@ class Services extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log('you are looking at a list of training services')
-    if (this.state.renderPopUp) {
-      console.log('you really need to delete all of these console logs')
-    }
+    
     return (
       <div className={classes.background}>
         <FilterAndSort services={this.props.services} careerID={this.props.careerID}/>

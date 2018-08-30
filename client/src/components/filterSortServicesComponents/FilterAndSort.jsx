@@ -7,7 +7,8 @@ const styles = theme => ({
   headerStyle: {
     backgroundColor: '#3652C5',
     padding: '8px',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginLeft: '-1px'
   },
 
   button: {

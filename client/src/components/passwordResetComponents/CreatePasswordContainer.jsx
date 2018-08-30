@@ -137,7 +137,6 @@ class CreatePasswordContainer extends React.Component {
       });
     })
     .then(res => {
-      console.log('after getloggedinuser:  ', res);
       store.dispatch(findUser(res.data.loggedInUser));
       this.setState({ redirect: true });
     })
