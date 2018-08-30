@@ -117,6 +117,7 @@ class App extends React.Component {
       query: getFavoritesQuery(token || null)
     })
     .then((res) => {
+      console.log(res);
       store.dispatch(getFavorites(res.data));
     });
   }
@@ -312,6 +313,7 @@ class App extends React.Component {
                     filterCareers={this.filterCareers}
                     removeFavorite={this.removeFavorite}
                     addFavorite={this.addFavorite}
+                    favorites={this.props.favorites}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
