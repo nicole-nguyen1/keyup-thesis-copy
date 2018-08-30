@@ -94,11 +94,9 @@ class NavBar extends React.Component {
                 >
                   <MenuIcon image="#" />
                 </IconButton>
-                {/* <div className={classes.home}> */}
                   <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                     <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' style={{ position: 'relative', top: '12px' }} />
                   </HashLink>
-                {/* </div> */}
               </Grid>
               <Grid item xs={9} sm={11} className={classes.pageTitle}>
                 <Typography variant="subheading" color="inherit" className={classes.flex}>
@@ -207,17 +205,16 @@ class NavBar extends React.Component {
                 </HashLink>
               </MenuItem>
               {this.props.showSignOutButton ? 
-                (<MenuItem onClick={this.handleSignOut} classes={{ root: classes.menuItem }}>
-                <Link to="/home">
-                  <ListItemIcon>
-                    <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
-                  </ListItemIcon>
-                  <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
-                  </ListItemText>
-                </Link>
-              </MenuItem>) : null
+                (<Link to="/home">
+                  <MenuItem onClick={this.handleSignOut} classes={{ root: classes.menuItem }}>
+                    <ListItemIcon>
+                      <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
+                    </ListItemIcon>
+                    <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
+                    </ListItemText>
+                  </MenuItem>
+                </Link>) : null
               }
-              
             </Menu>
           </Toolbar>
         </AppBar>
