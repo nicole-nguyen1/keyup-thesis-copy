@@ -185,7 +185,7 @@ class Career extends React.Component {
                       component={Link}
                       to={`/careers/${this.props.career.id}`}>
                       LEARN MORE
-                </Button>
+                  </Button>
                   </Grid>
                   <Grid item xs={5}>
                     <Button
@@ -193,7 +193,7 @@ class Career extends React.Component {
                       component={Link}
                       to={`/services/${this.props.career.id}`}>
                       FIND TRAINING
-                </Button>
+                  </Button>
                   </Grid>
                   <Grid item xs={1}>
                     <HeartContainer
@@ -202,6 +202,7 @@ class Career extends React.Component {
                       careerID={String(this.props.career.id)}
                       removeFavorite={this.props.removeFavorite}
                       addFavorite={this.props.addFavorite}
+                      handlePopUp={this.props.handlePopUp}
                     />
                   </Grid>
                 </Grid>

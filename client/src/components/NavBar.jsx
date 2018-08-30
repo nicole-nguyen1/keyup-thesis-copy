@@ -1,5 +1,4 @@
 import React from 'react';
-import { logout } from './graphql/graphql';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,12 +17,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import LogoutDialog from './LogoutDialog.jsx';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
-import { getPageTitle, findUser } from '../actions/action';
+import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
 import { HashLink } from 'react-router-hash-link';
 import { createApolloFetch } from 'apollo-fetch';
 import { Grid } from '@material-ui/core';
@@ -37,7 +37,7 @@ class NavBar extends React.Component {
 
     this.state = {
       anchorEl: null,
-      
+      confirmLogout: false
     };
   }
 
@@ -49,6 +49,10 @@ class NavBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  confirmClose = () => {
+    this.setState({ confirmLogout: false });
+  }
+
   handleSignOut = () => {
     localStorage.removeItem('jwt');
     const nullObj = {
@@ -58,15 +62,22 @@ class NavBar extends React.Component {
       last_name: '',
       phone_number: ''
     };
-    store.dispatch(findUser(nullObj))
+    const nullFaves = {
+      id: '',
+      career_id: '',
+      service_id: ''
+    };
+   
+    store.dispatch(findUser(nullObj));
+    store.dispatch(getFavorites(nullFaves));
     this.props.toggle();
-    this.handleClose()
+    this.handleClose();
+    this.setState({ confirmLogout: true });
   }
 
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
-
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -196,20 +207,24 @@ class NavBar extends React.Component {
                 </HashLink>
               </MenuItem>
               {this.props.showSignOutButton ? 
-                      (<MenuItem onClick={this.handleSignOut} classes={{ root: classes.menuItem }}>
-                      <Link to="/home">
-                        <ListItemIcon>
-                          <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
-                        </ListItemIcon>
-                        <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
-                        </ListItemText>
-                      </Link>
-                    </MenuItem>) : null
+                (<MenuItem onClick={this.handleSignOut} classes={{ root: classes.menuItem }}>
+                <Link to="/home">
+                  <ListItemIcon>
+                    <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
+                  </ListItemIcon>
+                  <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
+                  </ListItemText>
+                </Link>
+              </MenuItem>) : null
               }
               
             </Menu>
           </Toolbar>
         </AppBar>
+        <LogoutDialog 
+          open={this.state.confirmLogout}
+          onClose={this.confirmClose}
+        />
       </div>
     );
   }

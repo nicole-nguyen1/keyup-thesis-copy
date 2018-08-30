@@ -61,10 +61,16 @@ class HeartContainer extends React.Component {
   }
 
   addFavorite = () => {
-    this.setState({
-      isFavorite: true
-    })
-    this.props.addFavorite(this.updateArgs);
+    console.log('this is the token', localStorage.getItem('jwt'));
+    let token = localStorage.getItem('jwt');
+      if (token) {
+      this.setState({
+        isFavorite: true
+      })
+      this.props.addFavorite(this.updateArgs);
+      } else {
+        this.props.handlePopUp();
+      }
   }
 
   render() {

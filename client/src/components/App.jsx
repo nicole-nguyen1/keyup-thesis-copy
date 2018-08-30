@@ -112,12 +112,16 @@ class App extends React.Component {
   }
 
   getFavorites = (token) => {
-    this.fetch({
-      query: getFavoritesQuery(token || null)
-    })
-    .then((res) => {
-      store.dispatch(getFavorites(res.data));
-    });
+    if (token === 'null') {
+      console.log('also no')
+    } else {
+      this.fetch({
+        query: getFavoritesQuery(token || null)
+      })
+      .then((res) => {
+        store.dispatch(getFavorites(res.data));
+      });
+    }
   }
 
   addFavorite = (args) => {
