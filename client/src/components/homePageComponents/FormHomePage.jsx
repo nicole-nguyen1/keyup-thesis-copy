@@ -125,7 +125,7 @@ const FormHomePage = (props) => {
         </div>
         <MediaQuery query='(min-width: 600px)'>
           <div className={classes.imageDiv}>
-            <img src='https://s3.amazonaws.com/key-up-assets/Colorful-Chat-Icon-for-Home-Page.png'
+            <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Colorful-Chat-Icon-for-Home-Page.png'
               className={classes.image}
             />
           </div>

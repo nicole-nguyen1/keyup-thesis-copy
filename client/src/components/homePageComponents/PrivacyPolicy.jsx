@@ -3,15 +3,18 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = {
+const styles = theme => ({
   body: {
-    padding: '50px 10px 20px 10px'
+    padding: '50px 10px 20px 10px',
+    [theme.breakpoints.up('sm')]: {
+      padding: '50px'
+    }
   },
 
   section: {
     marginBottom: '30px'
   }
-};
+});
 
 const PrivacyPolicy = (props) => {
   const { classes } = props;

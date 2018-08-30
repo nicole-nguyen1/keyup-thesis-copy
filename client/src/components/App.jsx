@@ -24,7 +24,6 @@ import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
 import EnterEmailContainer from './passwordResetComponents/EnterEmailContainer.jsx';
 import PasswordEmailSuccess from './passwordResetComponents/PasswordEmailSuccess.jsx';
 import CreatePasswordContainer from './passwordResetComponents/CreatePasswordContainer.jsx';
-import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
   getIndustriesQuery,
@@ -113,9 +112,7 @@ class App extends React.Component {
   }
 
   getFavorites = (token) => {
-    if (token === 'null') {
-      console.log('also no')
-    } else {
+    if (token !== 'null') {
       this.fetch({
         query: getFavoritesQuery(token || null)
       })
@@ -347,8 +344,8 @@ class App extends React.Component {
                   />;
                 }} />
               </Switch>
+            <Footer />
             </Paper>
-          <Footer />
         </div>
       </Router>
     );
@@ -358,11 +355,14 @@ class App extends React.Component {
 const styles = theme => ({
   root: {
     marginTop: '56px',
+    width: '100vw',
+    borderRadius: '0',
+    marginLeft: '-7px',
     [theme.breakpoints.up('sm')]: {
       marginTop: '64px'
     }
   }
-})
+});
 
 const mapStateToProps = state => {
   return {

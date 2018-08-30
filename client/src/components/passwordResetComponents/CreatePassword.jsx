@@ -13,7 +13,10 @@ const styles = theme => ({
     backgroundColor: 'white',
     margin: '5px auto',
     padding: '10px',
-    width: '86vw'
+    width: '280px',
+    [theme.breakpoints.up('sm')]: {
+      width: '460px'
+    }
   },
   buttonStyle: {
     backgroundColor: '#4469FF',
@@ -39,7 +42,14 @@ const styles = theme => ({
   },
   error: {
     color: 'red'
-  }
+  },
+  formStyle: {
+    width: '320px',
+    margin: '0 auto',
+    [theme.breakpoints.up('sm')]: {
+      width: '500px'
+    }
+  },
 });
 
 class CreatePassword extends React.Component {
@@ -56,52 +66,54 @@ class CreatePassword extends React.Component {
 
     return (
       <div className={classes.paper}>
-        <Typography variant="headline" paragraph>
-          Create New Password
-        </Typography>
-        <Typography variant="body1" paragraph>
-          Please enter your new password below. 
-        </Typography>
-        <FormControl>
-          <TextField
-            autoFocus
-            fullWidth
-            required
-            type="password"
-            name="password"
-            placeholder="Password (at least 8 characters)"
-            className={classes.inputStyle}
-            onChange={this.props.handlePassChange}
-            InputProps={{
-              disableUnderline: true,
-              endAdornment: this.props.passCheck ? <CheckIcon className={classes.check} /> : null
-            }}
-          />
-          <TextField
-            autoFocus
-            fullWidth
-            required
-            type="password"
-            name="passwordConfirm"
-            placeholder="Re-Type Password"
-            className={classes.inputStyle}
-            onChange={this.props.handlePassConfirmChange}
-            InputProps={{
-              disableUnderline: true,
-              endAdornment: this.props.passConfirmCheck ? <CheckIcon className={classes.check} /> : this.props.passwordConfirm ? <ErrorIcon className={classes.error} /> : null
-            }}
-          />
-          <div>
-            <Button
-              variant="contained"
-              className={classes.buttonStyle}
-              onClick={this.props.submitForm}
-              disabled={this.props.buttonStatus}
-            >
-              Save New Password
+        <div className={classes.formStyle}>
+          <Typography variant="headline" paragraph>
+            Create New Password
+          </Typography>
+          <Typography variant="body1" paragraph>
+            Please enter your new password below.
+          </Typography>
+          <FormControl>
+            <TextField
+              autoFocus
+              fullWidth
+              required
+              type="password"
+              name="password"
+              placeholder="Password (at least 8 characters)"
+              className={classes.inputStyle}
+              onChange={this.props.handlePassChange}
+              InputProps={{
+                disableUnderline: true,
+                endAdornment: this.props.passCheck ? <CheckIcon className={classes.check} /> : null
+              }}
+            />
+            <TextField
+              autoFocus
+              fullWidth
+              required
+              type="password"
+              name="passwordConfirm"
+              placeholder="Re-Type Password"
+              className={classes.inputStyle}
+              onChange={this.props.handlePassConfirmChange}
+              InputProps={{
+                disableUnderline: true,
+                endAdornment: this.props.passConfirmCheck ? <CheckIcon className={classes.check} /> : this.props.passwordConfirm ? <ErrorIcon className={classes.error} /> : null
+              }}
+            />
+            <div>
+              <Button
+                variant="contained"
+                className={classes.buttonStyle}
+                onClick={this.props.submitForm}
+                disabled={this.props.buttonStatus}
+              >
+                Save New Password
             </Button>
-          </div>
-        </FormControl>
+            </div>
+          </FormControl>
+        </div>
       </div>
     )
   }

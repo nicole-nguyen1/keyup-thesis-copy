@@ -29,7 +29,11 @@ const styles = theme => ({
   },
 
   formStyle: {
-    maxWidth: '400px'
+    width: '320px',
+    margin: '0 auto',
+    [theme.breakpoints.up('sm')]: {
+      width: '500px'
+    }
   },
 
   sectionStyle: {
@@ -259,58 +263,60 @@ class FilterAndSortForm extends React.Component {
         }}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>
-          {"Filter and Sort Training"}
-        </DialogTitle>
-        <DialogContent>
-          <FormGroup className={classes.formStyle}>
-            <div className={classes.sectionStyle}>
-              {this.filterOptions.map((label, index) => {
-                return (<Filter
-                  key={index}
-                  label={label}
-                  handlePaidClick={this.handlePaidClick}
-                  handleFreeClick={this.handleFreeClick}
-                />
-                )
-              })}
-            </div>
-            <div className={classes.sectionStyle}>
-              <Typography className={classes.groupStyle}>
-                SORT BY
-              </Typography>
-              <RadioGroup name="sort">
-                {this.sortOptions.map((label, index) => {
-                  return (<Sort
+        <div className={classes.formStyle}>
+          <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>
+            {"Filter and Sort Training"}
+          </DialogTitle>
+          <DialogContent>
+            <FormGroup>
+              <div className={classes.sectionStyle}>
+                {this.filterOptions.map((label, index) => {
+                  return (<Filter
                     key={index}
                     label={label}
-                    select={this.setSort}
-                    sortSelection={this.state.sortSelection}
-                  />);
+                    handlePaidClick={this.handlePaidClick}
+                    handleFreeClick={this.handleFreeClick}
+                  />
+                  )
                 })}
-              </RadioGroup>
-            </div>
-            <Grid container>
-              <Grid item xs={7}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  onClick={() => {
-                    this.props.hideFilter();
-                    this.handleFormSubmission()
-                  }}
-                >See Training Results</Button>
+              </div>
+              <div className={classes.sectionStyle}>
+                <Typography className={classes.groupStyle}>
+                  SORT BY
+              </Typography>
+                <RadioGroup name="sort">
+                  {this.sortOptions.map((label, index) => {
+                    return (<Sort
+                      key={index}
+                      label={label}
+                      select={this.setSort}
+                      sortSelection={this.state.sortSelection}
+                    />);
+                  })}
+                </RadioGroup>
+              </div>
+              <Grid container>
+                <Grid item xs={7}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    onClick={() => {
+                      this.props.hideFilter();
+                      this.handleFormSubmission()
+                    }}
+                  >See Training Results</Button>
+                </Grid>
+                <Grid item xs={5}>
+                  <Button
+                    onClick={this.props.hideFilter}
+                    style={{ marginLeft: '20px' }}
+                  >CANCEL</Button>
+                </Grid>
               </Grid>
-              <Grid item xs={5}>
-                <Button
-                  onClick={this.props.hideFilter}
-                  style={{ marginLeft: '20px' }}
-                >CANCEL</Button>
-              </Grid>
-            </Grid>
-          </FormGroup>
-        </DialogContent>
+            </FormGroup>
+          </DialogContent>
+        </div>
       </Dialog>
     );
   }

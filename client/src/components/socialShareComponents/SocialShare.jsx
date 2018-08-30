@@ -9,7 +9,17 @@ import SendTextDialog from './SendTextDialog.jsx';
 import Drawer from '@material-ui/core/Drawer';
 import Snackbar from '@material-ui/core/Snackbar';
 import { isMobileOnly } from 'react-device-detect';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  drawer: {
+    textAlign: 'center'
+  },
+  paper: {
+    width: '580px',
+    margin: '0 auto'
+  }
+});
 class SocialShare extends React.Component {
   constructor(props) {
     super(props);
@@ -47,14 +57,19 @@ class SocialShare extends React.Component {
       }
     }
 
+    const { classes } = this.props;
     return (
       <div>
         <Drawer
           anchor="bottom"
           open={this.props.open}
           onClose={this.props.toggleDrawer}
-          style={{ textAlign: 'center' }}
-        >
+          className={classes.drawer}
+          PaperProps={{
+            classes: {
+              root: classes.paper
+            }
+          }}>
           <div style={{ display: 'inline-flex', margin: '20px 5px' }}>
             <Facebook 
               styles={styles} 
@@ -104,4 +119,4 @@ class SocialShare extends React.Component {
   }
 }
 
-export default SocialShare;
+export default withStyles(styles)(SocialShare);

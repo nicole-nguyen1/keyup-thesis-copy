@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   image: {
-    backgroundImage: 'url(https://s3.amazonaws.com/key-up-assets/Copy-of-Home-Page-Top-Image.jpg)',
+    backgroundImage: 'url(https://s3.us-east-2.amazonaws.com/keyup-assets/Copy-of-Home-Page-Top-Image.jpg)',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',

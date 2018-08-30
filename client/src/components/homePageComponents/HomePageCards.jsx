@@ -101,7 +101,7 @@ class HomePageCards extends React.Component {
               <CardContent className={classes.cardContentStyle}>
                 <div className={classes.cardTextStyle}>
                   <div className={classes.iconDiv}>
-                    <img src='https://s3.amazonaws.com/key-up-assets/White-chat-on-blue-circle.png'
+                    <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/White-chat-on-blue-circle.png'
                       className={classes.icon}
                     />
                   </div>
@@ -130,7 +130,7 @@ class HomePageCards extends React.Component {
               <CardContent className={classes.cardContentStyle}>
                 <div className={classes.cardTextStyle}>
                   <div className={classes.iconDiv}>
-                    <img src='https://s3.amazonaws.com/key-up-assets/white-suitcase-on-blue-circle.png'
+                    <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/white-suitcase-on-blue-circle.png'
                       className={classes.icon}
                     />
                   </div>

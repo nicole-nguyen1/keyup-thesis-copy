@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Header from './Header.jsx';
 import ViewFavorites from './ViewFavorites.jsx';
 import AccountInfo from './AccountInfo.jsx';
@@ -28,6 +29,10 @@ class UserProfile extends React.Component {
   }
 
   render() {
+    const token = localStorage.getItem('jwt');
+    if (token === null) {
+      return (<Redirect to={{ pathname: '/home'}} />)
+    }
     return (
       <div>
         <Header user={this.props.user}/>
