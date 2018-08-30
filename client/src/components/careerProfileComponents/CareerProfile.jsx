@@ -10,6 +10,13 @@ import Trainings from './Trainings.jsx';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
+  profile: {
+    [theme.breakpoints.up('sm')]: {
+      width: '550px',
+      margin: '0 auto'
+    }
+  },
+
   card: {
     borderRadius: 0,
     padding: '5px'
@@ -39,6 +46,13 @@ const styles = theme => ({
 
   listItem: {
     margin: '10px 0'
+  },
+
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 const CareerProfile = (props) => {
@@ -48,7 +62,7 @@ const CareerProfile = (props) => {
     const career = props.career;
 
     return (
-      <div>
+      <div className={classes.profile}>
         <IntroCard 
           career={career} 
           careerID={props.careerID} 
@@ -59,7 +73,7 @@ const CareerProfile = (props) => {
         <EarningsOpenings career={career} />
         <TasksSkills career={career}/>
         <Card className={classes.dark}>
-          <CardContent>
+          <CardContent className={classes.content}>
             <Typography variant='title' className={classes.lightText}>Job Satisfaction</Typography>
           </CardContent>
           <ProsCons info={career} />

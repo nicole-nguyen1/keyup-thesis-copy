@@ -122,6 +122,7 @@ class CreatePasswordContainer extends React.Component {
       query: resetPassword(formArguments)
     })
     .then((res) => {
+      console.log(res);
       if (!res.errors) {
         return res;
       } else {
@@ -131,6 +132,7 @@ class CreatePasswordContainer extends React.Component {
       }
     })
     .then((res) => {
+      console.log(res);
       if (!res.errors) {
         store.dispatch(findUser(res.data.resetPassword));
       }

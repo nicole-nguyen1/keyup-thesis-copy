@@ -24,7 +24,6 @@ import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
 import EnterEmailContainer from './passwordResetComponents/EnterEmailContainer.jsx';
 import PasswordEmailSuccess from './passwordResetComponents/PasswordEmailSuccess.jsx';
 import CreatePasswordContainer from './passwordResetComponents/CreatePasswordContainer.jsx';
-import MediaQuery from 'react-responsive';
 import {
   getCareersQuery,
   getIndustriesQuery,
@@ -34,7 +33,7 @@ import {
   addFavoriteToList,
   removeFavoriteFromList
 } from './graphql/graphql';
-import { Paper, createMuiTheme } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 
 const newHistory = createBrowserHistory();
 class App extends React.Component {

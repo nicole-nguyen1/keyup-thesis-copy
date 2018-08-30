@@ -19,6 +19,13 @@ const styles = theme => ({
 
   listItem: {
     margin: '10px 0'
+  },
+
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 
@@ -28,7 +35,7 @@ const TasksSkills = (props) => {
   return (
     <div>
       <Card className={classes.card}>
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography variant='title'>Typical Tasks</Typography>
           {props.career.tasks ?
             props.career.tasks.map((task) => {
@@ -42,7 +49,7 @@ const TasksSkills = (props) => {
               )
             }) : null}
         </CardContent>
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography variant='title'>Skills Needed</Typography>
           {props.career.skills ?
             props.career.skills.map((skill) => {

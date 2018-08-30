@@ -18,6 +18,13 @@ const styles = theme => ({
 
   listItem: {
     margin: '10px 0'
+  },
+
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 
@@ -26,7 +33,7 @@ const ProsCons = (props) => {
 
   return (
     <div>
-      <CardContent>
+      <CardContent className={classes.content}>
         <Typography variant='subheading' style={{
           color: '#1DCD8C',
           textAlign: 'center'
@@ -43,7 +50,7 @@ const ProsCons = (props) => {
             )
           }) : null}
       </CardContent>
-      <CardContent>
+      <CardContent className={classes.content}>
         <Typography variant='subheading' style={{
           color: '#E9DC00',
           textAlign: 'center'

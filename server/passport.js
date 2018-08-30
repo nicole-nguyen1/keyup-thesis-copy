@@ -158,7 +158,7 @@ const resetPassword = (email, password, req) => {
       });
     })
     .catch((err) => {
-      throw new Error('Could not reset password', err);
+      throw new Error('Could not reset password or sign user in', err);
     })
 }
 
