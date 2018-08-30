@@ -83,7 +83,7 @@ class EditAccountForm extends React.Component {
         last_name: this.props.user.last_name,
         email: this.props.user.email,
         phone_number: this.props.user.phone_number,
-        zip: zip
+        zip: this.props.user.zip
       })
     }
   }
@@ -196,7 +196,7 @@ class EditAccountForm extends React.Component {
           type="text"
           name="zip"
           placeholder="Zip Code (optional)"
-          value={"" || this.state.zip}
+          value={this.state.zip}
           className={classes.inputStyle}
           onChange={this.handleChange}
           InputProps={{

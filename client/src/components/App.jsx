@@ -3,6 +3,7 @@ import { createApolloFetch } from 'apollo-fetch';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
+import { withStyles } from '@material-ui/core/styles';
 import Careers from './Careers.jsx';
 import { findCareers, getIndustries, findUser, getFavorites } from '../actions/action';
 import { Switch, Route, Router } from 'react-router-dom';
@@ -33,6 +34,7 @@ import {
   addFavoriteToList,
   removeFavoriteFromList
 } from './graphql/graphql';
+import { Paper } from '@material-ui/core';
 
 const newHistory = createBrowserHistory();
 class App extends React.Component {
@@ -53,7 +55,6 @@ class App extends React.Component {
   componentDidMount() {
     this.getUser()
     this.getCareers();
-    // this.getFavorites();
     this.fetch({
       query: getIndustriesQuery
     }).then(res => {
@@ -96,12 +97,6 @@ class App extends React.Component {
       showFavorites: false
     });
   }
-    
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.user.user.id !== prevProps.user.user.id) {
-  //     this.getFavorites();
-  //   }
-  // }
 
   getCareers = () => {
     this.fetch({
@@ -122,6 +117,7 @@ class App extends React.Component {
       query: getFavoritesQuery(token || null)
     })
     .then((res) => {
+      console.log(res);
       store.dispatch(getFavorites(res.data));
     });
   }
@@ -232,6 +228,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <Router history={newHistory} >
         <div>
@@ -244,8 +241,7 @@ class App extends React.Component {
           getUser={this.getUser}
           user={this.props.user}
           />
-          <MediaQuery query="(min-width: 600px)">
-            <div style={{ marginTop: '64px' }}>
+            <Paper className={classes.root}>
               <Switch>
                 <Route exact path="/home" render={props => {
                   return <Home 
@@ -317,6 +313,7 @@ class App extends React.Component {
                     filterCareers={this.filterCareers}
                     removeFavorite={this.removeFavorite}
                     addFavorite={this.addFavorite}
+                    favorites={this.props.favorites}
                   />;
                 }} />
                 <Route path="/careers/:id" render={props => {
@@ -347,120 +344,22 @@ class App extends React.Component {
                   />;
                 }} />
               </Switch>
-            </div>
-          </MediaQuery>
-          <MediaQuery query="(max-width: 599px)">
-            <div style={{ marginTop: '56px' }}>
-              <Switch>
-              <Route exact path="/home" render={props => {
-                  return <Home 
-                  router={props}
-                  getUser={this.getUser}
-                  getFavorites={this.getFavorites}
-                  />
-                }} />
-                <Route exact path="/terms-and-conditions" component={TermsConditions} />
-                <Route exact path="/privacy-policy" component={PrivacyPolicy} />
-                <Route exact path="/login" component={LoginContainer} />
-                <Route exact path="/signup" component={SignUpForm} />
-                <Route exact path='/password/request' component={EnterEmailContainer} />
-                <Route exact path='/password/email-sent' render={props => {
-                  return <PasswordEmailSuccess router={props} />
-                }} />
-                <Route path='/password/reset/:token' render={props => {
-                  return <CreatePasswordContainer router={props}/>
-                }} />
-                <Route exact path="/profile" render={props => {
-                  return <UserProfile
-                    router={props}
-                    getUser={this.getUser}
-                    user={this.props.user.user}
-                  />
-                }} />
-                <Route exact path="/profile/edit" render={props => {
-                  return <EditAccountForm
-                    router={props}
-                    getUser={this.getUser}
-                    user={this.props.user.user}
-                  />;
-                }} />
-                <Route exact path="/favorites" render={props => {
-                  return <Favorites
-                    router={props}
-                    getUser={this.getUser}  
-                    favorites={this.props.favorites}
-                    getFavorites={this.getFavorites}
-                    removeFavorite={this.removeFavorite}
-                  />
-                }} />
-                <Route exact path="/favorites/careers" render={props => {
-                  return <Favorites
-                    router={props}
-                    getUser={this.getUser}
-                    favorites={this.props.favorites}
-                    getFavorites={this.getFavorites}
-                    removeFavorite={this.removeFavorite}
-                    active='careers'
-                  />
-                }} />
-                <Route exact path="/favorites/training-services" render={props => {
-                  return <Favorites
-                    router={props}
-                    getUser={this.getUser}
-                    favorites={this.props.favorites}
-                    getFavorites={this.getFavorites}
-                    removeFavorite={this.removeFavorite}
-                    active='trainings'
-                  />
-                }} />
-                <Route exact path="/careers" render={props => {
-                  return <Careers
-                    router={props}
-                    getUser={this.getUser}
-                    careers={this.props.careers}
-                    industries={this.props.industries}
-                    filterCareers={this.filterCareers}
-                    favorites={this.props.favorites}
-                    removeFavorite={this.removeFavorite}
-                    addFavorite={this.addFavorite}
-                  />;
-                }} />
-                <Route path="/careers/:id" render={props => {
-                  return <CareerProfileContainer
-                    router={props} 
-                    favorites={this.props.favorites} 
-                    removeFavorite={this.removeFavorite}
-                    addFavorite={this.addFavorite}
-                    getUser={this.getUser}
-                  />;
-                }} />
-                <Route path='/services/:id' render={props => {
-                  return <ServiceListContainer 
-                    router={props} 
-                    favorites={this.props.favorites}
-                    removeFavorite={this.removeFavorite}
-                    addFavorite={this.addFavorite}
-                    getUser={this.getUser}
-                  />;
-                }} />
-                <Route path='/service/:id' render={props => {
-                  return <TrainingServiceProfileContainer 
-                    router={props} 
-                    favorites={this.props.favorites}
-                    removeFavorite={this.removeFavorite}
-                    addFavorite={this.addFavorite}
-                    getUser={this.getUser}
-                  />;
-                }} />
-              </Switch>
-            </div>
-          </MediaQuery>
+            </Paper>
           <Footer />
         </div>
       </Router>
     );
   }
 }
+
+const styles = theme => ({
+  root: {
+    marginTop: '56px',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: '64px'
+    }
+  }
+})
 
 const mapStateToProps = state => {
   return {
@@ -475,4 +374,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ findCareers, getIndustries, findUser, getFavorites }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App));

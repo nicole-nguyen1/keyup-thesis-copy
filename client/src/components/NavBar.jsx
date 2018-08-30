@@ -88,35 +88,35 @@ class NavBar extends React.Component {
               PopoverClasses={{ paper: `${classes.menu}` }}
               className={classes.top}
             >
-            {this.props.showAccountInfo ? 
-                      (<div className={classes.logoutStyles}>
-                      
-                      <Typography variant="body1" align="center" style={{color: '#02ED96', marginBottom: '10px'}}>
-                        Account
-                      </Typography>
-                      <Typography variant="body1" align="center" style={{color: 'white'}}>
+              <div className={classes.menuTop}>
+                {this.props.showAccountInfo ?
+                  (<div className={classes.menuTopItems}>
+                    <Typography variant="body1" align="center" style={{ color: '#02ED96', marginBottom: '10px' }}>
+                      Account
+                        </Typography>
+                    <Typography variant="body1" align="center" style={{ color: 'white' }}>
                       {this.props.user.email || null}
-                      </Typography>
-                      
-                      </div>) : 
-              (<div className={classes.menuTop}>
-                <Link to="/login" className={classes.link}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.buttonStyle}
-                    onClick={this.handleClose}
-                  >
-                    SIGN IN
-                  </Button>
-                </Link>
-                  <Link to='/signup' className={classes.link}>
-                  <Typography onClick={this.handleClose} style={{ marginBottom: '3em' }} className={classes.menuTop}>
-                    Create an account
-                  </Typography>
-                </Link>
-              </div>)
-              }
+                    </Typography>
+                  </div>) :
+                  (<div className={classes.menuTopItems}>
+                      <Link to="/login" className={classes.link}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.buttonStyle}
+                          onClick={this.handleClose}
+                        >
+                          SIGN IN
+                    </Button>
+                      </Link>
+                      <Link to='/signup' className={classes.link}>
+                        <Typography onClick={this.handleClose} style={{ color: 'white' }}>
+                          Create an account
+                    </Typography>
+                      </Link>
+                    </div>)
+                }
+              </div>
               <MenuItem onClick={this.handleClose}>
                 <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                   <ListItemIcon>
@@ -226,7 +226,8 @@ NavBar.styles = {
     top: '0!important',
     left: '0!important',
     borderRadius: '0',
-    padding: '0'
+    paddingBottom: '30px',
+    width: '304px'
   },
   tools: {
     top: 0,
@@ -244,14 +245,17 @@ NavBar.styles = {
     textAlign: 'center',
     color: '#fff',
     fontWeight: 'normal',
-    margin: '0',
-    height: '100px',
-    marginBottom: '0em',
     height: '100%',
+    marginBottom: '1em',
     outline: 'none',
-    // marginTop: '-10px',
-    padding: '0',
-    border: 'none!important'
+    border: 'none!important',
+    display: 'table',
+    width: '100%',
+    padding: '25px 0'
+  },
+
+  menuTopItems: {
+    display: 'table-cell'
   },
 
   top: {
@@ -265,7 +269,6 @@ NavBar.styles = {
   buttonStyle: {
     backgroundColor: '#1DCD8C',
     borderRadius: 0,
-    marginTop: '3em',
     marginBottom: '1em',
     textDecoration: 'none',
     borderRadius: '2px'
