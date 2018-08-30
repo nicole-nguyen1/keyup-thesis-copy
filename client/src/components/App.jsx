@@ -354,6 +354,9 @@ class App extends React.Component {
 const styles = theme => ({
   root: {
     marginTop: '56px',
+    width: '100vw',
+    borderRadius: '0',
+    marginLeft: '-7px',
     [theme.breakpoints.up('sm')]: {
       marginTop: '64px'
     }
