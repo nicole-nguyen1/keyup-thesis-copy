@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   image: {
-    backgroundImage: 'url(https://s3.amazonaws.com/key-up-assets/Copy-of-Home-Page-Top-Image.jpg)',
+    backgroundImage: 'url(https://s3.amazonaws.com/keyup-assets/Copy-of-Home-Page-Top-Image.jpg)',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -71,8 +71,34 @@ class Intro extends React.Component {
     super(props);
   }
 
+<<<<<<< Updated upstream
   render() { 
     const { classes } = this.props;
+=======
+  render() {
+    const style = {
+      image: {
+        backgroundImage: 'url(https://s3.amazonaws.com/keyup-assets/Copy-of-Home-Page-Top-Image.jpg)',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      },
+      foreground: {
+        width: '100%',
+        backgroundColor: 'rgba(0, 0, 255, 0.3)',
+        color: 'white'
+      }, 
+      text: {
+        textAlign: 'center',
+        padding: '10vh 5vh'
+      },
+      blackBox: {
+        backgroundColor: 'rgba(0,0,0,0.35)',
+        width: '100%'
+      }
+    };
+
+>>>>>>> Stashed changes
     return (
       <div className={classes.image}>
         <div className={classes.foreground}>

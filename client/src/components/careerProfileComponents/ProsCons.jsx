@@ -37,7 +37,7 @@ const ProsCons = (props) => {
               <div key={pro.id} className={classes.listItem}>
                 <img
                   className={classes.bullets}
-                  src='https://s3.amazonaws.com/key-up-assets/White-thumbs-up-symbol.png' />
+                  src='https://s3.amazonaws.com/keyup-assets/White-thumbs-up-symbol.png' />
                 <Typography gutterBottom variant='body1' className={classes.lightTextList}>{pro.description}</Typography>
               </div>
             )
@@ -54,7 +54,7 @@ const ProsCons = (props) => {
               <div key={con.id} className={classes.listItem}>
                 <img
                   className={classes.bullets}
-                  src='https://s3.amazonaws.com/key-up-assets/white-thumbs-down.png' />
+                  src='https://s3.amazonaws.com/keyup-assets/white-thumbs-down.png' />
                 <Typography gutterBottom variant='body1' className={classes.lightTextList}>{con.description}</Typography>
               </div>
             )

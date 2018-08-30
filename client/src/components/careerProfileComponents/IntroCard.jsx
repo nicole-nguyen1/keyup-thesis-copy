@@ -63,11 +63,11 @@ class IntroCard extends React.Component {
           <CardActions className={classes.cardAction}>
             <Button component={Link} to={`/services/${this.props.careerID}`}>
               <Typography gutterBottom variant='body1' className={classes.link}>FIND TRAINING</Typography>
-              <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' className={classes.icon} />
+              <img src='https://s3.amazonaws.com/keyup-assets/Graduation-Cap-icon.png' className={classes.icon} />
             </Button>
             <Button onClick={this.toggleDrawer}>
               <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
-              <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' className={classes.icon} />
+              <img src='https://s3.amazonaws.com/keyup-assets/Share-Symbol.png' className={classes.icon} />
             </Button>
             <HeartContainer 
               profile={true}

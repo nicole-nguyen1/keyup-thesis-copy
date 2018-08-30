@@ -8,7 +8,7 @@ const Text = (props) => {
       <Grid item
         role="button"
         onClick={props.handleClick}>
-        <img src='https://s3.amazonaws.com/key-up-assets/Text-Icon.png' style={props.styles.bottomIcon} />
+        <img src='https://s3.amazonaws.com/keyup-assets/Text-Icon.png' style={props.styles.bottomIcon} />
         <Typography variant='caption'>Text</Typography>
       </Grid>
     </div>

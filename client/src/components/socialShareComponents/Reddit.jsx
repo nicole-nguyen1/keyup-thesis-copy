@@ -11,7 +11,7 @@ const Reddit = (props) => {
       <a href={redditUrl} style={{ textDecoration: 'none' }}>
         <Grid item
           role="button">
-          <img src='https://s3.amazonaws.com/key-up-assets/Reddit-logo-true.png' style={props.styles.topIcon} />
+          <img src='https://s3.amazonaws.com/keyup-assets/Reddit-logo-true.png' style={props.styles.topIcon} />
           <Typography variant='caption'>Reddit</Typography>
         </Grid>
       </a>
