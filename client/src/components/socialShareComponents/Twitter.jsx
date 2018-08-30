@@ -12,7 +12,7 @@ const Twitter = (props) => {
       <a href={twitterUrl} style={{ textDecoration: 'none' }}>
         <Grid item
           role="button">
-          <img src='https://s3.amazonaws.com/keyup-assets/Twitter-Logo-True.png' style={props.styles.topIcon} />
+          <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Twitter-Logo-True.png' style={props.styles.topIcon} />
           <Typography variant='caption'>Twitter</Typography>
         </Grid>
       </a>

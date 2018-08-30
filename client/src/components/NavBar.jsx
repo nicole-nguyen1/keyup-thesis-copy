@@ -184,7 +184,7 @@ class NavBar extends React.Component {
                       (<MenuItem onClick={this.handleSignOut}>
                       <Link to="/home">
                         <ListItemIcon>
-                          <img src='https://s3.amazonaws.com/keyup-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
+                          <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
                         </ListItemIcon>
                         <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
                         </ListItemText>
@@ -196,7 +196,7 @@ class NavBar extends React.Component {
             <Typography variant="display1" color="inherit">
               <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                 <Button onClick={this.handleClose} className={classes.home}>
-                  <img src='https://s3.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' />
+                  <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' />
                 </Button>
               </HashLink>
             </Typography>

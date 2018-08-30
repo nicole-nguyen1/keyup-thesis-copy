@@ -15,7 +15,7 @@ class Facebook extends React.Component {
           <Share href={this.props.url}>
             <Grid item
               role="button">
-              <img src='https://s3.amazonaws.com/keyup-assets/facebook-logo-true.png' style={this.props.styles.topIcon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/facebook-logo-true.png' style={this.props.styles.topIcon} />
               <Typography variant='caption'>Facebook</Typography>
             </Grid>
           </Share>

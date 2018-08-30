@@ -59,11 +59,11 @@ class About extends React.Component {
         <CardActions className={classes.cardAction}>
         <Button onClick={this.props.toggleQualifyDialog}>
               <Typography gutterBottom variant='body1' className={classes.link}>ADVICE</Typography>
-              <img src='https://s3.amazonaws.com/keyup-assets/Advice-Icon-Blue.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Advice-Icon-Blue.png' className={classes.icon} />
             </Button>
             <Button onClick={this.props.toggleDialog}>
               <Typography gutterBottom variant='body1' className={classes.link}>APPLY</Typography>
-              <img src='https://s3.amazonaws.com/keyup-assets/Graduation-Cap-icon.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Graduation-Cap-icon.png' className={classes.icon} />
             </Button>
             <HeartComponent 
               profile={true}
@@ -74,7 +74,7 @@ class About extends React.Component {
             />
             <Button onClick={this.toggleDrawer}>
               <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
-              <img src='https://s3.amazonaws.com/keyup-assets/Share-Symbol.png' className={classes.icon} />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Share-Symbol.png' className={classes.icon} />
             </Button>
           </CardActions>
           <CardContent style={{ paddingTop: 0 }}>

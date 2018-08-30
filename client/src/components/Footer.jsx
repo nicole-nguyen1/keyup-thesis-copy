@@ -44,17 +44,17 @@ const Footer = (props) => {
         <div className={classes.section}>
           <Grid item xs={4} className={classes.icon}>
             <a href='https://www.facebook.com/KeyUpAustin/'>
-              <img src='https://s3.amazonaws.com/keyup-assets/facebook-logo-icon-white.png' width='25px' height='25px' />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/facebook-logo-icon-white.png' width='25px' height='25px' />
             </a>
           </Grid>
           <Grid item xs={4} className={classes.icon}>
             <a href='https://www.linkedin.com/company/keyupaustin/'>
-              <img src='https://s3.amazonaws.com/keyup-assets/linkedin-icon-white.png' width='25px' height='25px' />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/linkedin-icon-white.png' width='25px' height='25px' />
             </a>
           </Grid>
           <Grid item xs={4} className={classes.icon}>
             <a href='https://www.instagram.com/keyupaustin/?hl=en'>
-              <img src='https://s3.amazonaws.com/keyup-assets/instagram-icon-white.png' width='25px' height='25px' />
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/instagram-icon-white.png' width='25px' height='25px' />
             </a>
           </Grid>
         </div>

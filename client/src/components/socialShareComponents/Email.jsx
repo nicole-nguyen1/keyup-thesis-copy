@@ -10,7 +10,7 @@ const Email = (props) => {
       <a href={url} style={{ textDecoration: 'none' }}>
         <Grid item
           role="button">
-          <img src='https://s3.amazonaws.com/keyup-assets/Email-Icon.png' style={props.styles.bottomIcon} />
+          <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Email-Icon.png' style={props.styles.bottomIcon} />
           <Typography variant='caption'>Email</Typography>
         </Grid>
       </a>
