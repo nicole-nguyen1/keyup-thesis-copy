@@ -186,12 +186,7 @@ export const resetPassword = (args) => (
       token: ${args.token},
       password: ${args.password}
     ) {
-      id
-      email
-      phone_number
-      first_name
-      last_name
-      zip
+      token
     }
   }
   `
@@ -276,38 +271,6 @@ export const getTrainingFave = (args) => (
   }`
 );
 
-export const saveCareer = (args) => (
-  `
-  mutation {
-    saveFavorite(
-      user_id: ${args.user_id},
-      career_id: ${args.career_id}
-    ) {
-      id
-      user_id
-      career_id
-      service_id
-    }
-  }
-  `
-);
-
-export const saveTraining = (args) => (
-  `
-  mutation {
-    saveFavorite(
-      user_id: ${args.user_id},
-      service_id: ${args.service_id}
-    ) {
-      id
-      user_id
-      career_ids
-      service_id
-    }
-  }
-  `
-);
-
 export const removeFavoriteFromList = (args) => (
   `
   mutation {
@@ -333,7 +296,6 @@ export const addFavoriteToList = (args) => (
 );
 
 export const logout = `
-
   mutation {
     logout {
       message
@@ -346,7 +308,6 @@ export const findUserEmail = (args) => (
   `
   {
     userEmail(email: ${args}) {
-      id
       email
     }
   }
@@ -357,7 +318,6 @@ export const checkToken = (args) => (
   `
   {
     token(token: ${args}) {
-      id
       email
     }
   }
