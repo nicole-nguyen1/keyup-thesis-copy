@@ -191,7 +191,6 @@ const TrainingTraitType = new GraphQLObjectType({
 const UserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
-    id: { type: GraphQLID },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
     first_name: { type: GraphQLString },
@@ -425,7 +424,7 @@ const RootQuery = new GraphQLObjectType({
       args: { token: { type: GraphQLString }},
       resolve(parent, args) {
         return knex('users')
-          .select('id', 'email', 'resetPasswordToken', 'resetPasswordExpiry')
+          .select('email', 'resetPasswordToken', 'resetPasswordExpiry')
           .where('resetPasswordToken', args.token)
           .first()
           .then((res) => {
@@ -468,9 +467,9 @@ const Mutation = new GraphQLObjectType({
         phone_number: { type: GraphQLString },
         zip: { type: GraphQLString }
       },
-      resolve(parent, { token, email, first_name, last_name, phone_number, zip }, req) {
+      resolve(parent, { token, email, first_name, last_name, phone_number, zip }) {
         return checkAuth(token)
-          .then(user => updateInfoHelper(user.id, email, first_name, last_name, phone_number, zip, req))
+          .then(user => updateInfoHelper(user.id, email, first_name, last_name, phone_number, zip))
       }
     },
 
@@ -486,18 +485,18 @@ const Mutation = new GraphQLObjectType({
     },
 
     resetPassword: {
-      type: UserType,
+      type: TokenType,
       args: { 
         token: { type: GraphQLString },
         password: { type: GraphQLString }
       },
-      resolve(parent, args, req) {
+      resolve(parent, args, context) {
         return knex('users')
           .select()
           .where('resetPasswordToken', args.token)
           .first()
           .then((res) => {
-            return resetPassword(res.email, args.password, req);
+            return resetPassword(res.email, args.password, context);
           })
       }
     },
