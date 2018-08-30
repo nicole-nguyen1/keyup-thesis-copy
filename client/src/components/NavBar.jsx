@@ -49,20 +49,16 @@ class NavBar extends React.Component {
   };
 
   handleSignOut = () => {
-    this.fetch({
-      query: logout
-    }).then(() => {
-      const nullObj = {
-        id: '',
-        email: '',
-        first_name: '',
-        last_name: '',
-        phone_number: ''
-      };
-      store.dispatch(findUser(nullObj))
-    }).then(() => {
-      this.props.toggle();
-    })
+    localStorage.removeItem('jwt');
+    const nullObj = {
+      id: '',
+      email: '',
+      first_name: '',
+      last_name: '',
+      phone_number: ''
+    };
+    store.dispatch(findUser(nullObj))
+    this.props.toggle();
     this.handleClose()
   }
 

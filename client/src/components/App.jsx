@@ -63,29 +63,30 @@ class App extends React.Component {
   }
 
   getUser = () => {
-    this.fetch({
-      query: getLoggedInUser
-    }).then(res => {
-      store.dispatch(findUser(res.data.loggedInUser));
-      return res;
-    }).then((res) => {
-      if (res.data.loggedInUser && res.data.loggedInUser.id) {
-        this.getFavorites(res.data.loggedInUser.id)
-        this.setState({
-          showSignOutButton: true,
-          showAccountInfo: true,
-          showProfile: true,
-          showFavorites: true
-        })
-      } else {
-        this.setState({
-          showSignOutButton: false,
-          showAccountInfo: false,
-          showProfile: false,
-          showFavorites: false
-        })
-      }
-    })
+    let token = localStorage.getItem('jwt');
+    if (token) {
+      token = JSON.stringify(token);
+      this.fetch({
+        query: getLoggedInUser(token)
+      })
+      .then(res => {
+        store.dispatch(findUser(res.data.loggedInUser))
+      })
+      this.getFavorites(token)
+      this.setState({
+        showSignOutButton: true,
+        showAccountInfo: true,
+        showProfile: true,
+        showFavorites: true
+      })
+    } else {
+      this.setState({
+        showSignOutButton: false,
+        showAccountInfo: false,
+        showProfile: false,
+        showFavorites: false
+      })
+    }
   }
 
   toggle = () => {
@@ -111,9 +112,9 @@ class App extends React.Component {
     });
   }
 
-  getFavorites = (id) => {
+  getFavorites = (token) => {
     this.fetch({
-      query: getFavoritesQuery(id || null)
+      query: getFavoritesQuery(token || null)
     })
     .then((res) => {
       store.dispatch(getFavorites(res.data));
@@ -121,12 +122,12 @@ class App extends React.Component {
   }
 
   addFavorite = (args) => {
-    args.userID = this.props.user.user.id;
+    args.token = JSON.stringify(localStorage.getItem('jwt'));
     this.fetch({
       query: addFavoriteToList(args)
     })
-    .then((res)=> {
-      this.getFavorites(this.props.user.user.id);
+    .then(()=> {
+      this.getFavorites(args.token);
     })
   }
 
@@ -134,8 +135,8 @@ class App extends React.Component {
     this.fetch({
       query: removeFavoriteFromList(favoriteID)
     })
-    .then((res)=> {
-      this.getFavorites(this.props.user.user.id);
+    .then(()=> {
+      this.getFavorites(JSON.stringify(localStorage.getItem('jwt')));
     })
   }
 

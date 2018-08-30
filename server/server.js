@@ -5,7 +5,6 @@ const graphQLHTTP = require('express-graphql');
 const path = require('path');
 const schema = require('./graphql/schema');
 const { passport } = require('./passport.js');
-const session = require('express-session');
 
 const port = process.env.PORT || 1337;
 
@@ -16,16 +15,16 @@ const app = express();
 //====================
 app.use(express.static(path.join(__dirname, '../client/dist'), { index: false }));
 app.use(bodyParser.json());
-app.use(session({secret: process.env.SECRET, resave: false, saveUninitialized: false, cookie:{maxAge: 600000}}));
+
 app.use(passport.initialize());
-app.use(passport.session());
 //====================
 //ENDPOINTS
 //====================
-app.use('/graphql', graphQLHTTP({
+app.use('/graphql', graphQLHTTP((req, res) => ({
     schema,
-    graphiql: true
-  })
+    graphiql: true,
+    context: {req, res}
+  }))
 );
 
 

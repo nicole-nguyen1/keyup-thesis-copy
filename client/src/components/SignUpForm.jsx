@@ -169,7 +169,7 @@ class SignUpForm extends React.Component {
       })
     })
     .then(res => {
-      store.dispatch(findUser(res.data.signUp));
+      localStorage.setItem('jwt', res.data.signUp.token);
       this.props.history.goBack();
     })
   }
