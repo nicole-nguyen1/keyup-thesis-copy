@@ -12,7 +12,14 @@ const styles = theme => ({
     padding: '60px 15px',
     backgroundColor: 'EDEDEE',
     height: '100vh'
-  }
+  },
+  message: {
+    width: '320px',
+    margin: '0 auto',
+    [theme.breakpoints.up('sm')]: {
+      width: '500px'
+    }
+  },
 });
 
 class PasswordEmailSuccess extends React.Component {
@@ -33,18 +40,20 @@ class PasswordEmailSuccess extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.paper}>
-        <Typography variant="headline" paragraph>
-          Message Sent
-        </Typography> 
-        <div>
-          <Typography variant="body1" paragraph>
-            If {this.state.email} exists in our system, we've just sent you a
-            password reset link via email.
+        <div className={classes.message}>
+          <Typography variant="headline" paragraph>
+            Message Sent
           </Typography>
-          <Typography variant="body1" paragraph>
-            If you don't receive an email, check your spam folder or contact customer service
+          <div>
+            <Typography variant="body1" paragraph>
+              If {this.state.email} exists in our system, we've just sent you a
+              password reset link via email.
+          </Typography>
+            <Typography variant="body1" paragraph>
+              If you don't receive an email, check your spam folder or contact customer service
             at <a href='mailto:maryhannah.duhon@keyup.services' className={classes.link}>maryhannah.duhon@keyup.services</a>.
           </Typography>
+          </div>
         </div>
       </div>
     )

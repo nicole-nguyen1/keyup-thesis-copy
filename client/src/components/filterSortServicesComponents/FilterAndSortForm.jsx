@@ -29,7 +29,7 @@ const styles = theme => ({
   },
 
   formStyle: {
-    width: '360px',
+    width: '320px',
     margin: '0 auto',
     [theme.breakpoints.up('sm')]: {
       width: '500px'
