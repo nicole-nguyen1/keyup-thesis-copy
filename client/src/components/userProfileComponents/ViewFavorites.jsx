@@ -47,7 +47,7 @@ class ViewFavorites extends React.Component {
           <Typography variant='title'>Favorites</Typography>
         </div>
         <div className={classes.section}>
-          <img src='https://s3.amazonaws.com/key-up-assets/Detailed-Briefcase-for-User-Profile-Page-black.png' className={classes.image} />
+          <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Detailed-Briefcase-for-User-Profile-Page-black.png' className={classes.image} />
           <Button 
             variant='contained' 
             color='primary' 
@@ -55,7 +55,7 @@ class ViewFavorites extends React.Component {
             href='/favorites/careers'>View Favorited Careers</Button>
         </div>
         <div className={classes.section}>
-          <img src='https://s3.amazonaws.com/key-up-assets/Schoolhouse-black.png' className={classes.image} />
+          <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Schoolhouse-black.png' className={classes.image} />
           <Button 
             variant='contained' 
             color='primary' 

@@ -46,25 +46,25 @@ const HowItWorks = props => {
         <Typography variant='subheading' className={classes.title} paragraph>How KeyUp Works</Typography>
         <div className={classes.grid}>
           <div className={classes.cell}>
-            <img src='https://s3.amazonaws.com/key-up-assets/lightbulb-white.png' className={classes.image} />
+            <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/lightbulb-white.png' className={classes.image} />
             <Typography gutterBottom variant='body1' style={{ color: '#ffae51' }}>Learn</Typography>
             <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Get recommendations or browse careers that are in-demand in Austin</Typography>
           </div>
 
           <div className={classes.cell}>
-            <img src='https://s3.amazonaws.com/key-up-assets/Zero-In-(target).png' className={classes.image} />
+            <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Zero-In-(target).png' className={classes.image} />
             <Typography gutterBottom variant='body1' style={{ color: '#b2c3fd' }}>Zero In</Typography>
             <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Find training services in Austin that fit into your life</Typography>
           </div>
 
           <div className={classes.cell}>
-            <img src='https://s3.amazonaws.com/key-up-assets/Connect-(handshake)-icon.png' className={classes.image} />
+            <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Connect-(handshake)-icon.png' className={classes.image} />
             <Typography gutterBottom variant='body1' style={{ color: '#e9dc00' }}>Connect</Typography>
             <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Get matched to support programs that can pay for tuition, childcare, etc.</Typography>
           </div>
 
           <div className={classes.cell}>
-            <img src='https://s3.amazonaws.com/key-up-assets/Go-(rocket-ship)-icon.png' className={classes.image} />
+            <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Go-(rocket-ship)-icon.png' className={classes.image} />
             <Typography gutterBottom variant='body1' style={{ color: '#02ed96' }}>Go!</Typography>
             <Typography gutterBottom variant='body1' style={{ color: '#ededee' }}>Apply and start on your path to a better future</Typography>
           </div>
