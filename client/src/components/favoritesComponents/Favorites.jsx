@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { createApolloFetch } from 'apollo-fetch';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
@@ -121,6 +122,11 @@ class Favorites extends React.Component {
   }
 
   render() {
+    const token = localStorage.getItem('jwt');
+    if (token === null) {
+      return (<Redirect to={{ pathname: '/home'}} />)
+    }
+    
     const { classes } = this.props;
     const faves = this.props.favorites.favorites;
     let component;
