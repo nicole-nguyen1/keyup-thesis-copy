@@ -139,7 +139,11 @@ class AccountInfo extends React.Component {
                 variant='contained'
                 color='primary'
                 className={classes.button}
-              >Reset Password</Button>
+              >
+                <Link to={{ pathname: '/password/request', state: { user: this.props.user } }}
+                  className={classes.buttonText}
+                >Reset Password</Link>
+              </Button>
             </div>
           </div>
         </div>

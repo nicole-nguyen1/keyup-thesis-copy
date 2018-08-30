@@ -116,7 +116,6 @@ class App extends React.Component {
       query: getFavoritesQuery(token || null)
     })
     .then((res) => {
-      console.log(res);
       store.dispatch(getFavorites(res.data));
     });
   }

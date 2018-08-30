@@ -72,7 +72,6 @@ class LoginContainer extends React.Component {
         })
       }
     }).then((res) => {
-      console.log('2:  ', res)
       if (!res.errors) {
         localStorage.setItem('jwt', res.data.login.token);
         this.props.history.goBack();

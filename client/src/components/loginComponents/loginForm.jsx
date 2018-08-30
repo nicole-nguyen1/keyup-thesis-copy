@@ -54,6 +54,12 @@ class LoginForm extends React.Component {
     super(props);
   }
 
+  handleEnterPress = (e) => {
+    if (e.key === 'Enter') {
+      this.props.submitForm();
+    }
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -74,6 +80,7 @@ class LoginForm extends React.Component {
             onChange={this.props.handleEmailChange}
           />
           <Input
+            onKeyPress={this.handleEnterPress}
             type="password"
             name="password"
             placeholder="Password"

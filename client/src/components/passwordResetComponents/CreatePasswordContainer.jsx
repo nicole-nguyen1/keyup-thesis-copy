@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getPageTitle, findUser } from '../../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { checkToken, resetPassword } from '../graphql/graphql';
+import { checkToken, resetPassword, getLoggedInUser } from '../graphql/graphql';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 
 class CreatePasswordContainer extends React.Component {
@@ -122,7 +122,6 @@ class CreatePasswordContainer extends React.Component {
       query: resetPassword(formArguments)
     })
     .then((res) => {
-      console.log(res);
       if (!res.errors) {
         return res;
       } else {
@@ -132,12 +131,13 @@ class CreatePasswordContainer extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
-      if (!res.errors) {
-        store.dispatch(findUser(res.data.resetPassword));
-      }
+      localStorage.setItem('jwt', res.data.resetPassword.token);
+      return this.fetch({
+        query: getLoggedInUser(JSON.stringify(res.data.resetPassword.token))
+      });
     })
-    .then((res) => {
+    .then(res => {
+      store.dispatch(findUser(res.data.loggedInUser));
       this.setState({ redirect: true });
     })
     .catch((err) => {

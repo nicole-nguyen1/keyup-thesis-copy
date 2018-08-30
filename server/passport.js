@@ -106,7 +106,7 @@ const login = (email, password, context) => {
   });
 };
 
-const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, req) => {
+const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip) => {
   return knex('users')
     .select()
     .where({ id })
@@ -133,7 +133,7 @@ const updateInfoHelper = (id, email, first_name, last_name, phone_number, zip, r
     })
 }
 
-const resetPassword = (email, password, req) => {
+const resetPassword = (email, password, context) => {
   return knex('users')
     .select()
     .where({ email })
@@ -153,9 +153,7 @@ const resetPassword = (email, password, req) => {
     })
     .then((res) => {
       let user = res[0];
-      req.login(user, () => {
-        return user;
-      });
+      return login(user.email, password, context);
     })
     .catch((err) => {
       throw new Error('Could not reset password or sign user in', err);
