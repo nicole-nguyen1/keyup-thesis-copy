@@ -1,5 +1,4 @@
 import React from 'react';
-import { logout } from './graphql/graphql';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,6 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import LogoutDialog from './LogoutDialog.jsx';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
@@ -36,7 +36,7 @@ class NavBar extends React.Component {
 
     this.state = {
       anchorEl: null,
-      
+      confirmLogout: false
     };
   }
 
@@ -48,6 +48,10 @@ class NavBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  confirmClose = () => {
+    this.setState({ confirmLogout: false });
+  }
+
   handleSignOut = () => {
     localStorage.removeItem('jwt');
     const nullObj = {
@@ -57,9 +61,10 @@ class NavBar extends React.Component {
       last_name: '',
       phone_number: ''
     };
-    store.dispatch(findUser(nullObj))
+    store.dispatch(findUser(nullObj));
     this.props.toggle();
-    this.handleClose()
+    this.handleClose();
+    this.setState({ confirmLogout: true });
   }
 
   render() {
@@ -205,6 +210,10 @@ class NavBar extends React.Component {
             </Typography>
           </Toolbar>
         </AppBar>
+        <LogoutDialog 
+          open={this.state.confirmLogout}
+          onClose={this.confirmClose}
+        />
       </div>
     );
   }
