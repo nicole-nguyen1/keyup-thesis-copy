@@ -17,18 +17,6 @@ const styles = theme => ({
     }
   },
 
-  card: {
-    borderRadius: 0,
-    padding: '5px'
-  },
-
-  bullets: {
-    position: 'relative',
-    height: '1em',
-    top: '2px',
-    marginRight: '20px'
-  },
-
   dark: {
     backgroundColor: '#232E49',
     borderRadius: 0,
@@ -37,15 +25,6 @@ const styles = theme => ({
 
   lightText: {
     color: '#EDEDED'
-  },
-
-  lightTextList: {
-    color: '#EDEDED',
-    display: 'inline'
-  },
-
-  listItem: {
-    margin: '10px 0'
   },
 
   content: {

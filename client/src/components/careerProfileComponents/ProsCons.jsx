@@ -30,6 +30,22 @@ const styles = theme => ({
 
 const ProsCons = (props) => {
   const { classes } = props;
+  let component;
+
+  if (!props.info.cons || props.info.cons.length === 0) {
+    component = (<Typography gutterBottom variant='body1' style={{ color: '#FFFFFF', textAlign: 'center' }}>There are no cons! Go for it!</Typography>);
+  } else if (props.info.cons.length > 1) {
+    component = (props.info.cons.map((con) => {
+      return (
+        <div key={con.id} className={classes.listItem}>
+          <img
+            className={classes.bullets}
+            src='https://s3.amazonaws.com/key-up-assets/white-thumbs-down.png' />
+          <Typography gutterBottom variant='body1' className={classes.lightTextList}>{con.description}</Typography>
+        </div>
+      )
+    }))
+  }
 
   return (
     <div>
@@ -51,21 +67,11 @@ const ProsCons = (props) => {
           }) : null}
       </CardContent>
       <CardContent className={classes.content}>
-        <Typography variant='subheading' style={{
+        <Typography variant='subheading' gutterBottom style={{
           color: '#E9DC00',
           textAlign: 'center'
         }}>CONS</Typography>
-        {props.info.cons ?
-          props.info.cons.map((con) => {
-            return (
-              <div key={con.id} className={classes.listItem}>
-                <img
-                  className={classes.bullets}
-                  src='https://s3.amazonaws.com/key-up-assets/white-thumbs-down.png' />
-                <Typography gutterBottom variant='body1' className={classes.lightTextList}>{con.description}</Typography>
-              </div>
-            )
-          }) : null}
+        {component}
       </CardContent>
     </div>
   )

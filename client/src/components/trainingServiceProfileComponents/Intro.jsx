@@ -10,7 +10,7 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     textAlign: 'center',
-    padding: '80px 0 0 0'
+    paddingTop: '40px'
   },
   foreground: {
     width: '200px',
@@ -26,7 +26,7 @@ const styles = theme => ({
   },
   text: {
     textAlign: 'center',
-    padding: '10vh 5vh',
+    padding: '20px 0 40px 0',
     color: 'white'
   }
 });
