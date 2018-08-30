@@ -1,25 +1,15 @@
-const nodemailer = require('nodemailer');
+const api_key = process.env.MG_API_KEY;
+const DOMAIN = process.env.DOMAIN_NAME;
+const mailgun = require('mailgun-js')({ apiKey: api_key, domain: DOMAIN });
 
 const contactForm = (req) => {
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.EMAIL_PW
-    }
-  });
-
   let name = null;
   const email = req.email || 'no-sender@email.com';
   const phone = req.phone_number || 'n/a';
   const message = req.message || 'n/a';
   let selectedOptions = [];
-  let mailOptions = {
-    from: `"${name}", ${email}`,
-    to: process.env.EMAIL,
-    replyTo: `${email}`
-  };
+  let subject = '';
+  let html = '';
 
   if (req.last_name !== null) {
     name = `${req.first_name} ${req.last_name}`;
@@ -48,18 +38,18 @@ const contactForm = (req) => {
   } 
 
   if (req.page === 'Homepage') {
-    mailOptions.subject = 'Contact Form',
-    mailOptions.html = `
+    subject = 'Contact Form';
+    html = `
       <h3>Contact Info</h3>
       <li>Name: ${name}</li>
       <li>Email: ${email}</li>
       <li>Phone: ${phone}</li>
       <h3>Message</h3>
       <p>${message}</p>
-    `
+    `;
   } else if (req.page === 'Training Service Profile') {
-      mailOptions.subject = 'Contact Form',
-      mailOptions.html = `
+      subject = 'Contact Form';
+      html = `
         <h3>Contact Info</h3>
         <li>Name: ${name}</li>
         <li>Email: ${email}</li>
@@ -70,13 +60,19 @@ const contactForm = (req) => {
         <li>Topics: ${selectedOptions.join(', ')}</li>
         <h3>Message</h3>
         <p>${message}</p>
-      `
+      `;
   }
   
-  transporter.sendMail(mailOptions, (error) => {
-    if (error) {
-      return console.error(error);
-    } 
+  let data = {
+    from: `${name} ${email}`,
+    to: 'contact@keyup.services',
+    subject: `${subject}`,
+    html: `${html}
+      `
+  };
+
+  mailgun.messages().send(data, function (error, body) {
+    console.log(body);
   });
 };
 

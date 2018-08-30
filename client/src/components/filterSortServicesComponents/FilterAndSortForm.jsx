@@ -37,7 +37,7 @@ const styles = theme => ({
   },
 
   sectionStyle: {
-    display: 'inline-grid',
+    // display: 'inline-grid',
     marginBottom: '30px'
   },
 
