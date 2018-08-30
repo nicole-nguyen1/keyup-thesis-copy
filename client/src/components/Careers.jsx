@@ -21,11 +21,12 @@ const styles = theme => ({
 
   popUpText: {
     color: '#88888A',
-    textAlign: 'left'
+    textAlign: 'left',
+    padding: '0 15px 15px'
   },
 
   popUpTitle: {
-    padding: '20px 10px 20px 10px', 
+    padding: '20px 15px', 
     textAlign: 'left'
   },
 
@@ -41,7 +42,7 @@ const styles = theme => ({
   },
 
   buttons: {
-    margin: '0 auto',
+    // margin: '0 auto',
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
@@ -65,8 +66,14 @@ const styles = theme => ({
     float: 'right',
     fontWeight: 'bold',
     textAlign: 'right',
-    padding: '0',
+    padding: '0 15px',
+    
     // alignSelf: 'flex-end'
+  },
+
+  cancelDiv: {
+    display: 'flex',
+    alignSelf: 'flex-end'
   }
 });
 
@@ -124,13 +131,13 @@ class Careers extends React.Component {
          <DialogTitle className={classes.popUpTitle}>
            {"Sign In or Create Account"}
          </DialogTitle>
-         <DialogContent>
-           <Typography variant='body1' className={classes.popUpText}>
+         <DialogContent className={classes.popUpText}>
+           <Typography variant='body1'>
              Sign in or create an account to save your favorite career and training options. 
            </Typography>
          </DialogContent>
-         <DialogActions>
-           <div className={classes.buttons}>
+         <DialogActions className={classes.buttons}>
+           <div >
             <div>
               <Link to='/login' className={classes.link}>
                 <Button 
@@ -150,12 +157,12 @@ class Careers extends React.Component {
                   </Button>
               </Link>
             </div>
-            <div>
+           </div>
+            <div className={classes.cancelDiv}>
               <Button onClick={this.handleClose} className={classes.cancelButton}>
                 CANCEL
               </Button>
             </div>
-           </div>
          </DialogActions>
         </Dialog>
       </div>
