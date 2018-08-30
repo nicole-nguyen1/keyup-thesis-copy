@@ -343,8 +343,8 @@ class App extends React.Component {
                   />;
                 }} />
               </Switch>
+            <Footer />
             </Paper>
-          <Footer />
         </div>
       </Router>
     );
