@@ -111,6 +111,7 @@ class Career extends React.Component {
                   careerID={String(this.props.career.id)}
                   removeFavorite={this.props.removeFavorite}
                   addFavorite={this.props.addFavorite}
+                  handlePopUp={this.props.handlePopUp}
                 />
               </Grid>
             </Grid>

@@ -23,7 +23,7 @@ import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
-import { getPageTitle, findUser } from '../actions/action';
+import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
 import { HashLink } from 'react-router-hash-link';
 import { createApolloFetch } from 'apollo-fetch';
 
@@ -61,7 +61,14 @@ class NavBar extends React.Component {
       last_name: '',
       phone_number: ''
     };
+    const nullFaves = {
+      id: '',
+      career_id: '',
+      service_id: ''
+    };
+   
     store.dispatch(findUser(nullObj));
+    store.dispatch(getFavorites(nullFaves));
     this.props.toggle();
     this.handleClose();
     this.setState({ confirmLogout: true });
@@ -70,7 +77,6 @@ class NavBar extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
-
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
@@ -186,15 +192,15 @@ class NavBar extends React.Component {
                 </HashLink>
               </MenuItem>
               {this.props.showSignOutButton ? 
-                      (<MenuItem onClick={this.handleSignOut}>
-                      <Link to="/home">
-                        <ListItemIcon>
-                          <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
-                        </ListItemIcon>
-                        <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
-                        </ListItemText>
-                      </Link>
-                    </MenuItem>) : null
+                      (<Link to="/home">
+                        <MenuItem onClick={this.handleSignOut}>
+                          <ListItemIcon>
+                            <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
+                          </ListItemIcon>
+                          <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
+                          </ListItemText>
+                        </MenuItem>
+                      </Link>) : null
               }
               
             </Menu>
