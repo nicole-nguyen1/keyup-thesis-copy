@@ -95,6 +95,7 @@ const Service = props => {
                 favorites={props.favorites}
                 removeFavorite={props.removeFavorite}
                 addFavorite={props.addFavorite}
+                handlePopUp={props.handlePopUp}
               />
             </Grid>
           </Grid>
