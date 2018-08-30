@@ -127,6 +127,11 @@ class EditAccountForm extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const token = localStorage.getItem('jwt');
+    
+    if (token === null) {
+      return (<Redirect to={{ pathname: '/home'}} />)
+    }
 
     if (this.state.redirect === true) {
       return (<Redirect to={{ pathname: '/profile', state: { updatedInfo: true }}} />);
