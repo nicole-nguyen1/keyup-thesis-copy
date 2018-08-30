@@ -36,7 +36,7 @@ const TasksSkills = (props) => {
                 <div key={task.id} className={classes.listItem}>
                   <img
                     className={classes.bullets}
-                    src='https://s3.amazonaws.com/key-up-assets/Checkbox-for-Typical-Tasks-Icon.png' />
+                    src='https://s3.us-east-2.amazonaws.com/keyup-assets/Checkbox-for-Typical-Tasks-Icon.png' />
                   <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{task.description}</Typography>
                 </div>
               )
@@ -50,7 +50,7 @@ const TasksSkills = (props) => {
                 <div key={skill.id} className={classes.listItem}>
                   <img
                     className={classes.bullets}
-                    src='https://s3.amazonaws.com/key-up-assets/Head-Symbol.png' />
+                    src='https://s3.us-east-2.amazonaws.com/keyup-assets/Head-Symbol.png' />
                   <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{skill.description}</Typography>
                 </div>
               )

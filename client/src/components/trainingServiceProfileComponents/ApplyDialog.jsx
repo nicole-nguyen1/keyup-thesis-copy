@@ -26,7 +26,7 @@ function ApplyPhone(props) {
         display: 'block',
         bottom: '16px'
       }}>
-      <img src='https://s3.amazonaws.com/key-up-assets/Phone-blue.png' 
+      <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Phone-blue.png' 
         style={{
           height: '1.5em',
           paddingBottom: '10px'
@@ -88,7 +88,7 @@ const AlertDialogSlide = props => {
           {props.service.apply_now_cta ? <MultiLineParagraph text={props.service.apply_now_cta} /> : props.service.apply_now_cta}
             {props.service.app_type === 'in person' ? 
               <div className={classes.phone}>
-                <img src='https://s3.amazonaws.com/key-up-assets/Phone-blue.png' className={classes.phoneIcon} />
+                <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Phone-blue.png' className={classes.phoneIcon} />
                 <Typography variant='body1'>{props.service.app_phone_number}</Typography>
               </div> : null}
         </DialogContent>
