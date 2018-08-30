@@ -26,6 +26,7 @@ import { store } from '../store/index';
 import { getPageTitle, findUser } from '../actions/action';
 import { HashLink } from 'react-router-hash-link';
 import { createApolloFetch } from 'apollo-fetch';
+import { Grid } from '@material-ui/core';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -70,16 +71,30 @@ class NavBar extends React.Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar className={classes.tools}>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-              aria-owns={anchorEl ? 'simple-menu' : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <MenuIcon image="#" />
-            </IconButton>
+            <Grid container className={classes.grid}>
+              <Grid item xs={1} sm={1} className={classes.home}>
+                <IconButton
+                  className={classes.menuButton}
+                  color="inherit"
+                  aria-label="Menu"
+                  aria-owns={anchorEl ? 'simple-menu' : null}
+                  aria-haspopup="true"
+                  onClick={this.handleClick}
+                >
+                  <MenuIcon image="#" />
+                </IconButton>
+                {/* <div className={classes.home}> */}
+                  <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
+                    <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px' style={{ position: 'relative', top: '12px' }} />
+                  </HashLink>
+                {/* </div> */}
+              </Grid>
+              <Grid item xs={9} sm={11} className={classes.pageTitle}>
+                <Typography variant="subheading" color="inherit" className={classes.flex}>
+                  {this.props.pages}
+                </Typography>
+              </Grid>
+            </Grid>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
@@ -117,7 +132,7 @@ class NavBar extends React.Component {
                     </div>)
                 }
               </div>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                   <ListItemIcon>
                     <HomeIcon />
@@ -126,7 +141,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </HashLink>
               </MenuItem>
-              {this.props.showProfile ? (<MenuItem onClick={this.handleClose}>
+              {this.props.showProfile ? (<MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <Link to="/profile">
                   <ListItemIcon>
                     <AccountCircleIcon />
@@ -135,7 +150,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </Link>
               </MenuItem>) : null}
-              {this.props.showFavorites ? (<MenuItem onClick={this.handleClose}>
+              {this.props.showFavorites ? (<MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <Link to="/favorites">
                   <ListItemIcon>
                     <FavoriteIcon />
@@ -144,7 +159,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </Link>
               </MenuItem>) : null}
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <Link to="/careers">
                   <ListItemIcon>
                     <SearchIcon />
@@ -153,7 +168,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <a style={{ textDecoration: 'none' }} href='https://keyup.typeform.com/to/dlfXQi'>
                   <ListItemIcon style={{ position: 'relative', top: '4px' }}>
                     <ChatIcon />
@@ -162,7 +177,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </a>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#about">
                   <ListItemIcon>
                     <InfoIcon />
@@ -171,7 +186,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </HashLink>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <HashLink scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#contact">
                   <ListItemIcon>
                     <PeopleIcon />
@@ -181,7 +196,7 @@ class NavBar extends React.Component {
                 </HashLink>
               </MenuItem>
               {this.props.showSignOutButton ? 
-                      (<MenuItem onClick={this.handleSignOut}>
+                      (<MenuItem onClick={this.handleSignOut} classes={{ root: classes.menuItem }}>
                       <Link to="/home">
                         <ListItemIcon>
                           <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
@@ -193,16 +208,6 @@ class NavBar extends React.Component {
               }
               
             </Menu>
-            <Typography variant="display1" color="inherit">
-              <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
-                <Button onClick={this.handleClose} className={classes.home}>
-                  <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px' />
-                </Button>
-              </HashLink>
-            </Typography>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              {this.props.pages}
-            </Typography>
           </Toolbar>
         </AppBar>
       </div>
@@ -229,6 +234,9 @@ NavBar.styles = {
     paddingBottom: '30px',
     width: '304px'
   },
+  menuItem: {
+    whiteSpace: "unset"
+  },
   tools: {
     top: 0,
     left: 0,
@@ -236,8 +244,16 @@ NavBar.styles = {
     display: 'flex',
     backgroundColor: '#4469FF'
   },
+  grid: {
+    display: 'table'
+  },
   home: {
-    padding: '0'
+    display: 'flex'
+  },
+  pageTitle: {
+    display: 'table-cell',
+    verticalAlign: 'middle',
+    padding: '5px 0 5px 20px'
   },
   menuTop: {
     background: '#232E49',

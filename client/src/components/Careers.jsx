@@ -10,11 +10,21 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   background: {
-    backgroundColor: '#CFCFCE'
+    backgroundColor: '#CFCFCE',
+    paddingBottom: '1px',
+    borderRadius: '0'
   },
 
   grid: {
-    marginTop: '8px'
+    margin: '8px auto',
+    width: '97%',
+    [theme.breakpoints.up('sm')]: {
+      // width: '390px'
+      width: '589px'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '589px'
+    }
   }
 });
 

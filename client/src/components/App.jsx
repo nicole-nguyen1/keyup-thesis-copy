@@ -34,7 +34,7 @@ import {
   addFavoriteToList,
   removeFavoriteFromList
 } from './graphql/graphql';
-import { Paper } from '@material-ui/core';
+import { Paper, createMuiTheme } from '@material-ui/core';
 
 const newHistory = createBrowserHistory();
 class App extends React.Component {
@@ -359,7 +359,7 @@ const styles = theme => ({
       marginTop: '64px'
     }
   }
-})
+});
 
 const mapStateToProps = state => {
   return {
