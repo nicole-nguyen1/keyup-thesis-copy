@@ -88,7 +88,7 @@ class Career extends React.Component {
   render() {
     const { classes } = this.props;
     let plumber = `Pipefitter /\n\nPlumber`;
-    
+    console.log('props in career', this.props)
     return (
       <Grid item xs={12} className={classes.grid}>
         <MediaQuery query='(max-width: 599px)'>

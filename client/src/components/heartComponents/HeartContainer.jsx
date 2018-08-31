@@ -73,6 +73,7 @@ class HeartContainer extends React.Component {
   }
 
   render() {
+    
     return (
       this.state.isFavorite ?
         <HeartButton 

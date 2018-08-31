@@ -67,6 +67,7 @@ const ApplicationProcess = props => {
             favorites={props.favorites}
             removeFavorite={props.removeFavorite}
             addFavorite={props.addFavorite}
+            handlePopUp={props.handlePopUp}
           />
         </div>
         <CardContent className={classes.linkContainer}>
