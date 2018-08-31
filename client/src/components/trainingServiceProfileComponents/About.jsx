@@ -78,7 +78,7 @@ class About extends React.Component {
       <div>
         <Card style={{ borderRadius: 0 }}>
           <div className={classes.cardAction}>
-            <Button onClick={this.props.toggleQualifyDialog} className={classes.button}>
+            <Button onClick={this.props.toggleAdviceForm} className={classes.button}>
               <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Get-Advice-Symbol-Gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>ADVICE</Typography>
             </Button>

@@ -115,14 +115,16 @@ class AdviceFormContainer extends React.Component {
         formSubmitted: true
       })
     })
+    .then(() => {
+      this.props.toggleAdviceMessageSent();
+    })
     .catch((err)=>{console.log(err)})
   }
 
-  closePopup = () => {
-    
+  closePopup = () => { 
     this.setState({
       formSubmitted: false
-    })
+    });
   }
 
   render() {
@@ -133,7 +135,7 @@ class AdviceFormContainer extends React.Component {
           setCheckbox={this.setCheckbox}
           buttonStatus={this.state.buttonStatus}
           submitForm={this.submitForm}
-          toggleQualifyDialog={this.props.toggleQualifyDialog}
+          toggleAdviceForm={this.props.toggleAdviceForm}
           dialogState={this.props.dialogState}
         />
     );

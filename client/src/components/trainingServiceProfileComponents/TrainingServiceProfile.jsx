@@ -8,6 +8,7 @@ import ApplicationProcess from './ApplicationProcess.jsx';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core';
 import AdviceFormContainer from './AdviceFormContainer.jsx';
+import FormSubmitted from '../homePageComponents/FormSubmitted.jsx';
 
 const styles = theme => ({
   profile: {
@@ -28,7 +29,8 @@ class TrainingServiceProfile extends React.Component {
     super(props);
     this.state = {
       open: false,
-      openQualifyContainer: false
+      openAdviceForm: false,
+      adviceFormSubmitted: false
     };
   }
 
@@ -36,8 +38,16 @@ class TrainingServiceProfile extends React.Component {
     this.setState({ open: !this.state.open });
   };
 
-  toggleQualifyDialog = () => {
-    this.setState({ openQualifyContainer: !this.state.openQualifyContainer})
+  toggleAdviceForm = () => {
+    this.setState({ openAdviceForm: !this.state.openAdviceForm});
+  }
+
+  toggleAdviceMessageSent = () => {
+    this.setState({ adviceFormSubmitted: true });
+  }
+
+  handleClose = () => {
+    this.setState({ adviceFormSubmitted: false })
   }
 
   render() {
@@ -51,15 +61,16 @@ class TrainingServiceProfile extends React.Component {
           service={service} 
           open={this.state.open} 
           toggleDialog={this.toggleDialog}
-          toggleQualifyDialog={this.toggleQualifyDialog}
+          toggleAdviceForm={this.toggleAdviceForm}
           favorites={this.props.favorites}
           removeFavorite={this.props.removeFavorite}
           addFavorite={this.props.addFavorite}
         />
         <AdviceFormContainer 
           service={service}
-          toggleQualifyDialog={this.toggleQualifyDialog}
-          dialogState={this.state.openQualifyContainer}
+          toggleAdviceForm={this.toggleAdviceForm}
+          dialogState={this.state.openAdviceForm}
+          toggleAdviceMessageSent={this.toggleAdviceMessageSent}
         />
         <Card className={classes.dark}>
           <ProsCons info={service} />
@@ -72,10 +83,14 @@ class TrainingServiceProfile extends React.Component {
           service={service} 
           open={this.state.open} 
           toggleDialog={this.toggleDialog}
-          toggleQualifyDialog={this.toggleQualifyDialog}
+          toggleAdviceForm={this.toggleAdviceForm}
           favorites={this.props.favorites}
           removeFavorite={this.props.removeFavorite}
           addFavorite={this.props.addFavorite}
+        />
+        <FormSubmitted 
+          open={this.state.adviceFormSubmitted}
+          onClose={this.handleClose}
         />
       </div>
     );

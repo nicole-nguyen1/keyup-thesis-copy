@@ -157,7 +157,7 @@ class AdviceForm extends React.Component {
                 className={classes.buttonStyle}
                 onClick={() => {
                   this.props.submitForm();
-                  this.props.toggleQualifyDialog();
+                  this.props.toggleAdviceForm();
                 }}
                 disabled={this.props.buttonStatus}
               >
@@ -165,7 +165,7 @@ class AdviceForm extends React.Component {
             </Button>
               <Button
                 className={classes.cancelButtonStyle}
-                onClick={this.props.toggleQualifyDialog}
+                onClick={this.props.toggleAdviceForm}
               >
                 CANCEL
             </Button>
