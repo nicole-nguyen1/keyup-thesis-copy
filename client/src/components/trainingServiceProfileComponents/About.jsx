@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import SocialShare from '../socialShareComponents/SocialShare.jsx';
 import { withStyles } from '@material-ui/core';
-import HeartComponent from '../heartComponents/HeartContainer.jsx';
+import HeartContainer from '../heartComponents/HeartContainer.jsx';
 
 const styles = theme => ({
   cardAction: {
@@ -77,7 +77,7 @@ class About extends React.Component {
               <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/graduation-cap-gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>APPLY</Typography>
             </Button>
-            <HeartComponent 
+            <HeartContainer 
               profile={true}
               serviceID={this.props.service.id}
               favorites={this.props.favorites}

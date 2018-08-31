@@ -47,7 +47,9 @@ class SignUpFormContainer extends React.Component {
       passCheck: false,
       passConfirmCheck: false,
       invalidEmail: false,
-      showError: false
+      showError: false,
+      loginFromFaves: false,
+      createAccountFromFaves: false
     }
   }
 
