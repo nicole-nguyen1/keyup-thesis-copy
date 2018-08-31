@@ -151,7 +151,6 @@ class SignUpFormContainer extends React.Component {
       })
     })
     .then(res => {
-      console.log(res);
       localStorage.setItem('jwt', res.data.signUp.token);
       this.props.history.goBack();
     })

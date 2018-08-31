@@ -641,7 +641,8 @@ const Mutation = new GraphQLObjectType({
               }
               return res;
             })
-            .then((res) => res[0]);
+            .then((res) => res[0])
+            .catch((err) => console.error(err));
         });
 
       }

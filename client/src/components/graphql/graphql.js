@@ -281,19 +281,17 @@ export const removeFavoriteFromList = (args) => (
   `
 );
 
-export const addFavoriteToList = (args) => (
-  `
-    mutation {
-      saveFavorite(
-        token: ${args.token || null}
-        career_id: ${args.careerID || null}
-        service_id: ${args.serviceID || null}
-      ){
-        id
-      }
+export const addFavoriteToList = (args) => (`
+  mutation {
+    saveFavorite(
+      token: ${args.token || null}
+      career_id: ${args.careerID || null}
+      service_id: ${args.serviceID || null}
+    ){
+      id
     }
-  `
-);
+  }
+`);
 
 export const logout = `
   mutation {

@@ -19,8 +19,6 @@ class HeartContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('this.props', this.props.favorites);
-    // console.log('prev props', prevProps.favorites);
     if (this.props.favorites !== prevProps.favorites) {
       this.isFavorite();
     }
@@ -79,7 +77,6 @@ class HeartContainer extends React.Component {
   }
 
   render() {
-    
     return (
       this.state.isFavorite ?
         <HeartButton 

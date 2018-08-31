@@ -127,9 +127,9 @@ class App extends React.Component {
     this.fetch({
       query: addFavoriteToList(args)
     })
-    .then(()=> {
+    .then((res)=> {
       this.getFavorites(args.token);
-    })
+    });
   }
 
   removeFavorite = (favoriteID) => {
