@@ -2,6 +2,7 @@ import React from 'react';
 import Career from './Career.jsx';
 import Grid from '@material-ui/core/Grid';
 import FilterandSort from './filterAndSortComponents/FilterAndSort.jsx';
+import GoSignInDialog from './GoSignInDialog.jsx';
 import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -112,6 +113,7 @@ class Careers extends React.Component {
     if (this.state.renderPopUp) {
       console.log('this worked')
     }
+    console.log('props in careers', this.props)
     return (
       <div className={classes.background}>
         <FilterandSort 
@@ -130,44 +132,10 @@ class Careers extends React.Component {
             />;
           })}
         </Grid>
-        <Dialog open={this.state.renderPopUp} maxWidth={"xs"}>
-         <DialogTitle className={classes.popUpTitle}>
-           {"Sign In or Create Account"}
-         </DialogTitle>
-         <DialogContent className={classes.popUpText}>
-           <Typography variant='body1'>
-             Sign in or create an account to save your favorite career and training options. 
-           </Typography>
-         </DialogContent>
-         <DialogActions className={classes.buttons}>
-           <div >
-            <div>
-              <Link to='/login' className={classes.link}>
-                <Button 
-                  variant="contained"
-                  className={classes.buttonStyle}
-                >
-                  SIGN IN
-                </Button>
-              </Link>
-            </div>
-            <div>
-              <Link to='/signup' className={classes.link}>
-                <Button
-                  className={classes.createButtonStyle}
-                  >
-                    CREATE AN ACCOUNT
-                  </Button>
-              </Link>
-            </div>
-           </div>
-            <div className={classes.cancelDiv}>
-              <Button onClick={this.handleClose} className={classes.cancelButton}>
-                CANCEL
-              </Button>
-            </div>
-         </DialogActions>
-        </Dialog>
+        <GoSignInDialog 
+          open={this.state.renderPopUp}
+          onClose={this.handleClose}
+        />
       </div>
     );
   }

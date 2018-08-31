@@ -65,6 +65,7 @@ class TrainingServiceProfile extends React.Component {
           favorites={this.props.favorites}
           removeFavorite={this.props.removeFavorite}
           addFavorite={this.props.addFavorite}
+          handlePopUp={this.props.handlePopUp}
         />
         <AdviceFormContainer 
           service={service}
@@ -87,6 +88,7 @@ class TrainingServiceProfile extends React.Component {
           favorites={this.props.favorites}
           removeFavorite={this.props.removeFavorite}
           addFavorite={this.props.addFavorite}
+          handlePopUp={this.props.handlePopUp}
         />
         <FormSubmitted 
           open={this.state.adviceFormSubmitted}
