@@ -66,6 +66,7 @@ class About extends React.Component {
     const { classes } = this.props;
 
     return (
+    
       <div>
         <Card style={{ borderRadius: 0 }}>
           <div className={classes.cardAction}>

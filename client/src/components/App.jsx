@@ -54,6 +54,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getUser()
     this.getCareers();
+    // this.getFavorites()
     this.fetch({
       query: getIndustriesQuery
     }).then(res => {
@@ -127,16 +128,18 @@ class App extends React.Component {
     this.fetch({
       query: addFavoriteToList(args)
     })
-    .then(()=> {
+    .then((res)=> {
       this.getFavorites(args.token);
-    })
+    });
   }
 
   removeFavorite = (favoriteID) => {
+    console.log('favorite id', favoriteID)
     this.fetch({
       query: removeFavoriteFromList(favoriteID)
     })
-    .then(()=> {
+    .then((res)=> {
+      console.log('remove favorite', res);
       this.getFavorites(JSON.stringify(localStorage.getItem('jwt')));
     })
   }
@@ -229,6 +232,7 @@ class App extends React.Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <Router history={newHistory} >
         <div>

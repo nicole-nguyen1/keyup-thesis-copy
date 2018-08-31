@@ -5,13 +5,14 @@ class HeartContainer extends React.Component {
     super(props);
     this.state = {
       iconSize: 20,
-      isFavorite: false
+      isFavorite: false,
+      currentFavoriteID: ''
     };
-    this.updateArgs = {
-      serviceID: this.props.serviceID || null,
-      careerID: this.props.careerID || null,
-      favoriteID: '',
-    }
+    // this.updateArgs = {
+    //   serviceID: this.props.serviceID || null,
+    //   careerID: this.props.careerID || null,
+    //   favoriteID: '',
+    // }
   }
 
   componentDidMount () {
@@ -25,23 +26,38 @@ class HeartContainer extends React.Component {
   } 
 
   isFavorite = () => {
+    let updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      // favoriteID: '',
+    }
     let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
-            this.updateArgs.favoriteID = this.props.favorites[favorite].id;
+            updateArgs.favoriteID = this.props.favorites[favorite].id;
+            this.setState({
+              currentFavoriteID: updateArgs.favoriteID
+            });
             favoriteFound = true;
-            this.turnMeBlue()
+            this.turnMeBlue();
             break;
+          } else {
+            this.setState({ isFavorite: false });
           }
         }
     } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
-          this.updateArgs.favoriteID = this.props.favorites[favorite].id;
+          updateArgs.favoriteID = this.props.favorites[favorite].id;
+          this.setState({
+            currentFavoriteID: updateArgs.favoriteID
+          });
           this.turnMeBlue();
           favoriteFound = true;
           break;
+        } else {
+          this.setState({ isFavorite: false });
         }
       }
     }
@@ -54,26 +70,35 @@ class HeartContainer extends React.Component {
   }
 
   removeFavorite = () => {
+    let updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      favoriteID: this.state.currentFavoriteID || null,
+    }
     this.setState({
       isFavorite: false
     })
-    this.props.removeFavorite(this.updateArgs.favoriteID);
+    this.props.removeFavorite(updateArgs.favoriteID);
   }
 
   addFavorite = () => {
+    let updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      // favoriteID: '',
+    }
     let token = localStorage.getItem('jwt');
       if (token) {
         this.setState({
           isFavorite: true
         })
-        this.props.addFavorite(this.updateArgs);
+        this.props.addFavorite(updateArgs);
       } else {
         this.props.handlePopUp();
       }
   }
 
   render() {
-    
     return (
       this.state.isFavorite ?
         <HeartButton 
