@@ -205,7 +205,7 @@ class NavBar extends React.Component {
                 </HashLink>
               </MenuItem>
               {this.props.showSignOutButton ? 
-                (<Link to="/home">
+                (<Link to="/home" className={classes.link} >
                   <MenuItem onClick={this.handleSignOut} classes={{ root: classes.menuItem }}>
                     <ListItemIcon>
                       <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
