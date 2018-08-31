@@ -17,7 +17,7 @@ import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.j
 import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
 import LoginContainer from './loginComponents/loginContainer.jsx';
-import SignUpForm from './SignUpForm.jsx';
+import SignUpFormContainer from './signupComponents/SignUpFormContainer.jsx';
 import UserProfile from './userProfileComponents/UserProfile.jsx';
 import Favorites from './favoritesComponents/Favorites.jsx';
 import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
@@ -253,7 +253,7 @@ class App extends React.Component {
                 <Route exact path="/terms-and-conditions" component={TermsConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/login" component={LoginContainer} />
-                <Route exact path="/signup" component={SignUpForm} />
+                <Route exact path="/signup" component={SignUpFormContainer} />
                 <Route exact path='/password/request' component={EnterEmailContainer}/>
                 <Route exact path='/password/email-sent' render={props => {
                   return <PasswordEmailSuccess router={props} />

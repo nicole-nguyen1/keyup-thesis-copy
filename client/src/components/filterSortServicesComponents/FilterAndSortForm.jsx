@@ -115,7 +115,6 @@ class FilterAndSortForm extends React.Component {
       let temp3 = {trainings: temp2}
       store.dispatch(findServices(temp3))
     } else {
-      console.log('res', res)
       let temp = {trainings: res.data.trainings}
       let temp2 = this.checkSortState(temp.trainings);
       let temp3 = {trainings: temp2}

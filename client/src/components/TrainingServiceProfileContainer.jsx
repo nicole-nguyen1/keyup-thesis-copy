@@ -56,6 +56,7 @@ class TrainingServiceProfileContainer extends React.Component {
       <GoSignInDialog 
         open={this.state.renderPopUp}
         onClose={this.handleClose}
+        page={this.props.router.location.pathname}
       />
       </div>
     );

@@ -41,6 +41,7 @@ class ServiceListContainer extends React.Component {
         favorites={faves}
         removeFavorite={this.props.removeFavorite}
         addFavorite={this.props.addFavorite}
+        page={this.props.router.location.pathname}
       />;
     }
   }

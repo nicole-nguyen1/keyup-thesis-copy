@@ -121,6 +121,7 @@ class Services extends React.Component {
         <GoSignInDialog 
           open={this.state.renderPopUp}
           onClose={this.handleClose}
+          page={this.props.page}
         />
       </div>
     );

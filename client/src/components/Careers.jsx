@@ -9,7 +9,6 @@ import { bindActionCreators } from 'redux';
 import { getPageTitle } from '../actions/action';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
 
 const styles = theme => ({
   background: {
@@ -21,63 +20,6 @@ const styles = theme => ({
   grid: {
     margin: '8px auto',
     width: '97%'
-  },
-
-  popUpText: {
-    color: '#88888A',
-    textAlign: 'left',
-    padding: '0 15px 15px'
-  },
-
-  popUpTitle: {
-    padding: '20px 15px', 
-    textAlign: 'left'
-  },
-
-  buttonStyle: {
-    backgroundColor: '#4469FF',
-    color: 'white',
-    borderRadius: 0,
-    padding: '5px 30px',
-    borderRadius: '2px',
-    marginBottom: '20px',
-    textDecoration: 'none',
-    outline: 'none'
-  },
-
-  buttons: {
-    // margin: '0 auto',
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center'
-  },
-
-  createButtonStyle: {
-    // float: 'left',
-    fontWeight: 'bold',
-    color: '#4469FF',
-    borderRadius: '2px',
-    padding: '5px 30px',
-    marginBottom: '10px'
-  },
-
-  link: {
-    textDecoration: 'none'
-  },
-
-  cancelButton: {
-    float: 'right',
-    fontWeight: 'bold',
-    textAlign: 'right',
-    padding: '0 15px',
-    
-    // alignSelf: 'flex-end'
-  },
-
-  cancelDiv: {
-    display: 'flex',
-    alignSelf: 'flex-end'
   }
 });
 
@@ -110,10 +52,7 @@ class Careers extends React.Component {
   render() {
     const { classes } = this.props;
     const faves = this.props.favorites.favorites;
-    if (this.state.renderPopUp) {
-      console.log('this worked')
-    }
-    console.log('props in careers', this.props)
+
     return (
       <div className={classes.background}>
         <FilterandSort 
@@ -135,6 +74,7 @@ class Careers extends React.Component {
         <GoSignInDialog 
           open={this.state.renderPopUp}
           onClose={this.handleClose}
+          page={this.props.router.location.pathname}
         />
       </div>
     );

@@ -8,19 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
-
 const styles = theme => ({
-  background: {
-    backgroundColor: '#CFCFCE',
-    paddingBottom: '1px',
-    borderRadius: '0'
-  },
-
-  grid: {
-    margin: '8px auto',
-    width: '97%'
-  },
-
   popUpText: {
     color: '#88888A',
     textAlign: 'left',
@@ -44,7 +32,6 @@ const styles = theme => ({
   },
 
   buttons: {
-    // margin: '0 auto',
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
@@ -52,7 +39,6 @@ const styles = theme => ({
   },
 
   createButtonStyle: {
-    // float: 'left',
     fontWeight: 'bold',
     color: '#4469FF',
     borderRadius: '2px',
@@ -68,9 +54,7 @@ const styles = theme => ({
     float: 'right',
     fontWeight: 'bold',
     textAlign: 'right',
-    padding: '0 15px',
-    
-    // alignSelf: 'flex-end'
+    padding: '0 15px'
   },
 
   cancelDiv: {
@@ -80,8 +64,8 @@ const styles = theme => ({
 });
 
 const GoSignInDialog = (props) => {
-  console.log('props', props);
   const { classes } = props;
+
   return (
     <Dialog open={props.open} maxWidth={'xs'}>
       <DialogTitle className={classes.popUpTitle}>
@@ -95,7 +79,11 @@ const GoSignInDialog = (props) => {
       <DialogActions className={classes.buttons}>
         <div >
           <div>
-            <Link to='/login' className={classes.link}>
+            <Link to={{ 
+              pathname: '/login',
+              state: { loginFromFaves: true, page: props.page } 
+            }} 
+            className={classes.link}>
               <Button
                 variant="contained"
                 className={classes.buttonStyle}
@@ -105,7 +93,11 @@ const GoSignInDialog = (props) => {
             </Link>
           </div>
           <div>
-            <Link to='/signup' className={classes.link}>
+            <Link to={{
+              pathname: '/signup',
+              state: { createAccountFromFaves: true, page: props.page }
+            }} 
+            className={classes.link}>
               <Button
                 className={classes.createButtonStyle}
               >
