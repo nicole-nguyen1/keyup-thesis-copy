@@ -72,6 +72,6 @@ const HowItWorks = props => {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default withStyles(styles)(HowItWorks);

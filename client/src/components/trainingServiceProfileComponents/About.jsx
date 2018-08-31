@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import SocialShare from '../socialShareComponents/SocialShare.jsx';
@@ -10,10 +9,6 @@ import HeartComponent from '../heartComponents/HeartContainer.jsx';
 
 const styles = theme => ({
   cardAction: {
-    // display: 'block',
-    // textAlign: 'right',
-    // marginTop: '10px',
-    // padding: '0 10px 0 0'
     textAlign: 'center',
     display: 'flex',
     width: '300px',
@@ -27,10 +22,6 @@ const styles = theme => ({
   },
 
   icon: {
-    // position: 'relative',
-    // top: '-4px',
-    // left: '10px',
-    // height: '1em'
     position: 'relative',
     padding: '5px',
     height: '1em'

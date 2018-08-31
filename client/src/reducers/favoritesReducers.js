@@ -11,9 +11,9 @@ let defaultState = {
 
 const favoritesReducers = (state = defaultState, action) => {
   switch (action.type) {
-    case 'FAVORITE':
-      return Object.assign({}, {favorites: action.payload});
-    default: return state;
+  case 'FAVORITE':
+    return Object.assign({}, {favorites: action.payload});
+  default: return state;
   }
 };
 

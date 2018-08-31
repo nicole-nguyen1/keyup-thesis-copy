@@ -27,12 +27,12 @@ class PasswordEmailSuccess extends React.Component {
     super(props);
     this.state = {
       email: ''
-    }
+    };
   }
 
   componentDidMount() {
     if (this.props.router.location.state && this.props.router.location.state.email) {
-      this.setState({ email: this.props.router.location.state.email})
+      this.setState({ email: this.props.router.location.state.email});
     }
   }
 
@@ -48,15 +48,15 @@ class PasswordEmailSuccess extends React.Component {
             <Typography variant="body1" paragraph>
               If {this.state.email} exists in our system, we've just sent you a
               password reset link via email.
-          </Typography>
+            </Typography>
             <Typography variant="body1" paragraph>
               If you don't receive an email, check your spam folder or contact customer service
             at <a href='mailto:maryhannah.duhon@keyup.services' className={classes.link}>maryhannah.duhon@keyup.services</a>.
-          </Typography>
+            </Typography>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

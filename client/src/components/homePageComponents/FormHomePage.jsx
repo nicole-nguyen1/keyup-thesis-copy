@@ -75,12 +75,12 @@ const FormHomePage = (props) => {
         <div className={classes.cardContentStyle}>
           <Typography variant="headline" className={classes.textStyle} gutterBottom>
             Chat with one of our
-          <br />
+            <br />
             KeyUp Guides Today
-        </Typography>
+          </Typography>
           <Typography className={classes.textStyle} gutterBottom>
             We'll get back to you within 24 hours
-        </Typography>
+          </Typography>
           <form style={{ width: '98%' }}>
             <Input
               type="text"

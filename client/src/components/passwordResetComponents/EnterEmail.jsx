@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import { Button } from '@material-ui/core';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   inputStyle: {
@@ -67,11 +67,11 @@ class EnterEmail extends React.Component {
           {!this.props.showError ?
             <Typography variant="body1" paragraph>
               Please enter your email address. We'll email you a link to reset your password.
-          </Typography> :
+            </Typography> :
             <div>
               <Typography variant="body1" color="secondary" paragraph>
                 Please enter a valid email address.
-              <span className={classes.text}>We'll email you a link to reset your password.</span>
+                <span className={classes.text}>We'll email you a link to reset your password.</span>
               </Typography>
             </div>
           }
@@ -92,12 +92,12 @@ class EnterEmail extends React.Component {
                 disabled={this.props.buttonStatus}
               >
                 Continue
-            </Button>
+              </Button>
             </div>
           </FormControl>
         </div>
       </div>
-    )
+    );
   }
 }
 

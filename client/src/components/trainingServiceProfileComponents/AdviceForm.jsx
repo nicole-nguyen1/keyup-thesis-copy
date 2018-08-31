@@ -33,7 +33,7 @@ const styles = theme => ({
   },
 
   backdrop: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     top: '56px'
   },
 
@@ -65,7 +65,7 @@ class AdviceForm extends React.Component {
         `Talk to a working ${this.props.service.career_name}`,
         'Other'
       ]
-    }
+    };
   }
 
   componentDidUpdate(prevProps) {
@@ -78,7 +78,7 @@ class AdviceForm extends React.Component {
           `Talk to a working ${this.props.service.career_name}`,
           'Other'
         ]
-      })
+      });
     }
   }
 
@@ -108,13 +108,13 @@ class AdviceForm extends React.Component {
             className={classes.headerStyle}
           >
             Chat with one of our
-          <br />
+            <br />
             KeyUp Guides Today
-        </DialogTitle>
+          </DialogTitle>
           <DialogContent>
             <Typography gutterBottom>
               We'll get back to you within 24 hours
-          </Typography>
+            </Typography>
             <FormControl style={{ width: '98%' }}>
               <Input
                 type="text"
@@ -162,13 +162,13 @@ class AdviceForm extends React.Component {
                 disabled={this.props.buttonStatus}
               >
                 GET ADVICE
-            </Button>
+              </Button>
               <Button
                 className={classes.cancelButtonStyle}
                 onClick={this.props.toggleAdviceForm}
               >
                 CANCEL
-            </Button>
+              </Button>
             </div>
           </DialogContent>
         </div>
