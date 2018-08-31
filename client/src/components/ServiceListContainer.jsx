@@ -31,14 +31,16 @@ class ServiceListContainer extends React.Component {
   }
   
   render() {
-    const faves = (store.getState()).favorites.favorites;
+    const faves = this.props.favorites;
     if (!this.props.services) {
       return <div>Loading...</div>
     } else {
       return <Services 
-      services={this.props.services} 
-      careerID={this.state.career_id}
-      favorites={faves}
+        services={this.props.services} 
+        careerID={this.state.career_id}
+        favorites={faves}
+        removeFavorite={this.props.removeFavorite}
+        addFavorite={this.props.addFavorite}
       />;
     }
   }

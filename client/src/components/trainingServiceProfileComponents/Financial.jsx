@@ -7,15 +7,21 @@ import Outcomes from './Outcomes.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import MultiLineParagraph from '../MultiLineParagraph.jsx';
 
-const styles = {
+const styles = theme => ({
   card: {
     borderRadius: 0,
     padding: '5px'
   },
   qualify: {
     margin: '30px 0'
+  },
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
-};
+});
 
 const Financial = props => {
   const { classes } = props;
@@ -23,7 +29,7 @@ const Financial = props => {
   return (
     <div>
       <Card className={classes.card}>
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography gutterBottom variant='title'>Financial Information</Typography>
           {props.service.financial_info ? <MultiLineParagraph text={props.service.financial_info} /> : props.service.financial_info}
           <div className={classes.qualify}>

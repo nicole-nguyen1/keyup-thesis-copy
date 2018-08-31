@@ -13,6 +13,13 @@ const styles = theme => ({
 
   lightText: {
     color: '#EDEDED'
+  },
+
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 
@@ -21,13 +28,13 @@ const EarningsOpenings = (props) => {
   return (
     <div>
       <Card className={classes.dark}>
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography gutterBottom variant='title' className={classes.lightText}>Average Earnings</Typography>
           <Typography variant='body1' className={classes.lightText}>
             <span style={{ color: '#1DCD8C' }}>{props.career.annual_salary}</span> or {props.career.hourly_pay}/hr
           </Typography>
         </CardContent>
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography gutterBottom variant='title' className={classes.lightText}>Job Openings</Typography>
           {props.career.openings ?
             <div>

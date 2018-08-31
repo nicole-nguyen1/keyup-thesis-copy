@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const FormSubmitted = (props) => {  
+const LogoutDialog = (props) => {  
   return (
     <Dialog
       open={props.open}
@@ -14,12 +14,7 @@ const FormSubmitted = (props) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{'Message Sent'}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          One of our KeyUp Guides will get back to you within 24 hours
-        </DialogContentText>
-      </DialogContent>
+      <DialogTitle id="alert-dialog-title">{'Logout Successful!'}</DialogTitle>
       <DialogActions>
         <Button onClick={props.onClose} color="primary" autoFocus>
           Okay
@@ -29,4 +24,4 @@ const FormSubmitted = (props) => {
   );
 };
 
-export default FormSubmitted;
+export default LogoutDialog;

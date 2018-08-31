@@ -1,5 +1,4 @@
 import React from 'react';
-import { logout } from './graphql/graphql';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,14 +17,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import LogoutDialog from './LogoutDialog.jsx';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
-import { getPageTitle, findUser } from '../actions/action';
+import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
 import { HashLink } from 'react-router-hash-link';
 import { createApolloFetch } from 'apollo-fetch';
+import { Grid } from '@material-ui/core';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -36,17 +37,10 @@ class NavBar extends React.Component {
 
     this.state = {
       anchorEl: null,
-      user: {
-
-      }
+      confirmLogout: false
     };
   }
 
-  componentDidMount() {
-    this.props.getUser()
-  }
-
-  
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -55,42 +49,61 @@ class NavBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  confirmClose = () => {
+    this.setState({ confirmLogout: false });
+  }
+
   handleSignOut = () => {
-    this.fetch({
-      query: logout
-    }).then(() => {
-      const nullObj = {
-        id: '',
-        email: '',
-        first_name: '',
-        last_name: '',
-        phone_number: ''
-      };
-      store.dispatch(findUser(nullObj))
-    }).then(() => {
-      this.props.toggle();
-    })
-    this.handleClose()
+    localStorage.removeItem('jwt');
+    const nullObj = {
+      id: '',
+      email: '',
+      first_name: '',
+      last_name: '',
+      phone_number: ''
+    };
+    const nullFaves = {
+      id: '',
+      career_id: '',
+      service_id: ''
+    };
+   
+    store.dispatch(findUser(nullObj));
+    store.dispatch(getFavorites(nullFaves));
+    this.props.toggle();
+    this.handleClose();
+    this.setState({ confirmLogout: true });
   }
 
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
-    const user = store.getState();
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar className={classes.tools}>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-              aria-owns={anchorEl ? 'simple-menu' : null}
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <MenuIcon image="#" />
-            </IconButton>
+            <Grid container className={classes.grid}>
+              <Grid item xs={1} sm={1} className={classes.home}>
+                <IconButton
+                  className={classes.menuButton}
+                  color="inherit"
+                  aria-label="Menu"
+                  aria-owns={anchorEl ? 'simple-menu' : null}
+                  aria-haspopup="true"
+                  onClick={this.handleClick}
+                >
+                  <MenuIcon image="#" />
+                </IconButton>
+                  <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
+                    <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' style={{ position: 'relative', top: '12px' }} />
+                  </HashLink>
+              </Grid>
+              <Grid item xs={9} sm={11} className={classes.pageTitle}>
+                <Typography variant="subheading" color="inherit" className={classes.flex}>
+                  {this.props.pages}
+                </Typography>
+              </Grid>
+            </Grid>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
@@ -99,45 +112,45 @@ class NavBar extends React.Component {
               PopoverClasses={{ paper: `${classes.menu}` }}
               className={classes.top}
             >
-            {this.props.showAccountInfo ? 
-                      (<div className={classes.logoutStyles}>
-                      
-                      <Typography variant="body1" align="center" style={{color: '#02ED96', marginBottom: '10px'}}>
-                        Account
-                      </Typography>
-                      <Typography variant="body1" align="center" style={{color: 'white'}}>
-                      {user.user.email}
-                      </Typography>
-                      
-                      </div>) : 
-              (<div className={classes.menuTop}>
-                <Link to="/login">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.buttonStyle}
-                    onClick={this.handleClose}
-                  >
-                    SIGN IN
-                  </Button>
-                </Link>
-                <Link to='/signup'>
-                  <Typography onClick={this.handleClose} style={{ marginBottom: '3em' }} className={classes.menuTop}>
-                    Create an account
-                  </Typography>
-                </Link>
-              </div>)
-              }
-              <MenuItem onClick={this.handleClose}>
-                <Link to="/home">
+              <div className={classes.menuTop}>
+                {this.props.showAccountInfo ?
+                  (<div className={classes.menuTopItems}>
+                    <Typography variant="body1" align="center" style={{ color: '#02ED96', marginBottom: '10px' }}>
+                      Account
+                        </Typography>
+                    <Typography variant="body1" align="center" style={{ color: 'white' }}>
+                      {this.props.user.email || null}
+                    </Typography>
+                  </div>) :
+                  (<div className={classes.menuTopItems}>
+                      <Link to="/login" className={classes.link}>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.buttonStyle}
+                          onClick={this.handleClose}
+                        >
+                          SIGN IN
+                    </Button>
+                      </Link>
+                      <Link to='/signup' className={classes.link}>
+                        <Typography onClick={this.handleClose} style={{ color: 'white' }}>
+                          Create an account
+                    </Typography>
+                      </Link>
+                    </div>)
+                }
+              </div>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
+                <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
                   <ListItemIcon>
                     <HomeIcon />
                   </ListItemIcon>
                   <ListItemText style={{ float: 'right' }} inset primary="Home">
                   </ListItemText>
-                </Link>
+                </HashLink>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              {this.props.showProfile ? (<MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <Link to="/profile">
                   <ListItemIcon>
                     <AccountCircleIcon />
@@ -145,8 +158,8 @@ class NavBar extends React.Component {
                   <ListItemText style={{ float: 'right' }} inset primary="My Profile">
                   </ListItemText>
                 </Link>
-              </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              </MenuItem>) : null}
+              {this.props.showFavorites ? (<MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <Link to="/favorites">
                   <ListItemIcon>
                     <FavoriteIcon />
@@ -154,8 +167,8 @@ class NavBar extends React.Component {
                   <ListItemText style={{ float: 'right' }} inset primary="My Favorites">
                   </ListItemText>
                 </Link>
-              </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              </MenuItem>) : null}
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <Link to="/careers">
                   <ListItemIcon>
                     <SearchIcon />
@@ -164,7 +177,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <a style={{ textDecoration: 'none' }} href='https://keyup.typeform.com/to/dlfXQi'>
                   <ListItemIcon style={{ position: 'relative', top: '4px' }}>
                     <ChatIcon />
@@ -173,7 +186,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </a>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#about">
                   <ListItemIcon>
                     <InfoIcon />
@@ -182,7 +195,7 @@ class NavBar extends React.Component {
                   </ListItemText>
                 </HashLink>
               </MenuItem>
-              <MenuItem onClick={this.handleClose}>
+              <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
                 <HashLink scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#contact">
                   <ListItemIcon>
                     <PeopleIcon />
@@ -192,30 +205,23 @@ class NavBar extends React.Component {
                 </HashLink>
               </MenuItem>
               {this.props.showSignOutButton ? 
-                      (<MenuItem onClick={this.handleSignOut}>
-                      <Link to="/home">
-                        <ListItemIcon>
-                          <img src='https://s3.amazonaws.com/key-up-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
-                        </ListItemIcon>
-                        <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
-                        </ListItemText>
-                      </Link>
-                    </MenuItem>) : null
+                (<Link to="/home">
+                  <MenuItem onClick={this.handleSignOut} classes={{ root: classes.menuItem }}>
+                    <ListItemIcon>
+                      <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Sign-out-gray.png' className={classes.logoutIcon}/>
+                    </ListItemIcon>
+                    <ListItemText style={{ float: 'right' }} inset primary="Sign Out">
+                    </ListItemText>
+                  </MenuItem>
+                </Link>) : null
               }
-              
             </Menu>
-            <Typography variant="display1" color="inherit">
-              <Link to="/home">
-                <Button onClick={this.handleClose} className={classes.home}>
-                  <img src='https://s3.amazonaws.com/key-up-assets/KeyUp-Logo-all-white.png' height='25px' />
-                </Button>
-              </Link>
-            </Typography>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-              {this.props.pages}
-            </Typography>
           </Toolbar>
         </AppBar>
+        <LogoutDialog 
+          open={this.state.confirmLogout}
+          onClose={this.confirmClose}
+        />
       </div>
     );
   }
@@ -237,7 +243,11 @@ NavBar.styles = {
     top: '0!important',
     left: '0!important',
     borderRadius: '0',
-    padding: '0'
+    paddingBottom: '30px',
+    width: '304px'
+  },
+  menuItem: {
+    whiteSpace: "unset"
   },
   tools: {
     top: 0,
@@ -246,8 +256,16 @@ NavBar.styles = {
     display: 'flex',
     backgroundColor: '#4469FF'
   },
+  grid: {
+    display: 'table'
+  },
   home: {
-    padding: '0'
+    display: 'flex'
+  },
+  pageTitle: {
+    display: 'table-cell',
+    verticalAlign: 'middle',
+    padding: '5px 0 5px 20px'
   },
   menuTop: {
     background: '#232E49',
@@ -255,24 +273,30 @@ NavBar.styles = {
     textAlign: 'center',
     color: '#fff',
     fontWeight: 'normal',
-    margin: '0',
-    height: '100px',
-    marginBottom: '0em',
     height: '100%',
+    marginBottom: '1em',
     outline: 'none',
-    // marginTop: '-10px',
-    padding: '0',
-    border: 'none!important'
+    border: 'none!important',
+    display: 'table',
+    width: '100%',
+    padding: '25px 0'
+  },
+
+  menuTopItems: {
+    display: 'table-cell'
   },
 
   top: {
     marginTop: '-10px'
   },
 
+  link: {
+    textDecoration: 'none'
+  },
+
   buttonStyle: {
     backgroundColor: '#1DCD8C',
     borderRadius: 0,
-    marginTop: '3em',
     marginBottom: '1em',
     textDecoration: 'none',
     borderRadius: '2px'

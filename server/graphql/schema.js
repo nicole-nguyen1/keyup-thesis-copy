@@ -1,6 +1,7 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { signUpHelper, loginHelper } = require('../passport.js')
+const { signUp, login, updateInfoHelper, resetPassword, checkAuth } = require('../passport.js');
+const { sendPasswordEmail } = require('../helpers/passwordReset');
 
 const {
   GraphQLSchema,
@@ -190,12 +191,12 @@ const TrainingTraitType = new GraphQLObjectType({
 const UserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
-    id: { type: GraphQLID },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
     first_name: { type: GraphQLString },
     last_name: { type: GraphQLString },
-    phone_number: { type: GraphQLString }
+    phone_number: { type: GraphQLString },
+    zip: { type: GraphQLString }
   })
 });
 
@@ -289,6 +290,13 @@ const FavoriteType = new GraphQLObjectType({
   })
 });
 
+const TokenType = new GraphQLObjectType({
+  name: 'Token',
+  fields: () => ({
+    token: { type: GraphQLString }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -334,9 +342,9 @@ const RootQuery = new GraphQLObjectType({
     //GET list of training services related to specific career
     trainings: {
       type: new GraphQLList(TrainingType),
-      args: { 
+      args: {
         career_id: { type: GraphQLID },
-        service_ids: { type: new GraphQLList(GraphQLID) } 
+        service_ids: { type: new GraphQLList(GraphQLID) }
       },
       resolve(parent, args) {
         let newQuery = knex('services');
@@ -374,23 +382,58 @@ const RootQuery = new GraphQLObjectType({
     //GET a specific user
     loggedInUser: {
       type: UserType,
-      resolve(parent, args, { session }) {
-        let id = session.passport.user;
-        return knex('users')
-          .select('id', 'email', 'phone_number', 'first_name', 'last_name')
-          .where({ id })
-          .first();
+      args: { token: { type: GraphQLString } },
+      resolve(parent, { token }, context) {
+        return checkAuth(token);
       }
     },
 
     //GET list of favorites for one user
     favorites: {
       type: new GraphQLList(FavoriteType),
-      args: { user_id: { type: GraphQLID } },
+      args: { token: { type: GraphQLString } },
+      resolve(parent, { token }) {
+        let user = new Promise((resolve, reject) => {
+          resolve(checkAuth(token))
+        });
+
+        return user.then((userObj) => {
+          return knex('favorites')
+            .select()
+            .where('favorites.user_id', userObj.id);
+        })
+      }
+    },
+
+    userEmail: {
+      type: UserType,
+      args: { email: { type: GraphQLString }},
       resolve(parent, args) {
-        return knex('favorites')
+        return knex('users')
           .select()
-          .where('favorites.user_id', args.user_id)
+          .where('email', args.email)
+          .first()
+          .then((res) => {
+            return sendPasswordEmail(res.id, res.email);
+          })
+      }
+    },
+
+    token: {
+      type: UserType,
+      args: { token: { type: GraphQLString }},
+      resolve(parent, args) {
+        return knex('users')
+          .select('email', 'resetPasswordToken', 'resetPasswordExpiry')
+          .where('resetPasswordToken', args.token)
+          .first()
+          .then((res) => {
+            if (Date.now() < res.resetPasswordExpiry) {
+              return res;
+            } else {
+              throw new Error('Invalid or expired token');
+            }
+          })
       }
     }
   }
@@ -400,41 +443,61 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     signUp: {
-      type: UserType,
+      type: TokenType,
       args: {
         email: { type: GraphQLString },
         password: { type: GraphQLString },
         first_name: { type: GraphQLString },
         last_name: { type: GraphQLString },
-        phone_number: { type: GraphQLString }
+        phone_number: { type: GraphQLString },
+        zip: { type: GraphQLString }
       },
-      resolve(parent, { email, password, first_name, last_name, phone_number }, req) {
-        return signUpHelper(email, password, first_name, last_name, phone_number, req);
+      resolve(parent, { email, password, first_name, last_name, phone_number, zip }, context) {
+        return signUp(email, password, first_name, last_name, phone_number, zip, context);
+      }
+    },
+
+    updateInfo: {
+      type: UserType,
+      args: {
+        token: { type: GraphQLString },
+        email: { type: GraphQLString },
+        first_name: { type: GraphQLString },
+        last_name: { type: GraphQLString },
+        phone_number: { type: GraphQLString },
+        zip: { type: GraphQLString }
+      },
+      resolve(parent, { token, email, first_name, last_name, phone_number, zip }) {
+        return checkAuth(token)
+          .then(user => updateInfoHelper(user.id, email, first_name, last_name, phone_number, zip))
       }
     },
 
     login: {
-      type: UserType,
+      type: TokenType,
       args: {
         email: { type: GraphQLString },
         password: { type: GraphQLString }
       },
-      resolve(parent, { email, password }, req) {
-        return loginHelper(email, password, req);
+      resolve(parent, { email, password }, context) {
+        return login(email, password, context);
       }
     },
 
-    logout: {
-      type: MessageType,
-      resolve(parent, args, req) {
-        req.session.destroy(err => {
-          if (err) {
-            console.log('ERROR', err)
-          }
-          req.logOut();
-          console.log('req session', req.session)
-        });
-        return {message: 'SUCCESS'};
+    resetPassword: {
+      type: TokenType,
+      args: { 
+        token: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve(parent, args, context) {
+        return knex('users')
+          .select()
+          .where('resetPasswordToken', args.token)
+          .first()
+          .then((res) => {
+            return resetPassword(res.email, args.password, context);
+          })
       }
     },
 
@@ -541,38 +604,46 @@ const Mutation = new GraphQLObjectType({
     saveFavorite: {
       type: FavoriteType,
       args: {
-        user_id: { type: GraphQLID },
+        token: { type: GraphQLString },
         career_id: { type: GraphQLID },
         service_id: { type: GraphQLID }
       },
-      resolve(parent, args) {
+      resolve(parent, { token, career_id, service_id }) {
         //check if favorite currently exists
-        let checkFaves = knex('favorites');
+        let params = {};
 
-        if (args.career_id) {
-          checkFaves = checkFaves.where('career_id', args.career_id);
-        } else if (args.service_id) {
-          checkFaves = checkFaves.where('service_id', args.service_id);
+        if (career_id) {
+          params.career_id = career_id;
+        } else if (service_id) {
+          params.service_id = service_id;
         }
 
-        return checkFaves
-          .select()
-          .first()
-          .then((res) => {
-            //add favorite if it
-            if (res === undefined) {
-              return knex('favorites')
-                .insert({
-                  user_id: args.user_id,
-                  career_id: args.career_id,
-                  service_id: args.service_id,
-                })
-                .returning('*')
-                .then((res) => res[0]);
-            }
-            
-            return res;
-          });
+        let user = new Promise((resolve, reject) => {
+          resolve(checkAuth(token))
+        });
+
+        return user.then(userObj => {
+          params.user_id = userObj.id;
+          return knex('favorites')
+            .select()
+            .where(params)
+            .first()
+            .then((res) => {
+              //add favorite if it
+              if (res === undefined) {
+                return knex('favorites')
+                  .insert({
+                    user_id: userObj.id,
+                    career_id: career_id,
+                    service_id: service_id,
+                  })
+                  .returning('*')
+              }
+              return res;
+            })
+            .then((res) => res[0]);
+        })
+
       }
     },
 

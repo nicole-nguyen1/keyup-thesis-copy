@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import CardContent from '@material-ui/core/CardContent';
 
 const styles = theme => ({
   lightText: {
@@ -14,12 +15,18 @@ const styles = theme => ({
     color: '#EDEDED',
     display: 'center',
     margin: '30px 0 30px 50px'
+  },
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 const Needs = (props) => {
   const { classes } = props;
   return (
-    <div >
+    <CardContent className={classes.content}>
       <Typography variant='title' className={classes.lightText}>
             To Get In, You Need...
       </Typography>    
@@ -34,7 +41,7 @@ const Needs = (props) => {
           );
         })}
       </div>
-    </div>
+    </CardContent>
   );
 }
 

@@ -11,22 +11,33 @@ import { withStyles } from '@material-ui/core/styles';
 import HeartContainer from '../heartComponents/HeartContainer.jsx';
 
 const styles = theme => ({
+  image: {
+    height: '35vh',
+    [theme.breakpoints.up('sm')]: {
+      height: '30vh'
+    }
+  },
   cardAction: {
+    textAlign: 'center',
+    display: 'flex',
+    width: '300px',
+    margin: '0 auto'
+  },
+
+  button: {
     display: 'block',
-    textAlign: 'right',
-    marginTop: '10px',
-    padding: '0 10px 0 0'
+    position: 'relative',
+    bottom: '2px'
   },
 
   icon: {
     position: 'relative',
-    top: '-4px',
-    left: '10px',
+    padding: '5px',
     height: '1em'
   },
 
   link: {
-    color: '#7A94F4'
+    color: '#88888A'
   },
 
   shareTopRow: {
@@ -38,6 +49,14 @@ const styles = theme => ({
   shareBottomRow: {
     width: '50px',
     height: '50px'
+  },
+  
+  content: {
+    paddingTop: '0',
+    [theme.breakpoints.up('sm')] : {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 class IntroCard extends React.Component {
@@ -59,23 +78,25 @@ class IntroCard extends React.Component {
         <Card style={{ borderRadius: 0 }}>
           <CardMedia
             image={this.props.career.profile_image_url || '#'}
-            style={{ height: '35vh' }} />
-          <CardActions className={classes.cardAction}>
-            <Button component={Link} to={`/services/${this.props.careerID}`}>
+            className={classes.image} />
+          <div className={classes.cardAction}>
+            <Button component={Link} to={`/services/${this.props.careerID}`} className={classes.button}>
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/graduation-cap-gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>FIND TRAINING</Typography>
-              <img src='https://s3.amazonaws.com/key-up-assets/Graduation-Cap-icon.png' className={classes.icon} />
-            </Button>
-            <Button onClick={this.toggleDrawer}>
-              <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
-              <img src='https://s3.amazonaws.com/key-up-assets/Share-Symbol.png' className={classes.icon} />
             </Button>
             <HeartContainer 
               profile={true}
               favorites={this.props.favorites}
               careerID={String(this.props.careerID)}
+              removeFavorite={this.props.removeFavorite}
+              addFavorite={this.props.addFavorite}
             />
-          </CardActions>
-          <CardContent style={{ paddingTop: 0 }}>
+            <Button onClick={this.toggleDrawer} className={classes.button}>
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Share-gray.png' className={classes.icon} />
+              <Typography gutterBottom variant='body1' className={classes.link}>SHARE</Typography>
+            </Button>
+          </div>
+          <CardContent className={classes.content}>
             <Typography gutterBottom variant='headline'>{this.props.career.name}</Typography>
             <Typography variant='body1'>{this.props.career.description}</Typography>
           </CardContent>

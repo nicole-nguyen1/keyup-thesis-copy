@@ -10,7 +10,8 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     textAlign: 'center',
-    padding: '40px 0'
+    padding: '40px 0',
+    marginLeft: '-1px'
   },
   foreground: {
     width: '200px',
@@ -36,7 +37,7 @@ class Header extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    
     return (
       <div className={classes.background}>
         <AccountCircleIcon className={classes.icon} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -73,12 +73,10 @@ class LoginContainer extends React.Component {
       }
     }).then((res) => {
       if (!res.errors) {
-        store.dispatch(findUser(res.data.login));
+        localStorage.setItem('jwt', res.data.login.token);
         this.props.history.goBack();
       }
-    }).catch(err => {
-      console.error(err);
-    });
+    }).catch(console.error);
   }
 
   render() {

@@ -5,13 +5,16 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   body: {
-    padding: '50px 10px 20px 10px'
+    padding: '50px 10px 20px 10px',
+    [theme.breakpoints.up('sm')]: {
+      padding: '50px'
+    }
   },
 
   section: {
     marginBottom: '30px'
   }
-})
+});
 
 const TermsConditions = (props) => {
   const { classes } = props;
@@ -47,7 +50,7 @@ const TermsConditions = (props) => {
               to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website.
               It is your responsibility to check this page periodically for changes. Your continued use of or access to the
               website following the posting of any changes constitutes acceptance of those changes.
-          </Typography>
+            </Typography>
           </div>
         </div>
         <div className={classes.section}>
@@ -67,7 +70,7 @@ const TermsConditions = (props) => {
             </Typography>
             <Typography paragraph variant='body1'>
               A breach or violation of any of the Terms will result in an immediate termination of your Services.
-          </Typography>
+            </Typography>
           </div>
         </div>
         <div className={classes.section}>
@@ -80,14 +83,14 @@ const TermsConditions = (props) => {
               You understand that your content (not including credit card information), may be transferred unencrypted
               and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical
               requirements of connecting networks or devices. Credit card information is always encrypted during transfer over networks.
-          </Typography>
+            </Typography>
             <Typography paragraph variant='body1'>
               You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or
               access to the Service or any contact on the website through which the service is provided, without express written permission by us.
             </Typography>
             <Typography paragraph variant='body1'>
               The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.
-          </Typography>
+            </Typography>
           </div>
         </div>
         <div className={classes.section}>
@@ -358,7 +361,7 @@ const TermsConditions = (props) => {
         </div>
       </Paper>
     </div>
-  )
-}
+  );
+};
 
 export default withStyles(styles)(TermsConditions);

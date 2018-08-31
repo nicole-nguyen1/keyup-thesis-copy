@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const FormSubmitted = (props) => {  
+const SubmissionError = (props) => {  
   return (
     <Dialog
       open={props.open}
@@ -14,10 +14,10 @@ const FormSubmitted = (props) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{'Message Sent'}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{'Message Error'}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          One of our KeyUp Guides will get back to you within 24 hours
+          Please make sure all fields are filled in before submitting
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -29,4 +29,4 @@ const FormSubmitted = (props) => {
   );
 };
 
-export default FormSubmitted;
+export default SubmissionError;

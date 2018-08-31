@@ -10,16 +10,11 @@ import Trainings from './Trainings.jsx';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
-  card: {
-    borderRadius: 0,
-    padding: '5px'
-  },
-
-  bullets: {
-    position: 'relative',
-    height: '1em',
-    top: '2px',
-    marginRight: '20px'
+  profile: {
+    [theme.breakpoints.up('sm')]: {
+      width: '550px',
+      margin: '0 auto'
+    }
   },
 
   dark: {
@@ -32,13 +27,11 @@ const styles = theme => ({
     color: '#EDEDED'
   },
 
-  lightTextList: {
-    color: '#EDEDED',
-    display: 'inline'
-  },
-
-  listItem: {
-    margin: '10px 0'
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 const CareerProfile = (props) => {
@@ -48,17 +41,29 @@ const CareerProfile = (props) => {
     const career = props.career;
 
     return (
-      <div>
-        <IntroCard career={career} careerID={props.careerID} favorites={props.favorites}/>
+      <div className={classes.profile}>
+        <IntroCard 
+          career={career} 
+          careerID={props.careerID} 
+          favorites={props.favorites}
+          removeFavorite={props.removeFavorite}
+          addFavorite={props.addFavorite}
+        />
         <EarningsOpenings career={career} />
         <TasksSkills career={career}/>
         <Card className={classes.dark}>
-          <CardContent>
+          <CardContent className={classes.content}>
             <Typography variant='title' className={classes.lightText}>Job Satisfaction</Typography>
           </CardContent>
           <ProsCons info={career} />
         </Card>
-        <Trainings career={career} careerID={props.careerID} favorites={props.favorites}/>
+        <Trainings 
+          career={career} 
+          careerID={props.careerID} 
+          favorites={props.favorites}
+          removeFavorite={props.removeFavorite}
+          addFavorite={props.addFavorite}
+        />
       </div>
     );
   } else {

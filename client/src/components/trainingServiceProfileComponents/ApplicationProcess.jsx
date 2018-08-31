@@ -25,6 +25,12 @@ const styles = theme => ({
   link: {
     textDecoration: 'none',
     color: '#7a94f4'
+  },
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 
@@ -34,11 +40,11 @@ const ApplicationProcess = props => {
   return (
     <div>
       <Card className={classes.card} >
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography gutterBottom variant='title'>Application Process</Typography>
           {props.service.app_process ? <MultiLineParagraph text={props.service.app_process} /> : props.service.app_process}
         </CardContent>
-        <CardActions >
+        <CardActions className={classes.content}>
           <div className={classes.buttons} >
             <Button onClick={props.toggleDialog} variant="contained" color="primary" style={{ backgroundColor: '#4e74ff' }}>
               APPLY NOW
@@ -47,7 +53,7 @@ const ApplicationProcess = props => {
               variant="contained" 
               color="primary" 
               style={{ backgroundColor: '88888a' }}
-              onClick={props.toggleQualifyDialog}
+              onClick={props.toggleAdviceForm}
             >
               GET ADVICE
             </Button>
@@ -59,6 +65,8 @@ const ApplicationProcess = props => {
             profile={true}
             serviceID={props.service.id}
             favorites={props.favorites}
+            removeFavorite={props.removeFavorite}
+            addFavorite={props.addFavorite}
           />
         </div>
         <CardContent className={classes.linkContainer}>

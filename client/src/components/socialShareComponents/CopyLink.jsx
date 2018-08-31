@@ -8,7 +8,7 @@ class CopyLink extends React.Component {
     super(props);
     this.state = {
       copied: false
-    }
+    };
   }
 
   render() {
@@ -20,12 +20,12 @@ class CopyLink extends React.Component {
           <Grid item
             role="button"
             onClick={this.props.handleClick}>
-            <img src='https://s3.amazonaws.com/key-up-assets/Link-symbol-black.png' style={this.props.styles.bottomIcon} />
+            <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Link-symbol-black.png' style={this.props.styles.bottomIcon} />
             <Typography variant='caption'>Copy Link</Typography>
           </Grid>
         </CopyToClipboard>
       </div>
-    )
+    );
   }
 }
 

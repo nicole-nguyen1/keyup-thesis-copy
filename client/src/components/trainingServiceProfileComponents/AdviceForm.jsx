@@ -46,20 +46,40 @@ const styles = theme => ({
     fontWeight: 'bold'
   },
   formStyle: {
-    maxWidth: '400px'
+    width: '360px',
+    margin: '0 auto',
+    [theme.breakpoints.up('sm')]: {
+      width: '500px'
+    }
   }
 });
 
 class AdviceForm extends React.Component {
   constructor(props) {
     super(props);
-    this.labels = [
-      'Financial aid',
-      'The application process',
-      `Talk to a grad of ${this.props.service.name}`,
-      `Talk to a working ${this.props.service.career_name}`,
-      'Other'
-    ];
+    this.state = {
+      labels: [
+        'Financial aid',
+        'The application process',
+        `Talk to a grad of ${this.props.service.name}`,
+        `Talk to a working ${this.props.service.career_name}`,
+        'Other'
+      ]
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.service !== prevProps.service) {
+      this.setState({
+        labels: [
+          'Financial aid',
+          'The application process',
+          `Talk to a grad of ${this.props.service.name}`,
+          `Talk to a working ${this.props.service.career_name}`,
+          'Other'
+        ]
+      })
+    }
   }
 
   render() {
@@ -82,74 +102,76 @@ class AdviceForm extends React.Component {
         }}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle
-          id="responsive-dialog-title"
-          className={classes.headerStyle}
-        >
-          Chat with one of our
+        <div className={classes.formStyle}>
+          <DialogTitle
+            id="responsive-dialog-title"
+            className={classes.headerStyle}
+          >
+            Chat with one of our
           <br />
-          KeyUp Guides Today
+            KeyUp Guides Today
         </DialogTitle>
-        <DialogContent className={classes.formStyle}>
-          <Typography gutterBottom>
-            We'll get back to you within 24 hours
+          <DialogContent>
+            <Typography gutterBottom>
+              We'll get back to you within 24 hours
           </Typography>
-          <FormControl style={{ width: '98%' }}>
-            <Input
-              type="text"
-              name="name"
-              placeholder="Your name?"
-              disableUnderline={true}
-              className={classes.inputStyle}
-              onChange={this.props.handleChange}
-            />
-            <Input
-              type="text"
-              name="emailOrPhone"
-              placeholder="Email Address or Phone Number?"
-              disableUnderline={true}
-              className={classes.inputStyle}
-              onChange={this.props.handleChange}
-            />
-            {this.labels.map((label, index) => {
-              return <Filter 
-                key={index} 
-                label={label}
-                setFilter={this.props.setCheckbox}
-                id={String(index)}
-              />;
-            })}
-            <Input
-              type="text"
-              name="message"
-              placeholder="Ask a question or tell us a little about your career interests and priorities..."
-              disableUnderline={true}
-              multiline
-              rows="4"
-              className={classes.inputStyle}
-              onChange={this.props.handleChange}
-            />
-          </FormControl>
-          <div style={{ textAlign: 'center' }}>
-            <Button
-              variant="contained" 
-              className={classes.buttonStyle}
-              onClick={()=>{
-                this.props.submitForm();
-                this.props.toggleQualifyDialog();
-              }}
-              disabled={this.props.buttonStatus}
-            >
-              GET ADVICE
+            <FormControl style={{ width: '98%' }}>
+              <Input
+                type="text"
+                name="name"
+                placeholder="Your name?"
+                disableUnderline={true}
+                className={classes.inputStyle}
+                onChange={this.props.handleChange}
+              />
+              <Input
+                type="text"
+                name="emailOrPhone"
+                placeholder="Email Address or Phone Number?"
+                disableUnderline={true}
+                className={classes.inputStyle}
+                onChange={this.props.handleChange}
+              />
+              {this.state.labels.map((label, index) => {
+                return <Filter
+                  key={index}
+                  label={label}
+                  setFilter={this.props.setCheckbox}
+                  id={String(index)}
+                />;
+              })}
+              <Input
+                type="text"
+                name="message"
+                placeholder="Ask a question or tell us a little about your career interests and priorities..."
+                disableUnderline={true}
+                multiline
+                rows="4"
+                className={classes.inputStyle}
+                onChange={this.props.handleChange}
+              />
+            </FormControl>
+            <div style={{ textAlign: 'center' }}>
+              <Button
+                variant="contained"
+                className={classes.buttonStyle}
+                onClick={() => {
+                  this.props.submitForm();
+                  this.props.toggleAdviceForm();
+                }}
+                disabled={this.props.buttonStatus}
+              >
+                GET ADVICE
             </Button>
-            <Button 
-              className={classes.cancelButtonStyle}
-              onClick={this.props.toggleQualifyDialog}
-            >
-              CANCEL
+              <Button
+                className={classes.cancelButtonStyle}
+                onClick={this.props.toggleAdviceForm}
+              >
+                CANCEL
             </Button>
-          </div>
-        </DialogContent>
+            </div>
+          </DialogContent>
+        </div>
       </Dialog>
     );
   }

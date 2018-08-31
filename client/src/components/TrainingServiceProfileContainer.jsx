@@ -29,9 +29,14 @@ class TrainingServiceProfileContainer extends React.Component {
   }
 
   render() {
-    const faves = (store.getState()).favorites.favorites;
+    const faves = this.props.favorites.favorites;
     return (
-      <TrainingServiceProfile service={this.props.service} favorites={faves}/>
+      <TrainingServiceProfile 
+        service={this.props.service} 
+        favorites={faves}
+        removeFavorite={this.props.removeFavorite}
+        addFavorite={this.props.addFavorite}
+      />
     );
   }
 }

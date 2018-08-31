@@ -17,6 +17,13 @@ const styles = theme => ({
   button: {
     margin: '0px auto 10px',
     backgroundColor: '#4469FF'
+  },
+
+  content: {
+    [theme.breakpoints.up('sm')]: {
+      width: '300px',
+      margin: '0 auto'
+    }
   }
 });
 
@@ -25,7 +32,7 @@ const Trainings = (props) => {
   return (
     <div>
       <Card className={classes.card}>
-        <CardContent>
+        <CardContent className={classes.content}>
           <Typography gutterBottom variant='title'>Training</Typography>
           <Typography gutterBottom variant='body1'>{props.career.number_of_services} training services in Austin</Typography>
           <Typography gutterBottom variant='body1'><strong>Length:</strong> {props.career.training_length}</Typography>
@@ -43,6 +50,8 @@ const Trainings = (props) => {
             size={'large'}
             favorites={props.favorites}
             careerID={String(props.careerID)}
+            removeFavorite={props.removeFavorite}
+            addFavorite={props.addFavorite}
           />
         </div>
       </Card>

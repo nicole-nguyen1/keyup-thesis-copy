@@ -149,7 +149,7 @@ export const addFormData = (args) => (
   `
 );
 
-export const signUp = ({ email, password, first_name, last_name, phone_number }) => (
+export const signUp = ({ email, password, first_name, last_name, phone_number, zip }) => (
   `
   mutation {
     signUp (
@@ -157,13 +157,10 @@ export const signUp = ({ email, password, first_name, last_name, phone_number })
       password: ${password},
       first_name: ${first_name},
       last_name: ${last_name},
-      phone_number: ${phone_number || null}
+      phone_number: ${phone_number || null},
+      zip: ${zip || null}
     ) {
-      id
-      email
-      first_name
-      last_name
-      phone_number
+      token
     }
   }
   `
@@ -176,11 +173,20 @@ export const loginData = (args) => (
       email: ${args.email},
       password: ${args.password}
     ) {
-      id
-      email
-      first_name
-      last_name
-      phone_number
+      token
+    }
+  }
+  `
+);
+
+export const resetPassword = (args) => (
+  `
+  mutation {
+    resetPassword(
+      token: ${args.token},
+      password: ${args.password}
+    ) {
+      token
     }
   }
   `
@@ -189,7 +195,7 @@ export const loginData = (args) => (
 export const getFavoritesQuery = (args) => (
   `
   {
-    favorites(user_id: ${args}) {
+    favorites(token: ${args}) {
       id
       career_id
       service_id
@@ -198,18 +204,40 @@ export const getFavoritesQuery = (args) => (
   `
 );
 
-export const getLoggedInUser = 
+export const getLoggedInUser = token => (
   `
   {
-    loggedInUser {
-      id
+    loggedInUser(token:${token}) {
+      email
+      first_name
+      last_name
+      phone_number,
+      zip
+    }
+  }
+  `
+);
+
+export const updateInfo = (args) => (
+  `
+  mutation {
+    updateInfo(
+      token: ${args.token},
+      email: ${args.email},
+      first_name: ${args.first_name},
+      last_name: ${args.last_name},
+      phone_number: ${args.phone_number},
+      zip: ${args.zip}
+    ) {
       email
       first_name
       last_name
       phone_number
+      zip
     }
   }
-  `;
+  `
+);
 
 export const getCareerFave = (args) => (
   `{
@@ -243,50 +271,31 @@ export const getTrainingFave = (args) => (
   }`
 );
 
-export const saveCareer = (args) => (
+export const removeFavoriteFromList = (args) => (
   `
   mutation {
-    saveFavorite(
-      user_id: ${args.user_id},
-      career_id: ${args.career_id}
-    ) {
+    removeFavorite (id: ${args}) {
       id
-      user_id
-      career_id
-      service_id
     }
   }
   `
 );
 
-export const saveTraining = (args) => (
+export const addFavoriteToList = (args) => (
   `
-  mutation {
-    saveFavorite(
-      user_id: ${args.user_id},
-      service_id: ${args.service_id}
-    ) {
-      id
-      user_id
-      career_ids
-      service_id
+    mutation {
+      saveFavorite(
+        token: ${args.token || null}
+        career_id: ${args.careerID || null}
+        service_id: ${args.serviceID || null}
+      ){
+        id
+      }
     }
-  }
-  `
-);
-
-export const removeFavorite = (args) => (
-  `
-  mutation {
-    removeFavorite (id: ${args.id}) {
-      user_id
-    }
-  }
   `
 );
 
 export const logout = `
-
   mutation {
     logout {
       message
@@ -294,3 +303,23 @@ export const logout = `
   }
 
 `;
+
+export const findUserEmail = (args) => (
+  `
+  {
+    userEmail(email: ${args}) {
+      email
+    }
+  }
+  `
+);
+
+export const checkToken = (args) => (
+  `
+  {
+    token(token: ${args}) {
+      email
+    }
+  }
+  `
+);

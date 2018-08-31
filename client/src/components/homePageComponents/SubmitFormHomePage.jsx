@@ -1,6 +1,7 @@
 import React from 'react';
 import FormHomePage from './FormHomePage.jsx';
 import FormSubmitted from './FormSubmitted.jsx';
+import SubmissionError from './SubmissionError.jsx';
 import { addFormData } from '../graphql/graphql';
 import { createApolloFetch } from 'apollo-fetch';
 
@@ -16,7 +17,8 @@ class SubmitFormHomePage extends React.Component {
       email: '',
       phone: '',
       message: '',
-      open: false
+      open: false,
+      submissionErr: false
     }
   }
 
@@ -52,22 +54,30 @@ class SubmitFormHomePage extends React.Component {
     this.setState({ open: false })
   }
 
+  handleErrClose = () => {
+    this.setState({ submissionErr: false })
+  }
+
   submitForm = async () => {
-    let formArguments = {
-      first_name: JSON.stringify(this.state.name.split(' ')[0]),
-      last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
-      email: JSON.stringify(this.state.email),
-      phone_number: JSON.stringify(this.state.phone),
-      message: JSON.stringify(this.state.message),
-      page: JSON.stringify("Homepage")
-    }
+    if (this.state.name && this.state.emailOrPhone && this.state.message) {
+      let formArguments = {
+        first_name: JSON.stringify(this.state.name.split(' ')[0]),
+        last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
+        email: JSON.stringify(this.state.email),
+        phone_number: JSON.stringify(this.state.phone),
+        message: JSON.stringify(this.state.message),
+        page: JSON.stringify("Homepage")
+      }
 
-    const form = await this.fetch({
-      query: addFormData(formArguments)
-    });
+      const form = await this.fetch({
+        query: addFormData(formArguments)
+      });
 
-    if (form.data.saveContactForm.id) {
-      this.setState({ open: true }, this.clearForm());
+      if (form.data.saveContactForm.id) {
+        this.setState({ open: true }, this.clearForm());
+      }
+    } else {
+      this.setState({ submissionErr: true });
     }
   }
 
@@ -85,6 +95,10 @@ class SubmitFormHomePage extends React.Component {
         <FormSubmitted
           open={this.state.open}
           onClose={this.handleClose}
+        />
+        <SubmissionError 
+          open={this.state.submissionErr}
+          onClose={this.handleErrClose}
         />
       </div>
     );
