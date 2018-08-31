@@ -48,6 +48,7 @@ const CareerProfile = (props) => {
           favorites={props.favorites}
           removeFavorite={props.removeFavorite}
           addFavorite={props.addFavorite}
+          handlePopUp={props.handlePopUp}
         />
         <EarningsOpenings career={career} />
         <TasksSkills career={career}/>
@@ -63,6 +64,7 @@ const CareerProfile = (props) => {
           favorites={props.favorites}
           removeFavorite={props.removeFavorite}
           addFavorite={props.addFavorite}
+          handlePopUp={props.handlePopUp}
         />
       </div>
     );

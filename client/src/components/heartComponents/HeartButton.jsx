@@ -28,9 +28,7 @@ class HeartButton extends React.Component {
       iconSize: 20
     };
   }
-
-
-
+  
   render() {
     const { classes } = this.props;
     if (this.props.size === 'large') {
@@ -42,11 +40,11 @@ class HeartButton extends React.Component {
       this.state.className = this.props.classes.icon;
     }
     return (
-      <Button classes={{label: classes.buttonStyle}} >
+      <Button classes={{ label: classes.buttonStyle }} onClick={this.props.handleClick}>
         <FavoriteIcon
           className={this.state.className}
           height={classes.largeSize.height}
-          onClick={this.props.handleClick}
+          // onClick={this.props.handleClick}
           style={{ fontSize: this.state.iconSize }}
         />
         <Typography 

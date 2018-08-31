@@ -100,24 +100,24 @@ class FilterAndSortForm extends React.Component {
       query: getServicesQuery(this.props.careerID)
     }).then(res => {
     if (this.state.paidToLearn && !this.state.freeTraining) {
-      let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings), career: res.data.career.name}
+      let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings)}
       let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2, career: res.data.career.name}
+      let temp3 = {trainings: temp2}
       store.dispatch(findServices(temp3))
     } else if (this.state.freeTraining && !this.state.paidToLearn) {
-      let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings), career: res.data.career.name}
+      let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings)}
       let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2, career: res.data.career.name}
+      let temp3 = {trainings: temp2}
       store.dispatch(findServices(temp3));
     } else if (this.state.freeTraining && this.state.paidToLearn) {
-      let temp = {trainings: this.filterServicesByPayAndLoans(res.data.trainings), career: res.data.career.name}
+      let temp = {trainings: this.filterServicesByPayAndLoans(res.data.trainings)}
       let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2, career: res.data.career.name}
+      let temp3 = {trainings: temp2}
       store.dispatch(findServices(temp3))
     } else {
-      let temp = {trainings: res.data.trainings, career: res.data.career.name}
+      let temp = {trainings: res.data.trainings}
       let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2, career: res.data.career.name}
+      let temp3 = {trainings: temp2}
       store.dispatch(findServices(temp3))
     }})
   }
@@ -178,15 +178,17 @@ class FilterAndSortForm extends React.Component {
     if (services.length < 1) {
       return [];
     }
+    const paid = [];
+    const free = [];
     const sortedServices = [];
     const unsortedRangeServices = [];
     const unsortedNumberServices = [];
     if (services[0].id) {
       services.forEach(service => {
         if (service.card_tuition.slice(0,4).toLowerCase() === 'paid') {
-          sortedServices.push(service)
+          paid.push(service)
         } else if (service.card_tuition.slice(0,4).toLowerCase() === 'free' && service.card_tuition.length === 4) {
-          sortedServices.push(service)
+          free.push(service)
         } else if (service.card_tuition.slice(0,4).toLowerCase() === 'free' && service.card_tuition.length > 4) {
           let range = Number(service.card_tuition.match(/\d/g).join(''));
           unsortedRangeServices.push([service, range]);
@@ -196,6 +198,12 @@ class FilterAndSortForm extends React.Component {
         }
       })
     }
+    paid.forEach(service => {
+      sortedServices.push(service);
+    })
+    free.forEach(service => {
+      sortedServices.push(service);
+    })
     unsortedRangeServices.sort(this.sortNumbers);
     unsortedRangeServices.forEach(service => {
       sortedServices.push(service[0]);

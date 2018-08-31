@@ -2,6 +2,7 @@ import React from 'react';
 import Service from './Service.jsx';
 import Grid from '@material-ui/core/Grid';
 import FilterAndSort from './filterSortServicesComponents/FilterAndSort.jsx';
+import GoSignInDialog from './GoSignInDialog.jsx';
 import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -117,44 +118,11 @@ class Services extends React.Component {
             />;
           })}
         </Grid>
-        <Dialog open={this.state.renderPopUp} maxWidth={"xs"}>
-         <DialogTitle className={classes.popUpTitle}>
-           {"Sign In or Create Account"}
-         </DialogTitle>
-         <DialogContent>
-           <Typography variant='body1' className={classes.popUpText}>
-             Sign in or create an account to save your favorite career and training options. 
-           </Typography>
-         </DialogContent>
-         <DialogActions>
-           <div className={classes.buttons}>
-            <div>
-              <Link to='/login' className={classes.link}>
-                <Button 
-                  variant="contained"
-                  className={classes.buttonStyle}
-                >
-                  SIGN IN
-                </Button>
-              </Link>
-            </div>
-            <div>
-              <Link to='/signup' className={classes.link}>
-                <Button
-                  className={classes.createButtonStyle}
-                  >
-                    CREATE AN ACCOUNT
-                  </Button>
-              </Link>
-            </div>
-            <div>
-              <Button onClick={this.handleClose} className={classes.cancelButton}>
-                CANCEL
-              </Button>
-            </div>
-           </div>
-         </DialogActions>
-        </Dialog>
+        <GoSignInDialog 
+          open={this.state.renderPopUp}
+          onClose={this.handleClose}
+          page={this.props.page}
+        />
       </div>
     );
   }

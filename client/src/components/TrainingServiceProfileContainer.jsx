@@ -7,6 +7,7 @@ import { findService } from '../actions/action';
 import { getPageTitle } from '../actions/action';
 import { getServiceQuery } from './graphql/graphql';
 import TrainingServiceProfile from './trainingServiceProfileComponents/TrainingServiceProfile.jsx';
+import GoSignInDialog from './GoSignInDialog.jsx';
 
 class TrainingServiceProfileContainer extends React.Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class TrainingServiceProfileContainer extends React.Component {
     const service_id = +props.router.match.params.id || null;
     this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
     this.state = {
-      service_id
+      service_id,
+      renderPopUp: false
     };
   }
 
@@ -28,15 +30,35 @@ class TrainingServiceProfileContainer extends React.Component {
     this.props.getUser();
   }
 
+  handlePopUp = () => {
+    this.setState({
+      renderPopUp: true
+    });
+  }
+
+  handleClose = () => {
+    this.setState({
+      renderPopUp: false
+    });
+  }
+
   render() {
     const faves = this.props.favorites.favorites;
     return (
+      <div>
       <TrainingServiceProfile 
         service={this.props.service} 
         favorites={faves}
         removeFavorite={this.props.removeFavorite}
         addFavorite={this.props.addFavorite}
+        handlePopUp={this.handlePopUp}
       />
+      <GoSignInDialog 
+        open={this.state.renderPopUp}
+        onClose={this.handleClose}
+        page={this.props.router.location.pathname}
+      />
+      </div>
     );
   }
 }

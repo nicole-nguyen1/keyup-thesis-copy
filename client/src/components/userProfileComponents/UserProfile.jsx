@@ -43,7 +43,7 @@ class UserProfile extends React.Component {
           onClose={this.handleClose}
         >
           <DialogTitle>
-            {"Account Info Updated"}
+            {'Account Info Updated'}
           </DialogTitle>
           <DialogContent>
             <Typography variant='body1'>Your account information was successfully updated.</Typography>

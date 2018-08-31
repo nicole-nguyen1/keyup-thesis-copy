@@ -52,6 +52,7 @@ const Trainings = (props) => {
             careerID={String(props.careerID)}
             removeFavorite={props.removeFavorite}
             addFavorite={props.addFavorite}
+            handlePopUp={props.handlePopUp}
           />
         </div>
       </Card>

@@ -19,7 +19,9 @@ class LoginContainer extends React.Component {
       password: '',
       buttonStatus: true,
       toHome: false,
-      showError: false
+      showError: false,
+      redirectLoginSuccess: false,
+      redirectSignUpSuccess: false
     };
   }
 
@@ -75,11 +77,23 @@ class LoginContainer extends React.Component {
       if (!res.errors) {
         localStorage.setItem('jwt', res.data.login.token);
         this.props.history.goBack();
+        // if (this.props.location.state.loginFromFaves) {
+        //   this.setState({ redirectLoginSuccess: true });
+        // } else if (this.props.location.state.createAccountFromFaves) {
+        //   this.setState({ redirectSignUpSuccess: true });
+        // } else {
+        //   this.props.history.goBack();
+        // }
       }
     }).catch(console.error);
   }
 
   render() {
+
+    if (this.state.redirectLoginSuccess === true) {
+      return (<Redirect to={{ pathname: '/profile', state: { updatedInfo: true } }} />);
+    }
+
     return (
       <div>
         <LoginForm 
