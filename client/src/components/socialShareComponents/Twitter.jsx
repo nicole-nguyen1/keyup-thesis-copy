@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 const Twitter = (props) => {
   const url = encodeURIComponent(props.url);
-  const text = encodeURIComponent(`I'm using KeyUp to explore careers, training services, and support services! Check out this link: `)
+  const text = encodeURIComponent('I\'m using KeyUp to explore careers, training services, and support services! Check out this link: ');
   const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
 
   return (
@@ -17,7 +17,7 @@ const Twitter = (props) => {
         </Grid>
       </a>
     </div>
-  )
-}
+  );
+};
 
 export default Twitter;

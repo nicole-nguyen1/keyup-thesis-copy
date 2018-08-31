@@ -46,7 +46,7 @@ const TasksSkills = (props) => {
                     src='https://s3.us-east-2.amazonaws.com/keyup-assets/Checkbox-for-Typical-Tasks-Icon.png' />
                   <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{task.description}</Typography>
                 </div>
-              )
+              );
             }) : null}
         </CardContent>
         <CardContent className={classes.content}>
@@ -60,12 +60,12 @@ const TasksSkills = (props) => {
                     src='https://s3.us-east-2.amazonaws.com/keyup-assets/Head-Symbol.png' />
                   <Typography gutterBottom variant='body1' style={{ display: 'inline' }}>{skill.description}</Typography>
                 </div>
-              )
+              );
             }) : null}
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 export default withStyles(styles)(TasksSkills);

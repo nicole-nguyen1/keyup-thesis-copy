@@ -5,8 +5,6 @@ import { store } from './store/index';
 import App from './components/App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
-
-
 render(
   <BrowserRouter>
     <Provider store={store}>

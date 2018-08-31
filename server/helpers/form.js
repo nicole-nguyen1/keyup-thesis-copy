@@ -1,6 +1,6 @@
-const api_key = process.env.MG_API_KEY;
+const apiKey = process.env.MG_API_KEY;
 const DOMAIN = process.env.DOMAIN_NAME;
-const mailgun = require('mailgun-js')({ apiKey: api_key, domain: DOMAIN });
+const mailgun = require('mailgun-js')({ apiKey: apiKey, domain: DOMAIN });
 
 const contactForm = (req) => {
   let name = null;
@@ -48,8 +48,8 @@ const contactForm = (req) => {
       <p>${message}</p>
     `;
   } else if (req.page === 'Training Service Profile') {
-      subject = 'Contact Form';
-      html = `
+    subject = 'Contact Form';
+    html = `
         <h3>Contact Info</h3>
         <li>Name: ${name}</li>
         <li>Email: ${email}</li>

@@ -84,7 +84,8 @@ class SignUpForm extends React.Component {
       passCheck: false,
       passConfirmCheck: false,
       invalidEmail: false,
-      inputClassName: this.props.classes.inputStyle
+      inputClassName: this.props.classes.inputStyle,
+      showError: false
     }
   }
 
@@ -171,6 +172,7 @@ class SignUpForm extends React.Component {
     let last_name = JSON.stringify(this.state.last_name);
     let phone_number = JSON.stringify(this.state.phone_number);
     let zip = JSON.stringify(this.state.zip);
+ 
     this.fetch({
       query: signUp({
         email,
@@ -293,7 +295,11 @@ class SignUpForm extends React.Component {
             }}
           />
           {this.state.password !== this.state.passwordConfirm ? <Typography variant="body1" color="secondary" paragraph>The passwords do not match. Please try again.</Typography> : null}
-          {this.state.buttonDisabled ? <Typography variant="body1" color="secondary" gutterBottom>Some required information is missing.</Typography> : null}
+          {this.state.showError ? <Typography variant="body1" color="secondary" gutterBottom>Some required information is missing.</Typography> : null}
+          <div onClick={() => {
+            if (this.state.buttonDisabled){
+              this.setState({showError: true})
+            }}}>
           <Button
             variant="contained"
             className={classes.buttonStyle}
@@ -302,6 +308,7 @@ class SignUpForm extends React.Component {
           >
             CREATE ACCOUNT
         </Button>
+        </div>
         </div>
       </div>
     )

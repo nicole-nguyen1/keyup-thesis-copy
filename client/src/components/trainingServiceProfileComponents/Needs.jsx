@@ -43,7 +43,7 @@ const Needs = (props) => {
       </div>
     </CardContent>
   );
-}
+};
 
 export default withStyles(styles)(Needs);
 

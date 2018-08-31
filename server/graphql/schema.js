@@ -394,14 +394,14 @@ const RootQuery = new GraphQLObjectType({
       args: { token: { type: GraphQLString } },
       resolve(parent, { token }) {
         let user = new Promise((resolve, reject) => {
-          resolve(checkAuth(token))
+          resolve(checkAuth(token));
         });
 
         return user.then((userObj) => {
           return knex('favorites')
             .select()
             .where('favorites.user_id', userObj.id);
-        })
+        });
       }
     },
 
@@ -415,7 +415,7 @@ const RootQuery = new GraphQLObjectType({
           .first()
           .then((res) => {
             return sendPasswordEmail(res.id, res.email);
-          })
+          });
       }
     },
 
@@ -433,7 +433,7 @@ const RootQuery = new GraphQLObjectType({
             } else {
               throw new Error('Invalid or expired token');
             }
-          })
+          });
       }
     }
   }
@@ -469,7 +469,7 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, { token, email, first_name, last_name, phone_number, zip }) {
         return checkAuth(token)
-          .then(user => updateInfoHelper(user.id, email, first_name, last_name, phone_number, zip))
+          .then(user => updateInfoHelper(user.id, email, first_name, last_name, phone_number, zip));
       }
     },
 
@@ -497,7 +497,7 @@ const Mutation = new GraphQLObjectType({
           .first()
           .then((res) => {
             return resetPassword(res.email, args.password, context);
-          })
+          });
       }
     },
 
@@ -537,7 +537,7 @@ const Mutation = new GraphQLObjectType({
               let thisInsert = {
                 first_name: args.first_name,
                 password: null
-              }
+              };
 
               if (args.last_name === null) {
                 thisInsert.last_name = null;
@@ -619,7 +619,7 @@ const Mutation = new GraphQLObjectType({
         }
 
         let user = new Promise((resolve, reject) => {
-          resolve(checkAuth(token))
+          resolve(checkAuth(token));
         });
 
         return user.then(userObj => {
@@ -637,12 +637,12 @@ const Mutation = new GraphQLObjectType({
                     career_id: career_id,
                     service_id: service_id,
                   })
-                  .returning('*')
+                  .returning('*');
               }
               return res;
             })
             .then((res) => res[0]);
-        })
+        });
 
       }
     },

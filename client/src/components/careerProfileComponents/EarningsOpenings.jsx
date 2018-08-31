@@ -45,7 +45,7 @@ const EarningsOpenings = (props) => {
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 export default withStyles(styles)(EarningsOpenings);

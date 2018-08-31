@@ -67,6 +67,6 @@ const About = ({ classes }) => {
       </MediaQuery>
     </div>
   );
-}
+};
 
 export default withStyles(styles)(About);

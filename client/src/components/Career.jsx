@@ -12,7 +12,7 @@ import MediaQuery from 'react-responsive';
 
 const styles = theme => ({
   grid: {
-    maxWidth: '97%', 
+    maxWidth: '97%',
     margin: '0 auto 8px'
   },
 
@@ -87,74 +87,74 @@ class Career extends React.Component {
 
   render() {
     const { classes } = this.props;
-    let plumber = `Pipefitter /\n\nPlumber`;
-    
+    let plumber = 'Pipefitter /\n\nPlumber';
+
     return (
       <Grid item xs={12} className={classes.grid}>
         <MediaQuery query='(max-width: 599px)'>
-            <Card className={classes.card}>
-              <CardContent className={classes.cardContent}>
-                <Grid container>
-                  <Grid item xs={7} className={classes.text}>
-                    <Typography color="textSecondary" gutterBottom>
-                      {this.props.career.industry_name}
-                    </Typography>
-                    <Typography variant="headline" paragraph>
-                      {this.props.career.name === 'Pipefitter/Plumber' ? plumber : this.props.career.name}
-                    </Typography>
-                    <Typography color="textSecondary" paragraph>
-                      {this.props.career.card_pro}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <img
-                      src={this.props.career.card_image_url || '#'}
-                      title={this.props.career.name}
-                      className={classes.image}
-                    />
-                  </Grid>
+          <Card className={classes.card}>
+            <CardContent className={classes.cardContent}>
+              <Grid container>
+                <Grid item xs={7} className={classes.text}>
+                  <Typography color="textSecondary" gutterBottom>
+                    {this.props.career.industry_name}
+                  </Typography>
+                  <Typography variant="headline" paragraph>
+                    {this.props.career.name === 'Pipefitter/Plumber' ? plumber : this.props.career.name}
+                  </Typography>
+                  <Typography color="textSecondary" paragraph>
+                    {this.props.career.card_pro}
+                  </Typography>
                 </Grid>
-                <Grid>
-                  <Grid item xs={12}>
-                    <Typography color="textSecondary" paragraph>
-                      Salary: {this.props.career.annual_salary}
-                      <br />
-                      Training length: {this.props.career.training_length}
-                    </Typography>
-                  </Grid>
+                <Grid item xs={4}>
+                  <img
+                    src={this.props.career.card_image_url || '#'}
+                    title={this.props.career.name}
+                    className={classes.image}
+                  />
                 </Grid>
-                <Grid container>
-                  <Grid item xs={5}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className={classes.learnButton}
-                      component={Link}
-                      to={`/careers/${this.props.career.id}`}>
-                      LEARN MORE
-                </Button>
-                  </Grid>
-                  <Grid item xs={5}>
-                    <Button
-                      className={classes.trainingButton}
-                      component={Link}
-                      to={`/services/${this.props.career.id}`}>
-                      FIND TRAINING
-                </Button>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <HeartContainer
-                      size={'large'}
-                      favorites={this.props.favorites}
-                      careerID={String(this.props.career.id)}
-                      removeFavorite={this.props.removeFavorite}
-                      addFavorite={this.props.addFavorite}
-                    />
-                  </Grid>
+              </Grid>
+              <Grid>
+                <Grid item xs={12}>
+                  <Typography color="textSecondary" paragraph>
+                    Salary: {this.props.career.annual_salary}
+                    <br />
+                    Training length: {this.props.career.training_length}
+                  </Typography>
                 </Grid>
-              </CardContent>
-              <CardActions className={classes.cardActions}></CardActions>
-            </Card>
+              </Grid>
+              <Grid container>
+                <Grid item xs={5}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.learnButton}
+                    component={Link}
+                    to={`/careers/${this.props.career.id}`}>
+                    LEARN MORE
+                  </Button>
+                </Grid>
+                <Grid item xs={5}>
+                  <Button
+                    className={classes.trainingButton}
+                    component={Link}
+                    to={`/services/${this.props.career.id}`}>
+                    FIND TRAINING
+                  </Button>
+                </Grid>
+                <Grid item xs={1}>
+                  <HeartContainer
+                    size={'large'}
+                    favorites={this.props.favorites}
+                    careerID={String(this.props.career.id)}
+                    removeFavorite={this.props.removeFavorite}
+                    addFavorite={this.props.addFavorite}
+                  />
+                </Grid>
+              </Grid>
+            </CardContent>
+            <CardActions className={classes.cardActions}></CardActions>
+          </Card>
         </MediaQuery>
         <MediaQuery query='(min-width: 600px)'>
           <Card className={classes.cardDesktop}>
@@ -185,7 +185,7 @@ class Career extends React.Component {
                       component={Link}
                       to={`/careers/${this.props.career.id}`}>
                       LEARN MORE
-                  </Button>
+                    </Button>
                   </Grid>
                   <Grid item xs={5}>
                     <Button
@@ -193,7 +193,7 @@ class Career extends React.Component {
                       component={Link}
                       to={`/services/${this.props.career.id}`}>
                       FIND TRAINING
-                  </Button>
+                    </Button>
                   </Grid>
                   <Grid item xs={1}>
                     <HeartContainer
@@ -218,6 +218,6 @@ class Career extends React.Component {
       </Grid>
     );
   }
-} 
+}
 
 export default withStyles(styles)(Career);

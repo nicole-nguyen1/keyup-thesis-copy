@@ -8,8 +8,8 @@ const MultiLineParagraph = (props) => {
   //Must put paragraphs into arrays to get proper spacing between paragraphs,
   //whereas with addresses, you do not want spacing between lines
   //The following logic takes care of all possible cases.
-  if ((props.text).includes("\\n\\n")) {
-    info = (props.text).split("\\n\\n");
+  if ((props.text).includes('\\n\\n')) {
+    info = (props.text).split('\\n\\n');
     for (let line of info) {
       if (!line.includes('\\n')) {
         paragraph.push([line]);
@@ -17,8 +17,8 @@ const MultiLineParagraph = (props) => {
         paragraph.push(line.split('\\n'));
       }
     }
-  } else if ((props.text).includes("\\n")) {
-    paragraph = (props.text).split("\\n");
+  } else if ((props.text).includes('\\n')) {
+    paragraph = (props.text).split('\\n');
   } else {
     paragraph.push(props.text);
   }
