@@ -90,6 +90,7 @@ class IntroCard extends React.Component {
               careerID={String(this.props.careerID)}
               removeFavorite={this.props.removeFavorite}
               addFavorite={this.props.addFavorite}
+              handlePopUp={this.props.handlePopUp}
             />
             <Button onClick={this.toggleDrawer} className={classes.button}>
               <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Share-gray.png' className={classes.icon} />
