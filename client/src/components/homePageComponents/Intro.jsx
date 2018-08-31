@@ -9,10 +9,10 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     [theme.breakpoints.up('md')]: {
-      height: '50vh'
+      height: '60vh'
     },
     [theme.breakpoints.up('lg')]: {
-      height: '60vh'
+      height: '65vh'
     }
   },
   foreground: {
@@ -20,10 +20,10 @@ const styles = theme => ({
     backgroundColor: 'rgba(0, 0, 255, 0.3)',
     color: 'white',
     [theme.breakpoints.up('md')]: {
-      height: '50vh'
+      height: '60vh'
     },
     [theme.breakpoints.up('lg')]: {
-      height: '60vh'
+      height: '65vh'
     }
   },
   textSection: {
@@ -42,11 +42,11 @@ const styles = theme => ({
     backgroundColor: 'rgba(0,0,0,0.35)',
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      height: '50vh',
+      height: '60vh',
       display: 'table'
     },
     [theme.breakpoints.up('lg')]: {
-      height: '60vh',
+      height: '65vh',
       display: 'table'
     }
   },
