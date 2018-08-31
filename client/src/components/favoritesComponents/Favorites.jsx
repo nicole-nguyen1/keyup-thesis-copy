@@ -141,10 +141,14 @@ class Favorites extends React.Component {
         component = <NoFaves type='training services' />
       }
     } else {
-      if (this.state.value === 0) {
+      if (this.state.value === 0 && this.state.careerFaves.length > 0) {
         component = <FavoriteCareers getUser={this.props.getUser} careers={this.state.careerFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>
-      } else if (this.state.value === 1) {
+      } else if (this.state.value === 0 && this.state.careerFaves.length === 0) {
+        component = <NoFaves type='careers' />
+      } else if (this.state.value === 1 && this.state.trainingFaves.length > 0) {
         component = <FavoriteTrainings getUser={this.props.getUser} trainings={this.state.trainingFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>
+      } else if (this.state.value === 1 && this.state.trainingFaves.length === 0) {
+        component = <NoFaves type='training services' />
       }
     }
 

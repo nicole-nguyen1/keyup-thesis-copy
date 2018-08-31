@@ -16,8 +16,10 @@ const styles = theme => ({
     textAlign: 'center'
   },
   paper: {
-    width: '580px',
-    margin: '0 auto'
+    [theme.breakpoints.up('sm')]: {
+      width: '580px',
+      margin: '0 auto'
+    }
   }
 });
 class SocialShare extends React.Component {

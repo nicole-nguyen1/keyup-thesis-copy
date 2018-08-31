@@ -113,38 +113,33 @@ class App extends React.Component {
   }
 
   getFavorites = (token) => {
-    console.log('this is also firing')
-    console.log('token', token)
     if (token !== 'null') {
       this.fetch({
         query: getFavoritesQuery(token || null)
       })
       .then((res) => {
-        console.log('this is the res', res)
         store.dispatch(getFavorites(res.data));
       });
     }
   }
 
   addFavorite = (args) => {
-    console.log('this is firing')
     args.token = JSON.stringify(localStorage.getItem('jwt'));
-    // args.
-    console.log('args', args)
     this.fetch({
       query: addFavoriteToList(args)
     })
     .then((res)=> {
-      console.log('this is an add favorite res', res)
       this.getFavorites(args.token);
-    })
+    });
   }
 
   removeFavorite = (favoriteID) => {
+    console.log('favorite id', favoriteID)
     this.fetch({
       query: removeFavoriteFromList(favoriteID)
     })
-    .then(()=> {
+    .then((res)=> {
+      console.log('remove favorite', res);
       this.getFavorites(JSON.stringify(localStorage.getItem('jwt')));
     })
   }
@@ -237,7 +232,7 @@ class App extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log('props in app', this.props)
+
     return (
       <Router history={newHistory} >
         <div>

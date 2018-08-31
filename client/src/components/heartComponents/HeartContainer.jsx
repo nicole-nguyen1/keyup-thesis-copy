@@ -5,7 +5,8 @@ class HeartContainer extends React.Component {
     super(props);
     this.state = {
       iconSize: 20,
-      isFavorite: false
+      isFavorite: false,
+      currentFavoriteID: ''
     };
     // this.updateArgs = {
     //   serviceID: this.props.serviceID || null,
@@ -28,25 +29,35 @@ class HeartContainer extends React.Component {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
       careerID: this.props.careerID || null,
-      favoriteID: '',
+      // favoriteID: '',
     }
     let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
             updateArgs.favoriteID = this.props.favorites[favorite].id;
+            this.setState({
+              currentFavoriteID: updateArgs.favoriteID
+            });
             favoriteFound = true;
-            this.turnMeBlue()
+            this.turnMeBlue();
             break;
+          } else {
+            this.setState({ isFavorite: false });
           }
         }
     } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
           updateArgs.favoriteID = this.props.favorites[favorite].id;
+          this.setState({
+            currentFavoriteID: updateArgs.favoriteID
+          });
           this.turnMeBlue();
           favoriteFound = true;
           break;
+        } else {
+          this.setState({ isFavorite: false });
         }
       }
     }
@@ -62,7 +73,7 @@ class HeartContainer extends React.Component {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
       careerID: this.props.careerID || null,
-      favoriteID: '',
+      favoriteID: this.state.currentFavoriteID || null,
     }
     this.setState({
       isFavorite: false
@@ -74,7 +85,7 @@ class HeartContainer extends React.Component {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
       careerID: this.props.careerID || null,
-      favoriteID: '',
+      // favoriteID: '',
     }
     let token = localStorage.getItem('jwt');
       if (token) {
@@ -88,9 +99,6 @@ class HeartContainer extends React.Component {
   }
 
   render() {
-    console.log('*****', this.props.favorites)
-    console.log('in heart container', this.props.serviceID)
-    console.log('update args in render of heart container', this.updateArgs)
     return (
       this.state.isFavorite ?
         <HeartButton 
