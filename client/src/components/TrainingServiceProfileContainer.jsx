@@ -43,8 +43,6 @@ class TrainingServiceProfileContainer extends React.Component {
   }
 
   render() {
-    console.log('props in training service profile container', this.props)
-    // const faves = this.props.favorites.favorites;
     return (
       <div>
       <TrainingServiceProfile 

@@ -5,7 +5,8 @@ class HeartContainer extends React.Component {
     super(props);
     this.state = {
       iconSize: 20,
-      isFavorite: false
+      isFavorite: false,
+      currentFavoriteID: ''
     };
     // this.updateArgs = {
     //   serviceID: this.props.serviceID || null,
@@ -28,13 +29,16 @@ class HeartContainer extends React.Component {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
       careerID: this.props.careerID || null,
-      favoriteID: '',
+      // favoriteID: '',
     }
     let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
             updateArgs.favoriteID = this.props.favorites[favorite].id;
+            this.setState({
+              currentFavoriteID: updateArgs.favoriteID
+            });
             favoriteFound = true;
             this.turnMeBlue();
             break;
@@ -46,6 +50,9 @@ class HeartContainer extends React.Component {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
           updateArgs.favoriteID = this.props.favorites[favorite].id;
+          this.setState({
+            currentFavoriteID: updateArgs.favoriteID
+          });
           this.turnMeBlue();
           favoriteFound = true;
           break;
@@ -66,7 +73,7 @@ class HeartContainer extends React.Component {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
       careerID: this.props.careerID || null,
-      favoriteID: '',
+      favoriteID: this.state.currentFavoriteID || null,
     }
     this.setState({
       isFavorite: false
@@ -78,7 +85,7 @@ class HeartContainer extends React.Component {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
       careerID: this.props.careerID || null,
-      favoriteID: '',
+      // favoriteID: '',
     }
     let token = localStorage.getItem('jwt');
       if (token) {
