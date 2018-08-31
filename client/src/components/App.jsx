@@ -136,7 +136,7 @@ class App extends React.Component {
     this.fetch({
       query: removeFavoriteFromList(favoriteID)
     })
-    .then(()=> {
+    .then((res)=> {
       this.getFavorites(JSON.stringify(localStorage.getItem('jwt')));
     })
   }

@@ -19,6 +19,8 @@ class HeartContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // console.log('this.props', this.props.favorites);
+    // console.log('prev props', prevProps.favorites);
     if (this.props.favorites !== prevProps.favorites) {
       this.isFavorite();
     }
@@ -31,8 +33,10 @@ class HeartContainer extends React.Component {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
             this.updateArgs.favoriteID = this.props.favorites[favorite].id;
             favoriteFound = true;
-            this.turnMeBlue()
+            this.turnMeBlue();
             break;
+          } else {
+            this.setState({ isFavorite: false });
           }
         }
     } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
@@ -42,6 +46,8 @@ class HeartContainer extends React.Component {
           this.turnMeBlue();
           favoriteFound = true;
           break;
+        } else {
+          this.setState({ isFavorite: false });
         }
       }
     }
