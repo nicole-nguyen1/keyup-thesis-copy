@@ -64,8 +64,9 @@ class About extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+   console.log('in about jsx', this.props)
     return (
+    
       <div>
         <Card style={{ borderRadius: 0 }}>
           <div className={classes.cardAction}>
