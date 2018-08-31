@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import SocialShare from '../socialShareComponents/SocialShare.jsx';
@@ -10,10 +9,6 @@ import HeartComponent from '../heartComponents/HeartContainer.jsx';
 
 const styles = theme => ({
   cardAction: {
-    // display: 'block',
-    // textAlign: 'right',
-    // marginTop: '10px',
-    // padding: '0 10px 0 0'
     textAlign: 'center',
     display: 'flex',
     width: '300px',
@@ -27,10 +22,6 @@ const styles = theme => ({
   },
 
   icon: {
-    // position: 'relative',
-    // top: '-4px',
-    // left: '10px',
-    // height: '1em'
     position: 'relative',
     padding: '5px',
     height: '1em'
@@ -78,7 +69,7 @@ class About extends React.Component {
       <div>
         <Card style={{ borderRadius: 0 }}>
           <div className={classes.cardAction}>
-            <Button onClick={this.props.toggleQualifyDialog} className={classes.button}>
+            <Button onClick={this.props.toggleAdviceForm} className={classes.button}>
               <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Get-Advice-Symbol-Gray.png' className={classes.icon} />
               <Typography gutterBottom variant='body1' className={classes.link}>ADVICE</Typography>
             </Button>

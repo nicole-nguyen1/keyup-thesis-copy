@@ -15,7 +15,7 @@ class FavoriteCareers extends React.Component {
     super(props);
     this.state = {
       careerFaves: []
-    }
+    };
     this.fetch = createApolloFetch({
       uri: '/graphql'
     }).bind(this);
@@ -30,7 +30,7 @@ class FavoriteCareers extends React.Component {
           return <Career key={career.id || index} career={career} favorites={this.props.favorites} removeFavorite={this.props.removeFavorite}/>;
         })}
       </Grid>
-    )
+    );
   }
 }
 

@@ -9,16 +9,16 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
 import MultiLineParagraph from '../MultiLineParagraph.jsx';
 
-function Transition(props) {
+const Transition = (props) => {
   return <Slide direction="up" {...props} />;
-}
+};
 
-function ApplyOnline(props) {
-  return <Button onClick={props.toggleDialog} href={props.service.app_url} style={{ color: '4e74ff' }}>GO TO APPLICATION</Button>
-}
+const ApplyOnline = (props) => {
+  return <Button onClick={props.toggleDialog} href={props.service.app_url} style={{ color: '4e74ff' }}>GO TO APPLICATION</Button>;
+};
 
-function ApplyPhone(props) {
-  let phone = `tel:${props.service.phone_number}`
+const ApplyPhone = (props) => {
+  let phone = `tel:${props.service.phone_number}`;
   return (
     <Button href={phone} 
       style={{
@@ -33,18 +33,18 @@ function ApplyPhone(props) {
         }}/>
       <span style={{ color: '4e74ff' }}>CALL</span>
     </Button>
-  )
-}
+  );
+};
 
-function ConditionalButton(props) {
+const ConditionalButton = (props) => {
   if (props.service.app_type === 'online') {
-    return <ApplyOnline service={props.service}/>
+    return <ApplyOnline service={props.service}/>;
   } else if (props.service.app_type === 'phone') {
-    return <ApplyPhone service={props.service} />
+    return <ApplyPhone service={props.service} />;
   } else {
     return null;
   }
-}
+};
 
 const styles = theme => ({
   phone: {
@@ -71,7 +71,7 @@ const AlertDialogSlide = props => {
   } else if (props.service.app_type === 'phone') {
     heading = 'Apply by Phone';
   } else if (props.service.app_type === 'in person') {
-    heading = 'Apply in Person'
+    heading = 'Apply in Person';
   }
 
   return (
@@ -86,11 +86,11 @@ const AlertDialogSlide = props => {
         <DialogTitle id="alert-dialog-slide-title">{heading}</DialogTitle>
         <DialogContent>
           {props.service.apply_now_cta ? <MultiLineParagraph text={props.service.apply_now_cta} /> : props.service.apply_now_cta}
-            {props.service.app_type === 'in person' ? 
-              <div className={classes.phone}>
-                <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Phone-blue.png' className={classes.phoneIcon} />
-                <Typography variant='body1'>{props.service.app_phone_number}</Typography>
-              </div> : null}
+          {props.service.app_type === 'in person' ? 
+            (<div className={classes.phone}>
+              <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Phone-blue.png' className={classes.phoneIcon} />
+              <Typography variant='body1'>{props.service.app_phone_number}</Typography>
+            </div>) : null}
         </DialogContent>
         <DialogActions>
           <ConditionalButton service={props.service}/>

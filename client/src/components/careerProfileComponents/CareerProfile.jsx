@@ -71,6 +71,6 @@ const CareerProfile = (props) => {
   } else {
     return null;
   }
-}
+};
 
 export default withStyles(styles)(CareerProfile);

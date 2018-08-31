@@ -37,8 +37,12 @@ const styles = theme => ({
   },
 
   sectionStyle: {
-    // display: 'inline-grid',
     marginBottom: '30px'
+  },
+
+  listItem: {
+    display: 'flex',
+    flexDirection: 'column'
   },
 
   form: {
@@ -279,29 +283,33 @@ class FilterAndSortForm extends React.Component {
           <DialogContent>
             <FormGroup>
               <div className={classes.sectionStyle}>
-                {this.filterOptions.map((label, index) => {
-                  return (<Filter
-                    key={index}
-                    label={label}
-                    handlePaidClick={this.handlePaidClick}
-                    handleFreeClick={this.handleFreeClick}
-                  />
-                  )
-                })}
+                <div className={classes.listItem}>
+                  {this.filterOptions.map((label, index) => {
+                    return (<Filter
+                      key={index}
+                      label={label}
+                      handlePaidClick={this.handlePaidClick}
+                      handleFreeClick={this.handleFreeClick}
+                    />
+                    )
+                  })}
+                </div>
               </div>
               <div className={classes.sectionStyle}>
                 <Typography className={classes.groupStyle}>
                   SORT BY
               </Typography>
                 <RadioGroup name="sort">
-                  {this.sortOptions.map((label, index) => {
-                    return (<Sort
-                      key={index}
-                      label={label}
-                      select={this.setSort}
-                      sortSelection={this.state.sortSelection}
-                    />);
-                  })}
+                  <div className={classes.listItem}>
+                    {this.sortOptions.map((label, index) => {
+                      return (<Sort
+                        key={index}
+                        label={label}
+                        select={this.setSort}
+                        sortSelection={this.state.sortSelection}
+                      />);
+                    })}
+                  </div>
                 </RadioGroup>
               </div>
               <Grid container>

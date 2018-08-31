@@ -53,7 +53,7 @@ const ApplicationProcess = props => {
               variant="contained" 
               color="primary" 
               style={{ backgroundColor: '88888a' }}
-              onClick={props.toggleQualifyDialog}
+              onClick={props.toggleAdviceForm}
             >
               GET ADVICE
             </Button>
