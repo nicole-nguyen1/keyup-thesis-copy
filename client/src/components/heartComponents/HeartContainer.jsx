@@ -7,11 +7,11 @@ class HeartContainer extends React.Component {
       iconSize: 20,
       isFavorite: false
     };
-    this.updateArgs = {
-      serviceID: this.props.serviceID || null,
-      careerID: this.props.careerID || null,
-      favoriteID: '',
-    }
+    // this.updateArgs = {
+    //   serviceID: this.props.serviceID || null,
+    //   careerID: this.props.careerID || null,
+    //   favoriteID: '',
+    // }
   }
 
   componentDidMount () {
@@ -25,11 +25,16 @@ class HeartContainer extends React.Component {
   } 
 
   isFavorite = () => {
+    let updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      favoriteID: '',
+    }
     let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
         for(let favorite in this.props.favorites) {
           if (this.props.favorites[favorite].career_id === this.props.careerID) {
-            this.updateArgs.favoriteID = this.props.favorites[favorite].id;
+            updateArgs.favoriteID = this.props.favorites[favorite].id;
             favoriteFound = true;
             this.turnMeBlue();
             break;
@@ -40,7 +45,7 @@ class HeartContainer extends React.Component {
     } else if (this.props.serviceID !== undefined && this.props.favorites !== undefined) {
       for(let favorite in this.props.favorites) {
         if (this.props.favorites[favorite].service_id === this.props.serviceID) {
-          this.updateArgs.favoriteID = this.props.favorites[favorite].id;
+          updateArgs.favoriteID = this.props.favorites[favorite].id;
           this.turnMeBlue();
           favoriteFound = true;
           break;
@@ -58,19 +63,29 @@ class HeartContainer extends React.Component {
   }
 
   removeFavorite = () => {
+    let updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      favoriteID: '',
+    }
     this.setState({
       isFavorite: false
     })
-    this.props.removeFavorite(this.updateArgs.favoriteID);
+    this.props.removeFavorite(updateArgs.favoriteID);
   }
 
   addFavorite = () => {
+    let updateArgs = {
+      serviceID: this.props.serviceID || null,
+      careerID: this.props.careerID || null,
+      favoriteID: '',
+    }
     let token = localStorage.getItem('jwt');
       if (token) {
         this.setState({
           isFavorite: true
         })
-        this.props.addFavorite(this.updateArgs);
+        this.props.addFavorite(updateArgs);
       } else {
         this.props.handlePopUp();
       }
