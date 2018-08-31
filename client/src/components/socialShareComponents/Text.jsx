@@ -12,7 +12,7 @@ const Text = (props) => {
         <Typography variant='caption'>Text</Typography>
       </Grid>
     </div>
-  )
-}
+  );
+};
 
 export default Text;

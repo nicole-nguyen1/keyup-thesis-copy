@@ -108,18 +108,18 @@ class HomePageCards extends React.Component {
                   <div style={{ flexGrow: '4' }}>
                     <Typography variant="body1" className={classes.headerStyle}>
                       Get Career Recommendations
-                  </Typography>
+                    </Typography>
                     <Typography className={classes.textStyle}>
                       Answer some quick questions to find careers and training
                       that fit your life
-                  </Typography>
+                    </Typography>
                   </div>
                   <MediaQuery query='(max-width: 599px)'>
                     <KeyboardArrowRightIcon style={{ flexGrow: '1' }} />
                   </MediaQuery>
                   <Button variant='contained' className={classes.button}>
                     Get Rec's
-                </Button>
+                  </Button>
                 </div>
               </CardContent>
               <CardActions className={classes.cardActionStyle}></CardActions>
@@ -137,18 +137,18 @@ class HomePageCards extends React.Component {
                   <div style={{ flexGrow: '4' }}>
                     <Typography variant="body1" className={classes.headerStyle}>
                       Browse Careers and Training Services
-                  </Typography>
+                    </Typography>
                     <Typography className={classes.textStyle}>
                       Search in-demand careers by salary, distance, training
                       time, and more
-                  </Typography>
+                    </Typography>
                   </div>
                   <MediaQuery query='(max-width: 599px)'>
                     <KeyboardArrowRightIcon style={{ flexGrow: '1' }} />
                   </MediaQuery>
                   <Button variant='contained' className={classes.button}>
                     Browse
-                </Button>
+                  </Button>
                 </div>
               </CardContent>
               <CardActions className={classes.cardActionStyle}></CardActions>

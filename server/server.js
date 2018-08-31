@@ -21,10 +21,10 @@ app.use(passport.initialize());
 //ENDPOINTS
 //====================
 app.use('/graphql', graphQLHTTP((req, res) => ({
-    schema,
-    graphiql: true,
-    context: {req, res}
-  }))
+  schema,
+  graphiql: true,
+  context: {req, res}
+}))
 );
 
 

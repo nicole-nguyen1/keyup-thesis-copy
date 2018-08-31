@@ -32,8 +32,12 @@ const styles = theme => ({
   },
 
   sectionStyle: {
-    // display: 'inline-grid',
     marginBottom: '30px'
+  },
+
+  listItem: {
+    display: 'flex',
+    flexDirection: 'column'
   },
 
   divider: {
@@ -131,26 +135,30 @@ class FilterAndSortForm extends React.Component {
                 FILTER
             </Typography>
               <div className={classes.sectionStyle}>
-                {this.props.industries.map((industry) => {
-                  return (
-                    <Filter
-                      key={industry.id}
-                      label={industry.name}
-                      id={industry.id}
-                      setFilter={this.setFilter}
-                    />);
-                })}
+                <div className={classes.listItem}>
+                  {this.props.industries.map((industry) => {
+                    return (
+                      <Filter
+                        key={industry.id}
+                        label={industry.name}
+                        id={industry.id}
+                        setFilter={this.setFilter}
+                      />);
+                  })}
+                </div>
                 <Divider className={classes.divider} />
-                <Filter
-                  label="Get paid to learn"
-                  id="-1"
-                  setFilter={this.setFixedFilter}
-                />
-                <Filter
-                  label="Free training services"
-                  id="-2"
-                  setFilter={this.setFixedFilter}
-                />
+                <div className={classes.listItem}>
+                  <Filter
+                    label="Get paid to learn"
+                    id="-1"
+                    setFilter={this.setFixedFilter}
+                  />
+                  <Filter
+                    label="Free training services"
+                    id="-2"
+                    setFilter={this.setFixedFilter}
+                  />
+                </div>
               </div>
               <div className={classes.sectionStyle}>
                 <Typography gutterBottom className={classes.groupStyle}>

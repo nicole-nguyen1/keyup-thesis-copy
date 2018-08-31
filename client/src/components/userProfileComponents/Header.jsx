@@ -17,7 +17,7 @@ const styles = theme => ({
     width: '200px',
     borderRadius: '50%',
     height: '200px',
-    margin: "0 auto",
+    margin: '0 auto',
     overflow: 'hidden'
   },
   icon: {
@@ -47,7 +47,7 @@ class Header extends React.Component {
           </Typography>
         </div>
       </div>
-    )
+    );
   }
 }
 

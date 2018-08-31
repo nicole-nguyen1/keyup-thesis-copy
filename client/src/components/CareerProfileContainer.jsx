@@ -12,10 +12,10 @@ import { getPageTitle } from '../actions/action';
 class CareerProfileContainer extends React.Component {
   constructor(props) {
     super(props);
-    const career_id = +props.router.match.params.id || null;
+    const careerID = +props.router.match.params.id || null;
     this.fetch = createApolloFetch({ uri: '../graphql' }).bind(this);
     this.state = {
-      career_id
+      careerID
     };
   }
 
@@ -24,7 +24,7 @@ class CareerProfileContainer extends React.Component {
       query: getCareerQuery(this.state.career_id)
     }).then(res => {
       store.dispatch(findCareer(res.data));
-      store.dispatch(getPageTitle(res.data.career.name))
+      store.dispatch(getPageTitle(res.data.career.name));
     });
     this.props.getUser();
   }
@@ -34,7 +34,7 @@ class CareerProfileContainer extends React.Component {
     return (
       <CareerProfile 
         career={this.props.career} 
-        careerID={this.state.career_id} 
+        careerID={this.state.careerID} 
         favorites={faves}
         removeFavorite={this.props.removeFavorite}
         addFavorite={this.props.addFavorite}

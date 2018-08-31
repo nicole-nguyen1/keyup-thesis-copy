@@ -1,8 +1,8 @@
 const crypto = require('crypto');
 const { knex } = require('../../database/db');
-const api_key = process.env.MG_API_KEY;
+const apiKey = process.env.MG_API_KEY;
 const DOMAIN = process.env.DOMAIN_NAME;
-const mailgun = require('mailgun-js')({ apiKey: api_key, domain: DOMAIN });
+const mailgun = require('mailgun-js')({ apiKey: apiKey, domain: DOMAIN });
 
 const sendPasswordEmail =  async (id, email) => {
   try {

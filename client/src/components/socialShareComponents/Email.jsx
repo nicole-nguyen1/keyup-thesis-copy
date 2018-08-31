@@ -15,7 +15,7 @@ const Email = (props) => {
         </Grid>
       </a>
     </div>
-  )
-}
+  );
+};
 
 export default Email;

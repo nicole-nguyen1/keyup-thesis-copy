@@ -43,8 +43,8 @@ const ProsCons = (props) => {
             src='https://s3.us-east-2.amazonaws.com/keyup-assets/white-thumbs-down.png' />
           <Typography gutterBottom variant='body1' className={classes.lightTextList}>{con.description}</Typography>
         </div>
-      )
-    }))
+      );
+    }));
   }
 
   return (
@@ -63,7 +63,7 @@ const ProsCons = (props) => {
                   src='https://s3.us-east-2.amazonaws.com/keyup-assets/White-thumbs-up-symbol.png' />
                 <Typography gutterBottom variant='body1' className={classes.lightTextList}>{pro.description}</Typography>
               </div>
-            )
+            );
           }) : null}
       </CardContent>
       <CardContent className={classes.content}>
@@ -74,7 +74,7 @@ const ProsCons = (props) => {
         {component}
       </CardContent>
     </div>
-  )
-}
+  );
+};
 
 export default withStyles(styles)(ProsCons);
