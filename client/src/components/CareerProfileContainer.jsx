@@ -23,7 +23,7 @@ class CareerProfileContainer extends React.Component {
 
   componentDidMount() {
     this.fetch({
-      query: getCareerQuery(this.state.career_id)
+      query: getCareerQuery(this.state.careerID)
     }).then(res => {
       store.dispatch(findCareer(res.data));
       store.dispatch(getPageTitle(res.data.career.name));
