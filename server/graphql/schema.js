@@ -1,6 +1,6 @@
 const { knex } = require('../../database/db');
 const contactForm = require('../helpers/form');
-const { signUp, login, updateInfoHelper, resetPassword, checkAuth } = require('../passport.js');
+const { signUp, login, updateInfoHelper, resetPassword, checkAuth } = require('../helpers/passport');
 const { sendPasswordEmail } = require('../helpers/passwordReset');
 
 const {
@@ -18,6 +18,17 @@ const IndustryType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString }
+  })
+});
+
+const CareerTraitType = new GraphQLObjectType({
+  name: 'CareerTrait',
+
+  fields: () => ({
+    id: { type: GraphQLID },
+    career_id: { type: GraphQLID },
+    type: { type: GraphQLString },
+    description: { type: GraphQLString }
   })
 });
 
@@ -96,12 +107,11 @@ const CareerType = new GraphQLObjectType({
   })
 });
 
-const CareerTraitType = new GraphQLObjectType({
-  name: 'CareerTrait',
-
+const TrainingTraitType = new GraphQLObjectType({
+  name: 'TrainingTrait',
   fields: () => ({
     id: { type: GraphQLID },
-    career_id: { type: GraphQLID },
+    service_id: { type: GraphQLID },
     type: { type: GraphQLString },
     description: { type: GraphQLString }
   })
@@ -175,16 +185,6 @@ const TrainingType = new GraphQLObjectType({
           .where({ 'service_id': parent.id, 'type': 'con' });
       }
     }
-  })
-});
-
-const TrainingTraitType = new GraphQLObjectType({
-  name: 'TrainingTrait',
-  fields: () => ({
-    id: { type: GraphQLID },
-    service_id: { type: GraphQLID },
-    type: { type: GraphQLString },
-    description: { type: GraphQLString }
   })
 });
 

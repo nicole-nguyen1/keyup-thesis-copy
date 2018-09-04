@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const graphQLHTTP = require('express-graphql');
 const path = require('path');
 const schema = require('./graphql/schema');
-const { passport } = require('./passport.js');
+const { passport } = require('./helpers/passport.js');
 
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 3000;
 
 const app = express();
 

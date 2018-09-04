@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const { knex } = require('../database/db');
+const { knex } = require('../../database/db');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
