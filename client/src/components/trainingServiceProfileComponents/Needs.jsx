@@ -1,7 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
+import { CardContent, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import CardContent from '@material-ui/core/CardContent';
 
 const styles = theme => ({
   lightText: {

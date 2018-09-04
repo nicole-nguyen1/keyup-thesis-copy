@@ -1,12 +1,11 @@
 import React from 'react';
-import EnterEmail from './EnterEmail.jsx';
-import { Redirect, withRouter } from 'react-router-dom'
-import { store } from '../../store/index';
+import EnterEmail from '../components/passwordResetComponents/EnterEmail.jsx';
+import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../../actions/action';
+import { getPageTitle } from '../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { findUserEmail } from '../graphql/graphql';
+import { findUserEmail } from '../components/graphql/graphql';
 
 class EnterEmailContainer extends React.Component {
   constructor(props) {

@@ -1,18 +1,14 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { createApolloFetch } from 'apollo-fetch';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import FavoriteCareers from './FavoriteCareers.jsx';
-import FavoriteTrainings from './FavoriteTrainings.jsx';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { getPageTitle } from '../../actions/action';
 import { getCareerFave, getTrainingFave } from '../graphql/graphql';
+import FavoriteCareers from './FavoriteCareers.jsx';
+import FavoriteTrainings from './FavoriteTrainings.jsx';
+import { Paper, Tabs, Tab, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   background: {

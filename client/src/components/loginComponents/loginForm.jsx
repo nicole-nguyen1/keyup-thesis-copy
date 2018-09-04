@@ -1,10 +1,7 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { Button, FormControl, Input, Typography } from '@material-ui/core';
 
 const styles = theme => ({
   formStyle: {

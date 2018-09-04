@@ -1,8 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { Button, Typography } from '@material-ui/core';
 
 const styles = theme => ({
   icon: {

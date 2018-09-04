@@ -1,16 +1,8 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
 import Filter from './Filter.jsx';
 import Sort from './Sort.jsx';
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Button, Dialog, DialogContent, DialogTitle, Divider, Grid, FormGroup, RadioGroup, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   headerStyle: {

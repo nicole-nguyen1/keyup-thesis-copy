@@ -1,29 +1,7 @@
 import React from 'react';
+
+// GRAPHQL
 import { createApolloFetch } from 'apollo-fetch';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { store } from '../store/index';
-import { withStyles } from '@material-ui/core/styles';
-import CareersList from './careerListComponents/CareersList.jsx';
-import { findCareers, getIndustries, findUser, getFavorites } from '../actions/action';
-import { Switch, Route, Router } from 'react-router-dom';
-import NavBar from './NavBar.jsx';
-import Footer from './Footer.jsx';
-import Home from './homePageComponents/Home.jsx';
-import ServiceListContainer from '../containers/ServiceListContainer.jsx';
-import createBrowserHistory from 'history/createBrowserHistory';
-import CareerProfileContainer from '../containers/CareerProfileContainer.jsx';
-import TrainingServiceProfileContainer from '../containers/TrainingServiceProfileContainer.jsx';
-import TermsConditions from './homePageComponents/TermsConditions.jsx';
-import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
-import LoginContainer from '../containers/loginContainer.jsx';
-import SignUpFormContainer from '../containers/SignUpFormContainer.jsx';
-import UserProfile from './userProfileComponents/UserProfile.jsx';
-import Favorites from './favoritesComponents/Favorites.jsx';
-import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
-import EnterEmailContainer from './passwordResetComponents/EnterEmailContainer.jsx';
-import PasswordEmailSuccess from './passwordResetComponents/PasswordEmailSuccess.jsx';
-import CreatePasswordContainer from '../containers/CreatePasswordContainer.jsx';
 import {
   getCareersQuery,
   getIndustriesQuery,
@@ -33,7 +11,41 @@ import {
   addFavoriteToList,
   removeFavoriteFromList
 } from './graphql/graphql';
+
+// REDUX
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { store } from '../store/index';
+import { findCareers, getIndustries, findUser, getFavorites } from '../actions/action';
+
+// REACT ROUTER
+import { Switch, Route, Router } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+// COMPONENTS
+import NavBar from './NavBar.jsx';
+import Footer from './Footer.jsx';
+import Home from './homePageComponents/Home.jsx';
+import CareersList from './careerListComponents/CareersList.jsx';
+import TermsConditions from './homePageComponents/TermsConditions.jsx';
+import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
+import UserProfile from './userProfileComponents/UserProfile.jsx';
+import Favorites from './favoritesComponents/Favorites.jsx';
+import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
+import PasswordEmailSuccess from './passwordResetComponents/PasswordEmailSuccess.jsx';
+
+// CONTAINERS
+import CareerProfileContainer from '../containers/CareerProfileContainer.jsx';
+import CreatePasswordContainer from '../containers/CreatePasswordContainer.jsx';
+import EnterEmailContainer from '../containers/EnterEmailContainer.jsx';
+import LoginContainer from '../containers/loginContainer.jsx';
+import ServiceListContainer from '../containers/ServiceListContainer.jsx';
+import SignUpFormContainer from '../containers/SignUpFormContainer.jsx';
+import TrainingServiceProfileContainer from '../containers/TrainingServiceProfileContainer.jsx';
+
+// STYLING
 import { Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 const newHistory = createBrowserHistory();
 class App extends React.Component {

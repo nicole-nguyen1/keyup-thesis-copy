@@ -1,14 +1,24 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+
+// GRAPHQL
+import { createApolloFetch } from 'apollo-fetch';
+
+// COMPONENTS
+import LogoutDialog from './LogoutDialog.jsx';
+
+// REACT ROUTER
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { HashLink } from 'react-router-hash-link';
+
+// REDUX
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { store } from '../store/index';
+import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
+
+// STYLING
+import { AppBar, Button, Grid, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -17,16 +27,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import LogoutDialog from './LogoutDialog.jsx';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { store } from '../store/index';
-import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
-import { HashLink } from 'react-router-hash-link';
-import { createApolloFetch } from 'apollo-fetch';
-import { Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 class NavBar extends React.Component {
   constructor(props) {

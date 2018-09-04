@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Checkbox, FormControlLabel } from '@material-ui/core';
 
 const styles = theme => ({
   formStyle: {

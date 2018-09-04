@@ -2,20 +2,13 @@ import React from 'react';
 import { createApolloFetch } from 'apollo-fetch';
 import Filter from './Filter.jsx';
 import Sort from './Sort.jsx';
-import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../../store/index';
 import { findServices } from '../../actions/action';
 import { getServicesQuery } from '../graphql/graphql';
+import { Button, Dialog, DialogContent, DialogTitle, Grid, FormGroup, RadioGroup, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   headerStyle: {

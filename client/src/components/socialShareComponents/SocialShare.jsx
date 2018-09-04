@@ -6,8 +6,7 @@ import Email from './Email.jsx';
 import Text from './Text.jsx';
 import CopyLink from './CopyLink.jsx';
 import SendTextDialog from './SendTextDialog.jsx';
-import Drawer from '@material-ui/core/Drawer';
-import Snackbar from '@material-ui/core/Snackbar';
+import { Drawer, Snackbar } from '@material-ui/core';
 import { isMobileOnly } from 'react-device-detect';
 import { withStyles } from '@material-ui/core/styles';
 
