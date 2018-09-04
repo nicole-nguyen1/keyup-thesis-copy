@@ -56,11 +56,12 @@ class SignUpFormContainer extends React.Component {
   }
 
   handleChange = (e) => {
+    let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let thisState = {};
     thisState[e.target.name] = e.target.value;
     this.setState(thisState, this.enableButton);
 
-    if (!(this.state.email).includes('@')) {
+    if (!(this.state.email).match(emailRegex)) {
       this.setState({
         invalidEmail: true
       })
