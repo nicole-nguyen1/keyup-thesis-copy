@@ -18,7 +18,7 @@ import { store } from '../store/index';
 import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
 
 // STYLING
-import { AppBar, Button, Grid, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Grid, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatIcon from '@material-ui/icons/Chat';
