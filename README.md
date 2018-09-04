@@ -1,5 +1,5 @@
 # unlock-caps
-This is my personal repo of the MVP application that I, as part of a team of four, built for a local Austin startup: KeyUp Austin.
+This is my personal repo of the MVP application that I, as part of a team of four, built for a local Austin startup over the course of four weeks: KeyUp Austin.
 This application serves as a way to connect lower-income students with middle-class career paths and training services to receive
 the necessary certifications.
 
