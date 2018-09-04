@@ -28,6 +28,12 @@ Built with
 - Sign in and create account (Passport local strategy authentication with GraphQL and JSON web tokens)
 - Favorite careers and training services
 
+Future features entail:
+- Facebook and Google OAuth
+- Adding support services information (financial aid, scholarships, etc)
+- Dynamic, multi-page questionnaire intake form
+- Internal tool for KeyUp admins and trusted partner organizations to edit database information
+
 ## Installation
 All you gotta do is: 
 ```
