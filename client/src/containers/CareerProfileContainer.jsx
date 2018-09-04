@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { findCareer } from '../actions/action';
 import { store } from '../store';
 import CareerProfile from '../components/careerProfileComponents/CareerProfile.jsx';
-import GoSignInDialog from '../components/GoSignInDialog.jsx';
+import GoSignInDialog from '../components/reusableComponents/GoSignInDialog.jsx';
 import { getCareerQuery } from '../components/graphql/graphql';
 import { getPageTitle } from '../actions/action';
 

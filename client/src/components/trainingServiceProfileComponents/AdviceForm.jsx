@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
-import Filter from '../filterAndSortComponents/Filter.jsx';
+import Filter from '../filterAndSortCareerComponents/Filter.jsx';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';

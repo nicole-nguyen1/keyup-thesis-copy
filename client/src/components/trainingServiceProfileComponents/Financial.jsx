@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Qualify from './Qualify.jsx';
 import Outcomes from './Outcomes.jsx';
 import { withStyles } from '@material-ui/core/styles';
-import MultiLineParagraph from '../MultiLineParagraph.jsx';
+import MultiLineParagraph from '../reusableComponents/MultiLineParagraph.jsx';
 
 const styles = theme => ({
   card: {

@@ -7,7 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
-import MultiLineParagraph from '../MultiLineParagraph.jsx';
+import MultiLineParagraph from '../reusableComponents/MultiLineParagraph.jsx';
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;

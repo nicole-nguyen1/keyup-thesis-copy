@@ -1,8 +1,8 @@
 import React from 'react';
 import CareerCard from './CareerCard.jsx';
 import Grid from '@material-ui/core/Grid';
-import FilterandSort from '../filterAndSortComponents/FilterAndSort.jsx';
-import GoSignInDialog from '../GoSignInDialog.jsx';
+import FilterandSort from '../filterAndSortCareerComponents/FilterAndSortButton.jsx';
+import GoSignInDialog from '../reusableComponents/GoSignInDialog.jsx';
 import { store } from '../../store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

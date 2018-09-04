@@ -1,6 +1,6 @@
 import React from 'react';
-import AdviceForm from './AdviceForm.jsx';
-import { addFormData } from '../graphql/graphql';
+import AdviceForm from '../components/trainingServiceProfileComponents/AdviceForm.jsx';
+import { addFormData } from '../components/graphql/graphql';
 import { createApolloFetch } from 'apollo-fetch';
 
 class AdviceFormContainer extends React.Component {

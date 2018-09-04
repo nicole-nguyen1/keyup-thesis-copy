@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import SocialShare from '../socialShareComponents/SocialShare.jsx';
 import { withStyles } from '@material-ui/core';
-import HeartContainer from '../heartComponents/HeartContainer.jsx';
+import HeartContainer from '../../containers/HeartContainer.jsx';
 
 const styles = theme => ({
   cardAction: {

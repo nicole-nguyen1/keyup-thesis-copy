@@ -6,8 +6,8 @@ import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import ApplyDialog from './ApplyDialog.jsx';
 import { withStyles } from '@material-ui/core/styles';
-import HeartContainer from '../heartComponents/HeartContainer.jsx';
-import MultiLineParagraph from '../MultiLineParagraph.jsx';
+import HeartContainer from '../../containers/HeartContainer.jsx';
+import MultiLineParagraph from '../reusableComponents/MultiLineParagraph.jsx';
 
 const styles = theme => ({
   card: {

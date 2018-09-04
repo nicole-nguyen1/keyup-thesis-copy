@@ -1,5 +1,6 @@
 import React from 'react';
-import HeartButton from './HeartButton.jsx';
+import HeartButton from '../components/heartComponents/HeartButton.jsx';
+
 class HeartContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -8,11 +9,6 @@ class HeartContainer extends React.Component {
       isFavorite: false,
       currentFavoriteID: ''
     };
-    // this.updateArgs = {
-    //   serviceID: this.props.serviceID || null,
-    //   careerID: this.props.careerID || null,
-    //   favoriteID: '',
-    // }
   }
 
   componentDidMount () {
@@ -28,8 +24,7 @@ class HeartContainer extends React.Component {
   isFavorite = () => {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
-      careerID: this.props.careerID || null,
-      // favoriteID: '',
+      careerID: this.props.careerID || null
     }
     let favoriteFound = false;
     if (this.props.careerID !== undefined && this.props.favorites !== undefined) {
@@ -84,8 +79,7 @@ class HeartContainer extends React.Component {
   addFavorite = () => {
     let updateArgs = {
       serviceID: this.props.serviceID || null,
-      careerID: this.props.careerID || null,
-      // favoriteID: '',
+      careerID: this.props.careerID || null
     }
     let token = localStorage.getItem('jwt');
       if (token) {

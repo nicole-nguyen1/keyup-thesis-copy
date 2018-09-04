@@ -1,13 +1,13 @@
 import React from 'react';
-import Intro from './homePageComponents/Intro.jsx';
-import SubmitFormHomePage from './homePageComponents/SubmitFormHomePage.jsx';
-import About from './homePageComponents/About.jsx';
-import HowItWorks from './homePageComponents/HowItWorks.jsx';
-import HomePageCards from './homePageComponents/HomePageCards.jsx';
-import { store } from '../store/index';
+import Intro from './Intro.jsx';
+import SubmitFormHomePage from './SubmitFormHomePage.jsx';
+import About from './About.jsx';
+import HowItWorks from './HowItWorks.jsx';
+import HomePageCards from './HomePageCards.jsx';
+import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../actions/action';
+import { getPageTitle } from '../../actions/action';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 
 class Home extends React.Component {

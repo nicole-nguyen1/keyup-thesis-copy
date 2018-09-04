@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
-import { store } from '../../store/index';
+import { store } from '../store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle, findUser } from '../../actions/action';
+import { getPageTitle, findUser } from '../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { loginData } from '../graphql/graphql';
-import LoginForm from './loginForm.jsx';
+import { loginData } from '../components/graphql/graphql';
+import LoginForm from '../components/loginComponents/loginForm.jsx';
 
 class LoginContainer extends React.Component {
   constructor(props) {

@@ -1,16 +1,13 @@
 import React from 'react';
-import Service from './Service.jsx';
+import ServiceCard from './ServiceCard.jsx';
 import Grid from '@material-ui/core/Grid';
-import FilterAndSort from './filterSortServicesComponents/FilterAndSort.jsx';
-import GoSignInDialog from './GoSignInDialog.jsx';
-import { store } from '../store/index';
+import FilterAndSortButton from '../filterSortServicesComponents/FilterAndSortButton.jsx';
+import GoSignInDialog from '../reusableComponents/GoSignInDialog.jsx';
+import { store } from '../../store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../actions/action';
+import { getPageTitle } from '../../actions/action';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
-
 
 const styles = theme => ({
   background: {
@@ -54,7 +51,6 @@ const styles = theme => ({
   },
 
   createButtonStyle: {
-    // float: 'left',
     fontWeight: 'bold',
     color: '#4469FF',
     borderRadius: '2px',
@@ -70,8 +66,7 @@ const styles = theme => ({
     float: 'right',
     fontWeight: 'bold',
     textAlign: 'right',
-    padding: '0',
-    // alignSelf: 'flex-end'
+    padding: '0'
   }
 });
 class Services extends React.Component {
@@ -104,10 +99,10 @@ class Services extends React.Component {
     
     return (
       <div className={classes.background}>
-        <FilterAndSort services={this.props.services} careerID={this.props.careerID}/>
+        <FilterAndSortButton services={this.props.services} careerID={this.props.careerID}/>
         <Grid container className={classes.grid}>
           {this.props.services.map((service, index) => {
-            return <Service 
+            return <ServiceCard 
               key={service.id || index} 
               service={service} 
               careerName={this.props.careerName} 

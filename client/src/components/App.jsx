@@ -9,21 +9,21 @@ import { findCareers, getIndustries, findUser, getFavorites } from '../actions/a
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
-import Home from './Home.jsx';
-import ServiceListContainer from './ServiceListContainer.jsx';
+import Home from './homePageComponents/Home.jsx';
+import ServiceListContainer from '../containers/ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
 import CareerProfileContainer from '../containers/CareerProfileContainer.jsx';
-import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.jsx';
+import TrainingServiceProfileContainer from '../containers/TrainingServiceProfileContainer.jsx';
 import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
-import LoginContainer from './loginComponents/loginContainer.jsx';
-import SignUpFormContainer from './signupComponents/SignUpFormContainer.jsx';
+import LoginContainer from '../containers/loginContainer.jsx';
+import SignUpFormContainer from '../containers/SignUpFormContainer.jsx';
 import UserProfile from './userProfileComponents/UserProfile.jsx';
 import Favorites from './favoritesComponents/Favorites.jsx';
 import EditAccountForm from './userProfileComponents/EditAccountInfoForm.jsx';
 import EnterEmailContainer from './passwordResetComponents/EnterEmailContainer.jsx';
 import PasswordEmailSuccess from './passwordResetComponents/PasswordEmailSuccess.jsx';
-import CreatePasswordContainer from './passwordResetComponents/CreatePasswordContainer.jsx';
+import CreatePasswordContainer from '../containers/CreatePasswordContainer.jsx';
 import {
   getCareersQuery,
   getIndustriesQuery,

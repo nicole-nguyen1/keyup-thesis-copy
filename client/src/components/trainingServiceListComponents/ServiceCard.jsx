@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import HeartContainer from './heartComponents/HeartContainer.jsx';
+import HeartContainer from '../../containers/HeartContainer.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import { CardActions, CardMedia } from '@material-ui/core';
 import MediaQuery from 'react-responsive';
@@ -83,7 +83,7 @@ const styles = theme => ({
   }
 });
 
-const Service = props => {
+const ServiceCard = props => {
   const { classes } = props;
 
   return (
@@ -203,4 +203,4 @@ const Service = props => {
   );
 };
 
-export default withStyles(styles)(Service);
+export default withStyles(styles)(ServiceCard);

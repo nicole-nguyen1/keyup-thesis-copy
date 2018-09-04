@@ -1,11 +1,11 @@
 import React from 'react';
-import CreatePassword from './CreatePassword.jsx';
-import { store } from '../../store/index';
+import CreatePassword from '../components/passwordResetComponents/CreatePassword.jsx';
+import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle, findUser } from '../../actions/action';
+import { getPageTitle, findUser } from '../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { checkToken, resetPassword, getLoggedInUser } from '../graphql/graphql';
+import { checkToken, resetPassword, getLoggedInUser } from '../components/graphql/graphql';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 
 class CreatePasswordContainer extends React.Component {

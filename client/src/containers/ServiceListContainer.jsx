@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { findServices } from '../actions/action';
 import { store } from '../store/index';
-import Services from './Services.jsx';
-import { getServicesQuery } from './graphql/graphql';
+import ServicesList from '../components/trainingServiceListComponents/ServicesList.jsx';
+import { getServicesQuery } from '../components/graphql/graphql';
+
 class ServiceListContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +36,7 @@ class ServiceListContainer extends React.Component {
     if (!this.props.services) {
       return <div>Loading...</div>
     } else {
-      return <Services 
+      return <ServicesList 
         services={this.props.services} 
         careerID={this.state.career_id}
         favorites={faves}

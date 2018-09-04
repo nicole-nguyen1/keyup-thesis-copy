@@ -1,13 +1,11 @@
 import React from 'react';
-import SignUpForm from './SignUpForm.jsx';
-import { withStyles } from '@material-ui/core/styles';
-import { store } from '../../store/index';
+import SignUpForm from '../components/signupComponents/SignUpForm.jsx';
+import { store } from '../store/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getPageTitle, findUser } from '../../actions/action.js';
-import { signUp } from '../graphql/graphql.js';
+import { getPageTitle, findUser } from '../actions/action';
+import { signUp } from '../components/graphql/graphql.js';
 import { createApolloFetch } from 'apollo-fetch';
-import { Redirect } from 'react-router';
 
 const styles = theme => ({
   inputStyle: {

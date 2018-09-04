@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import HeartContainer from '../heartComponents/HeartContainer.jsx';
+import HeartContainer from '../../containers/HeartContainer.jsx';
 
 const styles = theme => ({
   card: {
