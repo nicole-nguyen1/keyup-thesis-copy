@@ -1,14 +1,13 @@
 import React from 'react';
-import Career from './Career.jsx';
+import CareerCard from './CareerCard.jsx';
 import Grid from '@material-ui/core/Grid';
-import FilterandSort from './filterAndSortComponents/FilterAndSort.jsx';
-import GoSignInDialog from './GoSignInDialog.jsx';
-import { store } from '../store/index';
+import FilterandSort from '../filterAndSortComponents/FilterAndSort.jsx';
+import GoSignInDialog from '../GoSignInDialog.jsx';
+import { store } from '../../store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../actions/action';
+import { getPageTitle } from '../../actions/action';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   background: {
@@ -23,7 +22,7 @@ const styles = theme => ({
   }
 });
 
-class Careers extends React.Component {
+class CareersList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +60,7 @@ class Careers extends React.Component {
         />
         <Grid container className={classes.grid}>
           {this.props.careers.map((career, index) => {
-            return <Career
+            return <CareerCard
               key={career.id || index} 
               career={career} 
               favorites={faves}
@@ -91,4 +90,4 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPageTitle }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Careers));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(CareersList));

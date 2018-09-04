@@ -3,10 +3,10 @@ import { createApolloFetch } from 'apollo-fetch';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { findCareer } from '../actions/action';
-import { store } from '../store/index';
-import CareerProfile from './careerProfileComponents/CareerProfile.jsx';
-import GoSignInDialog from './GoSignInDialog.jsx';
-import { getCareerQuery } from './graphql/graphql';
+import { store } from '../store';
+import CareerProfile from '../components/careerProfileComponents/CareerProfile.jsx';
+import GoSignInDialog from '../components/GoSignInDialog.jsx';
+import { getCareerQuery } from '../components/graphql/graphql';
 import { getPageTitle } from '../actions/action';
 
 

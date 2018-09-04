@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { store } from '../store/index';
 import { withStyles } from '@material-ui/core/styles';
-import Careers from './Careers.jsx';
+import CareersList from './careerListComponents/CareersList.jsx';
 import { findCareers, getIndustries, findUser, getFavorites } from '../actions/action';
 import { Switch, Route, Router } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
@@ -12,7 +12,7 @@ import Footer from './Footer.jsx';
 import Home from './Home.jsx';
 import ServiceListContainer from './ServiceListContainer.jsx';
 import createBrowserHistory from 'history/createBrowserHistory';
-import CareerProfileContainer from './CareerProfileContainer.jsx';
+import CareerProfileContainer from '../containers/CareerProfileContainer.jsx';
 import TrainingServiceProfileContainer from './TrainingServiceProfileContainer.jsx';
 import TermsConditions from './homePageComponents/TermsConditions.jsx';
 import PrivacyPolicy from './homePageComponents/PrivacyPolicy.jsx';
@@ -309,7 +309,7 @@ class App extends React.Component {
                   />
                 }} />
                 <Route exact path="/careers" render={props => {
-                  return <Careers
+                  return <CareersList
                     router={props}
                     getUser={this.getUser}
                     careers={this.props.careers}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Career from '../Career.jsx';
+import CareerCard from '../careerListComponents/CareerCard.jsx';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
@@ -27,7 +27,7 @@ class FavoriteCareers extends React.Component {
     return (
       <Grid container className={classes.grid}>
         {this.props.careers.map((career, index) => {
-          return <Career key={career.id || index} career={career} favorites={this.props.favorites} removeFavorite={this.props.removeFavorite}/>;
+          return <CareerCard key={career.id || index} career={career} favorites={this.props.favorites} removeFavorite={this.props.removeFavorite}/>;
         })}
       </Grid>
     );

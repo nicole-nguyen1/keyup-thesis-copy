@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import HeartContainer from './heartComponents/HeartContainer.jsx';
+import HeartContainer from '../heartComponents/HeartContainer.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import { CardActions, CardMedia } from '@material-ui/core';
 import MediaQuery from 'react-responsive';
@@ -80,7 +80,7 @@ const styles = theme => ({
     padding: '0 24px'
   }
 });
-class Career extends React.Component {
+class CareerCard extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -221,4 +221,4 @@ class Career extends React.Component {
   }
 }
 
-export default withStyles(styles)(Career);
+export default withStyles(styles)(CareerCard);
