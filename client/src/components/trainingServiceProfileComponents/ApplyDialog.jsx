@@ -1,49 +1,11 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core';
+import ConditionalApplyDialogButton from './ConditionalApplyDialogButton.jsx'
 import MultiLineParagraph from '../reusableComponents/MultiLineParagraph.jsx';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Slide, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
-};
-
-const ApplyOnline = (props) => {
-  return <Button onClick={props.toggleDialog} href={props.service.app_url} style={{ color: '4e74ff' }}>GO TO APPLICATION</Button>;
-};
-
-const ApplyPhone = (props) => {
-  let phone = `tel:${props.service.phone_number}`;
-  return (
-    <Button href={phone} 
-      style={{
-        width: '32px',
-        display: 'block',
-        bottom: '16px'
-      }}>
-      <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/Phone-blue.png' 
-        style={{
-          height: '1.5em',
-          paddingBottom: '10px'
-        }}/>
-      <span style={{ color: '4e74ff' }}>CALL</span>
-    </Button>
-  );
-};
-
-const ConditionalButton = (props) => {
-  if (props.service.app_type === 'online') {
-    return <ApplyOnline service={props.service}/>;
-  } else if (props.service.app_type === 'phone') {
-    return <ApplyPhone service={props.service} />;
-  } else {
-    return null;
-  }
 };
 
 const styles = theme => ({
@@ -93,7 +55,7 @@ const AlertDialogSlide = props => {
             </div>) : null}
         </DialogContent>
         <DialogActions>
-          <ConditionalButton service={props.service}/>
+          <ConditionalApplyDialogButton service={props.service}/>
           <Button onClick={props.toggleDialog} className={classes.cancelButton}>
             CANCEL
           </Button>
