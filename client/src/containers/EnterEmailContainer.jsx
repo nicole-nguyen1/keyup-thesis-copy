@@ -18,7 +18,7 @@ class EnterEmailContainer extends React.Component {
       buttonStatus: true,
       showError: false,
       redirect: false
-    }
+    };
   }
 
   componentDidMount() {
@@ -28,18 +28,18 @@ class EnterEmailContainer extends React.Component {
   handleEmailChange = e => {
     this.setState({
       email: e.target.value
-    }, this.enableButton)
+    }, this.enableButton);
   }
 
   enableButton = () => {
     if (this.state.email.length) {
       this.setState({
         buttonStatus: false
-      })
+      });
     } else {
       this.setState({
         buttonStatus: true
-      })
+      });
     }
   }
 
@@ -48,22 +48,22 @@ class EnterEmailContainer extends React.Component {
     this.fetch({
       query: findUserEmail(email)
     })
-    .then((res) => {
-      if (res.data.userEmail) {
-        this.setState({
-          buttonStatus: true,
-          redirect: true
-        })
-        return res;
-      } else {
-        this.setState({
-          showError:true
-        })
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+      .then((res) => {
+        if (res.data.userEmail) {
+          this.setState({
+            buttonStatus: true,
+            redirect: true
+          });
+          return res;
+        } else {
+          this.setState({
+            showError: true
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   render() {
@@ -79,7 +79,7 @@ class EnterEmailContainer extends React.Component {
           showError={this.state.showError}
         />
       </div>
-    )
+    );
   }
 }
 

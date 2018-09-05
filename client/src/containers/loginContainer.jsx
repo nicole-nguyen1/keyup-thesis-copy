@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 import { store } from '../store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -32,24 +32,24 @@ class LoginContainer extends React.Component {
   handleEmailChange = e => {
     this.setState({
       email: e.target.value
-    }, this.enableButton)
+    }, this.enableButton);
   }
 
   handlePasswordChange = e => {
     this.setState({
       password: e.target.value
-    }, this.enableButton)
+    }, this.enableButton);
   }
 
   enableButton = () => {
     if (this.state.email.length > 0 && this.state.password.length > 0) {
       this.setState({
         buttonStatus: false
-      })
+      });
     } else {
       this.setState({
         buttonStatus: true
-      })
+      });
     }
   }
 
@@ -57,7 +57,7 @@ class LoginContainer extends React.Component {
     const formArguments = {
       email: JSON.stringify(this.state.email),
       password: JSON.stringify(this.state.password)
-    }
+    };
     this.fetch({
       query: loginData(formArguments)
     }).then((res) => {
@@ -66,12 +66,12 @@ class LoginContainer extends React.Component {
           email: '',
           password: '',
           buttonStatus: true
-        })
+        });
         return res;
       } else {
         this.setState({
           showError: true
-        })
+        });
       }
     }).then((res) => {
       if (!res.errors) {

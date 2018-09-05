@@ -48,7 +48,7 @@ class SignUpFormContainer extends React.Component {
       showError: false,
       loginFromFaves: false,
       createAccountFromFaves: false
-    }
+    };
   }
 
   componentDidMount() {
@@ -64,11 +64,11 @@ class SignUpFormContainer extends React.Component {
     if (!(this.state.email).match(emailRegex)) {
       this.setState({
         invalidEmail: true
-      })
+      });
     } else {
       this.setState({
         invalidEmail: false
-      })
+      });
     }
   }
 
@@ -149,10 +149,10 @@ class SignUpFormContainer extends React.Component {
         zip
       })
     })
-    .then(res => {
-      localStorage.setItem('jwt', res.data.signUp.token);
-      this.props.history.goBack();
-    })
+      .then(res => {
+        localStorage.setItem('jwt', res.data.signUp.token);
+        this.props.history.goBack();
+      });
   }
 
   render() {
@@ -174,7 +174,7 @@ class SignUpFormContainer extends React.Component {
         passConfirmCheck={this.state.passConfirmCheck}
         showError={this.showError}
       />
-    )
+    );
   }
 }
 

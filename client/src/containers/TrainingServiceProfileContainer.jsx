@@ -45,18 +45,18 @@ class TrainingServiceProfileContainer extends React.Component {
   render() {
     return (
       <div>
-      <TrainingServiceProfile 
-        service={this.props.service} 
-        favorites={this.props.favorites.favorites}
-        removeFavorite={this.props.removeFavorite}
-        addFavorite={this.props.addFavorite}
-        handlePopUp={this.handlePopUp}
-      />
-      <GoSignInDialog 
-        open={this.state.renderPopUp}
-        onClose={this.handleClose}
-        page={this.props.router.location.pathname}
-      />
+        <TrainingServiceProfile 
+          service={this.props.service} 
+          favorites={this.props.favorites.favorites}
+          removeFavorite={this.props.removeFavorite}
+          addFavorite={this.props.addFavorite}
+          handlePopUp={this.handlePopUp}
+        />
+        <GoSignInDialog 
+          open={this.state.renderPopUp}
+          onClose={this.handleClose}
+          page={this.props.router.location.pathname}
+        />
       </div>
     );
   }

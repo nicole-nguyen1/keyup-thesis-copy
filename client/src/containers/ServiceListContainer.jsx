@@ -34,7 +34,7 @@ class ServiceListContainer extends React.Component {
   render() {
     const faves = this.props.favorites;
     if (!this.props.services) {
-      return <div>Loading...</div>
+      return <div>Loading...</div>;
     } else {
       return <ServicesList 
         services={this.props.services} 

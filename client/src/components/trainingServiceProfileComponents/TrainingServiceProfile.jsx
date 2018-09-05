@@ -46,7 +46,7 @@ class TrainingServiceProfile extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ adviceFormSubmitted: false })
+    this.setState({ adviceFormSubmitted: false });
   }
 
   render() {

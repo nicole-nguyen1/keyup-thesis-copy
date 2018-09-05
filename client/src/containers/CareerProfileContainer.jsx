@@ -47,19 +47,19 @@ class CareerProfileContainer extends React.Component {
     const faves = this.props.favorites.favorites;
     return (
       <div>
-      <CareerProfile 
-        career={this.props.career} 
-        careerID={this.state.careerID} 
-        favorites={faves}
-        removeFavorite={this.props.removeFavorite}
-        addFavorite={this.props.addFavorite}
-        handlePopUp={this.handlePopUp}
-      />
-      <GoSignInDialog 
-        open={this.state.renderPopUp}
-        onClose={this.handleClose}
-        page={this.props.router.location.pathname}
-      />
+        <CareerProfile 
+          career={this.props.career} 
+          careerID={this.state.careerID} 
+          favorites={faves}
+          removeFavorite={this.props.removeFavorite}
+          addFavorite={this.props.addFavorite}
+          handlePopUp={this.handlePopUp}
+        />
+        <GoSignInDialog 
+          open={this.state.renderPopUp}
+          onClose={this.handleClose}
+          page={this.props.router.location.pathname}
+        />
       </div>
     );
   }
