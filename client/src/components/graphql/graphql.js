@@ -155,7 +155,7 @@ export const signUp = ({ email, password, first_name, last_name, phone_number, z
     signUp (
       email: ${email},
       password: ${password},
-      first_name: ${first_name},
+      first_name: ${first_name}, 
       last_name: ${last_name},
       phone_number: ${phone_number || null},
       zip: ${zip || null}

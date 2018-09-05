@@ -13,7 +13,7 @@
     "rules": {
       "no-mixed-spaces-and-tabs": 2,
       "indent": [2, 2],
-      "camelcase": [2, {"properties": "never"}],
+      "camelcase": ["error", {"properties": "never"}],
       "curly": 2,
       "eqeqeq": [2, "smart"],
       "func-style": [2, "expression"],
