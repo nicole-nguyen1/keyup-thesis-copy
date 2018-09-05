@@ -43,7 +43,7 @@ const styles = theme => ({
   },
 
   backdrop: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     top: '56px'
   },
 
@@ -79,40 +79,41 @@ class FilterAndSortForm extends React.Component {
   handlePaidClick = () => {
     this.setState({
       paidToLearn: !this.state.paidToLearn
-    })
+    });
   }
 
   handleFreeClick = () => {
     this.setState({
       freeTraining: !this.state.freeTraining
-    })
+    });
   }
 
   handleFormSubmission = () => {
     this.fetch({
       query: getServicesQuery(this.props.careerID)
     }).then(res => {
-    if (this.state.paidToLearn && !this.state.freeTraining) {
-      let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings)}
-      let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2}
-      store.dispatch(findServices(temp3))
-    } else if (this.state.freeTraining && !this.state.paidToLearn) {
-      let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings)}
-      let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2}
-      store.dispatch(findServices(temp3));
-    } else if (this.state.freeTraining && this.state.paidToLearn) {
-      let temp = {trainings: this.filterServicesByPayAndLoans(res.data.trainings)}
-      let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2}
-      store.dispatch(findServices(temp3))
-    } else {
-      let temp = {trainings: res.data.trainings}
-      let temp2 = this.checkSortState(temp.trainings);
-      let temp3 = {trainings: temp2}
-      store.dispatch(findServices(temp3))
-    }})
+      if (this.state.paidToLearn && !this.state.freeTraining) {
+        let temp = {trainings: this.filterServicesByGetPaidToLearn(res.data.trainings)};
+        let temp2 = this.checkSortState(temp.trainings);
+        let temp3 = {trainings: temp2};
+        store.dispatch(findServices(temp3));
+      } else if (this.state.freeTraining && !this.state.paidToLearn) {
+        let temp = {trainings: this.filterServicesByFederalLoans(res.data.trainings)};
+        let temp2 = this.checkSortState(temp.trainings);
+        let temp3 = {trainings: temp2};
+        store.dispatch(findServices(temp3));
+      } else if (this.state.freeTraining && this.state.paidToLearn) {
+        let temp = {trainings: this.filterServicesByPayAndLoans(res.data.trainings)};
+        let temp2 = this.checkSortState(temp.trainings);
+        let temp3 = {trainings: temp2};
+        store.dispatch(findServices(temp3));
+      } else {
+        let temp = {trainings: res.data.trainings};
+        let temp2 = this.checkSortState(temp.trainings);
+        let temp3 = {trainings: temp2};
+        store.dispatch(findServices(temp3));
+      } 
+    });
   }
 
   setSort = (e) => {
@@ -128,7 +129,7 @@ class FilterAndSortForm extends React.Component {
         if (service.paid_to_learn) {
           filteredPaidServices.push(service);
         }
-      })
+      });
       return filteredPaidServices;
     }
   }
@@ -140,7 +141,7 @@ class FilterAndSortForm extends React.Component {
         if (service.federal_student_aid) {
           filteredLoanServices.push(service);
         }
-      })
+      });
       return filteredLoanServices;
     }
   }
@@ -152,18 +153,18 @@ class FilterAndSortForm extends React.Component {
         if (service.federal_student_aid && service.paid_to_learn) {
           filteredServices.push(service);
         }
-      })
+      });
       return filteredServices;
     }
   }
 
   checkSortState = (services) => {
     if (this.state.sortSelection === 'Affordability') {
-      return this.sortByAffordability(services)
+      return this.sortByAffordability(services);
     } else if (this.state.sortSelection === 'Shortest Training') {
-      return this.sortByShortestTraining(services)
+      return this.sortByShortestTraining(services);
     } else {
-      return this.sortByAffordability(services)
+      return this.sortByAffordability(services);
     }
   }
 
@@ -178,33 +179,33 @@ class FilterAndSortForm extends React.Component {
     const unsortedNumberServices = [];
     if (services[0].id) {
       services.forEach(service => {
-        if (service.card_tuition.slice(0,4).toLowerCase() === 'paid') {
-          paid.push(service)
-        } else if (service.card_tuition.slice(0,4).toLowerCase() === 'free' && service.card_tuition.length === 4) {
-          free.push(service)
-        } else if (service.card_tuition.slice(0,4).toLowerCase() === 'free' && service.card_tuition.length > 4) {
+        if (service.card_tuition.slice(0, 4).toLowerCase() === 'paid') {
+          paid.push(service);
+        } else if (service.card_tuition.slice(0, 4).toLowerCase() === 'free' && service.card_tuition.length === 4) {
+          free.push(service);
+        } else if (service.card_tuition.slice(0, 4).toLowerCase() === 'free' && service.card_tuition.length > 4) {
           let range = Number(service.card_tuition.match(/\d/g).join(''));
           unsortedRangeServices.push([service, range]);
         } else {
           let num = Number(service.card_tuition.match(/\d/g).join(''));
           unsortedNumberServices.push([service, num]);
         }
-      })
+      });
     }
     paid.forEach(service => {
       sortedServices.push(service);
-    })
+    });
     free.forEach(service => {
       sortedServices.push(service);
-    })
+    });
     unsortedRangeServices.sort(this.sortNumbers);
     unsortedRangeServices.forEach(service => {
       sortedServices.push(service[0]);
-    })
+    });
     unsortedNumberServices.sort(this.sortNumbers);
     unsortedNumberServices.forEach(service => {
       sortedServices.push(service[0]);
-    })
+    });
     return sortedServices;
   }
 
@@ -229,16 +230,16 @@ class FilterAndSortForm extends React.Component {
           let num = Number(service.card_length.match(/\d/g).join('')) * 52;
           unsorted.push([service, num]);
         } 
-      })
+      });
     }
     unsorted.sort(this.sortNumbers);
     unsorted.forEach(service => {
       sortedServices.push(service[0]);
-    })
+    });
     return sortedServices;
   }
 
-  sortNumbers = (a,b) => {
+  sortNumbers = (a, b) => {
     if (a[1] < b[1]) {
       return -1;
     } else if (a[1] > b[1]) {
@@ -270,7 +271,7 @@ class FilterAndSortForm extends React.Component {
       >
         <div className={classes.formStyle}>
           <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>
-            {"Filter and Sort Training"}
+            {'Filter and Sort Training'}
           </DialogTitle>
           <DialogContent>
             <FormGroup>
@@ -283,14 +284,14 @@ class FilterAndSortForm extends React.Component {
                       handlePaidClick={this.handlePaidClick}
                       handleFreeClick={this.handleFreeClick}
                     />
-                    )
+                    );
                   })}
                 </div>
               </div>
               <div className={classes.sectionStyle}>
                 <Typography className={classes.groupStyle}>
                   SORT BY
-              </Typography>
+                </Typography>
                 <RadioGroup name="sort">
                   <div className={classes.listItem}>
                     {this.sortOptions.map((label, index) => {
@@ -312,7 +313,7 @@ class FilterAndSortForm extends React.Component {
                     className={classes.button}
                     onClick={() => {
                       this.props.hideFilter();
-                      this.handleFormSubmission()
+                      this.handleFormSubmission();
                     }}
                   >See Training Results</Button>
                 </Grid>

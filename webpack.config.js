@@ -15,9 +15,7 @@ var config = {
       {
         test: /\.jsx?/,
         include: APP_DIR,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: ['babel-loader', 'eslint-loader']
       }
     ]
   },

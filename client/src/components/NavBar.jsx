@@ -95,9 +95,9 @@ class NavBar extends React.Component {
                 >
                   <MenuIcon image="#" />
                 </IconButton>
-                  <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
-                    <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' style={{ position: 'relative', top: '12px' }} />
-                  </HashLink>
+                <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
+                  <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' style={{ position: 'relative', top: '12px' }} />
+                </HashLink>
               </Grid>
               <Grid item xs={9} sm={11} className={classes.pageTitle}>
                 <Typography variant="subheading" color="inherit" className={classes.flex}>
@@ -118,28 +118,28 @@ class NavBar extends React.Component {
                   (<div className={classes.menuTopItems}>
                     <Typography variant="body1" align="center" style={{ color: '#02ED96', marginBottom: '10px' }}>
                       Account
-                        </Typography>
+                    </Typography>
                     <Typography variant="body1" align="center" style={{ color: 'white' }}>
                       {this.props.user.email || null}
                     </Typography>
                   </div>) :
                   (<div className={classes.menuTopItems}>
-                      <Link to="/login" className={classes.link}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.buttonStyle}
-                          onClick={this.handleClose}
-                        >
+                    <Link to="/login" className={classes.link}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.buttonStyle}
+                        onClick={this.handleClose}
+                      >
                           SIGN IN
-                    </Button>
-                      </Link>
-                      <Link to='/signup' className={classes.link}>
-                        <Typography onClick={this.handleClose} style={{ color: 'white' }}>
+                      </Button>
+                    </Link>
+                    <Link to='/signup' className={classes.link}>
+                      <Typography onClick={this.handleClose} style={{ color: 'white' }}>
                           Create an account
-                    </Typography>
-                      </Link>
-                    </div>)
+                      </Typography>
+                    </Link>
+                  </div>)
                 }
               </div>
               <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
@@ -248,7 +248,7 @@ NavBar.styles = {
     width: '304px'
   },
   menuItem: {
-    whiteSpace: "unset"
+    whiteSpace: 'unset'
   },
   tools: {
     top: 0,
@@ -323,7 +323,7 @@ const mapStateToProps = state => {
     pages: state.pages.page,
     user: state.user.user
   };
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPageTitle, findUser }, dispatch);

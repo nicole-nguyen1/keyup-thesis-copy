@@ -15,22 +15,22 @@ class Home extends React.Component {
     super(props);
     this.state = {
       passwordResetSuccess: false
-    }
+    };
   }
 
   componentDidMount() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     store.dispatch(getPageTitle(''));
     this.props.getUser();
     if (this.props.router.location.state && this.props.router.location.state.passwordResetSuccess) {
-      this.setState({ passwordResetSuccess: this.props.router.location.state.passwordResetSuccess })
+      this.setState({ passwordResetSuccess: this.props.router.location.state.passwordResetSuccess });
     }
   }
 
   handleClose = (e) => {
     this.setState({
       passwordResetSuccess: false
-    })
+    });
   }
 
   render() {
@@ -62,7 +62,7 @@ class Home extends React.Component {
               onClick={this.handleClose}
             >
               Okay
-          </Button>
+            </Button>
           </DialogActions>
         </Dialog>
       </div>

@@ -43,7 +43,7 @@ const styles = theme => ({
   },
 
   backdrop: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     top: '56px'
   },
 
@@ -119,13 +119,13 @@ class FilterAndSortForm extends React.Component {
       >
         <div className={classes.formStyle}>
           <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>
-            {"Filter and Sort Careers"}
+            {'Filter and Sort Careers'}
           </DialogTitle>
           <DialogContent>
             <FormGroup>
               <Typography gutterBottom className={classes.groupStyle}>
                 FILTER
-            </Typography>
+              </Typography>
               <div className={classes.sectionStyle}>
                 <div className={classes.listItem}>
                   {this.props.industries.map((industry) => {
@@ -155,7 +155,7 @@ class FilterAndSortForm extends React.Component {
               <div className={classes.sectionStyle}>
                 <Typography gutterBottom className={classes.groupStyle}>
                   SORT BY
-              </Typography>
+                </Typography>
                 <RadioGroup name="sort">
                   {this.sortOptions.map((label, index) => {
                     return (<Sort
@@ -180,7 +180,7 @@ class FilterAndSortForm extends React.Component {
                         paidToLearn: this.paidToLearn,
                         freeTraining: this.freeTraining
                       }, this.state.sortSelection);
-                      this.filterOptions = {}
+                      this.filterOptions = {};
                     }}
                   >See Career Results</Button>
                 </Grid>

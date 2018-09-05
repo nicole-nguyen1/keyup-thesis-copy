@@ -29,7 +29,7 @@ class SocialShare extends React.Component {
       snackBarOpen: false,
       textOpen: false,
       textLink: ''
-    }
+    };
   }
 
   handleClick = (state) => {
@@ -56,7 +56,7 @@ class SocialShare extends React.Component {
       row: {
         width: '33%'
       }
-    }
+    };
 
     const { classes } = this.props;
     return (
@@ -116,7 +116,7 @@ class SocialShare extends React.Component {
           message={<span id="message-id">Link copied!</span>}
         />
       </div>
-    )
+    );
   }
 }
 

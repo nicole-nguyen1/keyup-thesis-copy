@@ -102,13 +102,13 @@ class LoginForm extends React.Component {
                 The email address and password you entered <br />
                 did not match any KeyUp accounts. <br />
                 Please try again.
-            </Typography>
+              </Typography>
               ) : null
             }
             <Typography variant="body1" align="center" className={classes.smallText}>
               <Link to='/password/request' className={classes.link}>
                 Forgot your password?
-            </Link>
+              </Link>
             </Typography>
             <div className={classes.buttons}>
               <Button
@@ -118,13 +118,13 @@ class LoginForm extends React.Component {
                 disabled={this.props.buttonStatus}
               >
                 SIGN IN
-            </Button>
+              </Button>
               <Link to='/signup'>
                 <Button
                   className={classes.createButtonStyle}
                 >
                   CREATE AN ACCOUNT
-              </Button>
+                </Button>
               </Link>
             </div>
           </FormControl>

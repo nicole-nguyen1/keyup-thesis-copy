@@ -1,5 +1,5 @@
 import React from 'react';
-import ConditionalApplyDialogButton from './ConditionalApplyDialogButton.jsx'
+import ConditionalApplyDialogButton from './ConditionalApplyDialogButton.jsx';
 import MultiLineParagraph from '../reusableComponents/MultiLineParagraph.jsx';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Slide, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core';

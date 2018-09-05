@@ -48,7 +48,7 @@ const styles = theme => ({
   
   content: {
     paddingTop: '0',
-    [theme.breakpoints.up('sm')] : {
+    [theme.breakpoints.up('sm')]: {
       width: '300px',
       margin: '0 auto'
     }
@@ -59,7 +59,7 @@ class IntroCard extends React.Component {
     super(props);
     this.state = {
       drawerState: false
-    }
+    };
   }
 
   toggleDrawer = () => {
@@ -99,7 +99,7 @@ class IntroCard extends React.Component {
         </Card>
         <SocialShare open={this.state.drawerState} toggleDrawer={this.toggleDrawer}/>
       </div>
-    )
+    );
   }
 }
 

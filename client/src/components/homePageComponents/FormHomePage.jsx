@@ -116,7 +116,7 @@ const FormHomePage = (props) => {
               onClick={props.submitForm}
             >
               GET STARTED
-          </Button>
+            </Button>
           </div>
         </div>
         <MediaQuery query='(min-width: 600px)'>

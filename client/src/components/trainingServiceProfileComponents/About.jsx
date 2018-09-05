@@ -52,7 +52,7 @@ class About extends React.Component {
     super(props);
     this.state = {
       drawerState: false
-    }
+    };
   }
 
   toggleDrawer = () => {
@@ -95,7 +95,7 @@ class About extends React.Component {
         </Card>
         <SocialShare open={this.state.drawerState} toggleDrawer={this.toggleDrawer}/>
       </div>
-    )
+    );
   }
 }
 

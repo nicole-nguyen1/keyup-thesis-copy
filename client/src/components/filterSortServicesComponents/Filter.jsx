@@ -15,7 +15,7 @@ class Filter extends React.Component {
   }
 
   checkLabel = () => {
-    if (this.props.label === "Get paid to learn") {
+    if (this.props.label === 'Get paid to learn') {
       this.props.handlePaidClick();
     } else {
       this.props.handleFreeClick();

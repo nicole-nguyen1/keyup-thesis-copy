@@ -34,7 +34,7 @@ const styles = theme => ({
   tabSelected: {}
 });
 
-function NoFaves(props) {
+const NoFaves = (props) => {
   return (
     <div>
       <Paper style={{ padding: '30px 15px', borderRadius: '0', height: '100%' }}>
@@ -45,11 +45,11 @@ function NoFaves(props) {
               color: '#4469FF',
               textDecoration: 'none'
             }}>Browser Careers and Training</Link> to pick out some likely-looking {props.type}.
-      </Typography>
+        </Typography>
       </Paper>
     </div>
-  )
-}
+  );
+};
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
@@ -57,7 +57,7 @@ class Favorites extends React.Component {
       value: 0,
       careerFaves: [],
       trainingFaves: []
-    }
+    };
     this.fetch = createApolloFetch({
       uri: '/graphql'
     }).bind(this);
@@ -105,22 +105,22 @@ class Favorites extends React.Component {
     this.fetch({
       query: getCareerFave(careers)
     })
-    .then((res) => {
-      this.setState({ careerFaves: res.data.careers })
-    });
+      .then((res) => {
+        this.setState({ careerFaves: res.data.careers });
+      });
 
     this.fetch({
       query: getTrainingFave(trainings)
     })
-    .then((res) => {
-      this.setState({ trainingFaves: res.data.trainings })
-    });
+      .then((res) => {
+        this.setState({ trainingFaves: res.data.trainings });
+      });
   }
 
   render() {
     const token = localStorage.getItem('jwt');
     if (token === null) {
-      return (<Redirect to={{ pathname: '/home'}} />)
+      return (<Redirect to={{ pathname: '/home'}} />);
     }
     
     const { classes } = this.props;
@@ -132,19 +132,19 @@ class Favorites extends React.Component {
     //ternary statements
     if (!faves || faves.length === 0) {
       if (this.state.value === 0) {
-        component = <NoFaves type='careers' />
+        component = <NoFaves type='careers' />;
       } else if (this.state.value === 1) {
-        component = <NoFaves type='training services' />
+        component = <NoFaves type='training services' />;
       }
     } else {
       if (this.state.value === 0 && this.state.careerFaves.length > 0) {
-        component = <FavoriteCareers getUser={this.props.getUser} careers={this.state.careerFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>
+        component = <FavoriteCareers getUser={this.props.getUser} careers={this.state.careerFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>;
       } else if (this.state.value === 0 && this.state.careerFaves.length === 0) {
-        component = <NoFaves type='careers' />
+        component = <NoFaves type='careers' />;
       } else if (this.state.value === 1 && this.state.trainingFaves.length > 0) {
-        component = <FavoriteTrainings getUser={this.props.getUser} trainings={this.state.trainingFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>
+        component = <FavoriteTrainings getUser={this.props.getUser} trainings={this.state.trainingFaves} favorites={faves} removeFavorite={this.props.removeFavorite}/>;
       } else if (this.state.value === 1 && this.state.trainingFaves.length === 0) {
-        component = <NoFaves type='training services' />
+        component = <NoFaves type='training services' />;
       }
     }
 
@@ -173,7 +173,7 @@ class Favorites extends React.Component {
         </Tabs>
         {component}
       </div>
-    )
+    );
   }
 }
 

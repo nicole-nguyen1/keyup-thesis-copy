@@ -6,7 +6,7 @@ class SendTextDialog extends React.Component {
     super(props);
     this.state = {
       textLink: ''
-    }
+    };
   }
 
   handleChange = (e) => {
@@ -23,7 +23,7 @@ class SendTextDialog extends React.Component {
           onClose={() => this.props.handleClose('textOpen')}
           aria-labelledby="text-title"
         >
-          <DialogTitle id="text-title">{"Share This Page"}</DialogTitle>
+          <DialogTitle id="text-title">{'Share This Page'}</DialogTitle>
           <DialogContent>
             <Typography gutterBottom>
               Enter the phone number of the person you want to text. 
@@ -53,7 +53,7 @@ class SendTextDialog extends React.Component {
           </DialogActions>
         </Dialog>
       </div>
-    )
+    );
   }
 }
 
