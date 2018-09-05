@@ -1,12 +1,11 @@
 import React from 'react';
-import EnterEmail from './EnterEmail.jsx';
-import { Redirect, withRouter } from 'react-router-dom'
-import { store } from '../../store/index';
+import EnterEmail from '../components/passwordResetComponents/EnterEmail.jsx';
+import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../../actions/action';
+import { getPageTitle } from '../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { findUserEmail } from '../graphql/graphql';
+import { findUserEmail } from '../components/graphql/graphql';
 
 class EnterEmailContainer extends React.Component {
   constructor(props) {
@@ -19,7 +18,7 @@ class EnterEmailContainer extends React.Component {
       buttonStatus: true,
       showError: false,
       redirect: false
-    }
+    };
   }
 
   componentDidMount() {
@@ -29,18 +28,18 @@ class EnterEmailContainer extends React.Component {
   handleEmailChange = e => {
     this.setState({
       email: e.target.value
-    }, this.enableButton)
+    }, this.enableButton);
   }
 
   enableButton = () => {
     if (this.state.email.length) {
       this.setState({
         buttonStatus: false
-      })
+      });
     } else {
       this.setState({
         buttonStatus: true
-      })
+      });
     }
   }
 
@@ -49,22 +48,22 @@ class EnterEmailContainer extends React.Component {
     this.fetch({
       query: findUserEmail(email)
     })
-    .then((res) => {
-      if (res.data.userEmail) {
-        this.setState({
-          buttonStatus: true,
-          redirect: true
-        })
-        return res;
-      } else {
-        this.setState({
-          showError:true
-        })
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+      .then((res) => {
+        if (res.data.userEmail) {
+          this.setState({
+            buttonStatus: true,
+            redirect: true
+          });
+          return res;
+        } else {
+          this.setState({
+            showError: true
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   render() {
@@ -80,7 +79,7 @@ class EnterEmailContainer extends React.Component {
           showError={this.state.showError}
         />
       </div>
-    )
+    );
   }
 }
 

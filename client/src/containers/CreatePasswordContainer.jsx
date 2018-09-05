@@ -1,11 +1,11 @@
 import React from 'react';
-import CreatePassword from './CreatePassword.jsx';
-import { store } from '../../store/index';
+import CreatePassword from '../components/passwordResetComponents/CreatePassword.jsx';
+import { store } from '../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle, findUser } from '../../actions/action';
+import { getPageTitle, findUser } from '../actions/action';
 import { createApolloFetch } from 'apollo-fetch';
-import { checkToken, resetPassword, getLoggedInUser } from '../graphql/graphql';
+import { checkToken, resetPassword, getLoggedInUser } from '../components/graphql/graphql';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 
 class CreatePasswordContainer extends React.Component {
@@ -23,7 +23,7 @@ class CreatePasswordContainer extends React.Component {
       passConfirmCheck: false,
       showError: false,
       redirect: false
-    }
+    };
   }
 
   componentDidMount() {
@@ -36,20 +36,20 @@ class CreatePasswordContainer extends React.Component {
     this.fetch({
       query: checkToken(token)
     })
-    .then((res) => {
-      if (res.errors) {
-        this.setState({
-          invalidToken: true
-        });
-      } else {
-        this.setState({
-          invalidToken: false
-        });
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+      .then((res) => {
+        if (res.errors) {
+          this.setState({
+            invalidToken: true
+          });
+        } else {
+          this.setState({
+            invalidToken: false
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   handleChange = (e) => {
@@ -116,33 +116,33 @@ class CreatePasswordContainer extends React.Component {
     const formArguments = {
       token: JSON.stringify(this.props.router.match.params.token),
       password: JSON.stringify(this.state.password)
-    }
+    };
 
     this.fetch({
       query: resetPassword(formArguments)
     })
-    .then((res) => {
-      if (!res.errors) {
-        return res;
-      } else {
-        this.setState({
-          showError: true
-        })
-      }
-    })
-    .then((res) => {
-      localStorage.setItem('jwt', res.data.resetPassword.token);
-      return this.fetch({
-        query: getLoggedInUser(JSON.stringify(res.data.resetPassword.token))
+      .then((res) => {
+        if (!res.errors) {
+          return res;
+        } else {
+          this.setState({
+            showError: true
+          });
+        }
+      })
+      .then((res) => {
+        localStorage.setItem('jwt', res.data.resetPassword.token);
+        return this.fetch({
+          query: getLoggedInUser(JSON.stringify(res.data.resetPassword.token))
+        });
+      })
+      .then(res => {
+        store.dispatch(findUser(res.data.loggedInUser));
+        this.setState({ redirect: true });
+      })
+      .catch((err) => {
+        console.error(err);
       });
-    })
-    .then(res => {
-      store.dispatch(findUser(res.data.loggedInUser));
-      this.setState({ redirect: true });
-    })
-    .catch((err) => {
-      console.error(err);
-    })
   }
 
   render() {
@@ -181,11 +181,11 @@ class CreatePasswordContainer extends React.Component {
               href="/password/request"
             >
               Reset Password
-          </Button>
+            </Button>
           </DialogActions>
         </Dialog>
       </div>
-    )
+    );
   }
 }
 

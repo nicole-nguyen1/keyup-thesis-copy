@@ -1,11 +1,8 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { Button, Card, CardActions, CardContent, Typography } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import { CardActions, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import MediaQuery from 'react-responsive';
 
 const styles = theme => ({

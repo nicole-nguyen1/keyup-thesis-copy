@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Checkbox, FormControlLabel } from '@material-ui/core';
 
 const styles = theme => ({
   formStyle: {
@@ -16,7 +15,7 @@ class Filter extends React.Component {
   }
 
   checkLabel = () => {
-    if (this.props.label === "Get paid to learn") {
+    if (this.props.label === 'Get paid to learn') {
       this.props.handlePaidClick();
     } else {
       this.props.handleFreeClick();

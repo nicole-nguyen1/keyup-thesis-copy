@@ -1,14 +1,9 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
 import SocialShare from '../socialShareComponents/SocialShare.jsx';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import HeartContainer from '../heartComponents/HeartContainer.jsx';
+import HeartContainer from '../../containers/HeartContainer.jsx';
 
 const styles = theme => ({
   image: {
@@ -53,7 +48,7 @@ const styles = theme => ({
   
   content: {
     paddingTop: '0',
-    [theme.breakpoints.up('sm')] : {
+    [theme.breakpoints.up('sm')]: {
       width: '300px',
       margin: '0 auto'
     }
@@ -64,7 +59,7 @@ class IntroCard extends React.Component {
     super(props);
     this.state = {
       drawerState: false
-    }
+    };
   }
 
   toggleDrawer = () => {
@@ -104,7 +99,7 @@ class IntroCard extends React.Component {
         </Card>
         <SocialShare open={this.state.drawerState} toggleDrawer={this.toggleDrawer}/>
       </div>
-    )
+    );
   }
 }
 

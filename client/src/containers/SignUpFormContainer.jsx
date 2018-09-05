@@ -1,13 +1,11 @@
 import React from 'react';
-import SignUpForm from './SignUpForm.jsx';
-import { withStyles } from '@material-ui/core/styles';
-import { store } from '../../store/index';
+import SignUpForm from '../components/signupComponents/SignUpForm.jsx';
+import { store } from '../store/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getPageTitle, findUser } from '../../actions/action.js';
-import { signUp } from '../graphql/graphql.js';
+import { getPageTitle, findUser } from '../actions/action';
+import { signUp } from '../components/graphql/graphql.js';
 import { createApolloFetch } from 'apollo-fetch';
-import { Redirect } from 'react-router';
 
 const styles = theme => ({
   inputStyle: {
@@ -50,7 +48,7 @@ class SignUpFormContainer extends React.Component {
       showError: false,
       loginFromFaves: false,
       createAccountFromFaves: false
-    }
+    };
   }
 
   componentDidMount() {
@@ -58,18 +56,19 @@ class SignUpFormContainer extends React.Component {
   }
 
   handleChange = (e) => {
+    let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let thisState = {};
     thisState[e.target.name] = e.target.value;
     this.setState(thisState, this.enableButton);
 
-    if (!(this.state.email).includes('@')) {
+    if (!(this.state.email).match(emailRegex)) {
       this.setState({
         invalidEmail: true
-      })
+      });
     } else {
       this.setState({
         invalidEmail: false
-      })
+      });
     }
   }
 
@@ -150,10 +149,10 @@ class SignUpFormContainer extends React.Component {
         zip
       })
     })
-    .then(res => {
-      localStorage.setItem('jwt', res.data.signUp.token);
-      this.props.history.goBack();
-    })
+      .then(res => {
+        localStorage.setItem('jwt', res.data.signUp.token);
+        this.props.history.goBack();
+      });
   }
 
   render() {
@@ -175,7 +174,7 @@ class SignUpFormContainer extends React.Component {
         passConfirmCheck={this.state.passConfirmCheck}
         showError={this.showError}
       />
-    )
+    );
   }
 }
 

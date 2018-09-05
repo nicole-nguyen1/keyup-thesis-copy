@@ -2,12 +2,12 @@ import React from 'react';
 import { createApolloFetch } from 'apollo-fetch';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { store } from '../store/index';
+import { store } from '../store';
 import { findService } from '../actions/action';
 import { getPageTitle } from '../actions/action';
-import { getServiceQuery } from './graphql/graphql';
-import TrainingServiceProfile from './trainingServiceProfileComponents/TrainingServiceProfile.jsx';
-import GoSignInDialog from './GoSignInDialog.jsx';
+import { getServiceQuery } from '../components/graphql/graphql';
+import TrainingServiceProfile from '../components/trainingServiceProfileComponents/TrainingServiceProfile.jsx';
+import GoSignInDialog from '../components/reusableComponents/GoSignInDialog.jsx';
 
 class TrainingServiceProfileContainer extends React.Component {
   constructor(props) {
@@ -45,18 +45,18 @@ class TrainingServiceProfileContainer extends React.Component {
   render() {
     return (
       <div>
-      <TrainingServiceProfile 
-        service={this.props.service} 
-        favorites={this.props.favorites.favorites}
-        removeFavorite={this.props.removeFavorite}
-        addFavorite={this.props.addFavorite}
-        handlePopUp={this.handlePopUp}
-      />
-      <GoSignInDialog 
-        open={this.state.renderPopUp}
-        onClose={this.handleClose}
-        page={this.props.router.location.pathname}
-      />
+        <TrainingServiceProfile 
+          service={this.props.service} 
+          favorites={this.props.favorites.favorites}
+          removeFavorite={this.props.removeFavorite}
+          addFavorite={this.props.addFavorite}
+          handlePopUp={this.handlePopUp}
+        />
+        <GoSignInDialog 
+          open={this.state.renderPopUp}
+          onClose={this.handleClose}
+          page={this.props.router.location.pathname}
+        />
       </div>
     );
   }

@@ -1,12 +1,10 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import IntroCard from './IntroCard.jsx';
 import EarningsOpenings from './EarningsOpenings.jsx';
 import TasksSkills from './TasksSkills.jsx';
 import ProsCons from './ProsCons.jsx';
 import Trainings from './Trainings.jsx';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({

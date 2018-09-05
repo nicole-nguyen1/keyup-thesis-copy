@@ -5,10 +5,9 @@ import About from './About.jsx';
 import Needs from './Needs.jsx';
 import ProsCons from '../careerProfileComponents/ProsCons.jsx';
 import ApplicationProcess from './ApplicationProcess.jsx';
-import Card from '@material-ui/core/Card';
-import { withStyles } from '@material-ui/core';
-import AdviceFormContainer from './AdviceFormContainer.jsx';
+import AdviceFormContainer from '../../containers/AdviceFormContainer.jsx';
 import FormSubmitted from '../homePageComponents/FormSubmitted.jsx';
+import { Card, withStyles } from '@material-ui/core';
 
 const styles = theme => ({
   profile: {
@@ -47,7 +46,7 @@ class TrainingServiceProfile extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ adviceFormSubmitted: false })
+    this.setState({ adviceFormSubmitted: false });
   }
 
   render() {

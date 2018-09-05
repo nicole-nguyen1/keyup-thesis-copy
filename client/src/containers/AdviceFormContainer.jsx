@@ -1,6 +1,6 @@
 import React from 'react';
-import AdviceForm from './AdviceForm.jsx';
-import { addFormData } from '../graphql/graphql';
+import AdviceForm from '../components/trainingServiceProfileComponents/AdviceForm.jsx';
+import { addFormData } from '../components/graphql/graphql';
 import { createApolloFetch } from 'apollo-fetch';
 
 class AdviceFormContainer extends React.Component {
@@ -36,26 +36,26 @@ class AdviceFormContainer extends React.Component {
 
   setCheckbox = (e) => {
     if (e.target.value === '0') {
-        this.state.financialAid = !this.state.financialAid;
-        this.enableButton();
+      this.state.financialAid = !this.state.financialAid;
+      this.enableButton();
     } else if (e.target.value === '1') {
-        this.state.applicationProcess = !this.state.applicationProcess;
-        this.enableButton();
+      this.state.applicationProcess = !this.state.applicationProcess;
+      this.enableButton();
     } else if (e.target.value === '2' ) {
-        this.state.talkToGrad = !this.state.talkToGrad;
-        this.enableButton();
+      this.state.talkToGrad = !this.state.talkToGrad;
+      this.enableButton();
     } else if (e.target.value === '3') {
-        this.state.talkToProfessional = !this.state.talkToProfessional;
-        this.enableButton();
+      this.state.talkToProfessional = !this.state.talkToProfessional;
+      this.enableButton();
     } else if (e.target.value === '4') {
-        this.state.other = !this.state.other;
-        this.enableButton();
+      this.state.other = !this.state.other;
+      this.enableButton();
     }
   }
 
   enableButton = () => {
     if (this.state.name.length > 0 &&
-      this.state.emailOrPhone.length > 0  &&
+      this.state.emailOrPhone.length > 0 &&
       (
         this.state.financialAid ||
         this.state.applicationProcess ||
@@ -66,11 +66,11 @@ class AdviceFormContainer extends React.Component {
     ) {
       this.setState({
         buttonStatus: false
-      })
+      });
     } else {
       this.setState({
         buttonStatus: true
-      })
+      });
     }
   }
 
@@ -80,14 +80,14 @@ class AdviceFormContainer extends React.Component {
     if (this.state.emailOrPhone.includes('@')) {
       email = JSON.stringify(this.state.emailOrPhone);
     } else {
-      phoneNumber = JSON.stringify(this.state.emailOrPhone)
+      phoneNumber = JSON.stringify(this.state.emailOrPhone);
     }
     let formArguments = {
       first_name: JSON.stringify(this.state.name.split(' ')[0]),
       last_name: JSON.stringify(this.state.name.split(' ').slice(1).join(' ')),
       email: email,
       phone_number: phoneNumber,
-      page: JSON.stringify("Training Service Profile"),
+      page: JSON.stringify('Training Service Profile'),
       career: JSON.stringify(this.props.service.career_name),
       training_service: JSON.stringify(this.props.service.name),
       financial_aid: this.state.financialAid,
@@ -100,25 +100,25 @@ class AdviceFormContainer extends React.Component {
     this.fetch({
       query: addFormData(formArguments) 
     })
-    .then(()=> {
-      this.setState({
-        showForm: false,
-        name: '',
-        emailOrPhone: '',
-        message: '',
-        financialAid: false,
-        applicationProcess: false,
-        talkToGrad: false,
-        talkToProfessional: false,
-        other: false,
-        buttonStatus: true,
-        formSubmitted: true
+      .then(()=> {
+        this.setState({
+          showForm: false,
+          name: '',
+          emailOrPhone: '',
+          message: '',
+          financialAid: false,
+          applicationProcess: false,
+          talkToGrad: false,
+          talkToProfessional: false,
+          other: false,
+          buttonStatus: true,
+          formSubmitted: true
+        });
       })
-    })
-    .then(() => {
-      this.props.toggleAdviceMessageSent();
-    })
-    .catch((err)=>{console.log(err)})
+      .then(() => {
+        this.props.toggleAdviceMessageSent();
+      })
+      .catch((err)=> console.log(err));
   }
 
   closePopup = () => { 
@@ -129,15 +129,15 @@ class AdviceFormContainer extends React.Component {
 
   render() {
     return (
-        <AdviceForm 
-          service={this.props.service}
-          handleChange={this.handleChange}
-          setCheckbox={this.setCheckbox}
-          buttonStatus={this.state.buttonStatus}
-          submitForm={this.submitForm}
-          toggleAdviceForm={this.props.toggleAdviceForm}
-          dialogState={this.props.dialogState}
-        />
+      <AdviceForm 
+        service={this.props.service}
+        handleChange={this.handleChange}
+        setCheckbox={this.setCheckbox}
+        buttonStatus={this.state.buttonStatus}
+        submitForm={this.submitForm}
+        toggleAdviceForm={this.props.toggleAdviceForm}
+        dialogState={this.props.dialogState}
+      />
     );
   }
 }

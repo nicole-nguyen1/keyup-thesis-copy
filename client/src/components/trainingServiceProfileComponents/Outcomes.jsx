@@ -1,7 +1,7 @@
 import React from 'react';
+import MultiLineParagraph from '../reusableComponents/MultiLineParagraph.jsx';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import MultiLineParagraph from '../MultiLineParagraph.jsx';
 
 const styles = theme => ({
   outcomes: {

@@ -17,13 +17,13 @@ const styles = theme => ({
   }
 });
 
-class FilterAndSort extends React.Component {
+class FilterAndSortButton extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       showFilter: false
-    }
+    };
   }
 
   displayFilter = () => {
@@ -58,24 +58,10 @@ class FilterAndSort extends React.Component {
             open={this.state.showFilter}
           />
         </div>
-        {/* {this.state.showFilter ?
-          (<FilterAndSortForm 
-            services={this.props.services}
-            careerName={this.props.careerName}
-            hideFilter={this.hideFilter}
-            careerID={this.props.careerID}
-          />) :
-          (<Button 
-            variant="contained"
-            color="primary"
-            onClick={this.displayFilter}
-            style={{backgroundColor: 'b367c2'}}
-          >Filter And Sort</Button>)
-        } */}
       </div>
     );
   }
 
 }
 
-export default withStyles(styles)(FilterAndSort);
+export default withStyles(styles)(FilterAndSortButton);

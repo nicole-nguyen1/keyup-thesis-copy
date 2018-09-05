@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
+import { FormControlLabel, Radio } from '@material-ui/core';
 
 const styles = theme => ({
   headerStyle: {

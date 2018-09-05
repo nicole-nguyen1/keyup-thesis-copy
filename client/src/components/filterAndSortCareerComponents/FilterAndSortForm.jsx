@@ -1,16 +1,8 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import FormGroup from '@material-ui/core/FormGroup';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
 import Filter from './Filter.jsx';
 import Sort from './Sort.jsx';
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Button, Dialog, DialogContent, DialogTitle, Divider, Grid, FormGroup, RadioGroup, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   headerStyle: {
@@ -51,7 +43,7 @@ const styles = theme => ({
   },
 
   backdrop: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     top: '56px'
   },
 
@@ -127,13 +119,13 @@ class FilterAndSortForm extends React.Component {
       >
         <div className={classes.formStyle}>
           <DialogTitle id="responsive-dialog-title" className={classes.headerStyle}>
-            {"Filter and Sort Careers"}
+            {'Filter and Sort Careers'}
           </DialogTitle>
           <DialogContent>
             <FormGroup>
               <Typography gutterBottom className={classes.groupStyle}>
                 FILTER
-            </Typography>
+              </Typography>
               <div className={classes.sectionStyle}>
                 <div className={classes.listItem}>
                   {this.props.industries.map((industry) => {
@@ -163,7 +155,7 @@ class FilterAndSortForm extends React.Component {
               <div className={classes.sectionStyle}>
                 <Typography gutterBottom className={classes.groupStyle}>
                   SORT BY
-              </Typography>
+                </Typography>
                 <RadioGroup name="sort">
                   {this.sortOptions.map((label, index) => {
                     return (<Sort
@@ -188,7 +180,7 @@ class FilterAndSortForm extends React.Component {
                         paidToLearn: this.paidToLearn,
                         freeTraining: this.freeTraining
                       }, this.state.sortSelection);
-                      this.filterOptions = {}
+                      this.filterOptions = {};
                     }}
                   >See Career Results</Button>
                 </Grid>

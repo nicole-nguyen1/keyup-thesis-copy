@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Service from '../Service.jsx';
+import ServiceCard from '../trainingServiceListComponents/ServiceCard.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { createApolloFetch } from 'apollo-fetch';
@@ -27,7 +27,7 @@ class FavoriteTrainings extends React.Component {
     return (
       <Grid container className={classes.grid}>
         {this.props.trainings.map((service, index) => {
-          return <Service key={service.id || index} service={service} favorites={this.props.favorites} removeFavorite={this.props.removeFavorite}/>;
+          return <ServiceCard key={service.id || index} service={service} favorites={this.props.favorites} removeFavorite={this.props.removeFavorite}/>;
         })}
       </Grid>
     );

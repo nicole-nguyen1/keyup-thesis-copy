@@ -19,7 +19,7 @@ class SubmitFormHomePage extends React.Component {
       message: '',
       open: false,
       submissionErr: false
-    }
+    };
   }
 
   clearForm = () => {
@@ -51,11 +51,11 @@ class SubmitFormHomePage extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ open: false })
+    this.setState({ open: false });
   }
 
   handleErrClose = () => {
-    this.setState({ submissionErr: false })
+    this.setState({ submissionErr: false });
   }
 
   submitForm = async () => {
@@ -66,8 +66,8 @@ class SubmitFormHomePage extends React.Component {
         email: JSON.stringify(this.state.email),
         phone_number: JSON.stringify(this.state.phone),
         message: JSON.stringify(this.state.message),
-        page: JSON.stringify("Homepage")
-      }
+        page: JSON.stringify('Homepage')
+      };
 
       const form = await this.fetch({
         query: addFormData(formArguments)

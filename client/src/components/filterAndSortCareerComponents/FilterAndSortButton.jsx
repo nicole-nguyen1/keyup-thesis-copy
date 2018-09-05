@@ -23,7 +23,7 @@ class FilterAndSort extends React.Component {
 
     this.state = {
       showFilter: false
-    }
+    };
   }
 
   displayFilter = () => {

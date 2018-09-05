@@ -1,9 +1,7 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
-import FormControl from '@material-ui/core/FormControl';
 import { Redirect } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Button, FormControl, Typography } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
 import TextField from '@material-ui/core/TextField';

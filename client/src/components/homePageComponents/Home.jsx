@@ -1,13 +1,13 @@
 import React from 'react';
-import Intro from './homePageComponents/Intro.jsx';
-import SubmitFormHomePage from './homePageComponents/SubmitFormHomePage.jsx';
-import About from './homePageComponents/About.jsx';
-import HowItWorks from './homePageComponents/HowItWorks.jsx';
-import HomePageCards from './homePageComponents/HomePageCards.jsx';
-import { store } from '../store/index';
+import Intro from './Intro.jsx';
+import SubmitFormHomePage from './SubmitFormHomePage.jsx';
+import About from './About.jsx';
+import HowItWorks from './HowItWorks.jsx';
+import HomePageCards from './HomePageCards.jsx';
+import { store } from '../../store/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getPageTitle } from '../actions/action';
+import { getPageTitle } from '../../actions/action';
 import { Button, Dialog, DialogTitle, DialogActions, DialogContent, Typography } from '@material-ui/core';
 
 class Home extends React.Component {
@@ -15,22 +15,22 @@ class Home extends React.Component {
     super(props);
     this.state = {
       passwordResetSuccess: false
-    }
+    };
   }
 
   componentDidMount() {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
     store.dispatch(getPageTitle(''));
     this.props.getUser();
     if (this.props.router.location.state && this.props.router.location.state.passwordResetSuccess) {
-      this.setState({ passwordResetSuccess: this.props.router.location.state.passwordResetSuccess })
+      this.setState({ passwordResetSuccess: this.props.router.location.state.passwordResetSuccess });
     }
   }
 
   handleClose = (e) => {
     this.setState({
       passwordResetSuccess: false
-    })
+    });
   }
 
   render() {
@@ -62,7 +62,7 @@ class Home extends React.Component {
               onClick={this.handleClose}
             >
               Okay
-          </Button>
+            </Button>
           </DialogActions>
         </Dialog>
       </div>

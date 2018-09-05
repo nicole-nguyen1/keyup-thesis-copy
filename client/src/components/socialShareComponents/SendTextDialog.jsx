@@ -1,19 +1,12 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import smsLink from 'sms-link';
+import { Button, Dialog, DialogTitle, DialogActions, DialogContent, TextField, Typography } from '@material-ui/core';
 
 class SendTextDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       textLink: ''
-    }
+    };
   }
 
   handleChange = (e) => {
@@ -30,7 +23,7 @@ class SendTextDialog extends React.Component {
           onClose={() => this.props.handleClose('textOpen')}
           aria-labelledby="text-title"
         >
-          <DialogTitle id="text-title">{"Share This Page"}</DialogTitle>
+          <DialogTitle id="text-title">{'Share This Page'}</DialogTitle>
           <DialogContent>
             <Typography gutterBottom>
               Enter the phone number of the person you want to text. 
@@ -60,7 +53,7 @@ class SendTextDialog extends React.Component {
           </DialogActions>
         </Dialog>
       </div>
-    )
+    );
   }
 }
 

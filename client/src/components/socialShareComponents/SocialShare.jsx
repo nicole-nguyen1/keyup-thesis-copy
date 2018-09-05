@@ -6,8 +6,7 @@ import Email from './Email.jsx';
 import Text from './Text.jsx';
 import CopyLink from './CopyLink.jsx';
 import SendTextDialog from './SendTextDialog.jsx';
-import Drawer from '@material-ui/core/Drawer';
-import Snackbar from '@material-ui/core/Snackbar';
+import { Drawer, Snackbar } from '@material-ui/core';
 import { isMobileOnly } from 'react-device-detect';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -30,7 +29,7 @@ class SocialShare extends React.Component {
       snackBarOpen: false,
       textOpen: false,
       textLink: ''
-    }
+    };
   }
 
   handleClick = (state) => {
@@ -57,7 +56,7 @@ class SocialShare extends React.Component {
       row: {
         width: '33%'
       }
-    }
+    };
 
     const { classes } = this.props;
     return (
@@ -117,7 +116,7 @@ class SocialShare extends React.Component {
           message={<span id="message-id">Link copied!</span>}
         />
       </div>
-    )
+    );
   }
 }
 

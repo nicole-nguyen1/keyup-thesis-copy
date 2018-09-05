@@ -64,7 +64,7 @@ class EditAccountForm extends React.Component {
       zip: '',
       buttonDisabled: true,
       redirect: false
-    }
+    };
   }
 
   componentDidMount() {
@@ -84,7 +84,7 @@ class EditAccountForm extends React.Component {
         email: this.props.user.email,
         phone_number: this.props.user.phone_number,
         zip: this.props.user.zip
-      })
+      });
     }
   }
 
@@ -119,10 +119,10 @@ class EditAccountForm extends React.Component {
         zip
       })
     })
-    .then(res => {
-      store.dispatch(findUser(res.data.updateInfo));
-      this.setState({ redirect: true });
-    })
+      .then(res => {
+        store.dispatch(findUser(res.data.updateInfo));
+        this.setState({ redirect: true });
+      });
   }
 
   render() {
@@ -130,7 +130,7 @@ class EditAccountForm extends React.Component {
     const token = localStorage.getItem('jwt');
     
     if (token === null) {
-      return (<Redirect to={{ pathname: '/home'}} />)
+      return (<Redirect to={{ pathname: '/home'}} />);
     }
 
     if (this.state.redirect === true) {
@@ -218,7 +218,7 @@ class EditAccountForm extends React.Component {
           Save Changes
         </Button>
       </div>
-    )
+    );
   }
 }
 

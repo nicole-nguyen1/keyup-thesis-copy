@@ -1,14 +1,24 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+
+// GRAPHQL
+import { createApolloFetch } from 'apollo-fetch';
+
+// COMPONENTS
+import LogoutDialog from './LogoutDialog.jsx';
+
+// REACT ROUTER
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { HashLink } from 'react-router-hash-link';
+
+// REDUX
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { store } from '../store/index';
+import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
+
+// STYLING
+import { AppBar, Button, Grid, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -17,16 +27,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PeopleIcon from '@material-ui/icons/People';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import LogoutDialog from './LogoutDialog.jsx';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { store } from '../store/index';
-import { getPageTitle, findUser, getFavorites, findCareers } from '../actions/action';
-import { HashLink } from 'react-router-hash-link';
-import { createApolloFetch } from 'apollo-fetch';
-import { Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -94,9 +95,9 @@ class NavBar extends React.Component {
                 >
                   <MenuIcon image="#" />
                 </IconButton>
-                  <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
-                    <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' style={{ position: 'relative', top: '12px' }} />
-                  </HashLink>
+                <HashLink style={{ textDecoration: 'none' }} scroll={el => el.scrollIntoView({ block: 'center', behavior: 'smooth', inline: 'nearest' })} to="/home#intro">
+                  <img src='https://s3.us-east-2.amazonaws.com/keyup-assets/KeyUp-Logo-all-white.png' height='25px' style={{ position: 'relative', top: '12px' }} />
+                </HashLink>
               </Grid>
               <Grid item xs={9} sm={11} className={classes.pageTitle}>
                 <Typography variant="subheading" color="inherit" className={classes.flex}>
@@ -117,28 +118,28 @@ class NavBar extends React.Component {
                   (<div className={classes.menuTopItems}>
                     <Typography variant="body1" align="center" style={{ color: '#02ED96', marginBottom: '10px' }}>
                       Account
-                        </Typography>
+                    </Typography>
                     <Typography variant="body1" align="center" style={{ color: 'white' }}>
                       {this.props.user.email || null}
                     </Typography>
                   </div>) :
                   (<div className={classes.menuTopItems}>
-                      <Link to="/login" className={classes.link}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.buttonStyle}
-                          onClick={this.handleClose}
-                        >
+                    <Link to="/login" className={classes.link}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.buttonStyle}
+                        onClick={this.handleClose}
+                      >
                           SIGN IN
-                    </Button>
-                      </Link>
-                      <Link to='/signup' className={classes.link}>
-                        <Typography onClick={this.handleClose} style={{ color: 'white' }}>
+                      </Button>
+                    </Link>
+                    <Link to='/signup' className={classes.link}>
+                      <Typography onClick={this.handleClose} style={{ color: 'white' }}>
                           Create an account
-                    </Typography>
-                      </Link>
-                    </div>)
+                      </Typography>
+                    </Link>
+                  </div>)
                 }
               </div>
               <MenuItem onClick={this.handleClose} classes={{ root: classes.menuItem }}>
@@ -247,7 +248,7 @@ NavBar.styles = {
     width: '304px'
   },
   menuItem: {
-    whiteSpace: "unset"
+    whiteSpace: 'unset'
   },
   tools: {
     top: 0,
@@ -322,7 +323,7 @@ const mapStateToProps = state => {
     pages: state.pages.page,
     user: state.user.user
   };
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({ getPageTitle, findUser }, dispatch);

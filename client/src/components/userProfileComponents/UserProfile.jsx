@@ -13,7 +13,7 @@ class UserProfile extends React.Component {
     super(props);
     this.state = {
       updatedInfo: false
-    }
+    };
   }
 
   handleClose = () => {
@@ -31,7 +31,7 @@ class UserProfile extends React.Component {
   render() {
     const token = localStorage.getItem('jwt');
     if (token === null) {
-      return (<Redirect to={{ pathname: '/home'}} />)
+      return (<Redirect to={{ pathname: '/home'}} />);
     }
     return (
       <div>
@@ -55,7 +55,7 @@ class UserProfile extends React.Component {
           </DialogActions>
         </Dialog>
       </div>
-    )
+    );
   }
 }
 
